@@ -1,0 +1,17 @@
+{
+  "name": "rfui",
+  "version": "1.0.0",
+  "description": "A React component library",
+  "main": "rollup.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rfui-library/rfui-package.git"
+  },
+  "keywords": ["react", "component library"],
+  "author": "Adam Zerner <adamzerner@protonmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rfui-library/rfui-package/issues"
+  },
+  "homepage": "https://github.com/rfui-library/rfui-package#readme"
+}
