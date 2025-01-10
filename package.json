@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A React component library",
   "main": "dist/index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "start": "rollup -c -w"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rfui-library/rfui-package.git"
@@ -33,5 +37,6 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "type": "module"
 }
