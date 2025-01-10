@@ -4,6 +4,11 @@ import { CloseIcon } from "../../icons/close-icon";
 import { HamburgerIcon } from "../../icons/hamburger-icon";
 import { Flex } from "../../layout/flex";
 
+export { VerticalNavbarBottom } from "./vertical-navbar-bottom";
+export { VerticalNavbarItem } from "./vertical-navbar-item";
+export { VerticalNavbarSection } from "./vertical-navbar-section";
+export { VerticalNavbarTop } from "./vertical-navbar-top";
+
 export type VerticalNavbarType = {
   background?: "neutral" | "none";
   children: ReactNode;
