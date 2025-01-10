@@ -1,3 +1,2 @@
-export default () => {
-  return <div>Hello world</div>;
-};
+export { Badge } from "./data-display/badge";
+export type { BadgeType } from "./data-display/badge";
