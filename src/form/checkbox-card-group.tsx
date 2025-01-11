@@ -102,7 +102,7 @@ export const CheckboxCardGroupItem = ({
 
   return (
     <Flex className={containerClass} onClick={handleClick}>
-      <Checkbox checked={isChecked} {...checkboxRest} />
+      <Checkbox readOnly checked={isChecked} {...checkboxRest} />
       <div>{children}</div>
     </Flex>
   );
