@@ -70,7 +70,12 @@ export type { StackType } from "./layout/stack";
 
 export { Breadcrumbs } from "./navigation/breadcrumbs";
 export type { BreadcrumbsType } from "./navigation/breadcrumbs";
-export { Footer } from "./navigation/footer";
+export {
+  Footer,
+  FooterColumn,
+  FooterHeading,
+  FooterItem,
+} from "./navigation/footer";
 export type { FooterType } from "./navigation/footer";
 export { Link } from "./navigation/link";
 export type { LinkType } from "./navigation/link";
@@ -82,7 +87,10 @@ export {
 } from "./navigation/navbar";
 export type { NavbarType } from "./navigation/navbar";
 export { NavigationLinks } from "./navigation/navigation-links";
-export type { NavigationLinksType } from "./navigation/navigation-links";
+export type {
+  NavigationLinksType,
+  LinkItemType,
+} from "./navigation/navigation-links";
 export { Tabs, TabSection } from "./navigation/tabs";
 export type { TabsType } from "./navigation/tabs";
 export {
