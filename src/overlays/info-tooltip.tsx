@@ -34,7 +34,7 @@ export const InfoTooltip = ({
 
   return (
     <Tooltip content={content} direction={direction} {...rest}>
-      <InfoIcon class={iconClass} />
+      <InfoIcon className={iconClass} />
     </Tooltip>
   );
 };

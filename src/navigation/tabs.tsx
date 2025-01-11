@@ -38,6 +38,7 @@ export const Tabs = ({
       <Flex className="border-b border-b-neutral-500">
         {tabNames.map((tabName) => (
           <Tab
+            key={tabName}
             tabName={tabName}
             activeTab={activeTab}
             onClick={() => {

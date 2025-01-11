@@ -34,7 +34,7 @@ export const HelpTooltip = ({
 
   return (
     <Tooltip content={content} direction={direction} {...rest}>
-      <QuestionMarkCircleIcon class={iconClass} />
+      <QuestionMarkCircleIcon className={iconClass} />
     </Tooltip>
   );
 };

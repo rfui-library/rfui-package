@@ -1,6 +1,7 @@
 import type { ComponentProps } from "react";
 import { ChevronRightIcon } from "../icons/chevron-right";
 import { Link } from "./link";
+import { Fragment } from "react";
 
 export type BreadcrumbsType = {
   links: BreadcrumbLink[];
@@ -60,7 +61,7 @@ export const Breadcrumbs = ({
         const isLastLink = i === links.length - 1;
 
         return (
-          <>
+          <Fragment key={link.title}>
             {!isLastLink ? (
               <Link href={link.href} underline="hover">
                 {link.title}
@@ -68,8 +69,8 @@ export const Breadcrumbs = ({
             ) : (
               <span>{link.title}</span>
             )}
-            {!isLastLink && <ChevronRightIcon class={chevronClassName} />}
-          </>
+            {!isLastLink && <ChevronRightIcon className={chevronClassName} />}
+          </Fragment>
         );
       })}
     </nav>

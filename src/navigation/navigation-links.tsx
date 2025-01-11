@@ -1,5 +1,6 @@
 import type { ComponentProps } from "react";
 import { Link } from "../navigation/link";
+import { Fragment } from "react";
 
 export type NavigationLinksType = {
   linkItems: LinkItemType[];
@@ -61,15 +62,20 @@ const LinkItems = ({
   return (
     <>
       {linkItems.map((linkItem) => (
-        <>
-          <LinkItem linkItem={linkItem} indentationLevel={indentationLevel} />
+        <Fragment key={linkItem.name}>
+          <LinkItem
+            key={`${linkItem.name}-item`}
+            linkItem={linkItem}
+            indentationLevel={indentationLevel}
+          />
           {linkItem.children && (
             <LinkItems
+              key={`${linkItem.name}-container`}
               linkItems={linkItem.children}
               indentationLevel={indentationLevel + 1}
             />
           )}
-        </>
+        </Fragment>
       ))}
     </>
   );
