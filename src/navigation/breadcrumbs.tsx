@@ -1,7 +1,7 @@
 import type { ComponentProps } from "react";
+import { Fragment } from "react";
 import { ChevronRightIcon } from "../icons/chevron-right";
 import { Link } from "./link";
-import { Fragment } from "react";
 
 export type BreadcrumbsType = {
   links: BreadcrumbLink[];

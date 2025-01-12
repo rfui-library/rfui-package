@@ -1,4 +1,4 @@
-import type { ReactNode, ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
 export type ContainerType = {
   size?: "sm" | "md" | "lg" | "xl" | "2xl";

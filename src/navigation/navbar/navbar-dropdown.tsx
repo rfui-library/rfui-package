@@ -1,4 +1,4 @@
-import type { ReactNode, ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "../../icons/chevron-down";
 import { ChevronUpIcon } from "../../icons/chevron-up";

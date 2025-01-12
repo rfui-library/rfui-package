@@ -1,4 +1,4 @@
-import type { ReactNode, ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { Link } from "../navigation/link";
 
 export type H2Type = {

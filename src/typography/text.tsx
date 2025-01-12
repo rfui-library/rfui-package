@@ -1,4 +1,4 @@
-import type { ReactNode, ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { Stack } from "../layout/stack";
 
 export type TextType = {

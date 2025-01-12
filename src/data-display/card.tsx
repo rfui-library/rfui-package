@@ -1,4 +1,4 @@
-import type { ReactNode, ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { getChildren } from "../utilities/get-children";
 
 export type CardType = {

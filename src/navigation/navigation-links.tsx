@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react";
-import { Link } from "../navigation/link";
 import { Fragment } from "react";
+import { Link } from "../navigation/link";
 
 export type NavigationLinksType = {
   linkItems: LinkItemType[];

@@ -1,4 +1,4 @@
-import type { ReactNode, ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { useState } from "react";
 import { Flex } from "../layout/flex";
 import { getChildren } from "../utilities/get-children";

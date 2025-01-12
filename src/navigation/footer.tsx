@@ -1,4 +1,4 @@
-import type { ReactNode, ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { Container, ContainerType } from "../layout/container";
 import { Flex } from "../layout/flex";
 import { Stack } from "../layout/stack";

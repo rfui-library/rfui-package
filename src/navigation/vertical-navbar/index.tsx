@@ -1,4 +1,4 @@
-import type { ReactNode, ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { useState } from "react";
 import { CloseIcon } from "../../icons/close-icon";
 import { HamburgerIcon } from "../../icons/hamburger-icon";
