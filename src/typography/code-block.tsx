@@ -40,7 +40,7 @@ export const CodeBlock = ({ code, language, ...rest }: CodeBlockType) => {
       // @ts-expect-error it exists
       Prism.highlightAll();
     }
-  });
+  }, [language]);
 
   return (
     <pre className={className} {...restWithoutClass}>
