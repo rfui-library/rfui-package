@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from "react";
-import { useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 
 export type TooltipType = {
   content: string;
@@ -23,7 +23,7 @@ export const Tooltip = ({
 }: TooltipType) => {
   const [isVisible, setIsVisible] = useState(false);
   const timeoutRef = useRef<number | null>(null);
-  const id = `tooltip-${Math.random().toString().replace(".", "")}`;
+  const id = `tooltip-${useId()}`;
   const handleMouseEnter = () => {
     timeoutRef.current = setTimeout(() => {
       setIsVisible(true);

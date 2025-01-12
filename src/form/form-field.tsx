@@ -1,4 +1,5 @@
 import type { ComponentProps } from "react";
+import { useId } from "react";
 import { PasswordInput } from "../form/password-input";
 // import type { RadioButtonGroupType } from "../form/radio-button-group";
 // import {
@@ -95,7 +96,7 @@ export const FormField = ({
   selectRest,
   ...rest
 }: FormFieldType) => {
-  const id = crypto.randomUUID();
+  const id = useId();
   const [smallFontClass, normalFontClass] = (() => {
     switch (size) {
       case "sm":

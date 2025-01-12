@@ -1,6 +1,7 @@
 // TODO: This is tricky to do without Signals from Preact
 
 // import type { ReactNode } from "react";
+// import { useId } from "react";
 // import { RadioButton, RadioButtonType } from "../form/radio-button";
 // import { Flex } from "../layout/flex";
 // import { Stack } from "../layout/stack";
@@ -43,7 +44,7 @@
 //   rounded,
 //   children,
 // }: RadioButtonCardGroupType) => {
-//   const id = crypto.randomUUID();
+//   const id = useId();
 //   let containerClass = `radio-button-card-group-${id}`;
 
 //   containerClass += ` gap-${padding === "sm" ? 2 : padding === "md" ? 3 : 4}`;

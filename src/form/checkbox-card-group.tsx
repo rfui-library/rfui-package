@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { Checkbox, CheckboxType } from "../form/checkbox";
 import { Flex } from "../layout/flex";
 import { Stack } from "../layout/stack";
@@ -34,12 +34,11 @@ export const CheckboxCardGroup = ({
   rounded,
   children,
 }: CheckboxCardGroupType) => {
-  const id = crypto.randomUUID();
+  const id = useId();
   let containerClass = `checkbox-card-group-${id}`;
 
   containerClass += ` gap-${padding === "sm" ? 2 : padding === "md" ? 3 : 4}`;
 
-  // TODO: Have numerous classes like `.checkbox-card-group-padding-sm-rounded-square` and get rid of the `id`. The `id` causes a server-client mismatch error because a different value is generated for the server and client.
   return (
     <>
       <style>
