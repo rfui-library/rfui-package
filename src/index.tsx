@@ -84,6 +84,9 @@ export {
   NavbarItem,
   NavbarLeft,
   NavbarRight,
+  NavbarDropdown,
+  NavbarDropdownItem,
+  NavbarMegamenu,
 } from "./navigation/navbar";
 export type { NavbarType } from "./navigation/navbar";
 export { NavigationLinks } from "./navigation/navigation-links";
