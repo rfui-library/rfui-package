@@ -28,8 +28,8 @@ export type {
 } from "./form/checkbox-card-group";
 export { Checkbox } from "./form/checkbox";
 export type { CheckboxType } from "./form/checkbox";
-// export { FormField } from "./form/form-field";
-// export type { FormFieldType } from "./form/form-field";
+export { FormField } from "./form/form-field";
+export type { FormFieldType } from "./form/form-field";
 export { Input } from "./form/input";
 export type { InputType } from "./form/input";
 export { PasswordInput } from "./form/password-input";
