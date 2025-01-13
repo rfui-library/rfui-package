@@ -1,9 +1,10 @@
-import { Highlight } from "prism-react-renderer";
+import { Highlight, themes } from "prism-react-renderer";
 import type { ComponentProps } from "react";
 
 export type CodeBlockType = {
   code: string;
   language?: string;
+  theme?: string;
 } & ComponentProps<"pre">;
 
 /** *
@@ -13,8 +14,10 @@ export type CodeBlockType = {
  *
  * @see {@link https://rfui.deno.dev/atoms/code-block}
  *
- * @param language - See {@link https://prismjs.com/index.html#supported-languages}. And make sure when you download Prism that you check off the languages you need.
+ * @param language - See {@link https://github.com/FormidableLabs/prism-react-renderer?tab=readme-ov-file#custom-language-support}.
  *
+ * @param theme - See {@link https://github.com/FormidableLabs/prism-react-renderer?tab=readme-ov-file#theming}.
+ * 
  * @example
  * <CodeBlock
     language="ts"
@@ -23,7 +26,12 @@ const lastName = 'Doe';
 const fullName = firstName + " " + lastName;`}
 />
  */
-export const CodeBlock = ({ code, language, ...rest }: CodeBlockType) => {
+export const CodeBlock = ({
+  code,
+  language,
+  theme,
+  ...rest
+}: CodeBlockType) => {
   const { className: restClass, ...restWithoutClass } = rest;
   let className = "block whitespace-pre-wrap bg-neutral-50 p-5";
 
@@ -37,12 +45,11 @@ export const CodeBlock = ({ code, language, ...rest }: CodeBlockType) => {
 
   if (language) {
     return (
-      <Highlight theme={undefined} code={code} language={language}>
+      <Highlight theme={themes.github} code={code} language={language}>
         {({ style, tokens, getLineProps, getTokenProps }) => (
-          <pre style={style}>
+          <pre style={style} className="p-4 overflow-x-scroll">
             {tokens.map((line, i) => (
               <div key={i} {...getLineProps({ line })}>
-                <span>{i + 1}</span>
                 {line.map((token, key) => (
                   <span key={key} {...getTokenProps({ token })} />
                 ))}
