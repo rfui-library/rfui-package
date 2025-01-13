@@ -1,10 +1,9 @@
-import { Highlight, themes } from "prism-react-renderer";
 import type { ComponentProps } from "react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
 export type CodeBlockType = {
   code: string;
   language?: string;
-  theme?: string;
 } & ComponentProps<"pre">;
 
 /** *
@@ -14,9 +13,7 @@ export type CodeBlockType = {
  *
  * @see {@link https://rfui.deno.dev/atoms/code-block}
  *
- * @param language - See {@link https://github.com/FormidableLabs/prism-react-renderer?tab=readme-ov-file#custom-language-support}.
- *
- * @param theme - See {@link https://github.com/FormidableLabs/prism-react-renderer?tab=readme-ov-file#theming}.
+ * @param language - See {@link https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/master/AVAILABLE_LANGUAGES_PRISM.MD}.
  * 
  * @example
  * <CodeBlock
@@ -26,12 +23,7 @@ const lastName = 'Doe';
 const fullName = firstName + " " + lastName;`}
 />
  */
-export const CodeBlock = ({
-  code,
-  language,
-  theme,
-  ...rest
-}: CodeBlockType) => {
+export const CodeBlock = ({ code, language, ...rest }: CodeBlockType) => {
   const { className: restClass, ...restWithoutClass } = rest;
   let className = "block whitespace-pre-wrap bg-neutral-50 p-5";
 
@@ -44,21 +36,7 @@ export const CodeBlock = ({
   }
 
   if (language) {
-    return (
-      <Highlight theme={themes.github} code={code} language={language}>
-        {({ style, tokens, getLineProps, getTokenProps }) => (
-          <pre style={style} className="p-4 overflow-x-scroll">
-            {tokens.map((line, i) => (
-              <div key={i} {...getLineProps({ line })}>
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token })} />
-                ))}
-              </div>
-            ))}
-          </pre>
-        )}
-      </Highlight>
-    );
+    return <SyntaxHighlighter language={language}>{code}</SyntaxHighlighter>;
   }
 
   return (
