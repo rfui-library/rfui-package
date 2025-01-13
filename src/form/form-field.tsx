@@ -31,6 +31,7 @@ export type FormFieldType = {
   label: string;
   name?: ComponentProps<"input">["name"];
   value?: ComponentProps<"input">["value"];
+  defaultValue?: ComponentProps<"input">["defaultValue"];
   type?:
     | ComponentProps<"input">["type"]
     | "switch"
@@ -77,6 +78,7 @@ export const FormField = ({
   label,
   name,
   value,
+  defaultValue,
   type,
   required = false,
   requiredIndicator = "none",
@@ -165,6 +167,7 @@ export const FormField = ({
           id={id}
           name={name}
           value={value}
+          defaultValue={defaultValue}
           required={required}
           size={size}
           rounded={rounded}
@@ -185,7 +188,7 @@ export const FormField = ({
           onInput={onInput}
           {...textareaRest}
         >
-          {value}
+          {value || defaultValue}
         </Textarea>
       ) : type === "radio-button-group" ? ( // && radioButtonGroupOptions ? (
         <div>RadioButtonGroup</div>
@@ -215,6 +218,7 @@ export const FormField = ({
           id={id}
           name={name}
           value={value}
+          defaultValue={defaultValue}
           required={required}
           invalid={invalid}
           className={`block w-full ${selectRest?.className}`}
@@ -233,6 +237,7 @@ export const FormField = ({
           id={id}
           name={name}
           value={value}
+          defaultValue={defaultValue}
           type={type}
           required={required}
           size={size}
