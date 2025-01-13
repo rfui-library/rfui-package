@@ -43,11 +43,11 @@ export const RadioButtonGroup = ({
   ...rest
 }: RadioButtonGroupType) => {
   const { className: restClass, ...restWithoutClass } = rest;
-  const theChildren = Children.toArray(children);
+  const childrenArray = Children.toArray(children);
 
   return (
     <Stack className={`gap-3 ${restClass}`} {...restWithoutClass}>
-      {theChildren.map((child: any) =>
+      {childrenArray.map((child: any) =>
         cloneElement(child, {
           name,
           key: child.props.value,

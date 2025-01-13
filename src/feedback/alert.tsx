@@ -1,8 +1,7 @@
 import type { ComponentProps, ReactNode } from "react";
-import { useState } from "react";
+import { Children, useState } from "react";
 import { CloseIcon } from "../icons/close-icon";
 import { Flex } from "../layout/flex";
-import { getChildren } from "../utilities/get-children";
 
 export type AlertType = {
   variant?: "success" | "info" | "warning" | "danger" | "neutral";
@@ -100,18 +99,18 @@ export const Alert = ({
   );
 };
 
-const getComponents = (_children: any) => {
-  const children = getChildren(_children);
+const getComponents = (children: any) => {
+  const childrenArray: any[] = Children.toArray(children);
 
-  if (!Array.isArray(children)) {
+  if (childrenArray.length === 1) {
     return { alertBody: children };
   }
 
-  const alertHeader = children.find(
+  const alertHeader = childrenArray.find(
     (child: any) => child && child.type && child.type.name === AlertHeader.name,
   );
 
-  const alertBody = children.find(
+  const alertBody = childrenArray.find(
     (child: any) => child && child.type && child.type.name === AlertBody.name,
   );
 

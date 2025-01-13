@@ -1,22 +1,22 @@
-import { getChildren } from "../../utilities/get-children";
+import { Children } from "react";
 import { NavbarLeft } from "./navbar-left";
 import { NavbarRight } from "./navbar-right";
 
-export const getComponents = (_children: any) => {
-  const children = getChildren(_children);
+export const getComponents = (children: any) => {
+  const childrenArray: any[] = Children.toArray(children);
 
-  if (!Array.isArray(children)) {
-    const localChildren = getChildren(children.props.children);
-    const numItems = Array.isArray(localChildren) ? localChildren.length : 1;
+  if (childrenArray.length === 1) {
+    const localChildren = Children.toArray(children.props.children);
+    const numItems = localChildren.length;
 
     return { navbarLeft: children, numItems };
   }
 
-  const navbarLeft = children.find(
+  const navbarLeft = childrenArray.find(
     (child) => child && child.type && child.type.name === NavbarLeft.name,
   );
 
-  const navbarRight = children.find(
+  const navbarRight = childrenArray.find(
     (child) => child && child.type && child.type.name === NavbarRight.name,
   );
 
@@ -26,18 +26,10 @@ export const getComponents = (_children: any) => {
     );
   }
 
-  const navbarLeftChildren = getChildren(navbarLeft.props.children);
-  const numLeftItems = navbarLeft
-    ? Array.isArray(navbarLeftChildren)
-      ? navbarLeftChildren.length
-      : 1
-    : 0;
-  const navbarRightChildren = getChildren(navbarRight.props.children);
-  const numRightItems = navbarRight
-    ? Array.isArray(navbarRightChildren)
-      ? navbarRightChildren.length
-      : 1
-    : 0;
+  const navbarLeftChildren = Children.toArray(navbarLeft.props.children);
+  const numLeftItems = navbarLeft ? navbarLeftChildren.length : 0;
+  const navbarRightChildren = Children.toArray(navbarRight.props.children);
+  const numRightItems = navbarRight ? navbarRightChildren.length : 0;
   const numItems = numLeftItems + numRightItems;
 
   return { navbarLeft, navbarRight, numItems };
