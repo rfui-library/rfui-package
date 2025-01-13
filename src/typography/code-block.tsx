@@ -1,5 +1,5 @@
+import { Highlight } from "prism-react-renderer";
 import type { ComponentProps } from "react";
-import { useEffect } from "react";
 
 export type CodeBlockType = {
   code: string;
@@ -35,12 +35,24 @@ export const CodeBlock = ({ code, language, ...rest }: CodeBlockType) => {
     className += ` ${restClass}`;
   }
 
-  useEffect(() => {
-    if (language) {
-      // @ts-expect-error it exists
-      Prism.highlightAll();
-    }
-  }, [language]);
+  if (language) {
+    return (
+      <Highlight theme={undefined} code={code} language={language}>
+        {({ style, tokens, getLineProps, getTokenProps }) => (
+          <pre style={style}>
+            {tokens.map((line, i) => (
+              <div key={i} {...getLineProps({ line })}>
+                <span>{i + 1}</span>
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({ token })} />
+                ))}
+              </div>
+            ))}
+          </pre>
+        )}
+      </Highlight>
+    );
+  }
 
   return (
     <pre className={className} {...restWithoutClass}>
