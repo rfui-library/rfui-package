@@ -35,16 +35,14 @@ export const Footer = ({
   const { className: restClass, ...restWithoutClass } = rest;
   let containerClass = "mt-10 w-full py-8 md:mt-12 md:py-10";
 
-  containerClass +=
-    " " +
-    (() => {
-      switch (background) {
-        case "neutral":
-          return "bg-neutral-700 text-neutral-50";
-        case "none":
-          return "border-t border-t-neutral-100";
-      }
-    })();
+  containerClass += (() => {
+    switch (background) {
+      case "neutral":
+        return "bg-neutral-700 text-neutral-50";
+      case "none":
+        return "border-t border-t-neutral-100";
+    }
+  })();
 
   if (restClass) {
     containerClass += ` ${restClass}`;

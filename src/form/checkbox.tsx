@@ -27,18 +27,16 @@ export const Checkbox = ({
   const { className: restClass, ...restWithoutClass } = rest;
   let className = "rfui-checkbox cursor-pointer accent-primary-500";
 
-  className +=
-    " " +
-    (() => {
-      switch (size) {
-        case "sm":
-          return "w-5 h-5";
-        case "md":
-          return "w-6 h-6";
-        case "lg":
-          return "w-7 h-7";
-      }
-    })();
+  className += (() => {
+    switch (size) {
+      case "sm":
+        return " w-5 h-5";
+      case "md":
+        return " w-6 h-6";
+      case "lg":
+        return " w-7 h-7";
+    }
+  })();
 
   if (rest.disabled) {
     className += " cursor-not-allowed";

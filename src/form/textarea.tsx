@@ -24,20 +24,18 @@ export const Textarea = ({
   let className =
     "border border-neutral-500 px-2 py-1 focus:border-neutral-900 focus:shadow-sm focus:outline-none";
 
-  className +=
-    " " +
-    (() => {
-      switch (rounded) {
-        case "square":
-          return "rounded-none";
-        case "sm":
-          return "rounded";
-        case "lg":
-          return "rounded-lg";
-        default:
-          return "rfui-rounded-default";
-      }
-    })();
+  className += (() => {
+    switch (rounded) {
+      case "square":
+        return " rounded-none";
+      case "sm":
+        return " rounded";
+      case "lg":
+        return " rounded-lg";
+      default:
+        return " rfui-rounded-default";
+    }
+  })();
 
   if (rest.disabled) {
     className += " cursor-not-allowed bg-neutral-50";

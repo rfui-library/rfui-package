@@ -32,35 +32,31 @@ export const Select = ({
   let className =
     "cursor-pointer border border-neutral-500 bg-[#fff] px-2 py-1 focus:border-neutral-900 focus:shadow-sm focus:outline-none";
 
-  className +=
-    " " +
-    (() => {
-      switch (size) {
-        case "sm":
-          return "px-2 text-sm";
-        case "md":
-          return "px-2 py-2";
-        case "lg":
-          return "px-3 py-3 text-lg";
-      }
-    })();
+  className += (() => {
+    switch (size) {
+      case "sm":
+        return " px-2 text-sm";
+      case "md":
+        return " px-2 py-2";
+      case "lg":
+        return " px-3 py-3 text-lg";
+    }
+  })();
 
-  className +=
-    " " +
-    (() => {
-      switch (rounded) {
-        case "square":
-          return "rounded-none";
-        case "sm":
-          return "rounded";
-        case "lg":
-          return "rounded-lg";
-        case "full":
-          return "rounded-full";
-        default:
-          return "rfui-rounded-default";
-      }
-    })();
+  className += (() => {
+    switch (rounded) {
+      case "square":
+        return " rounded-none";
+      case "sm":
+        return " rounded";
+      case "lg":
+        return " rounded-lg";
+      case "full":
+        return " rounded-full";
+      default:
+        return " rfui-rounded-default";
+    }
+  })();
 
   if (rest.disabled) {
     className += " cursor-not-allowed bg-neutral-50";

@@ -20,33 +20,30 @@ export const Container = ({
   children,
   ...rest
 }: ContainerType) => {
-  const { className: classFromRest, ...restWithoutClass } = rest;
-  let classValue = "mx-6 lg:mx-auto lg:px-10 lg:w-full";
+  const { className: restClass, ...restWithoutClass } = rest;
+  let className = "mx-6 lg:mx-auto lg:px-10 lg:w-full";
 
-  switch (size) {
-    case "sm":
-      classValue += " max-w-screen-sm";
-      break;
-    case "md":
-      classValue += " max-w-screen-md";
-      break;
-    case "lg":
-      classValue += " max-w-screen-lg";
-      break;
-    case "xl":
-      classValue += " max-w-screen-xl";
-      break;
-    case "2xl":
-      classValue += " max-w-screen-2xl";
-      break;
-  }
+  className += (() => {
+    switch (size) {
+      case "sm":
+        return " max-w-screen-sm";
+      case "md":
+        return " max-w-screen-md";
+      case "lg":
+        return " max-w-screen-lg";
+      case "xl":
+        return " max-w-screen-xl";
+      case "2xl":
+        return "m max-w-screen-2xl";
+    }
+  })();
 
-  if (classFromRest) {
-    classValue += ` ${classFromRest}`;
+  if (restClass) {
+    className += ` ${restClass}`;
   }
 
   return (
-    <div className={classValue} {...restWithoutClass}>
+    <div className={className} {...restWithoutClass}>
       {children}
     </div>
   );

@@ -33,23 +33,32 @@ export const Breadcrumbs = ({
   ...rest
 }: BreadcrumbsType) => {
   const { className: restClass, ...restWithoutClass } = rest;
-  const chevronClassName =
-    size === "xl"
-      ? "!h-5 !w-5"
-      : size === "lg"
-        ? "!h-[18px] !w-[18px]"
-        : size === "md"
-          ? "!h-4 !w-4"
-          : "!h-3.5 !w-3.5";
+  const chevronClassName = (() => {
+    switch (size) {
+      case "xl":
+        return " !h-5 !w-5";
+      case "lg":
+        return " !h-[18px] !w-[18px]";
+      case "lg":
+        return " !h-4 !w-4";
+      default:
+        return " !h-3.5 !w-3.5";
+    }
+  })();
   let className =
     "flex items-center gap-2 text-neutral-700" +
-    (size === "xl"
-      ? " text-xl"
-      : size === "lg"
-        ? " text-lg"
-        : size === "sm"
-          ? " text-sm"
-          : "");
+    (() => {
+      switch (size) {
+        case "xl":
+          return " text-xl";
+        case "lg":
+          return " text-lg";
+        case "sm":
+          return " text-sm";
+        default:
+          return "";
+      }
+    })();
 
   if (restClass) {
     className += ` ${restClass}`;

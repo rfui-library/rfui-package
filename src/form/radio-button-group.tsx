@@ -44,9 +44,14 @@ export const RadioButtonGroup = ({
 }: RadioButtonGroupType) => {
   const { className: restClass, ...restWithoutClass } = rest;
   const childrenArray = Children.toArray(children);
+  let className = "gap-3";
+
+  if (restClass) {
+    className += ` ${restClass}`;
+  }
 
   return (
-    <Stack className={`gap-3 ${restClass}`} {...restWithoutClass}>
+    <Stack className={className} {...restWithoutClass}>
       {childrenArray.map((child: any) =>
         cloneElement(child, {
           name,

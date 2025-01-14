@@ -41,20 +41,18 @@ export const Tooltip = ({
   let tooltipClass =
     "absolute z-10 max-w-xs transform whitespace-nowrap rounded bg-neutral-900 px-2 py-1 text-neutral-50";
 
-  tooltipClass +=
-    " " +
-    (() => {
-      switch (direction) {
-        case "top":
-          return "bottom-full left-1/2 mb-1 -translate-x-1/2";
-        case "right":
-          return "left-full top-1/2 ml-2 -translate-y-1/2";
-        case "bottom":
-          return "top-full left-1/2 mt-1 -translate-x-1/2";
-        case "left":
-          return "right-full top-1/2 mr-2 -translate-y-1/2";
-      }
-    })();
+  tooltipClass += (() => {
+    switch (direction) {
+      case "top":
+        return " bottom-full left-1/2 mb-1 -translate-x-1/2";
+      case "right":
+        return " left-full top-1/2 ml-2 -translate-y-1/2";
+      case "bottom":
+        return " top-full left-1/2 mt-1 -translate-x-1/2";
+      case "left":
+        return " right-full top-1/2 mr-2 -translate-y-1/2";
+    }
+  })();
   containerClass += restClass ? ` ${restClass}` : "";
 
   return (

@@ -54,16 +54,14 @@ export const Navbar = ({
     containerClass += " sm:sticky sm:top-0 sm:left-0 sm:z-10";
   }
 
-  containerClass +=
-    " " +
-    (() => {
-      switch (background) {
-        case "neutral":
-          return "bg-neutral-50";
-        case "none":
-          return "border-b border-b-neutral-100";
-      }
-    })();
+  containerClass += (() => {
+    switch (background) {
+      case "neutral":
+        return " bg-neutral-50";
+      case "none":
+        return " border-b border-b-neutral-100";
+    }
+  })();
 
   if (restClass) {
     containerClass += ` ${restClass}`;
