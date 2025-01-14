@@ -34,7 +34,7 @@ export const RadioButton = ({
       case "md":
         return " w-6 h-6";
       case "lg":
-        return "w-7 h-7";
+        return " w-7 h-7";
     }
   })();
 

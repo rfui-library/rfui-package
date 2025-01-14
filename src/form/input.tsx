@@ -34,7 +34,6 @@ export const Input = ({
         return " px-4 py-3 text-lg";
     }
   })();
-
   className += (() => {
     switch (rounded) {
       case "square":

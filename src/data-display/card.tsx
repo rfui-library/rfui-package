@@ -43,48 +43,41 @@ export const Card = ({
     containerClass += " border-l-primary-500 border-l-2";
   }
 
-  containerClass +=
-    " " +
-    (() => {
-      switch (width) {
-        case "sm":
-          return "w-[300px]";
-        case "md":
-          return "w-[600px]";
-        case "lg":
-          return "w-[900px]";
-        case "full":
-          return "w-full";
-      }
-    })();
+  containerClass += (() => {
+    switch (width) {
+      case "sm":
+        return " w-[300px]";
+      case "md":
+        return " w-[600px]";
+      case "lg":
+        return " w-[900px]";
+      case "full":
+        return " w-full";
+    }
+  })();
+  containerClass += (() => {
+    switch (shadow) {
+      case "sm":
+        return " shadow";
+      case "md":
+        return " shadow-md";
+      case "lg":
+        return " shadow-lg";
+    }
+  })();
 
-  containerClass +=
-    " " +
-    (() => {
-      switch (shadow) {
-        case "sm":
-          return "shadow";
-        case "md":
-          return "shadow-md";
-        case "lg":
-          return "shadow-lg";
-      }
-    })();
-
-  containerClass +=
-    " " +
-    (() => {
-      switch (rounded) {
-        case "square":
-          return "rounded-none";
-        case "sm":
-          return "rounded";
-        case "lg":
-          return "rounded-lg";
-        default:
-          return "rfui-rounded-default";
-      }
-    })();
+  containerClass += (() => {
+    switch (rounded) {
+      case "square":
+        return " rounded-none";
+      case "sm":
+        return " rounded";
+      case "lg":
+        return " rounded-lg";
+      default:
+        return " rfui-rounded-default";
+    }
+  })();
 
   if (restClass) {
     containerClass += ` ${restClass}`;

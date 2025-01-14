@@ -38,9 +38,9 @@ export const Footer = ({
   containerClass += (() => {
     switch (background) {
       case "neutral":
-        return "bg-neutral-700 text-neutral-50";
+        return " bg-neutral-700 text-neutral-50";
       case "none":
-        return "border-t border-t-neutral-100";
+        return " border-t border-t-neutral-100";
     }
   })();
 

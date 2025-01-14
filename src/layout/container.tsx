@@ -34,7 +34,7 @@ export const Container = ({
       case "xl":
         return " max-w-screen-xl";
       case "2xl":
-        return "m max-w-screen-2xl";
+        return " m max-w-screen-2xl";
     }
   })();
 
