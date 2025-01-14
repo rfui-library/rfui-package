@@ -146,7 +146,9 @@ export const FormField = ({
           required={required}
           size={size}
           invalid={invalid}
-          className={`mt-1 ${inputRest?.className}`}
+          className={
+            inputRest?.className ? `mt-1 ${inputRest?.className}` : "mt-1"
+          }
           onChange={onChange}
           onInput={onInput}
           {...inputRest}
@@ -157,7 +159,9 @@ export const FormField = ({
           name={name}
           value={value}
           required={required}
-          className={`mt-1 ${inputRest?.className}`}
+          className={
+            inputRest?.className ? `mt-1 ${inputRest?.className}` : "mt-1"
+          }
           onChange={onChange}
           onInput={onInput}
           {...inputRest}
@@ -172,7 +176,11 @@ export const FormField = ({
           size={size}
           rounded={rounded}
           invalid={invalid}
-          className={`block w-full ${inputRest?.className}`}
+          className={
+            inputRest?.className
+              ? `block w-full ${inputRest?.className}`
+              : "block w-full"
+          }
           onChange={onChange}
           onInput={onInput}
           {...inputRest}
@@ -183,7 +191,11 @@ export const FormField = ({
           name={name}
           required={required}
           invalid={invalid}
-          className={`block w-full ${textareaRest?.className}`}
+          className={
+            textareaRest?.className
+              ? `block w-full ${textareaRest?.className}`
+              : "block w-full"
+          }
           onChange={onChange}
           onInput={onInput}
           {...textareaRest}
@@ -221,7 +233,11 @@ export const FormField = ({
           defaultValue={defaultValue}
           required={required}
           invalid={invalid}
-          className={`block w-full ${selectRest?.className}`}
+          className={
+            selectRest?.className
+              ? `block w-full ${selectRest?.className}`
+              : "block w-full"
+          }
           onChange={onChange}
           onInput={onInput}
           {...selectRest}
@@ -243,7 +259,11 @@ export const FormField = ({
           size={size}
           rounded={rounded}
           invalid={invalid}
-          className={`block w-full ${inputRest?.className}`}
+          className={
+            inputRest?.className
+              ? `block w-full ${inputRest?.className}`
+              : "block w-full"
+          }
           onChange={onChange}
           onInput={onInput}
           {...inputRest}
