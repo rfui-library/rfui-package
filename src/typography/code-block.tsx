@@ -13,7 +13,7 @@ export type CodeBlockType = {
  *
  * @see {@link https://rfui.deno.dev/atoms/code-block}
  *
- * @param language - See {@link https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/master/AVAILABLE_LANGUAGES_PRISM.MD}.
+ * @param language - See this list: {@link https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/master/AVAILABLE_LANGUAGES_PRISM.MD}.
  * 
  * @example
  * <CodeBlock

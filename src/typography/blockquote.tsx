@@ -22,7 +22,7 @@ export const Blockquote = ({ children, ...rest }: BlockquoteType) => {
   }
 
   return (
-    <blockquote {...restWithoutClass} className={className}>
+    <blockquote className={className} {...restWithoutClass}>
       {children}
     </blockquote>
   );
