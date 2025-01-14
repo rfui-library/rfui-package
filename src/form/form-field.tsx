@@ -1,13 +1,13 @@
 import type { ComponentProps } from "react";
 import { useId } from "react";
-import { PasswordInput } from "../form/password-input";
-// import type { RadioButtonGroupType } from "../form/radio-button-group";
-// import {
-//   RadioButtonGroup,
-//   RadioButtonGroupItem,
-// } from "../form/radio-button-group";
 import { Checkbox } from "../form/checkbox";
 import { Input } from "../form/input";
+import { PasswordInput } from "../form/password-input";
+import type { RadioButtonGroupType } from "../form/radio-button-group";
+import {
+  RadioButtonGroup,
+  RadioButtonGroupItem,
+} from "../form/radio-button-group";
 import type { SelectType } from "../form/select";
 import { Select } from "../form/select";
 import { Switch } from "../form/switch";
@@ -49,10 +49,10 @@ export type FormFieldType = {
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
   errorText?: string;
-  // radioButtonGroupOptions?: {
-  //   value: string;
-  //   display: string;
-  // }[];
+  radioButtonGroupOptions?: {
+    value: string;
+    display: string;
+  }[];
   selectOptions?: {
     value: string;
     display: string;
@@ -61,7 +61,7 @@ export type FormFieldType = {
   onInput?: (e: any) => void;
   inputRest?: Omit<ComponentProps<"input">, ExcludedInputProps>;
   textareaRest?: Omit<TextareaType, ExcludedInputProps>;
-  // radioButtonGroupRest?: Omit<RadioButtonGroupType, ExcludedInputProps>;
+  radioButtonGroupRest?: Omit<RadioButtonGroupType, ExcludedInputProps>;
   selectRest?: Omit<SelectType, ExcludedInputProps>;
 } & Omit<ComponentProps<"div">, "size">;
 
@@ -92,13 +92,13 @@ export const FormField = ({
   rounded,
   invalid = false,
   errorText,
-  // radioButtonGroupOptions,
+  radioButtonGroupOptions,
   selectOptions,
   onChange,
   onInput,
   inputRest,
   textareaRest,
-  // radioButtonGroupRest,
+  radioButtonGroupRest,
   selectRest,
   ...rest
 }: FormFieldType) => {
@@ -208,30 +208,33 @@ export const FormField = ({
         >
           {value || defaultValue}
         </Textarea>
-      ) : type === "radio-button-group" ? ( // && radioButtonGroupOptions ? (
-        <div>RadioButtonGroup</div>
-      ) : // <RadioButtonGroup
-      //   id={id}
-      //   name={name as string}
-      //   className={`block w-full mt-3 ${radioButtonGroupRest?.className}`}
-      //   onChange={(newVal) => {
-      //     if (onChange) {
-      //       onChange({
-      //         target: {
-      //           value: newVal,
-      //         },
-      //       });
-      //     }
-      //   }}
-      //   {...radioButtonGroupRest}
-      // >
-      //   {radioButtonGroupOptions.map(({ value, display }) => (
-      //     <RadioButtonGroupItem value={value} key={value}>
-      //       {display}
-      //     </RadioButtonGroupItem>
-      //   ))}
-      // </RadioButtonGroup>
-      type === "select" && selectOptions ? (
+      ) : type === "radio-button-group" && radioButtonGroupOptions ? (
+        <RadioButtonGroup
+          id={id}
+          name={name as string}
+          className={
+            radioButtonGroupRest?.className
+              ? `block w-full mt-3 ${radioButtonGroupRest?.className}`
+              : "block w-full mt-3"
+          }
+          onChange={(newVal) => {
+            if (onChange) {
+              onChange({
+                target: {
+                  value: newVal,
+                },
+              });
+            }
+          }}
+          {...radioButtonGroupRest}
+        >
+          {radioButtonGroupOptions.map(({ value, display }) => (
+            <RadioButtonGroupItem value={value} key={value}>
+              {display}
+            </RadioButtonGroupItem>
+          ))}
+        </RadioButtonGroup>
+      ) : type === "select" && selectOptions ? (
         <Select
           id={id}
           name={name}
