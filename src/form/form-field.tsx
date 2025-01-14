@@ -32,6 +32,8 @@ export type FormFieldType = {
   name?: ComponentProps<"input">["name"];
   value?: ComponentProps<"input">["value"];
   defaultValue?: ComponentProps<"input">["defaultValue"];
+  checked?: boolean;
+  defaultChecked?: boolean;
   type?:
     | ComponentProps<"input">["type"]
     | "switch"
@@ -79,6 +81,8 @@ export const FormField = ({
   name,
   value,
   defaultValue,
+  checked,
+  defaultChecked,
   type,
   required = false,
   requiredIndicator = "none",
@@ -143,6 +147,8 @@ export const FormField = ({
           id={id}
           name={name}
           value={value}
+          checked={checked}
+          defaultChecked={defaultChecked}
           required={required}
           size={size}
           invalid={invalid}
