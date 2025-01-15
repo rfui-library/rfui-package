@@ -81,12 +81,14 @@ export const RadioButtonGroupItem = ({
   ...rest
 }: RadioButtonGroupItemType) => {
   const { className: restClass, ...restWithoutClass } = rest;
+  let className = "flex gap-3 items-center cursor-pointer";
+
+  if (restClass) {
+    className += ` ${restClass}`;
+  }
 
   return (
-    <label
-      className={`flex gap-3 items-center cursor-pointer ${restClass}`}
-      {...restWithoutClass}
-    >
+    <label className={className} {...restWithoutClass}>
       <RadioButton name={name} value={value} {...radioButtonRest} />
       <div>{children}</div>
     </label>
