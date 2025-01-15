@@ -10,7 +10,7 @@ export type SelectType = {
 /** *
  * @function Select
  *
- * Doesn't really have readonly: https://stackoverflow.com/q/368813/1927876
+ * Doesn't really have readOnly: https://stackoverflow.com/q/368813/1927876
  *
  * @see {@link https://rfui.deno.dev/atoms/select}
  *
@@ -42,7 +42,6 @@ export const Select = ({
         return " px-3 py-3 text-lg";
     }
   })();
-
   className += (() => {
     switch (rounded) {
       case "square":
