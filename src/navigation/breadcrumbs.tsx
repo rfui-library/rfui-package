@@ -45,20 +45,20 @@ export const Breadcrumbs = ({
         return " !h-3.5 !w-3.5";
     }
   })();
-  let className =
-    "flex items-center gap-2 text-neutral-700" +
-    (() => {
-      switch (size) {
-        case "xl":
-          return " text-xl";
-        case "lg":
-          return " text-lg";
-        case "sm":
-          return " text-sm";
-        default:
-          return "";
-      }
-    })();
+  let className = "flex items-center gap-2 text-neutral-700";
+
+  className += (() => {
+    switch (size) {
+      case "xl":
+        return " text-xl";
+      case "lg":
+        return " text-lg";
+      case "sm":
+        return " text-sm";
+      default:
+        return "";
+    }
+  })();
 
   if (restClass) {
     className += ` ${restClass}`;

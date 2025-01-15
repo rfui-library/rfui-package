@@ -82,15 +82,13 @@ const Tab = ({
   const isActive = tabName === activeTab;
   let containerClass = "rfui-tab cursor-pointer px-5 py-4 text-center";
 
-  if (isActive) {
-    containerClass += " border-b text-neutral-900";
-  } else {
-    containerClass += " text-neutral-700";
-  }
-
   if (fullWidth) {
     containerClass += " w-full";
   }
+
+  containerClass += isActive
+    ? " border-b text-neutral-900"
+    : " text-neutral-700";
 
   return (
     <div className={containerClass} onClick={onClick}>
@@ -100,7 +98,7 @@ const Tab = ({
 };
 
 export const TabSection = ({
-  // @ts-expect-error
+  // @ts-expect-error This is needed elsewhere
   tabName,
   children,
 }: {

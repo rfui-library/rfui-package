@@ -85,12 +85,12 @@ export const Card = ({
 
   return (
     <div className={containerClass} {...restWithoutClass}>
-      {cardHeader && cardHeader}
+      {cardHeader ? cardHeader : null}
       {cardBody && isArray ? cardBody : null}
       {cardBody && !isArray ? (
         <div className="rfui-card-body">{cardBody}</div>
       ) : null}
-      {cardFooter && cardFooter}
+      {cardFooter ? cardFooter : null}
     </div>
   );
 };

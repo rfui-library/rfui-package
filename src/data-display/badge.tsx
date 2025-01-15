@@ -39,7 +39,6 @@ export const Badge = ({
         return " bg-supporting-red-50 text-supporting-red-900";
     }
   })();
-
   className += (() => {
     switch (size) {
       case "sm":
@@ -50,7 +49,6 @@ export const Badge = ({
         return " px-3 py-1 text-md";
     }
   })();
-
   className += (() => {
     switch (rounded) {
       case "square":
@@ -71,7 +69,7 @@ export const Badge = ({
   }
 
   return (
-    <div {...restWithoutClass} className={className}>
+    <div className={className} {...restWithoutClass}>
       {children}
     </div>
   );
