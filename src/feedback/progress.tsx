@@ -24,7 +24,16 @@ export const Progress = ({
   let outerClassName = `box-content rounded-sm border`;
   let innerClassName = `h-full`;
 
-  outerClassName += ` ${size === "lg" ? "h-5" : size === "md" ? "h-4" : "h-3"}`;
+  outerClassName += (() => {
+    switch (size) {
+      case "lg":
+        return " h-5";
+      case "md":
+        return " h-4";
+      default:
+        return " h-3";
+    }
+  })();
   outerClassName += (() => {
     switch (variant) {
       case "neutral":

@@ -60,13 +60,12 @@ export const Alert = ({
   const { className: restClass, ...restWithoutClass } = rest;
   const { alertHeader, alertBody } = getComponents(children);
   let alertHeaderClass = "mb-2 text-lg font-bold";
-  let alertBodyClass = "";
+  let alertBodyClass = bodyTextColorMap[variant];
   let containerClass = "w-full p-5 border-l-4";
 
   containerClass += ` ${borderMap[variant]}`;
   containerClass += ` ${bgMap[variant]}`;
   alertHeaderClass += ` ${headerTextColorMap[variant]}`;
-  alertBodyClass += ` ${bodyTextColorMap[variant]}`;
 
   if (restClass) {
     containerClass += ` ${restClass}`;
