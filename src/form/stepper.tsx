@@ -15,7 +15,7 @@ export type StepperType = {
 /** *
  * @function Stepper
  *
- * @see {@link https://rfui.deno.dev/molecules/stepper}
+ * @see {@link https://rfui-docs.onrender.com/components/form/stepper}
  *
  * @example
  * <Stepper />

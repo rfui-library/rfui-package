@@ -12,7 +12,7 @@ export type SelectType = {
  *
  * Doesn't really have readOnly: https://stackoverflow.com/q/368813/1927876
  *
- * @see {@link https://rfui.deno.dev/atoms/select}
+ * @see {@link https://rfui-docs.onrender.com/components/form/select}
  *
  * @example
  * <Select>

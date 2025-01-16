@@ -5,7 +5,7 @@ export type SwitchType = ComponentProps<"input">;
 /** *
  * @function Switch
  *
- * @see {@link https://rfui.deno.dev/atoms/switch}
+ * @see {@link https://rfui-docs.onrender.com/components/form/switch}
  *
  * @example
  * <Switch />

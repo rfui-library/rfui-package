@@ -12,7 +12,7 @@ export type ModalType = {
 /** *
  * @function Modal
  *
- * @see {@link https://rfui.deno.dev/molecules/modal}
+ * @see {@link https://rfui-docs.onrender.com/components/overlays/modal}
  *
  * @example
  * <Modal isOpen={isOpen}>

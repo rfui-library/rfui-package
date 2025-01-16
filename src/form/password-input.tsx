@@ -16,7 +16,7 @@ export type PasswordInputType = {
  * - https://www.lukew.com/ff/entry.asp?1653
  * - https://ux.stackexchange.com/q/144503/39046
  *
- * @see {@link https://rfui.deno.dev/molecules/password-input}
+ * @see {@link https://rfui-docs.onrender.com/components/form/password-input}
  *
  * @param defaultVisibility `"hidden"` or `"shown"`. Consider the factors at play here, including:
  * 1. Usability: Seeing * as you type instead of characters like "a" and "b" can hurt usability.

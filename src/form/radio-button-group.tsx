@@ -20,7 +20,7 @@ export type RadioButtonGroupItemType = {
 /** *
  * @function RadioButtonGroup
  *
- * @see {@link https://rfui.deno.dev/molecules/radio-button-group}
+ * @see {@link https://rfui-docs.onrender.com/components/form/radio-button-group}
  *
  * @example
  * <RadioButtonGroup name="plan">

@@ -9,7 +9,7 @@ export type TextareaType = {
 /** *
  * @function Textarea
  *
- * @see {@link https://rfui.deno.dev/atoms/textarea}
+ * @see {@link https://rfui-docs.onrender.com/components/form/textarea}
  *
  * @example
  * <Textarea></Textarea>

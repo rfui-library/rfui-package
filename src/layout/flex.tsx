@@ -5,7 +5,7 @@ export type FlexType = { children: ReactNode } & ComponentProps<"div">;
 /** *
  * @function Flex
  *
- * @see {@link https://rfui.deno.dev/helpers/flex}
+ * @see {@link https://rfui-docs.onrender.com/components/layout/flex}
  *
  * @example
  * <Flex>

@@ -24,7 +24,7 @@
 // /** *
 //  * @function RadioButtonCardGroup
 //  *
-//  * @see {@link https://rfui.deno.dev/molecules/radio-button-card-group}
+//  * @see {@link https://rfui-docs.onrender.com/components/form/radio-button-card-group}
 //  *
 //  * @example
 //  * <RadioButtonCardGroup>

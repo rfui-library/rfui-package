@@ -14,7 +14,7 @@ export type CardType = {
 /** *
  * @function Card
  *
- * @see {@link https://rfui.deno.dev/molecules/card}
+ * @see {@link https://rfui-docs.onrender.com/components/data-display/card}
  *
  * @example
  * <Card>Example</Card>

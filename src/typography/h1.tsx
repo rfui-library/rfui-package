@@ -7,7 +7,7 @@ export type H1Type = {
 /** *
  * @function H1
  *
- * @see {@link https://rfui.deno.dev/atoms/h1}
+ * @see {@link https://rfui-docs.onrender.com/components/typography/h1}
  *
  * @example
  * <H1>Heading</H1>

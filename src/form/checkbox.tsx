@@ -14,7 +14,7 @@ export type CheckboxType = {
  *
  * Discussion of the cursor property https://ux.stackexchange.com/q/23266/39046
  *
- * @see {@link https://rfui.deno.dev/atoms/checkbox}
+ * @see {@link https://rfui-docs.onrender.com/components/form/checkbox}
  *
  * @example
  * <Checkbox />

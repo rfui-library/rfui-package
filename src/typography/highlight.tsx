@@ -7,7 +7,7 @@ export type HighlightType = {
 /** *
  * @function Highlight
  *
- * @see {@link https://rfui.deno.dev/atoms/highlight}
+ * @see {@link https://rfui-docs.onrender.com/components/typography/highlight}
  *
  * @example
  * <div>Lorem ipsum <Highlight>dolor</Highlight> sit amet, consectetur.</div>

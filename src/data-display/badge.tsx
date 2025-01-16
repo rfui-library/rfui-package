@@ -10,7 +10,7 @@ export type BadgeType = {
 /**
  * @function Badge
  *
- * @see {@link https://rfui.deno.dev/atoms/badge}
+ * @see {@link https://rfui-docs.onrender.com/components/data-display/badge}
  *
  * @example
  * <Badge>Example</Badge>

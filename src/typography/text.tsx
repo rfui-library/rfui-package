@@ -9,7 +9,7 @@ export type TextType = {
 /** *
  * @function Text
  *
- * @see {@link https://rfui.deno.dev/atoms/text}
+ * @see {@link https://rfui-docs.onrender.com/components/typography/text}
  *
  * @example
  * <Text>

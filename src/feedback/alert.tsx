@@ -14,7 +14,7 @@ export type AlertType = {
  *
  * Don't overdo it. If you "cry wolf", users become numb to alerts. https://ux.stackexchange.com/q/44609/39046
  *
- * @see {@link https://rfui.deno.dev/molecules/alert}
+ * @see {@link https://rfui-docs.onrender.com/components/feedback/alert}
  *
  * @example
  * <Alert>

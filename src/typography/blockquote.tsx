@@ -7,7 +7,7 @@ export type BlockquoteType = {
 /** *
  * @function Blockquote
  *
- * @see {@link https://rfui.deno.dev/atoms/blockquote}
+ * @see {@link https://rfui-docs.onrender.com/components/typography/blockquote}
  *
  * @example
  * <Blockquote>All models are wrong. Some models are useful.</Blockquote>

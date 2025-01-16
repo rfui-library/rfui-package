@@ -20,7 +20,7 @@ export type CheckboxCardGroupItemType = {
 /** *
  * @function CheckboxCardGroup
  *
- * @see {@link https://rfui.deno.dev/molecules/checkbox-card-group}
+ * @see {@link https://rfui-docs.onrender.com/components/form/checkbox-card-group}
  *
  * @example
  * <CheckboxCardGroup>

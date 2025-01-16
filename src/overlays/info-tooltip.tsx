@@ -8,7 +8,7 @@ export type InfoTooltipType = Omit<TooltipType, "children" | "size"> & {
 /** *
  * @function InfoTooltip
  *
- * @see {@link https://rfui.deno.dev/molecules/info-tooltip}
+ * @see {@link https://rfui-docs.onrender.com/components/overlays/info-tooltip}
  *
  * @example
  * <InfoTooltip content="Example content" />

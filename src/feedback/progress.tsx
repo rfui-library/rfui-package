@@ -9,7 +9,7 @@ export type ProgressType = {
 /**
  * @function Progress
  *
- * @see {@link https://rfui.deno.dev/atoms/progress}
+ * @see {@link https://rfui-docs.onrender.com/components/feedback/progress}
  *
  * @example
  * <Progress value={40} />

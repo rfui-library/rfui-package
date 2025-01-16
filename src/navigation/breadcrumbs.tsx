@@ -16,7 +16,7 @@ type BreadcrumbLink = {
 /** *
  * @function Breadcrumbs
  *
- * @see {@link https://rfui.deno.dev/atoms/breadcrumbs}
+ * @see {@link https://rfui-docs.onrender.com/components/navigation/breadcrumbs}
  *
  * @example
  * <Breadcrumbs

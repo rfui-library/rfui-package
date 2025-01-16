@@ -8,7 +8,7 @@ export type OLType = {
 /** *
  * @function OL
  *
- * @see {@link https://rfui.deno.dev/atoms/ol}
+ * @see {@link https://rfui-docs.onrender.com/components/typography/ol}
  *
  * @example
  * <OL>

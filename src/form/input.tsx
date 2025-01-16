@@ -9,7 +9,7 @@ export type InputType = {
 /** *
  * @function Input
  *
- * @see {@link https://rfui.deno.dev/atoms/input}
+ * @see {@link https://rfui-docs.onrender.com/components/form/input}
  *
  * @example
  * <Input type="text" />

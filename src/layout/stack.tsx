@@ -5,7 +5,7 @@ export type StackType = { children: ReactNode } & ComponentProps<"div">;
 /** *
  * @function Stack
  *
- * @see {@link https://rfui.deno.dev/helpers/stack}
+ * @see {@link https://rfui-docs.onrender.com/components/layout/stack}
  *
  * @example
  * <Stack>

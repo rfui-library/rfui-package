@@ -25,7 +25,7 @@ export type TableType = {
  *
  * Making the header or first column sticky is helpful when the user needs to cross-reference and avoid losing context.
  *
- * @see {@link https://rfui.deno.dev/atoms/table}
+ * @see {@link https://rfui-docs.onrender.com/components/data-display/table}
  *
  * @example
  * <Table>

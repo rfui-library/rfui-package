@@ -11,7 +11,7 @@ export type TabsType = {
 /** *
  * @function Tabs
  *
- * @see {@link https://rfui.deno.dev/molecules/tabs}
+ * @see {@link https://rfui-docs.onrender.com/components/navigation/tabs}
  *
  * @example
  * <Tabs>

@@ -10,7 +10,7 @@ export type TooltipType = {
 /** *
  * @function Tooltip
  *
- * @see {@link https://rfui.deno.dev/molecules/tooltip}
+ * @see {@link https://rfui-docs.onrender.com/components/overlays/tooltip}
  *
  * @example
  * <Tooltip content="Example content">Hover me</Tooltip>

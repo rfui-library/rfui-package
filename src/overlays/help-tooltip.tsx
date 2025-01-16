@@ -8,7 +8,7 @@ export type HelpTooltipType = Omit<TooltipType, "children" | "size"> & {
 /** *
  * @function HelpTooltip
  *
- * @see {@link https://rfui.deno.dev/molecules/help-tooltip}
+ * @see {@link https://rfui-docs.onrender.com/components/overlays/help-tooltip}
  *
  * @example
  * <HelpTooltip content="Example content" />

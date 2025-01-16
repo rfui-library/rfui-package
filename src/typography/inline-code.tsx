@@ -7,7 +7,7 @@ export type InlineCodeType = {
 /** *
  * @function InlineCode
  *
- * @see {@link https://rfui.deno.dev/atoms/inline-code}
+ * @see {@link https://rfui-docs.onrender.com/components/typography/inline-code}
  *
  * @example
  * <div>

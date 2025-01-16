@@ -11,7 +11,7 @@ export type ULType = {
  *
  * Useful blog post: https://css-tricks.com/list-style-recipes/
  *
- * @see {@link https://rfui.deno.dev/atoms/ul}
+ * @see {@link https://rfui-docs.onrender.com/components/typography/ul}
  *
  * @example
  * <UL>

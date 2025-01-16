@@ -17,7 +17,7 @@ export type LinkItemType = {
 /**
  * @function NavigationLinks
  *
- * @see {@link https://rfui.deno.dev/molecules/navigation-links}
+ * @see {@link https://rfui-docs.onrender.com/components/navigation/navigation-links}
  *
  * @example
  * <NavigationLinks

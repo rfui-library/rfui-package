@@ -17,7 +17,7 @@ export type VerticalNavbarType = {
 /** *
  * @function VerticalNavbar
  *
- * @see {@link https://rfui.deno.dev/molecules/vertical-navbar}
+ * @see {@link https://rfui-docs.onrender.com/components/navigation/vertical-navbar}
  *
  * @example
  */

@@ -9,7 +9,7 @@ export type H2Type = {
 /** *
  * @function H1
  *
- * @see {@link https://rfui.deno.dev/atoms/h2}
+ * @see {@link https://rfui-docs.onrender.com/components/typography/h2}
  *
  * @example
  * <H2>Subheading</H2>

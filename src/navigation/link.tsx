@@ -13,7 +13,7 @@ export type LinkType = {
 /** *
  * @function Link
  *
- * @see {@link https://rfui.deno.dev/atoms/link}
+ * @see {@link https://rfui-docs.onrender.com/components/navigation/link}
  *
  * @example
  * <Link href="https://example.com">Example</Link>

@@ -24,7 +24,7 @@ export type NavbarType = {
 /** *
  * @function Navbar
  *
- * @see {@link https://rfui.deno.dev/molecules/navbar}
+ * @see {@link https://rfui-docs.onrender.com/components/navigation/navbar}
  *
  * @example
  * <Navbar size="xl">

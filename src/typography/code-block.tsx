@@ -11,7 +11,7 @@ export type CodeBlockType = {
  *
  * Preserving whitespace and line breaks is a little tricky. In short, just try to follow the example below and make sure you use a [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) instead of a normal string.
  *
- * @see {@link https://rfui.deno.dev/atoms/code-block}
+ * @see {@link https://rfui-docs.onrender.com/components/typography/code-block}
  *
  * @param language - See this list: {@link https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/master/AVAILABLE_LANGUAGES_PRISM.MD}.
  * 
