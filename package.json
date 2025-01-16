@@ -1,5 +1,5 @@
 {
-  "name": "rfui",
+  "name": "@rfui-library/rfui-package",
   "version": "0.1.0",
   "description": "A React component library",
   "main": "dist/index.js",
