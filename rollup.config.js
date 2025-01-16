@@ -6,10 +6,7 @@ export default {
   output: [
     {
       file: packageJson.main,
-      format: "cjs",
-      exports: "named",
       sourcemap: true,
-      strict: false,
     },
   ],
   plugins: [typescript()],
