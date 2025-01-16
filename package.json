@@ -1,5 +1,5 @@
 {
-  "name": "@rfui-library/rfui-package",
+  "name": "rfui-package",
   "version": "0.1.0",
   "description": "A React component library",
   "main": "dist/index.js",
@@ -39,5 +39,8 @@
   "files": [
     "dist"
   ],
-  "type": "module"
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  }
 }
