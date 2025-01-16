@@ -4,6 +4,7 @@ import { Stack } from "../layout/stack";
 
 export type RadioButtonGroupType = {
   name?: string;
+  defaultSelectedValue?: RadioButtonType["value"];
   selectedValue?: RadioButtonType["value"];
   onChange?: (newSelectedVal: RadioButtonType["value"]) => void;
   children: ReactNode;
@@ -37,6 +38,7 @@ export type RadioButtonGroupItemType = {
 
 export const RadioButtonGroup = ({
   name,
+  defaultSelectedValue,
   selectedValue,
   onChange,
   children,
@@ -60,6 +62,10 @@ export const RadioButtonGroup = ({
             checked:
               onChange && selectedValue
                 ? selectedValue === child.props.value
+                : undefined,
+            defaultChecked:
+              !onChange && defaultSelectedValue !== undefined
+                ? defaultSelectedValue === child.props.value
                 : undefined,
           },
           onClick: () => {
@@ -89,7 +95,7 @@ export const RadioButtonGroupItem = ({
 
   return (
     <label className={className} {...restWithoutClass}>
-      <RadioButton name={name} value={value} {...radioButtonRest} />
+      <RadioButton readOnly name={name} value={value} {...radioButtonRest} />
       <div>{children}</div>
     </label>
   );

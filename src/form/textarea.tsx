@@ -17,7 +17,6 @@ export type TextareaType = {
 export const Textarea = ({
   rounded,
   invalid = false,
-  children,
   ...rest
 }: TextareaType) => {
   const { className: restClass, ...resstWithoutClass } = rest;
@@ -54,9 +53,5 @@ export const Textarea = ({
     className += ` ${restClass}`;
   }
 
-  return (
-    <textarea className={className} {...resstWithoutClass}>
-      {children}
-    </textarea>
-  );
+  return <textarea className={className} {...resstWithoutClass} />;
 };

@@ -61,7 +61,10 @@ export type FormFieldType = {
   onInput?: (e: any) => void;
   inputRest?: Omit<ComponentProps<"input">, ExcludedInputProps>;
   textareaRest?: Omit<TextareaType, ExcludedInputProps>;
-  radioButtonGroupRest?: Omit<RadioButtonGroupType, ExcludedInputProps>;
+  radioButtonGroupRest?: Omit<
+    RadioButtonGroupType,
+    ExcludedInputProps | "children"
+  >;
   selectRest?: Omit<SelectType, ExcludedInputProps>;
 } & Omit<ComponentProps<"div">, "size">;
 
@@ -71,7 +74,6 @@ export type FormFieldType = {
  * @see {@link https://rfui.deno.dev/molecules/form-field}
  *
  * @param requiredIndicator See https://ux.stackexchange.com/q/840/39046 for a discussion.
- * @param value When `type` is `textarea` the `value` prop is passed like this `<Textarea>{value}</Textarea>` and isn't passed as a prop.
  *
  * @example
  * <FormField label="Name" />
@@ -172,6 +174,8 @@ export const FormField = ({
           id={id}
           name={name}
           value={value}
+          checked={checked}
+          defaultChecked={defaultChecked}
           required={required}
           className={inputRestClassName ? `mt-1 ${inputRestClassName}` : "mt-1"}
           onChange={onChange}
@@ -201,6 +205,8 @@ export const FormField = ({
         <Textarea
           id={id}
           name={name}
+          value={value}
+          defaultValue={defaultValue}
           required={required}
           invalid={invalid}
           className={
@@ -211,9 +217,7 @@ export const FormField = ({
           onChange={onChange}
           onInput={onInput}
           {...textareaRestWithoutClassName}
-        >
-          {value || defaultValue}
-        </Textarea>
+        />
       ) : type === "radio-button-group" && radioButtonGroupOptions ? (
         <RadioButtonGroup
           id={id}
@@ -223,15 +227,17 @@ export const FormField = ({
               ? `block w-full mt-3 ${radioButtonGroupRestClassName}`
               : "block w-full mt-3"
           }
-          onChange={(newVal) => {
-            if (onChange) {
-              onChange({
-                target: {
-                  value: newVal,
-                },
-              });
-            }
-          }}
+          onChange={
+            onChange
+              ? (newVal) => {
+                  onChange({
+                    target: {
+                      value: newVal,
+                    },
+                  });
+                }
+              : undefined
+          }
           {...radioButtonGroupRestWithoutClassName}
         >
           {radioButtonGroupOptions.map(({ value, display }) => (
