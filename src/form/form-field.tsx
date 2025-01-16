@@ -113,6 +113,16 @@ export const FormField = ({
         return ["text-base", "text-lg"];
     }
   })();
+  const { className: inputRestClassName, ...inputRestWithoutClassName } =
+    inputRest || {};
+  const { className: textareaRestClassName, ...textareaRestWithoutClassName } =
+    textareaRest || {};
+  const {
+    className: radioButtonGroupRestClassName,
+    ...radioButtonGroupRestWithoutClassName
+  } = radioButtonGroupRest || {};
+  const { className: selectRestClassName, ...selectRestWithoutClassName } =
+    selectRest || {};
 
   return (
     <div {...rest}>
@@ -152,12 +162,10 @@ export const FormField = ({
           required={required}
           size={size}
           invalid={invalid}
-          className={
-            inputRest?.className ? `mt-1 ${inputRest?.className}` : "mt-1"
-          }
+          className={inputRestClassName ? `mt-1 ${inputRestClassName}` : "mt-1"}
           onChange={onChange}
           onInput={onInput}
-          {...inputRest}
+          {...inputRestWithoutClassName}
         />
       ) : type === "switch" ? (
         <Switch
@@ -165,12 +173,10 @@ export const FormField = ({
           name={name}
           value={value}
           required={required}
-          className={
-            inputRest?.className ? `mt-1 ${inputRest?.className}` : "mt-1"
-          }
+          className={inputRestClassName ? `mt-1 ${inputRestClassName}` : "mt-1"}
           onChange={onChange}
           onInput={onInput}
-          {...inputRest}
+          {...inputRestWithoutClassName}
         />
       ) : type === "rfui-password-input" ? (
         <PasswordInput
@@ -183,13 +189,13 @@ export const FormField = ({
           rounded={rounded}
           invalid={invalid}
           className={
-            inputRest?.className
-              ? `block w-full ${inputRest?.className}`
+            inputRestClassName
+              ? `block w-full ${inputRestClassName}`
               : "block w-full"
           }
           onChange={onChange}
           onInput={onInput}
-          {...inputRest}
+          {...inputRestWithoutClassName}
         />
       ) : type === "textarea" ? (
         <Textarea
@@ -198,13 +204,13 @@ export const FormField = ({
           required={required}
           invalid={invalid}
           className={
-            textareaRest?.className
-              ? `block w-full ${textareaRest?.className}`
+            textareaRestClassName
+              ? `block w-full ${textareaRestClassName}`
               : "block w-full"
           }
           onChange={onChange}
           onInput={onInput}
-          {...textareaRest}
+          {...textareaRestWithoutClassName}
         >
           {value || defaultValue}
         </Textarea>
@@ -213,8 +219,8 @@ export const FormField = ({
           id={id}
           name={name as string}
           className={
-            radioButtonGroupRest?.className
-              ? `block w-full mt-3 ${radioButtonGroupRest?.className}`
+            radioButtonGroupRestClassName
+              ? `block w-full mt-3 ${radioButtonGroupRestClassName}`
               : "block w-full mt-3"
           }
           onChange={(newVal) => {
@@ -226,7 +232,7 @@ export const FormField = ({
               });
             }
           }}
-          {...radioButtonGroupRest}
+          {...radioButtonGroupRestWithoutClassName}
         >
           {radioButtonGroupOptions.map(({ value, display }) => (
             <RadioButtonGroupItem value={value} key={value}>
@@ -243,13 +249,13 @@ export const FormField = ({
           required={required}
           invalid={invalid}
           className={
-            selectRest?.className
-              ? `block w-full ${selectRest?.className}`
+            selectRestClassName
+              ? `block w-full ${selectRestClassName}`
               : "block w-full"
           }
           onChange={onChange}
           onInput={onInput}
-          {...selectRest}
+          {...selectRestWithoutClassName}
         >
           {selectOptions.map(({ value, display }) => (
             <option value={value} key={value}>
@@ -269,13 +275,13 @@ export const FormField = ({
           rounded={rounded}
           invalid={invalid}
           className={
-            inputRest?.className
-              ? `block w-full ${inputRest?.className}`
+            inputRestClassName
+              ? `block w-full ${inputRestClassName}`
               : "block w-full"
           }
           onChange={onChange}
           onInput={onInput}
-          {...inputRest}
+          {...inputRestWithoutClassName}
         />
       )}
     </div>
