@@ -13,7 +13,8 @@ export type CheckboxCardGroupType = {
 export type CheckboxCardGroupItemType = {
   defaultIsChecked?: boolean;
   onChange?: (isChecked: boolean) => void;
-  checkboxRest?: Omit<CheckboxType, "size">;
+  name?: CheckboxType["name"];
+  checkboxRest?: Omit<CheckboxType, "size" | "name">;
   children: ReactNode;
 };
 
@@ -34,7 +35,7 @@ export const CheckboxCardGroup = ({
   rounded,
   children,
 }: CheckboxCardGroupType) => {
-  const id = useId();
+  const id = useId().replace(/:/g, ""); // There is a ":" at the beginning and end of the generated id which leads to CSS issues.
   let containerClass = `checkbox-card-group-${id}`;
 
   containerClass += ` gap-${padding === "sm" ? 2 : padding === "md" ? 3 : 4}`;
@@ -82,6 +83,7 @@ export const CheckboxCardGroup = ({
 export const CheckboxCardGroupItem = ({
   defaultIsChecked = false,
   onChange,
+  name,
   checkboxRest,
   children,
 }: CheckboxCardGroupItemType) => {
@@ -91,7 +93,7 @@ export const CheckboxCardGroupItem = ({
       onChange(!isChecked);
     }
 
-    setIsChecked(!isChecked);
+    setIsChecked((v) => !v);
   };
   let containerClass =
     "checkbox-card-group-item cursor-pointer items-center rounded border p-5";
@@ -102,11 +104,7 @@ export const CheckboxCardGroupItem = ({
 
   return (
     <Flex className={containerClass} onClick={handleClick}>
-      {onChange ? (
-        <Checkbox checked={isChecked} {...checkboxRest} />
-      ) : (
-        <Checkbox defaultChecked={isChecked} {...checkboxRest} />
-      )}
+      <Checkbox readOnly checked={isChecked} name={name} {...checkboxRest} />
       <div>{children}</div>
     </Flex>
   );
