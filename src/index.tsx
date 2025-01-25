@@ -111,6 +111,8 @@ export { InfoTooltip } from "./overlays/info-tooltip";
 export type { InfoTooltipType } from "./overlays/info-tooltip";
 export { Modal } from "./overlays/modal";
 export type { ModalType } from "./overlays/modal";
+export { Popover } from "./overlays/popover";
+export type { PopoverType } from "./overlays/popover";
 export { Tooltip } from "./overlays/tooltip";
 export type { TooltipType } from "./overlays/tooltip";
 
