@@ -37,6 +37,11 @@
     "react-dom": "^19.0.0",
     "react-syntax-highlighter": "^15.6.1"
   },
+  "peerDependenciesMeta": {
+    "@headlessui/react": {
+      "optional": true
+    }
+  },
   "files": [
     "dist"
   ],
