@@ -122,7 +122,7 @@ export const RadioButtonCardGroupItem = ({
         handleNewSelection(value);
       }}
     >
-      <RadioButton name={name} checked={isSelected} value={value} />
+      <RadioButton readOnly name={name} checked={isSelected} value={value} />
       <div>{children}</div>
     </Flex>
   );
