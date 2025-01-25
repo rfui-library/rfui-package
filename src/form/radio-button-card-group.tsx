@@ -8,6 +8,7 @@ export type RadioButtonCardGroupType = {
   name: RadioButtonType["name"];
   padding?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg";
+  onChange?: (newValue: RadioButtonType["value"]) => void;
   children: ReactNode;
 };
 
@@ -41,6 +42,7 @@ export const RadioButtonCardGroup = ({
   name,
   padding = "md",
   rounded,
+  onChange,
   children,
 }: RadioButtonCardGroupType) => {
   const id = useId().replace(/:/g, ""); // There is a ":" at the beginning and end of the generated id which leads to CSS issues.
@@ -92,7 +94,13 @@ export const RadioButtonCardGroup = ({
             value: child.props.value,
             key: child.props.value,
             isSelected: selectedItemName === child.props.value,
-            handleNewSelection: setSelectedItemName,
+            handleNewSelection: (newValue: string) => {
+              setSelectedItemName(newValue);
+
+              if (onChange) {
+                onChange(newValue);
+              }
+            },
           }),
         )}
       </Stack>
