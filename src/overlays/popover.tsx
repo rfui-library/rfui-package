@@ -27,7 +27,12 @@ export const Popover = ({
   return (
     <HeadlessUIPopover className="relative">
       <PopoverButton>{children}</PopoverButton>
-      <PopoverPanel anchor={direction}>{content}</PopoverPanel>
+      <PopoverPanel
+        anchor={{ to: direction, gap: 4 }}
+        className="rounded border border-neutral-100 p-4 shadow-lg"
+      >
+        {content}
+      </PopoverPanel>
     </HeadlessUIPopover>
   );
 };
