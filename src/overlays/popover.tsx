@@ -25,10 +25,10 @@ export const Popover = ({
   children,
 }: PopoverType) => {
   return (
-    <HeadlessUIPopover className="relative">
+    <HeadlessUIPopover>
       <PopoverButton>{children}</PopoverButton>
       <PopoverPanel
-        anchor={{ to: direction, gap: 4 }}
+        anchor={{ to: direction, gap: 6 }}
         className="rounded border border-neutral-100 p-4 shadow-lg"
       >
         {content}
