@@ -6,6 +6,7 @@ import { Stack } from "../layout/stack";
 
 export type RadioButtonCardGroupType = {
   name: RadioButtonType["name"];
+  initialSelectedValue?: RadioButtonType["value"];
   padding?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg";
   onChange?: (newValue: RadioButtonType["value"]) => void;
@@ -40,13 +41,16 @@ export type RadioButtonCardGroupItemType = {
  */
 export const RadioButtonCardGroup = ({
   name,
+  initialSelectedValue,
   padding = "md",
   rounded,
   onChange,
   children,
 }: RadioButtonCardGroupType) => {
   const id = useId().replace(/:/g, ""); // There is a ":" at the beginning and end of the generated id which leads to CSS issues.
-  const [selectedItemName, setSelectedItemName] = useState("");
+  const [selectedItemName, setSelectedItemName] = useState(
+    initialSelectedValue ?? "",
+  );
   const childrenArray = Children.toArray(children);
   let containerClass = `radio-button-card-group-${id}`;
 
