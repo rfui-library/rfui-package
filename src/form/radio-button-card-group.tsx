@@ -48,10 +48,10 @@ export const RadioButtonCardGroup = ({
   children,
 }: RadioButtonCardGroupType) => {
   const id = useId().replace(/:/g, ""); // There is a ":" at the beginning and end of the generated id which leads to CSS issues.
-  const [selectedItemName, setSelectedItemName] = useState(
-    initialSelectedValue ?? "",
-  );
   const childrenArray = Children.toArray(children);
+  const [selectedItemName, setSelectedItemName] = useState(
+    initialSelectedValue ?? (childrenArray[0] as any)?.props?.value ?? "",
+  );
   let containerClass = `radio-button-card-group-${id}`;
 
   containerClass += ` gap-${padding === "sm" ? 2 : padding === "md" ? 3 : 4}`;
