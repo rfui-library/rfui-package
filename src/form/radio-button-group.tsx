@@ -54,27 +54,31 @@ export const RadioButtonGroup = ({
 
   return (
     <Stack className={className} {...restWithoutClass}>
-      {childrenArray.map((child: any) =>
-        cloneElement(child, {
+      {childrenArray.map((child: any, i) => {
+        const checked =
+          onChange && selectedValue
+            ? selectedValue === child.props.value
+            : undefined;
+        const defaultChecked = !!onChange
+          ? undefined
+          : initialSelectedValue !== undefined
+            ? initialSelectedValue === child.props.value
+            : i === 0;
+
+        return cloneElement(child, {
           name,
           key: child.props.value,
           radioButtonRest: {
-            checked:
-              onChange && selectedValue
-                ? selectedValue === child.props.value
-                : undefined,
-            defaultChecked:
-              !onChange && initialSelectedValue !== undefined
-                ? initialSelectedValue === child.props.value
-                : undefined,
+            checked,
+            defaultChecked,
           },
-          onClick: () => {
-            if (onChange) {
-              onChange(child.props.value);
-            }
-          },
-        }),
-      )}
+          onClick: !!onChange
+            ? () => {
+                onChange(child.props.value);
+              }
+            : undefined,
+        });
+      })}
     </Stack>
   );
 };
@@ -87,7 +91,7 @@ export const RadioButtonGroupItem = ({
   ...rest
 }: RadioButtonGroupItemType) => {
   const { className: restClass, ...restWithoutClass } = rest;
-  let className = "flex gap-3 items-center cursor-pointer";
+  let className = "flex cursor-pointer items-center gap-3";
 
   if (restClass) {
     className += ` ${restClass}`;
