@@ -12,6 +12,7 @@ export type SelectType = {
     id: string;
     display: string;
     value: ComponentProps<"option">["value"];
+    disabled?: boolean;
   }[];
   name?: string;
   disabled?: boolean;
@@ -50,7 +51,7 @@ export const Select = ({
   let optionsClassName =
     "min-w-52 mt-1 border border-neutral-500 bg-[#fff] focus:outline-none";
   let optionClassName =
-    "group mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50";
+    "group mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50 data-[disabled]:opacity-50";
   let chevronIconClassName = "group pointer-events-none";
   let checkIconClassName =
     "invisible fill-neutral-700 group-data-[selected]:visible";
@@ -127,6 +128,7 @@ export const Select = ({
             key={option.id}
             value={option}
             className={optionClassName}
+            disabled={!!option.disabled}
           >
             <CheckIcon className={checkIconClassName} />
             <span>{option.display}</span>
