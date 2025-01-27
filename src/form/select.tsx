@@ -40,7 +40,7 @@ export const Select = ({
   multiple = false,
 }: SelectType) => {
   if (options.length === 0) {
-    throw new Error("The `options` array can't be empty.");
+    return null;
   }
 
   const [selectedOption, setSelectedOption] = useState<
