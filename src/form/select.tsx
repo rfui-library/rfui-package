@@ -4,6 +4,7 @@ import {
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useState, type ComponentProps } from "react";
 
 export type SelectType = {
@@ -45,14 +46,14 @@ export const Select = ({
     SelectType["options"][number]
   >(options[0]);
   let className =
-    "cursor-pointer border border-neutral-500 bg-[#fff] px-2 py-1 focus:border-neutral-900 focus:shadow-sm focus:outline-none";
+    "min-w-52 flex cursor-pointer items-center justify-between border border-neutral-500 bg-[#fff] text-left focus:border-neutral-900 focus:shadow-sm focus:outline-none";
 
   className += (() => {
     switch (size) {
       case "sm":
         return " px-2 text-sm";
       case "md":
-        return " px-2 py-2";
+        return " px-3 py-2";
       case "lg":
         return " px-3 py-3 text-lg";
     }
@@ -90,14 +91,16 @@ export const Select = ({
       invalid={invalid}
       multiple={multiple}
     >
-      <ListboxButton>{selectedOption.display}</ListboxButton>
+      <ListboxButton className={className}>
+        <span>{selectedOption.display}</span>
+        <ChevronDownIcon
+          className="size-4 group pointer-events-none"
+          aria-hidden="true"
+        />
+      </ListboxButton>
       <ListboxOptions anchor="bottom">
         {options.map((option) => (
-          <ListboxOption
-            key={option.id}
-            value={option}
-            className="data-[focus]:bg-blue-100"
-          >
+          <ListboxOption key={option.id} value={option} className="text-left">
             {option.display}
           </ListboxOption>
         ))}
