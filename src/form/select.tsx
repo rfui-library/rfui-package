@@ -1,33 +1,48 @@
-import type { ComponentProps, ReactNode } from "react";
+import {
+  Listbox,
+  ListboxButton,
+  ListboxOption,
+  ListboxOptions,
+} from "@headlessui/react";
+import { useState, type ComponentProps, type ReactNode } from "react";
 
 export type SelectType = {
+  options: {
+    id: string;
+    display: string;
+    value: ComponentProps<"option">["value"];
+  }[];
+  name?: ComponentProps<"select">["name"];
   size?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
   children?: ReactNode;
-} & Omit<ComponentProps<"select">, "size">;
+};
 
 /** *
  * @function Select
  *
- * Doesn't really have readOnly: https://stackoverflow.com/q/368813/1927876
- *
  * @see {@link https://rfui-docs.onrender.com/components/form/select}
  *
  * @example
- * <Select>
- *   <option value="foo">foo</option>
- *   <option value="bar">bar</option>
- *   <option value="baz">baz</option>
- * </Select>
+ * <Select options={options} />
  */
 export const Select = ({
+  options,
+  name,
   size = "md",
   rounded,
   invalid = false,
   children,
   ...rest
 }: SelectType) => {
+  if (options.length === 0) {
+    throw new Error("The `options` array can't be empty.");
+  }
+
+  const [selectedOption, setSelectedOption] = useState<
+    SelectType["options"][number]
+  >(options[0]);
   const { className: restClass, ...restWithoutClass } = rest;
   let className =
     "cursor-pointer border border-neutral-500 bg-[#fff] px-2 py-1 focus:border-neutral-900 focus:shadow-sm focus:outline-none";
@@ -71,8 +86,24 @@ export const Select = ({
   }
 
   return (
-    <select className={className} {...restWithoutClass}>
-      {children}
-    </select>
+    <Listbox
+      className={className}
+      value={selectedOption}
+      onChange={setSelectedOption}
+      {...restWithoutClass}
+    >
+      <ListboxButton>{selectedOption.display}</ListboxButton>
+      <ListboxOptions anchor="bottom">
+        {options.map((option) => (
+          <ListboxOption
+            key={option.id}
+            value={option}
+            className="data-[focus]:bg-blue-100"
+          >
+            {option.display}
+          </ListboxOption>
+        ))}
+      </ListboxOptions>
+    </Listbox>
   );
 };
