@@ -87,6 +87,8 @@ export const Select = ({
       name={name}
       value={selectedOption}
       onChange={setSelectedOption}
+      disabled={disabled}
+      invalid={invalid}
       multiple={multiple}
     >
       <ListboxButton>{selectedOption.display}</ListboxButton>
