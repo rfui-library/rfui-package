@@ -19,7 +19,6 @@ export type SelectType = {
   size?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
-  multiple?: boolean;
 };
 
 /** *
@@ -37,7 +36,6 @@ export const Select = ({
   size = "md",
   rounded,
   invalid = false,
-  multiple = false,
 }: SelectType) => {
   if (options.length === 0) {
     return null;
@@ -116,7 +114,6 @@ export const Select = ({
       onChange={setSelectedOption}
       disabled={disabled}
       invalid={invalid}
-      multiple={multiple}
     >
       <ListboxButton className={buttonClassName}>
         <span>{selectedOption.display}</span>
