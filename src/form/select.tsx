@@ -51,19 +51,25 @@ export const Select = ({
     "min-w-52 mt-1 border border-neutral-500 bg-[#fff] focus:outline-none";
   let optionClassName =
     "group mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50";
-  let chevronIconClassName = "size-5 group pointer-events-none";
+  let chevronIconClassName = "group pointer-events-none";
   let checkIconClassName =
-    "size-4 invisible fill-neutral-700 group-data-[selected]:visible";
+    "invisible fill-neutral-700 group-data-[selected]:visible";
 
   if (size === "sm") {
     buttonClassName += " px-2 text-sm";
     optionClassName += " px-2 text-sm";
+    chevronIconClassName += " size-4";
+    checkIconClassName += " size-3";
   } else if (size === "md") {
     buttonClassName += " px-3 py-2";
     optionClassName += " px-3 py-2";
+    chevronIconClassName += " size-5";
+    checkIconClassName += " size-4";
   } else if (size === "lg") {
     buttonClassName += " px-3 py-3 text-lg";
     optionClassName += " px-3 py-3 text-lg";
+    chevronIconClassName += " size-5";
+    checkIconClassName += " size-4";
   }
 
   if (rounded === "square") {
