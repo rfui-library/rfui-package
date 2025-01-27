@@ -4,7 +4,7 @@ import {
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/react";
-import { useState, type ComponentProps, type ReactNode } from "react";
+import { useState, type ComponentProps } from "react";
 
 export type SelectType = {
   options: {
@@ -12,11 +12,12 @@ export type SelectType = {
     display: string;
     value: ComponentProps<"option">["value"];
   }[];
-  name?: ComponentProps<"select">["name"];
+  name?: string;
+  disabled?: boolean;
   size?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
-  children?: ReactNode;
+  multiple?: boolean;
 };
 
 /** *
@@ -30,11 +31,11 @@ export type SelectType = {
 export const Select = ({
   options,
   name,
+  disabled = false,
   size = "md",
   rounded,
   invalid = false,
-  children,
-  ...rest
+  multiple = false,
 }: SelectType) => {
   if (options.length === 0) {
     throw new Error("The `options` array can't be empty.");
@@ -43,7 +44,6 @@ export const Select = ({
   const [selectedOption, setSelectedOption] = useState<
     SelectType["options"][number]
   >(options[0]);
-  const { className: restClass, ...restWithoutClass } = rest;
   let className =
     "cursor-pointer border border-neutral-500 bg-[#fff] px-2 py-1 focus:border-neutral-900 focus:shadow-sm focus:outline-none";
 
@@ -72,7 +72,7 @@ export const Select = ({
     }
   })();
 
-  if (rest.disabled) {
+  if (disabled) {
     className += " cursor-not-allowed bg-neutral-50";
   }
 
@@ -81,16 +81,13 @@ export const Select = ({
       " border-supporting-red-300 bg-supporting-red-50 text-supporting-red-900 focus:border-supporting-red-700";
   }
 
-  if (restClass) {
-    className += ` ${restClass}`;
-  }
-
   return (
     <Listbox
       className={className}
+      name={name}
       value={selectedOption}
       onChange={setSelectedOption}
-      {...restWithoutClass}
+      multiple={multiple}
     >
       <ListboxButton>{selectedOption.display}</ListboxButton>
       <ListboxOptions anchor="bottom">
