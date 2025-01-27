@@ -45,10 +45,10 @@ export const Select = ({
   const [selectedOption, setSelectedOption] = useState<
     SelectType["options"][number]
   >(options[0]);
-  let className =
+  let buttonClassName =
     "min-w-52 flex cursor-pointer items-center justify-between border border-neutral-500 bg-[#fff] text-left focus:border-neutral-900 focus:shadow-sm focus:outline-none";
 
-  className += (() => {
+  buttonClassName += (() => {
     switch (size) {
       case "sm":
         return " px-2 text-sm";
@@ -58,7 +58,7 @@ export const Select = ({
         return " px-3 py-3 text-lg";
     }
   })();
-  className += (() => {
+  buttonClassName += (() => {
     switch (rounded) {
       case "square":
         return " rounded-none";
@@ -74,11 +74,11 @@ export const Select = ({
   })();
 
   if (disabled) {
-    className += " cursor-not-allowed bg-neutral-50";
+    buttonClassName += " cursor-not-allowed bg-neutral-50";
   }
 
   if (invalid) {
-    className +=
+    buttonClassName +=
       " border-supporting-red-300 bg-supporting-red-50 text-supporting-red-900 focus:border-supporting-red-700";
   }
 
@@ -91,7 +91,7 @@ export const Select = ({
       invalid={invalid}
       multiple={multiple}
     >
-      <ListboxButton className={className}>
+      <ListboxButton className={buttonClassName}>
         <span>{selectedOption.display}</span>
         <ChevronDownIcon
           className="size-4 group pointer-events-none"
