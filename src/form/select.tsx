@@ -4,7 +4,7 @@ import {
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { CheckIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useState, type ComponentProps } from "react";
 
 export type SelectType = {
@@ -47,31 +47,40 @@ export const Select = ({
   >(options[0]);
   let buttonClassName =
     "min-w-52 flex cursor-pointer items-center justify-between border border-neutral-500 bg-[#fff] text-left focus:border-neutral-900 focus:shadow-sm focus:outline-none";
+  let optionsClassName =
+    "min-w-52 mt-1 border border-neutral-500 bg-[#fff] focus:outline-none";
+  let optionClassName =
+    "flex cursor-default items-center gap-2 data-[focus]:bg-neutral-100";
 
-  buttonClassName += (() => {
-    switch (size) {
-      case "sm":
-        return " px-2 text-sm";
-      case "md":
-        return " px-3 py-2";
-      case "lg":
-        return " px-3 py-3 text-lg";
-    }
-  })();
-  buttonClassName += (() => {
-    switch (rounded) {
-      case "square":
-        return " rounded-none";
-      case "sm":
-        return " rounded";
-      case "lg":
-        return " rounded-lg";
-      case "full":
-        return " rounded-full";
-      default:
-        return " rfui-rounded-default";
-    }
-  })();
+  switch (size) {
+    case "sm":
+      buttonClassName += " px-2 text-sm";
+      optionClassName += " px-2 text-sm";
+    case "md":
+      buttonClassName += " px-3 py-2";
+      optionClassName += " px-3 py-2";
+    case "lg":
+      buttonClassName += " px-3 py-3 text-lg";
+      optionClassName += " px-3 py-3 text-lg";
+  }
+
+  switch (rounded) {
+    case "square":
+      buttonClassName += " rounded-none";
+      optionsClassName += " rounded-none";
+    case "sm":
+      buttonClassName += " rounded";
+      optionsClassName += " rounded";
+    case "lg":
+      buttonClassName += " rounded-lg";
+      optionsClassName += " rounded-lg";
+    case "full":
+      buttonClassName += " rounded-full";
+      optionsClassName += " rounded-full";
+    default:
+      buttonClassName += " rfui-rounded-default";
+      optionsClassName += " rfui-rounded-default";
+  }
 
   if (disabled) {
     buttonClassName += " cursor-not-allowed bg-neutral-50";
@@ -98,10 +107,15 @@ export const Select = ({
           aria-hidden="true"
         />
       </ListboxButton>
-      <ListboxOptions anchor="bottom">
+      <ListboxOptions anchor="bottom" className={optionsClassName}>
         {options.map((option) => (
-          <ListboxOption key={option.id} value={option} className="text-left">
-            {option.display}
+          <ListboxOption
+            key={option.id}
+            value={option}
+            className={optionClassName}
+          >
+            <CheckIcon className="size-4 invisible fill-white group-data-[selected]:visible" />
+            <span>{option.display}</span>
           </ListboxOption>
         ))}
       </ListboxOptions>
