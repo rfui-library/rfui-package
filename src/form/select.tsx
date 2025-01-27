@@ -46,7 +46,7 @@ export const Select = ({
     SelectType["options"][number]
   >(options[0]);
   let buttonClassName =
-    "min-w-52 flex items-center justify-between border border-neutral-500 bg-[#fff] text-left focus:border-neutral-900 focus:shadow-sm focus:outline-none";
+    "min-w-52 flex items-center justify-between border border-neutral-500 bg-[#fff] focus:border-neutral-900 focus:shadow-sm focus:outline-none";
   let optionsClassName =
     "min-w-52 mt-1 border border-neutral-500 bg-[#fff] focus:outline-none";
   let optionClassName =
@@ -55,39 +55,37 @@ export const Select = ({
   let checkIconClassName =
     "size-4 invisible fill-neutral-700 group-data-[selected]:visible";
 
-  switch (size) {
-    case "sm":
-      buttonClassName += " px-2 text-sm";
-      optionClassName += " px-2 text-sm";
-    case "md":
-      buttonClassName += " px-3 py-2";
-      optionClassName += " px-3 py-2";
-    case "lg":
-      buttonClassName += " px-3 py-3 text-lg";
-      optionClassName += " px-3 py-3 text-lg";
+  if (size === "sm") {
+    buttonClassName += " px-2 text-sm";
+    optionClassName += " px-2 text-sm";
+  } else if (size === "md") {
+    buttonClassName += " px-3 py-2";
+    optionClassName += " px-3 py-2";
+  } else if (size === "lg") {
+    buttonClassName += " px-3 py-3 text-lg";
+    optionClassName += " px-3 py-3 text-lg";
   }
 
-  switch (rounded) {
-    case "square":
-      buttonClassName += " rounded-none";
-      optionsClassName += " rounded-none";
-      optionClassName += " rounded-none";
-    case "sm":
-      buttonClassName += " rounded";
-      optionsClassName += " rounded";
-      optionClassName += " rounded";
-    case "lg":
-      buttonClassName += " rounded-lg";
-      optionsClassName += " rounded-lg";
-      optionClassName += " rounded-lg";
-    case "full":
-      buttonClassName += " rounded-full";
-      optionsClassName += " rounded-full";
-      optionClassName += " rounded-full";
-    default:
-      buttonClassName += " rfui-rounded-default";
-      optionsClassName += " rfui-rounded-default";
-      optionClassName += " rfui-rounded-default";
+  if (rounded === "square") {
+    buttonClassName += " rounded-none";
+    optionsClassName += " rounded-none";
+    optionClassName += " rounded-none";
+  } else if (rounded === "sm") {
+    buttonClassName += " rounded";
+    optionsClassName += " rounded";
+    optionClassName += " rounded";
+  } else if (rounded === "lg") {
+    buttonClassName += " rounded-lg";
+    optionsClassName += " rounded-lg";
+    optionClassName += " rounded-lg";
+  } else if (rounded === "full") {
+    buttonClassName += " rounded-full";
+    optionsClassName += " rounded-lg";
+    optionClassName += " rounded-lg";
+  } else {
+    buttonClassName += " rfui-rounded-default";
+    optionsClassName += " rfui-rounded-default";
+    optionClassName += " rfui-rounded-default";
   }
 
   if (disabled) {
