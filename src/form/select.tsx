@@ -51,9 +51,9 @@ export const Select = ({
     SelectType["options"][number]
   >(options[0]);
   let buttonClassName =
-    "min-w-52 flex w-full items-center justify-between border border-neutral-500 bg-[#fff] focus:border-neutral-900 focus:shadow-sm focus:outline-none";
+    "min-w-52 flex w-full max-w-full items-center justify-between border border-neutral-500 bg-[#fff] focus:border-neutral-900 focus:shadow-sm focus:outline-none";
   let optionsClassName =
-    "min-w-52 mt-1 w-[var(--button-width)] border border-neutral-500 bg-[#fff] focus:outline-none";
+    "min-w-52 mt-1 w-[var(--button-width)] max-w-full border border-neutral-500 bg-[#fff] focus:outline-none";
   let optionClassName =
     "group mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50 data-[disabled]:opacity-50";
   let chevronIconClassName = "group pointer-events-none";
