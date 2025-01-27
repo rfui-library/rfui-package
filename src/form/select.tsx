@@ -50,7 +50,7 @@ export const Select = ({
   let optionsClassName =
     "min-w-52 mt-1 border border-neutral-500 bg-[#fff] focus:outline-none";
   let optionClassName =
-    "flex cursor-default items-center gap-2 data-[focus]:bg-neutral-100";
+    "group mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50";
 
   switch (size) {
     case "sm":
@@ -68,18 +68,23 @@ export const Select = ({
     case "square":
       buttonClassName += " rounded-none";
       optionsClassName += " rounded-none";
+      optionClassName += " rounded-none";
     case "sm":
       buttonClassName += " rounded";
       optionsClassName += " rounded";
+      optionClassName += " rounded";
     case "lg":
       buttonClassName += " rounded-lg";
       optionsClassName += " rounded-lg";
+      optionClassName += " rounded-lg";
     case "full":
       buttonClassName += " rounded-full";
       optionsClassName += " rounded-full";
+      optionClassName += " rounded-full";
     default:
       buttonClassName += " rfui-rounded-default";
       optionsClassName += " rfui-rounded-default";
+      optionClassName += " rfui-rounded-default";
   }
 
   if (disabled) {
@@ -103,7 +108,7 @@ export const Select = ({
       <ListboxButton className={buttonClassName}>
         <span>{selectedOption.display}</span>
         <ChevronDownIcon
-          className="size-4 group pointer-events-none"
+          className="size-5 group pointer-events-none fill-neutral-700"
           aria-hidden="true"
         />
       </ListboxButton>
@@ -114,7 +119,7 @@ export const Select = ({
             value={option}
             className={optionClassName}
           >
-            <CheckIcon className="size-4 invisible fill-white group-data-[selected]:visible" />
+            <CheckIcon className="size-4 invisible fill-neutral-700 group-data-[selected]:visible" />
             <span>{option.display}</span>
           </ListboxOption>
         ))}
