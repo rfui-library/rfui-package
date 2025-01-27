@@ -19,6 +19,9 @@ export type SelectType = {
   size?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
+  buttonClassName?: string;
+  optionsClassName?: string;
+  optionClassName?: string;
 };
 
 /** *
@@ -36,6 +39,9 @@ export const Select = ({
   size = "md",
   rounded,
   invalid = false,
+  buttonClassName: _buttonClassName,
+  optionsClassName: _optionsClassName,
+  optionClassName: _optionClassName,
 }: SelectType) => {
   if (options.length === 0) {
     return null;
@@ -45,9 +51,9 @@ export const Select = ({
     SelectType["options"][number]
   >(options[0]);
   let buttonClassName =
-    "min-w-52 flex items-center justify-between border border-neutral-500 bg-[#fff] focus:border-neutral-900 focus:shadow-sm focus:outline-none";
+    "min-w-52 flex w-full items-center justify-between border border-neutral-500 bg-[#fff] focus:border-neutral-900 focus:shadow-sm focus:outline-none";
   let optionsClassName =
-    "min-w-52 mt-1 border border-neutral-500 bg-[#fff] focus:outline-none";
+    "min-w-52 mt-1 w-full border border-neutral-500 bg-[#fff] focus:outline-none";
   let optionClassName =
     "group mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50 data-[disabled]:opacity-50";
   let chevronIconClassName = "group pointer-events-none";
@@ -105,6 +111,18 @@ export const Select = ({
     chevronIconClassName += " fill-supporting-red-700";
   } else {
     chevronIconClassName += " fill-neutral-700";
+  }
+
+  if (_buttonClassName) {
+    buttonClassName += ` ${_buttonClassName}`;
+  }
+
+  if (_optionsClassName) {
+    optionsClassName += ` ${_optionsClassName}`;
+  }
+
+  if (_optionClassName) {
+    optionClassName += ` ${_optionClassName}`;
   }
 
   return (
