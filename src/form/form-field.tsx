@@ -9,7 +9,6 @@ import {
   RadioButtonGroupItem,
 } from "../form/radio-button-group";
 import type { SelectType } from "../form/select";
-import { Select } from "../form/select";
 import { Switch } from "../form/switch";
 import type { TextareaType } from "../form/textarea";
 import { Textarea } from "../form/textarea";
@@ -123,8 +122,8 @@ export const FormField = ({
     className: radioButtonGroupRestClassName,
     ...radioButtonGroupRestWithoutClassName
   } = radioButtonGroupRest || {};
-  const { className: selectRestClassName, ...selectRestWithoutClassName } =
-    selectRest || {};
+  // const { className: selectRestClassName, ...selectRestWithoutClassName } =
+  //   selectRest || {};
 
   return (
     <div {...rest}>
@@ -246,30 +245,30 @@ export const FormField = ({
             </RadioButtonGroupItem>
           ))}
         </RadioButtonGroup>
-      ) : type === "select" && selectOptions ? (
-        <Select
-          id={id}
-          name={name}
-          value={value}
-          defaultValue={defaultValue}
-          required={required}
-          invalid={invalid}
-          className={
-            selectRestClassName
-              ? `block w-full ${selectRestClassName}`
-              : "block w-full"
-          }
-          onChange={onChange}
-          onInput={onInput}
-          {...selectRestWithoutClassName}
-        >
-          {selectOptions.map(({ value, display }) => (
-            <option value={value} key={value}>
-              {display}
-            </option>
-          ))}
-        </Select>
       ) : (
+        // ) : type === "select" && selectOptions ? (
+        //   <Select
+        //     id={id}
+        //     name={name}
+        //     value={value}
+        //     defaultValue={defaultValue}
+        //     required={required}
+        //     invalid={invalid}
+        //     className={
+        //       selectRestClassName
+        //         ? `block w-full ${selectRestClassName}`
+        //         : "block w-full"
+        //     }
+        //     onChange={onChange}
+        //     onInput={onInput}
+        //     {...selectRestWithoutClassName}
+        //   >
+        //     {selectOptions.map(({ value, display }) => (
+        //       <option value={value} key={value}>
+        //         {display}
+        //       </option>
+        //     ))}
+        //   </Select>
         <Input
           id={id}
           name={name}

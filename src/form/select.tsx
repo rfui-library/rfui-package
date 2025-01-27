@@ -83,7 +83,6 @@ export const Select = ({
 
   return (
     <Listbox
-      className={className}
       name={name}
       value={selectedOption}
       onChange={setSelectedOption}
