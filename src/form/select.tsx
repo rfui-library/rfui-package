@@ -51,6 +51,9 @@ export const Select = ({
     "min-w-52 mt-1 border border-neutral-500 bg-[#fff] focus:outline-none";
   let optionClassName =
     "group mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50";
+  let chevronIconClassName = "size-5 group pointer-events-none";
+  let checkIconClassName =
+    "size-4 invisible fill-neutral-700 group-data-[selected]:visible";
 
   switch (size) {
     case "sm":
@@ -95,7 +98,10 @@ export const Select = ({
 
   if (invalid) {
     buttonClassName +=
-      " border-supporting-red-300 bg-supporting-red-50 text-supporting-red-900 focus:border-supporting-red-700";
+      " border-supporting-red-700 bg-supporting-red-50 text-supporting-red-900 focus:border-supporting-red-900";
+    chevronIconClassName += " fill-supporting-red-700";
+  } else {
+    chevronIconClassName += " fill-neutral-700";
   }
 
   return (
@@ -109,10 +115,7 @@ export const Select = ({
     >
       <ListboxButton className={buttonClassName}>
         <span>{selectedOption.display}</span>
-        <ChevronDownIcon
-          className="size-5 group pointer-events-none fill-neutral-700"
-          aria-hidden="true"
-        />
+        <ChevronDownIcon className={chevronIconClassName} aria-hidden="true" />
       </ListboxButton>
       <ListboxOptions anchor="bottom" className={optionsClassName}>
         {options.map((option) => (
@@ -121,7 +124,7 @@ export const Select = ({
             value={option}
             className={optionClassName}
           >
-            <CheckIcon className="size-4 invisible fill-neutral-700 group-data-[selected]:visible" />
+            <CheckIcon className={checkIconClassName} />
             <span>{option.display}</span>
           </ListboxOption>
         ))}
