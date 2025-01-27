@@ -46,7 +46,7 @@ export const Select = ({
     SelectType["options"][number]
   >(options[0]);
   let buttonClassName =
-    "min-w-52 flex cursor-pointer items-center justify-between border border-neutral-500 bg-[#fff] text-left focus:border-neutral-900 focus:shadow-sm focus:outline-none";
+    "min-w-52 flex items-center justify-between border border-neutral-500 bg-[#fff] text-left focus:border-neutral-900 focus:shadow-sm focus:outline-none";
   let optionsClassName =
     "min-w-52 mt-1 border border-neutral-500 bg-[#fff] focus:outline-none";
   let optionClassName =
@@ -89,6 +89,8 @@ export const Select = ({
 
   if (disabled) {
     buttonClassName += " cursor-not-allowed bg-neutral-50";
+  } else {
+    buttonClassName += " cursor-pointer";
   }
 
   if (invalid) {
