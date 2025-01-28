@@ -19,10 +19,10 @@ export type SelectType = {
   size?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
+  onChange?: (newValue: Option) => void;
   buttonClassName?: string;
   optionsClassName?: string;
   optionClassName?: string;
-  onChange?: (newValue: Option) => void;
 };
 
 type Option = SelectType["options"][number];
@@ -42,10 +42,10 @@ export const Select = ({
   size = "md",
   rounded,
   invalid = false,
+  onChange,
   buttonClassName: _buttonClassName,
   optionsClassName: _optionsClassName,
   optionClassName: _optionClassName,
-  onChange,
 }: SelectType) => {
   if (options.length === 0) {
     return null;
