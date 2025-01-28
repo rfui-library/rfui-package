@@ -22,7 +22,10 @@ export type SelectType = {
   buttonClassName?: string;
   optionsClassName?: string;
   optionClassName?: string;
+  onChange?: (newValue: Option) => void;
 };
+
+type Option = SelectType["options"][number];
 
 /** *
  * @function Select
@@ -42,14 +45,13 @@ export const Select = ({
   buttonClassName: _buttonClassName,
   optionsClassName: _optionsClassName,
   optionClassName: _optionClassName,
+  onChange,
 }: SelectType) => {
   if (options.length === 0) {
     return null;
   }
 
-  const [selectedOption, setSelectedOption] = useState<
-    SelectType["options"][number]
-  >(options[0]);
+  const [selectedOption, setSelectedOption] = useState<Option>(options[0]);
   let buttonClassName =
     "min-w-52 flex w-full max-w-full items-center justify-between border border-neutral-500 bg-[#fff] focus:border-neutral-900 focus:shadow-sm focus:outline-none";
   let optionsClassName =
@@ -129,7 +131,13 @@ export const Select = ({
     <Listbox
       name={name}
       value={selectedOption}
-      onChange={setSelectedOption}
+      onChange={(newVal) => {
+        setSelectedOption(newVal);
+
+        if (onChange) {
+          onChange(newVal);
+        }
+      }}
       disabled={disabled}
       invalid={invalid}
     >
