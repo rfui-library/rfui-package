@@ -36,7 +36,11 @@ export const CodeBlock = ({ code, language, ...rest }: CodeBlockType) => {
   }
 
   if (language) {
-    return <SyntaxHighlighter language={language}>{code}</SyntaxHighlighter>;
+    return (
+      <SyntaxHighlighter className={className} language={language}>
+        {code}
+      </SyntaxHighlighter>
+    );
   }
 
   return (
