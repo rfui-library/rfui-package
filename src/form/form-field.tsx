@@ -8,7 +8,6 @@ import {
   RadioButtonGroup,
   RadioButtonGroupItem,
 } from "../form/radio-button-group";
-import type { SelectType } from "../form/select";
 import { Switch } from "../form/switch";
 import type { TextareaType } from "../form/textarea";
 import { Textarea } from "../form/textarea";
@@ -38,8 +37,7 @@ export type FormFieldType = {
     | "switch"
     | "rfui-password-input"
     | "textarea"
-    | "radio-button-group"
-    | "select";
+    | "radio-button-group";
   required?: boolean;
   requiredIndicator?: "text" | "asterisk" | "none";
   optionalIndicator?: "text" | "asterisk" | "none";
@@ -52,10 +50,6 @@ export type FormFieldType = {
     value: string;
     display: string;
   }[];
-  selectOptions?: {
-    value: string;
-    display: string;
-  }[];
   onChange?: (e: any) => void;
   onInput?: (e: any) => void;
   inputRest?: Omit<ComponentProps<"input">, ExcludedInputProps>;
@@ -64,7 +58,6 @@ export type FormFieldType = {
     RadioButtonGroupType,
     ExcludedInputProps | "children"
   >;
-  selectRest?: Omit<SelectType, ExcludedInputProps>;
 } & Omit<ComponentProps<"div">, "size">;
 
 /** *
@@ -94,13 +87,11 @@ export const FormField = ({
   invalid = false,
   errorText,
   radioButtonGroupOptions,
-  selectOptions,
   onChange,
   onInput,
   inputRest,
   textareaRest,
   radioButtonGroupRest,
-  selectRest,
   ...rest
 }: FormFieldType) => {
   const id = useId();
@@ -122,8 +113,6 @@ export const FormField = ({
     className: radioButtonGroupRestClassName,
     ...radioButtonGroupRestWithoutClassName
   } = radioButtonGroupRest || {};
-  // const { className: selectRestClassName, ...selectRestWithoutClassName } =
-  //   selectRest || {};
 
   return (
     <div {...rest}>
@@ -246,29 +235,6 @@ export const FormField = ({
           ))}
         </RadioButtonGroup>
       ) : (
-        // ) : type === "select" && selectOptions ? (
-        //   <Select
-        //     id={id}
-        //     name={name}
-        //     value={value}
-        //     defaultValue={defaultValue}
-        //     required={required}
-        //     invalid={invalid}
-        //     className={
-        //       selectRestClassName
-        //         ? `block w-full ${selectRestClassName}`
-        //         : "block w-full"
-        //     }
-        //     onChange={onChange}
-        //     onInput={onInput}
-        //     {...selectRestWithoutClassName}
-        //   >
-        //     {selectOptions.map(({ value, display }) => (
-        //       <option value={value} key={value}>
-        //         {display}
-        //       </option>
-        //     ))}
-        //   </Select>
         <Input
           id={id}
           name={name}
