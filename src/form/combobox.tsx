@@ -140,6 +140,7 @@ export const Combobox = ({
             key={option.id}
             value={option}
             className={optionClassName}
+            disabled={!!option.disabled}
           >
             <CheckIcon className={checkIconClassName} />
             <span>{option.display}</span>
