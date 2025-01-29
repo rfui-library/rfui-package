@@ -123,7 +123,6 @@ export const Combobox = ({
         setQuery("");
       }}
       disabled={disabled}
-      invalid={invalid}
     >
       <div className="relative">
         <ComboboxInput
