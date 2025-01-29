@@ -20,6 +20,7 @@ export type ComboboxType = {
   size?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
+  onChange?: (newValue: Option) => void;
 };
 
 type Option = ComboboxType["options"][number];
@@ -39,6 +40,7 @@ export const Combobox = ({
   size = "md",
   rounded,
   invalid = false,
+  onChange,
 }: ComboboxType) => {
   const [selectedOption, setSelectedOption] = useState<Option>(options[0]);
   const [query, setQuery] = useState("");
@@ -118,6 +120,10 @@ export const Combobox = ({
       value={selectedOption}
       onChange={(option: Option) => {
         setSelectedOption(option);
+
+        if (onChange) {
+          onChange(option);
+        }
       }}
       onClose={() => {
         setQuery("");
