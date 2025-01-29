@@ -15,6 +15,7 @@ export type ComboboxType = {
     display: string;
     disabled?: boolean;
   }[];
+  name?: string;
   disabled?: boolean;
   size?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg" | "full";
@@ -33,6 +34,7 @@ type Option = ComboboxType["options"][number];
  */
 export const Combobox = ({
   options,
+  name,
   disabled = false,
   size = "md",
   rounded,
@@ -112,6 +114,7 @@ export const Combobox = ({
 
   return (
     <HeadlessUICombobox
+      name={name}
       value={selectedOption}
       onChange={(option: Option) => {
         setSelectedOption(option);
@@ -122,7 +125,6 @@ export const Combobox = ({
     >
       <div className="relative">
         <ComboboxInput
-          aria-label="Assignee"
           displayValue={(option: Option) => (option ? option.display : "")}
           onChange={(event) => setQuery(event.target.value)}
           className={inputClassName}
