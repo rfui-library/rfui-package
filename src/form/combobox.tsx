@@ -122,6 +122,8 @@ export const Combobox = ({
       onClose={() => {
         setQuery("");
       }}
+      disabled={disabled}
+      invalid={invalid}
     >
       <div className="relative">
         <ComboboxInput
