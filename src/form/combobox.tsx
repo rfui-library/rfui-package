@@ -21,6 +21,9 @@ export type ComboboxType = {
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
   onChange?: (newValue: Option) => void;
+  inputClassName?: string;
+  optionsClassName?: string;
+  optionClassName?: string;
 };
 
 type Option = ComboboxType["options"][number];
@@ -41,6 +44,9 @@ export const Combobox = ({
   rounded,
   invalid = false,
   onChange,
+  inputClassName: _inputClassName,
+  optionsClassName: _optionsClassName,
+  optionClassName: _optionClassName,
 }: ComboboxType) => {
   const [selectedOption, setSelectedOption] = useState<Option>(options[0]);
   const [query, setQuery] = useState("");
@@ -112,6 +118,18 @@ export const Combobox = ({
     chevronIconClassName += " fill-supporting-red-700";
   } else {
     chevronIconClassName += " fill-neutral-700";
+  }
+
+  if (_inputClassName) {
+    inputClassName += ` ${_inputClassName}`;
+  }
+
+  if (_optionsClassName) {
+    optionsClassName += ` ${_optionsClassName}`;
+  }
+
+  if (_optionClassName) {
+    optionClassName += ` ${_optionClassName}`;
   }
 
   return (
