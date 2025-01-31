@@ -73,7 +73,7 @@ const HamburgerMenuToggle = ({
       onClick={toggleHamburgerMenu}
     >
       {isOpen ? (
-        <CloseIcon className="outline-none" />
+        <CloseIcon className="outline-hidden" />
       ) : (
         <>
           <HamburgerIcon className="!inline-block w-6" /> Menu

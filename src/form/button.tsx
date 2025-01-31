@@ -56,7 +56,7 @@ export const Button = ({
       case "square":
         return " rounded-none";
       case "sm":
-        return " rounded";
+        return " rounded-sm";
       case "lg":
         return " rounded-lg";
       case "full":

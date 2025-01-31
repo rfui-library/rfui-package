@@ -21,14 +21,14 @@ export const Textarea = ({
 }: TextareaType) => {
   const { className: restClass, ...resstWithoutClass } = rest;
   let className =
-    "border border-neutral-500 px-2 py-1 focus:border-neutral-900 focus:shadow-sm focus:outline-none";
+    "focus:shadow-xs border border-neutral-500 px-2 py-1 focus:border-neutral-900 focus:outline-hidden";
 
   className += (() => {
     switch (rounded) {
       case "square":
         return " rounded-none";
       case "sm":
-        return " rounded";
+        return " rounded-sm";
       case "lg":
         return " rounded-lg";
       default:

@@ -55,7 +55,7 @@ export const NavbarDropdown = ({
           )}
         </div>
         {isMenuOpen && (
-          <ul className="absolute left-0 top-[89px] z-10 hidden w-72 rounded border border-neutral-100 bg-[#fff] py-2 sm:block">
+          <ul className="absolute left-0 top-[89px] z-10 hidden w-72 rounded-sm border border-neutral-100 bg-[#fff] py-2 sm:block">
             {children}
           </ul>
         )}

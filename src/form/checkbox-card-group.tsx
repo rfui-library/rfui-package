@@ -96,7 +96,7 @@ export const CheckboxCardGroupItem = ({
     setIsChecked((v) => !v);
   };
   let containerClass =
-    "checkbox-card-group-item cursor-pointer items-center rounded border p-5";
+    "checkbox-card-group-item cursor-pointer items-center rounded-sm border p-5";
 
   containerClass += isChecked
     ? " border-2 border-neutral-500"

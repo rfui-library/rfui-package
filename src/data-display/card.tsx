@@ -58,7 +58,7 @@ export const Card = ({
   containerClass += (() => {
     switch (shadow) {
       case "sm":
-        return " shadow";
+        return " shadow-sm";
       case "md":
         return " shadow-md";
       case "lg":
@@ -71,7 +71,7 @@ export const Card = ({
       case "square":
         return " rounded-none";
       case "sm":
-        return " rounded";
+        return " rounded-sm";
       case "lg":
         return " rounded-lg";
       default:

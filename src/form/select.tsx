@@ -53,9 +53,9 @@ export const Select = ({
 
   const [selectedOption, setSelectedOption] = useState<Option>(options[0]);
   let buttonClassName =
-    "min-w-52 flex w-full max-w-full items-center justify-between border border-neutral-500 bg-[#fff] focus:border-neutral-900 focus:shadow-sm focus:outline-none";
+    "min-w-52 focus:shadow-xs flex w-full max-w-full items-center justify-between border border-neutral-500 bg-[#fff] focus:border-neutral-900 focus:outline-hidden";
   let optionsClassName =
-    "min-w-52 mt-1 w-[var(--button-width)] max-w-full border border-neutral-500 bg-[#fff] focus:outline-none";
+    "min-w-52 mt-1 w-[var(--button-width)] max-w-full border border-neutral-500 bg-[#fff] focus:outline-hidden";
   let optionClassName =
     "group mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50 data-[disabled]:opacity-50";
   let chevronIconClassName = "group pointer-events-none";
@@ -84,9 +84,9 @@ export const Select = ({
     optionsClassName += " rounded-none";
     optionClassName += " rounded-none";
   } else if (rounded === "sm") {
-    buttonClassName += " rounded";
-    optionsClassName += " rounded";
-    optionClassName += " rounded";
+    buttonClassName += " rounded-sm";
+    optionsClassName += " rounded-sm";
+    optionClassName += " rounded-sm";
   } else if (rounded === "lg") {
     buttonClassName += " rounded-lg";
     optionsClassName += " rounded-lg";

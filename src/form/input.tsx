@@ -22,7 +22,7 @@ export const Input = ({
 }: InputType) => {
   const { className: restClass, ...restWithoutClass } = rest;
   let className =
-    "w-full border border-neutral-500 px-2 py-1 focus:border-neutral-900 focus:shadow-sm focus:outline-none";
+    "focus:shadow-xs w-full border border-neutral-500 px-2 py-1 focus:border-neutral-900 focus:outline-hidden";
 
   className += (() => {
     switch (size) {
@@ -39,7 +39,7 @@ export const Input = ({
       case "square":
         return " rounded-none";
       case "sm":
-        return " rounded";
+        return " rounded-sm";
       case "lg":
         return " rounded-lg";
       case "full":

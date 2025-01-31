@@ -58,9 +58,9 @@ export const Combobox = ({
         );
 
   let inputClassName =
-    "min-w-52 flex w-full max-w-full items-center justify-between border border-neutral-500 bg-[#fff] focus:border-neutral-900 focus:shadow-sm focus:outline-none";
+    "min-w-52 focus:shadow-xs flex w-full max-w-full items-center justify-between border border-neutral-500 bg-[#fff] focus:border-neutral-900 focus:outline-hidden";
   let optionsClassName =
-    "min-w-52 mt-1 w-[var(--input-width)] max-w-full border border-neutral-500 bg-[#fff] empty:invisible focus:outline-none";
+    "min-w-52 mt-1 w-[var(--input-width)] max-w-full border border-neutral-500 bg-[#fff] empty:invisible focus:outline-hidden";
   let optionClassName =
     "group mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50 data-[disabled]:opacity-50";
   let chevronIconClassName = "group pointer-events-none";
@@ -89,9 +89,9 @@ export const Combobox = ({
     optionsClassName += " rounded-none";
     optionClassName += " rounded-none";
   } else if (rounded === "sm") {
-    inputClassName += " rounded";
-    optionsClassName += " rounded";
-    optionClassName += " rounded";
+    inputClassName += " rounded-sm";
+    optionsClassName += " rounded-sm";
+    optionClassName += " rounded-sm";
   } else if (rounded === "lg") {
     inputClassName += " rounded-lg";
     optionsClassName += " rounded-lg";
