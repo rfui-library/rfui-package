@@ -25,7 +25,7 @@ export const RadioButton = ({
   ...rest
 }: RadioButtonType) => {
   const { className: restClass, ...restWithoutClass } = rest;
-  let className = "rfui-radio-button cursor-pointer accent-primary-500";
+  let className = "rfui-radio-button accent-primary-500";
 
   className += (() => {
     switch (size) {

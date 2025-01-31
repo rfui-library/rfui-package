@@ -58,9 +58,9 @@ export const Combobox = ({
         );
 
   let inputClassName =
-    "min-w-52 focus:shadow-xs flex w-full max-w-full items-center justify-between border border-neutral-500 bg-[#fff] focus:border-neutral-900 focus:outline-hidden";
+    "min-w-52 focus:shadow-xs focus:outline-hidden flex w-full max-w-full items-center justify-between border border-neutral-500 bg-[#fff] focus:border-neutral-900";
   let optionsClassName =
-    "min-w-52 mt-1 w-[var(--input-width)] max-w-full border border-neutral-500 bg-[#fff] empty:invisible focus:outline-hidden";
+    "min-w-52 focus:outline-hidden mt-1 w-[var(--input-width)] max-w-full border border-neutral-500 bg-[#fff] empty:invisible";
   let optionClassName =
     "group mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50 data-[disabled]:opacity-50";
   let chevronIconClassName = "group pointer-events-none";
@@ -108,8 +108,6 @@ export const Combobox = ({
 
   if (disabled) {
     inputClassName += " cursor-not-allowed bg-neutral-50";
-  } else {
-    inputClassName += " cursor-pointer";
   }
 
   if (invalid) {

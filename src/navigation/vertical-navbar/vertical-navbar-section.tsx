@@ -19,7 +19,7 @@ export const VerticalNavbarSection = ({
     <section className={isExpanded && hasMarginUnderneath ? "mb-8" : "mb-6"}>
       {heading && (
         <h3
-          className="mt-3 cursor-pointer rounded-sm px-3 py-2 font-bold tracking-wide text-neutral-700 max-sm:text-sm sm:py-1 sm:text-xs sm:hover:bg-neutral-100/50"
+          className="mt-3 rounded-sm px-3 py-2 font-bold tracking-wide text-neutral-700 max-sm:text-sm sm:py-1 sm:text-xs sm:hover:bg-neutral-100/50"
           onClick={toggleIsExpanded}
         >
           {heading}

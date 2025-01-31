@@ -28,7 +28,7 @@ export const Link = ({
   ...rest
 }: LinkType) => {
   const { className: restClass, ...restWithoutClass } = rest;
-  let className = "relative cursor-pointer";
+  let className = "relative";
 
   className += (() => {
     switch (underline) {

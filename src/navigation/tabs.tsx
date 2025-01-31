@@ -80,7 +80,7 @@ const Tab = ({
   fullWidth: boolean;
 }) => {
   const isActive = tabName === activeTab;
-  let containerClass = "rfui-tab cursor-pointer px-5 py-4 text-center";
+  let containerClass = "rfui-tab px-5 py-4 text-center";
 
   if (fullWidth) {
     containerClass += " w-full";
