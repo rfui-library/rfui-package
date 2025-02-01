@@ -22,7 +22,7 @@ export const Tooltip = ({
   ...rest
 }: TooltipType) => {
   const [isVisible, setIsVisible] = useState(false);
-  const timeoutRef = useRef<number | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const id = `tooltip-${useId()}`;
   const handleMouseEnter = () => {
     timeoutRef.current = setTimeout(() => {
