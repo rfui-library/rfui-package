@@ -28,7 +28,7 @@ export const NavbarDropdown = ({
   };
   const { className: restClass, ...restWithoutClass } = rest;
   let containerClass =
-    "relative inline-block cursor-pointer border-b border-b-neutral-200 text-neutral-700 max-sm:hover:bg-neutral-100/50 sm:border-b-neutral-50";
+    "relative inline-block border-b border-b-neutral-200 text-neutral-700 max-sm:hover:bg-neutral-100/50 sm:border-b-neutral-50";
 
   if (restClass) {
     containerClass += ` ${restClass}`;
@@ -55,7 +55,7 @@ export const NavbarDropdown = ({
           )}
         </div>
         {isMenuOpen && (
-          <ul className="absolute left-0 top-[89px] z-10 hidden w-72 rounded border border-neutral-100 bg-[#fff] py-2 sm:block">
+          <ul className="absolute left-0 top-[89px] z-10 hidden w-72 rounded-sm border border-neutral-100 bg-[#fff] py-2 sm:block">
             {children}
           </ul>
         )}

@@ -54,7 +54,7 @@ export const PasswordInput = ({
       if (inputProps.rounded === "square") {
         s += " rounded-none";
       } else if (inputProps.rounded === "sm") {
-        s += " rounded";
+        s += " rounded-sm";
       } else if (inputProps.rounded === "lg") {
         s += " rounded-lg";
       } else if (inputProps.rounded === "full") {

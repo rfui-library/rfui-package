@@ -1,0 +1,282 @@
+@theme {
+  --font-*: initial;
+  --font-sans: "Open Sans", sans-serif;
+
+  --spacing-px: 1px;
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.5rem;
+  --spacing-6: 2rem;
+  --spacing-7: 3rem;
+  --spacing-8: 4rem;
+  --spacing-9: 6rem;
+  --spacing-10: 8rem;
+  --spacing-11: 12rem;
+  --spacing-12: 16rem;
+  --spacing-13: 24rem;
+  --spacing-14: 32rem;
+  --spacing-15: 40rem;
+  --spacing-16: 48rem;
+
+  --rounded-square: var(--spacing-0);
+  --rounded-sm: var(--spacing-1);
+  --rounded-lg: var(--spacing-2);
+  --rounded-full: 9999px;
+  --default-roundedness: var(--rounded-sm);
+
+  --color-*: initial;
+  --color-gray-200: rgb(229 231 235);
+  --color-primary-50: rgb(220 238 251);
+  --color-primary-100: rgb(182 224 254);
+  --color-primary-200: rgb(132 197 244);
+  --color-primary-300: rgb(98 176 232);
+  --color-primary-400: rgb(64 152 215);
+  --color-primary-500: rgb(38 128 194);
+  --color-primary-600: rgb(24 111 175);
+  --color-primary-700: rgb(15 96 155);
+  --color-primary-800: rgb(10 85 140);
+  --color-primary-900: rgb(0 62 107);
+
+  --color-neutral-50: rgb(240 244 248);
+  --color-neutral-100: rgb(217 226 236);
+  --color-neutral-200: rgb(188 204 220);
+  --color-neutral-300: rgb(159 179 200);
+  --color-neutral-400: rgb(130 154 177);
+  --color-neutral-500: rgb(98 125 152);
+  --color-neutral-600: rgb(72 101 129);
+  --color-neutral-700: rgb(51 78 104);
+  --color-neutral-800: rgb(36 59 83);
+  --color-neutral-900: rgb(16 42 67);
+
+  --color-supporting-green-50: rgb(227 249 229);
+  --color-supporting-green-100: rgb(193 234 197);
+  --color-supporting-green-200: rgb(163 217 165);
+  --color-supporting-green-300: rgb(123 196 127);
+  --color-supporting-green-400: rgb(87 174 91);
+  --color-supporting-green-500: rgb(63 145 66);
+  --color-supporting-green-600: rgb(47 129 50);
+  --color-supporting-green-700: rgb(32 114 39);
+  --color-supporting-green-800: rgb(14 88 20);
+  --color-supporting-green-900: rgb(5 68 10);
+
+  --color-supporting-yellow-50: rgb(255 251 234);
+  --color-supporting-yellow-100: rgb(255 243 196);
+  --color-supporting-yellow-200: rgb(252 229 136);
+  --color-supporting-yellow-300: rgb(250 219 95);
+  --color-supporting-yellow-400: rgb(247 201 72);
+  --color-supporting-yellow-500: rgb(240 180 41);
+  --color-supporting-yellow-600: rgb(222 145 29);
+  --color-supporting-yellow-700: rgb(203 110 23);
+  --color-supporting-yellow-800: rgb(180 77 18);
+  --color-supporting-yellow-900: rgb(141 43 11);
+
+  --color-supporting-red-50: rgb(255 238 238);
+  --color-supporting-red-100: rgb(250 205 205);
+  --color-supporting-red-200: rgb(242 155 155);
+  --color-supporting-red-300: rgb(230 106 106);
+  --color-supporting-red-400: rgb(214 69 69);
+  --color-supporting-red-500: rgb(186 37 37);
+  --color-supporting-red-600: rgb(166 27 27);
+  --color-supporting-red-700: rgb(145 17 17);
+  --color-supporting-red-800: rgb(120 10 10);
+  --color-supporting-red-900: rgb(97 4 4);
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+/* Default roundedness */
+
+.rfui-rounded-default {
+  border-radius: var(--default-roundedness);
+}
+
+.rfui-rounded-l-default {
+  border-top-left-radius: var(--default-roundedness);
+  border-bottom-left-radius: var(--default-roundedness);
+}
+
+.rfui-rounded-r-default {
+  border-top-right-radius: var(--default-roundedness);
+  border-bottom-right-radius: var(--default-roundedness);
+}
+
+/* Table */
+
+table.rfui-table th {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  padding-top: var(--spacing-2);
+  padding-bottom: var(--spacing-2);
+  border-bottom: 1px solid var(--color-neutral-100);
+  color: var(--color-neutral-700);
+}
+
+table.rfui-table.sticky-header thead {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 2;
+  background: var(--color-neutral-50);
+}
+
+table.rfui-table.sticky-first-column tr th:first-child,
+table.rfui-table.sticky-first-column tr td:first-child {
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: 1;
+  background: var(--color-neutral-50);
+}
+
+table.rfui-table.condensed th {
+  padding-bottom: var(--spacing-1);
+}
+
+table.rfui-table td,
+table.rfui-table th {
+  overflow-wrap: anywhere;
+  word-break: break-all;
+}
+
+table.rfui-table td {
+  padding-top: var(--spacing-5);
+  padding-bottom: var(--spacing-5);
+}
+
+table.rfui-table.condensed td {
+  padding-top: var(--spacing-3);
+  padding-bottom: var(--spacing-3);
+}
+
+table.rfui-table.bordered td {
+  border-bottom: 1px solid var(--color-neutral-100);
+}
+
+table.rfui-table.hover tr:hover td {
+  background: var(--color-neutral-50);
+}
+
+table.rfui-table.hover.striped tr:hover td {
+  background: var(--color-neutral-100);
+}
+
+table.rfui-table th,
+table.rfui-table td {
+  padding-left: var(--spacing-4);
+  padding-right: var(--spacing-4);
+  text-align: left;
+}
+
+table.rfui-table.condensed th,
+table.rfui-table.condensed td {
+  padding-left: var(--spacing-2);
+  padding-right: var(--spacing-2);
+}
+
+table.rfui-table.striped tr:nth-child(even) {
+  background: var(--color-neutral-50);
+}
+
+/* Switch */
+
+.rfui-switch {
+  appearance: none;
+  position: relative;
+  display: inline-block;
+  background: lightgrey;
+  vertical-align: middle;
+  height: 1.65rem;
+  width: 2.75rem;
+  border-radius: 2rem;
+  box-shadow: 0px 1px 3px #0003 inset;
+  transition: 0.25s linear background;
+}
+
+.rfui-switch::before {
+  content: "";
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+  background: #fff;
+  border-radius: 1.2rem;
+  position: absolute;
+  top: 0.2rem;
+  left: 0.2rem;
+  box-shadow: 0px 1px 3px #0003;
+  transition: 0.25s linear transform;
+  transform: translateX(0rem);
+}
+
+.rfui-switch:checked {
+  background: var(--color-primary-500);
+}
+
+.rfui-switch:checked::before {
+  transform: translateX(1rem);
+}
+
+.rfui-switch:focus {
+  outline: none;
+  outline-color: transparent;
+}
+
+.rfui-switch:focus-visible {
+  outline: 2px solid var(--color-primary-300);
+  outline-offset: 2px;
+}
+
+/* Card */
+
+.rfui-card-header {
+  border-bottom-width: 1px;
+  border-color: var(--color-neutral-100);
+}
+
+.rfui-card-footer {
+  border-top-width: 1px;
+  border-color: var(--color-neutral-100);
+}
+
+.rfui-card.padding-sm > .rfui-card-header,
+.rfui-card.padding-sm > .rfui-card-body,
+.rfui-card.padding-sm > .rfui-card-footer {
+  padding: var(--spacing-3);
+}
+
+.rfui-card.padding-md > .rfui-card-header,
+.rfui-card.padding-md > .rfui-card-body,
+.rfui-card.padding-md > .rfui-card-footer {
+  padding: var(--spacing-5);
+}
+
+.rfui-card.padding-lg > .rfui-card-header,
+.rfui-card.padding-lg > .rfui-card-body,
+.rfui-card.padding-lg > .rfui-card-footer {
+  padding: var(--spacing-7);
+}
+
+.rfui-in-page-link .rfui-in-page-link-icon {
+  display: none;
+}
+
+.rfui-in-page-link:hover .rfui-in-page-link-icon {
+  display: inline;
+}

@@ -29,7 +29,7 @@ export const Popover = ({
       <PopoverButton>{children}</PopoverButton>
       <PopoverPanel
         anchor={{ to: direction, gap: 6 }}
-        className="rounded border border-neutral-100 p-4 shadow-lg"
+        className="rounded-sm border border-neutral-100 p-4 shadow-lg"
       >
         {content}
       </PopoverPanel>

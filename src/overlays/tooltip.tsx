@@ -22,7 +22,7 @@ export const Tooltip = ({
   ...rest
 }: TooltipType) => {
   const [isVisible, setIsVisible] = useState(false);
-  const timeoutRef = useRef<number | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const id = `tooltip-${useId()}`;
   const handleMouseEnter = () => {
     timeoutRef.current = setTimeout(() => {
@@ -39,7 +39,7 @@ export const Tooltip = ({
   const { className: restClass, ...restWithoutClass } = rest;
   let containerClass = "relative inline-block";
   let tooltipClass =
-    "absolute z-10 max-w-xs transform whitespace-nowrap rounded bg-neutral-900 px-2 py-1 text-neutral-50";
+    "absolute z-10 max-w-xs transform whitespace-nowrap rounded-sm bg-neutral-900 px-2 py-1 text-neutral-50";
 
   tooltipClass += (() => {
     switch (direction) {

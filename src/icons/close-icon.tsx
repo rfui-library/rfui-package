@@ -2,8 +2,7 @@ import type { ComponentProps } from "react";
 
 export const CloseIcon = ({ ...rest }: ComponentProps<"svg">) => {
   const { className: restClass, ...restWithoutClass } = rest;
-  let className =
-    "h-6 w-6 cursor-pointer rounded outline-1 outline-offset-2 hover:outline";
+  let className = "h-6 w-6 rounded-sm outline-1 outline-offset-2 hover:outline";
 
   if (restClass) {
     className += ` ${restClass}`;

@@ -21,7 +21,7 @@ export const Progress = ({
   ...rest
 }: ProgressType) => {
   const { className: restClass, ...restWithoutClass } = rest;
-  let outerClassName = `box-content rounded-sm border`;
+  let outerClassName = `rounded-xs box-content border`;
   let innerClassName = `h-full`;
 
   outerClassName += (() => {

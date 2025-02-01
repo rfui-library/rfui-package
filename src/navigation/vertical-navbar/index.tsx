@@ -69,11 +69,11 @@ const HamburgerMenuToggle = ({
 }) => {
   return (
     <Flex
-      className="cursor-pointer items-center gap-2 px-2 py-3 text-neutral-700"
+      className="items-center gap-2 px-2 py-3 text-neutral-700"
       onClick={toggleHamburgerMenu}
     >
       {isOpen ? (
-        <CloseIcon className="outline-none" />
+        <CloseIcon className="outline-hidden" />
       ) : (
         <>
           <HamburgerIcon className="!inline-block w-6" /> Menu
