@@ -1,4 +1,5 @@
 import typescript from "@rollup/plugin-typescript";
+import copy from "rollup-plugin-copy";
 import packageJson from "./package.json" with { type: "json" };
 
 export default {
@@ -9,6 +10,11 @@ export default {
       sourcemap: true,
     },
   ],
-  plugins: [typescript()],
+  plugins: [
+    typescript(),
+    copy({
+      targets: [{ src: "src/rfui-tailwind.css", dest: "dist" }],
+    }),
+  ],
   external: ["react", "react-dom"],
 };
