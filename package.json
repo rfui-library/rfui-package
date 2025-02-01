@@ -24,11 +24,13 @@
   "homepage": "https://github.com/rfui-library/rfui-package#readme",
   "devDependencies": {
     "@rollup/plugin-typescript": "^12.1.2",
+    "@tailwindcss/cli": "^4.0.2",
     "@types/react": "^19.0.4",
     "@types/react-dom": "^19.0.2",
     "@types/react-syntax-highlighter": "^15.5.13",
     "prettier": "3.4.2",
     "rollup-plugin-copy": "^3.5.0",
+    "tailwindcss": "^4.0.2",
     "tslib": "^2.8.1",
     "typescript": "^5.7.3"
   },

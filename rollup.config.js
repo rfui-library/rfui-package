@@ -13,7 +13,10 @@ export default {
   plugins: [
     typescript(),
     copy({
-      targets: [{ src: "src/rfui-tailwind.css", dest: "dist" }],
+      targets: [
+        { src: "src/rfui-tailwind.css", dest: "dist" },
+        { src: "src/rfui.css", dest: "dist" },
+      ],
     }),
   ],
   external: ["react", "react-dom"],
