@@ -491,6 +491,9 @@
   .-ml-4 {
     margin-left: calc(var(--spacing-4) * -1);
   }
+  .ml-1 {
+    margin-left: var(--spacing-1);
+  }
   .ml-2 {
     margin-left: var(--spacing-2);
   }
@@ -579,6 +582,12 @@
   .h-full {
     height: 100%;
   }
+  .h-px {
+    height: 1px;
+  }
+  .h-px {
+    height: var(--spacing-px);
+  }
   .\!w-3\.5 {
     width: calc(var(--spacing) * 3.5) !important;
   }
@@ -659,6 +668,9 @@
   }
   .min-w-52 {
     min-width: calc(var(--spacing) * 52);
+  }
+  .min-w-\[var\(--button-width\)\] {
+    min-width: var(--button-width);
   }
   .flex-1 {
     flex: 1;
@@ -898,6 +910,9 @@
   .bg-neutral-50\/75 {
     background-color: color-mix(in oklab, var(--color-neutral-50) 75%, transparent);
   }
+  .bg-neutral-100 {
+    background-color: var(--color-neutral-100);
+  }
   .bg-neutral-200 {
     background-color: var(--color-neutral-200);
   }
@@ -1002,6 +1017,9 @@
   }
   .text-center {
     text-align: center;
+  }
+  .text-left {
+    text-align: left;
   }
   .text-right {
     text-align: right;
