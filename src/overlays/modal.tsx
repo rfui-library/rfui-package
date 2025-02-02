@@ -28,7 +28,7 @@ export const Modal = ({
 }: ModalType) => {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const { className: restClass, ...restWithoutClass } = rest;
-  const containerClass = ` w-[600px] p-4 rounded-sm backdrop:backdrop-blur-xs ${restClass}`;
+  const containerClass = `w-[600px] p-4 rounded-sm backdrop:backdrop-blur-xs mx-auto absolute top-[30%] translate-y-[-30%] ${restClass}`;
 
   // @ts-expect-error
   useEffect(() => {
