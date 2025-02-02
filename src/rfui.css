@@ -497,9 +497,6 @@
   .box-content {
     box-sizing: content-box;
   }
-  .\!inline-block {
-    display: inline-block !important;
-  }
   .block {
     display: block;
   }
@@ -514,6 +511,9 @@
   }
   .inline-block {
     display: inline-block;
+  }
+  .inline-block\! {
+    display: inline-block !important;
   }
   .table {
     display: table;
@@ -1153,18 +1153,7 @@
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
-  .outline-hidden {
-    outline-style: none;
-    @media (forced-colors: active) {
-      outline: 2px solid transparent;
-      outline-offset: 2px;
-    }
-  }
   .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
-  }
-  .outline-1 {
     outline-style: var(--tw-outline-style);
     outline-width: 1px;
   }
@@ -1203,6 +1192,13 @@
     &:hover {
       @media (hover: hover) {
         border-color: var(--color-neutral-700);
+      }
+    }
+  }
+  .hover\:bg-current\/10 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: color-mix(in oklab, currentColor 10%, transparent);
       }
     }
   }
