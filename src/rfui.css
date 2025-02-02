@@ -371,6 +371,9 @@
   .top-1\/2 {
     top: calc(1/2 * 100%);
   }
+  .top-\[30\%\] {
+    top: 30%;
+  }
   .top-\[89px\] {
     top: 89px;
   }
@@ -418,6 +421,9 @@
   }
   .mx-6 {
     margin-inline: var(--spacing-6);
+  }
+  .mx-auto {
+    margin-inline: auto;
   }
   .my-1 {
     margin-block: var(--spacing-1);
@@ -663,6 +669,10 @@
   }
   .-translate-y-1\/2 {
     --tw-translate-y: calc(calc(1/2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .translate-y-\[-30\%\] {
+    --tw-translate-y: -30%;
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .transform {
