@@ -61,7 +61,7 @@ export const Alert = ({
   const { alertHeader, alertBody } = getComponents(children);
   let alertHeaderClass = "mb-2 text-lg font-bold";
   let alertBodyClass = bodyTextColorMap[variant];
-  let containerClass = "w-full p-5 border-l-4";
+  let containerClass = "w-full border-l-4 p-5";
 
   containerClass += ` ${borderMap[variant]}`;
   containerClass += ` ${bgMap[variant]}`;
@@ -87,7 +87,7 @@ export const Alert = ({
         </div>
         {isDismissable && (
           <CloseIcon
-            className={`${headerTextColorMap[variant]} self-start`}
+            className={`${headerTextColorMap[variant]} self-start outline hover:bg-current/10`}
             onClick={() => {
               setIsShown(false);
             }}
@@ -146,7 +146,7 @@ const Icon = ({ variant }: { variant: AlertType["variant"] }) => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="h-6 w-6 text-supporting-green-500"
+          className="text-supporting-green-500 h-6 w-6"
         >
           <path
             strokeLinecap="round"
@@ -164,7 +164,7 @@ const Icon = ({ variant }: { variant: AlertType["variant"] }) => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="h-6 w-6 text-primary-500"
+          className="text-primary-500 h-6 w-6"
         >
           <path
             strokeLinecap="round"
@@ -182,7 +182,7 @@ const Icon = ({ variant }: { variant: AlertType["variant"] }) => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="h-6 w-6 text-supporting-yellow-700"
+          className="text-supporting-yellow-700 h-6 w-6"
         >
           <path
             strokeLinecap="round"
@@ -200,7 +200,7 @@ const Icon = ({ variant }: { variant: AlertType["variant"] }) => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="h-6 w-6 text-supporting-red-500"
+          className="text-supporting-red-500 h-6 w-6"
         >
           <path
             strokeLinecap="round"

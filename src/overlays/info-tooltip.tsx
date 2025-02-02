@@ -1,4 +1,4 @@
-import { InfoIcon } from "../icons/info-icon";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import { Tooltip, TooltipType } from "./tooltip";
 
 export type InfoTooltipType = Omit<TooltipType, "children" | "size"> & {
@@ -34,7 +34,7 @@ export const InfoTooltip = ({
 
   return (
     <Tooltip content={content} direction={direction} {...rest}>
-      <InfoIcon className={iconClass} />
+      <InformationCircleIcon className={iconClass} />
     </Tooltip>
   );
 };

@@ -67,7 +67,7 @@ export const Modal = ({
     <dialog ref={dialogRef} className={containerClass} {...restWithoutClass}>
       <div className="mb-2 text-right">
         <button onClick={close}>
-          <CloseIcon />
+          <CloseIcon className="hover:bg-current/10 outline" />
         </button>
       </div>
       <div className="mx-4 mb-4">

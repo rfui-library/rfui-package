@@ -1,7 +1,7 @@
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import type { ComponentProps, ReactNode } from "react";
 import { useState } from "react";
 import { CloseIcon } from "../../icons/close-icon";
-import { HamburgerIcon } from "../../icons/hamburger-icon";
 import { Flex } from "../../layout/flex";
 
 export { VerticalNavbarBottom } from "./vertical-navbar-bottom";
@@ -73,10 +73,10 @@ const HamburgerMenuToggle = ({
       onClick={toggleHamburgerMenu}
     >
       {isOpen ? (
-        <CloseIcon className="outline-hidden" />
+        <CloseIcon />
       ) : (
         <>
-          <HamburgerIcon className="!inline-block w-6" /> Menu
+          <Bars3Icon className="inline-block! size-6 w-6" /> Menu
         </>
       )}
     </Flex>

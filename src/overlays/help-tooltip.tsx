@@ -1,4 +1,4 @@
-import { QuestionMarkCircleIcon } from "../icons/question-mark-circle-icon";
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 import { Tooltip, TooltipType } from "./tooltip";
 
 export type HelpTooltipType = Omit<TooltipType, "children" | "size"> & {

@@ -1,5 +1,5 @@
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import type { ComponentProps, ReactNode } from "react";
-import { NewTabIcon } from "../icons/new-tab-icon";
 
 export type LinkType = {
   href: string;
@@ -63,7 +63,9 @@ export const Link = ({
         </span>
       )}
       {children}
-      {_newTab && _includeNewTabIcon && <NewTabIcon />}
+      {_newTab && _includeNewTabIcon && (
+        <ArrowTopRightOnSquareIcon className="relative bottom-[1px] left-2 inline w-4" />
+      )}
     </a>
   );
 };

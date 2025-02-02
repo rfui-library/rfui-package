@@ -1,6 +1,6 @@
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import type { ComponentProps } from "react";
 import { Fragment } from "react";
-import { ChevronRightIcon } from "../icons/chevron-right";
 import { Link } from "./link";
 
 export type BreadcrumbsType = {

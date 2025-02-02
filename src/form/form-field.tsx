@@ -1,3 +1,4 @@
+import { XCircleIcon } from "@heroicons/react/24/outline";
 import type { ComponentProps } from "react";
 import { useId } from "react";
 import { Checkbox } from "../form/checkbox";
@@ -11,7 +12,6 @@ import {
 import { Switch } from "../form/switch";
 import type { TextareaType } from "../form/textarea";
 import { Textarea } from "../form/textarea";
-import { XCircleIcon } from "../icons/x-circle-icon";
 import { Flex } from "../layout/flex";
 
 type ExcludedInputProps =
@@ -138,7 +138,9 @@ export const FormField = ({
         <Flex
           className={`${smallFontClass} text-supporting-red-700 mb-1 gap-1 items-center`}
         >
-          <XCircleIcon className={size === "sm" ? "w-4 h-4" : undefined} />{" "}
+          <XCircleIcon
+            className={size === "sm" ? "w-4 h-4 inline" : "w-5 h-5 inline"}
+          />{" "}
           {errorText}
         </Flex>
       )}
