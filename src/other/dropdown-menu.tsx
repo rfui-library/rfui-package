@@ -5,7 +5,7 @@ import {
   MenuItems,
   MenuSeparator,
 } from "@headlessui/react";
-import { Button } from "../form/button";
+import { Button, type ButtonType } from "../form/button";
 import { ChevronDownIcon } from "../icons/chevron-down";
 
 type DropdownMenuItemType =
@@ -16,6 +16,7 @@ type DropdownMenuItemType =
 
 export type DropdownMenuType = {
   buttonText: string;
+  buttonProps?: Partial<ButtonType>;
   items: DropdownMenuItemType[];
 };
 
@@ -45,7 +46,11 @@ export type DropdownMenuType = {
     ]}
   />
  */
-export const DropdownMenu = ({ buttonText, items }: DropdownMenuType) => {
+export const DropdownMenu = ({
+  buttonText,
+  buttonProps,
+  items,
+}: DropdownMenuType) => {
   const menuItemsClassName =
     "focus:outline-hidden mt-1 rounded-sm border border-neutral-500 bg-[#fff]";
   const menuItemClassName =
@@ -54,7 +59,7 @@ export const DropdownMenu = ({ buttonText, items }: DropdownMenuType) => {
   return (
     <Menu>
       <MenuButton>
-        <Button>
+        <Button {...buttonProps}>
           {buttonText}{" "}
           <ChevronDownIcon className="ml-1 inline-block" strokeWidth={2} />
         </Button>
