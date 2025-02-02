@@ -136,3 +136,6 @@ export { Text } from "./typography/text";
 export type { TextType } from "./typography/text";
 export { UL } from "./typography/ul";
 export type { ULType } from "./typography/ul";
+
+export { DropdownMenu } from "./other/dropdown-menu";
+export type { DropdownMenuType } from "./other/dropdown-menu";
