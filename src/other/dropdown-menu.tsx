@@ -88,7 +88,7 @@ export const DropdownMenu = ({ buttonText, items }: DropdownMenuType) => {
               </button>
             </MenuItem>
           ) : item.type === "separator" ? (
-            <MenuSeparator className="my-1 h-px bg-black" />
+            <MenuSeparator className="my-1 h-px bg-neutral-100" />
           ) : null,
         )}
       </MenuItems>
