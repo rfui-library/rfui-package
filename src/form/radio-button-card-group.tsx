@@ -119,12 +119,11 @@ export const RadioButtonCardGroupItem = ({
   handleNewSelection,
   children,
 }: RadioButtonCardGroupItemType) => {
-  let containerClass =
-    "radio-button-card-group-item cursor-pointer items-center border";
+  let containerClass = "radio-button-card-group-item items-center border";
 
   containerClass += isSelected
     ? " border-2 border-neutral-500"
-    : " border-2 border-neutral-100";
+    : " border-2 border-neutral-100 hover:border-neutral-200";
 
   return (
     <Flex
