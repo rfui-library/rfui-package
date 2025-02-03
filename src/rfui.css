@@ -1216,6 +1216,13 @@
       visibility: hidden;
     }
   }
+  .hover\:border-neutral-200 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: var(--color-neutral-200);
+      }
+    }
+  }
   .hover\:border-neutral-700 {
     &:hover {
       @media (hover: hover) {
