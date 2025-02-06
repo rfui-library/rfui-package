@@ -69,11 +69,11 @@ const HamburgerMenuToggle = ({
 }) => {
   return (
     <Flex
-      className="items-center gap-2 px-2 py-3 text-neutral-700"
+      className="cursor-default items-center gap-2 px-2 py-3 text-neutral-700 hover:bg-neutral-100"
       onClick={toggleHamburgerMenu}
     >
       {isOpen ? (
-        <CloseIcon />
+        <CloseIcon className="hover:outline-none" />
       ) : (
         <>
           <Bars3Icon className="inline-block! size-6 w-6" /> Menu
