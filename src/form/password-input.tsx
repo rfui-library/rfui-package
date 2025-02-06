@@ -38,7 +38,7 @@ export const PasswordInput = ({
     setShouldShow((v) => !v);
   };
   const buttonClass = (() => {
-    let s = "bg-neutral-50 px-2";
+    let s = "bg-neutral-50 px-2 hover:bg-neutral-100/50";
 
     if ("size" in inputProps) {
       if (inputProps.size === "lg") {
