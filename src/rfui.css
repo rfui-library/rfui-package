@@ -1244,6 +1244,13 @@
       }
     }
   }
+  .hover\:bg-neutral-100 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-neutral-100);
+      }
+    }
+  }
   .hover\:bg-neutral-100\/30 {
     &:hover {
       @media (hover: hover) {
@@ -1319,6 +1326,14 @@
       @media (hover: hover) {
         outline-style: var(--tw-outline-style);
         outline-width: 1px;
+      }
+    }
+  }
+  .hover\:outline-none {
+    &:hover {
+      @media (hover: hover) {
+        --tw-outline-style: none;
+        outline-style: none;
       }
     }
   }
@@ -1535,15 +1550,6 @@
       &:hover {
         @media (hover: hover) {
           border-bottom-color: var(--color-neutral-500);
-        }
-      }
-    }
-  }
-  .sm\:hover\:bg-neutral-100 {
-    @media (width >= 40rem) {
-      &:hover {
-        @media (hover: hover) {
-          background-color: var(--color-neutral-100);
         }
       }
     }
