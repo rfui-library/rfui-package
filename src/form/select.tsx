@@ -19,6 +19,7 @@ export type SelectType = {
   size?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
+  defaultValue?: Option;
   onChange?: (newValue: Option) => void;
   buttonClassName?: string;
   optionsClassName?: string;
@@ -42,6 +43,7 @@ export const Select = ({
   size = "md",
   rounded,
   invalid = false,
+  defaultValue,
   onChange,
   buttonClassName: _buttonClassName,
   optionsClassName: _optionsClassName,
@@ -128,20 +130,38 @@ export const Select = ({
   return (
     <Listbox
       name={name}
-      value={selectedOption}
-      onChange={(newVal) => {
-        setSelectedOption(newVal);
+      defaultValue={
+        defaultValue !== undefined
+          ? defaultValue
+          : onChange
+            ? undefined
+            : options[0]
+      }
+      value={onChange ? selectedOption : undefined}
+      onChange={
+        onChange
+          ? (newVal) => {
+              setSelectedOption(newVal);
 
-        if (onChange) {
-          onChange(newVal);
-        }
-      }}
+              if (onChange) {
+                onChange(newVal);
+              }
+            }
+          : undefined
+      }
       disabled={disabled}
       invalid={invalid}
     >
       <ListboxButton className={buttonClassName}>
-        <span>{selectedOption.display}</span>
-        <ChevronDownIcon className={chevronIconClassName} aria-hidden="true" />
+        {({ value }) => (
+          <>
+            <span>{value?.display}</span>
+            <ChevronDownIcon
+              className={chevronIconClassName}
+              aria-hidden="true"
+            />
+          </>
+        )}
       </ListboxButton>
       <ListboxOptions anchor="bottom" className={optionsClassName}>
         {options.map((option) => (
