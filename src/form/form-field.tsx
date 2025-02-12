@@ -9,6 +9,7 @@ import {
   RadioButtonGroup,
   RadioButtonGroupItem,
 } from "../form/radio-button-group";
+import { Select, type SelectType } from "../form/select";
 import { Switch } from "../form/switch";
 import type { TextareaType } from "../form/textarea";
 import { Textarea } from "../form/textarea";
@@ -30,6 +31,7 @@ export type FormFieldType = {
   name?: ComponentProps<"input">["name"];
   value?: ComponentProps<"input">["value"];
   defaultValue?: ComponentProps<"input">["defaultValue"];
+  selectDefaultValue?: SelectType["defaultValue"];
   checked?: boolean;
   defaultChecked?: boolean;
   type?:
@@ -37,7 +39,8 @@ export type FormFieldType = {
     | "switch"
     | "rfui-password-input"
     | "textarea"
-    | "radio-button-group";
+    | "radio-button-group"
+    | "select";
   required?: boolean;
   requiredIndicator?: "text" | "asterisk" | "none";
   optionalIndicator?: "text" | "asterisk" | "none";
@@ -54,10 +57,12 @@ export type FormFieldType = {
   onInput?: (e: any) => void;
   inputRest?: Omit<ComponentProps<"input">, ExcludedInputProps>;
   textareaRest?: Omit<TextareaType, ExcludedInputProps>;
+  selectOptions?: SelectType["options"];
   radioButtonGroupRest?: Omit<
     RadioButtonGroupType,
     ExcludedInputProps | "children"
   >;
+  selectRest?: SelectType;
 } & Omit<ComponentProps<"div">, "size">;
 
 /** *
@@ -75,6 +80,7 @@ export const FormField = ({
   name,
   value,
   defaultValue,
+  selectDefaultValue,
   checked,
   defaultChecked,
   type,
@@ -92,6 +98,8 @@ export const FormField = ({
   inputRest,
   textareaRest,
   radioButtonGroupRest,
+  selectOptions,
+  selectRest,
   ...rest
 }: FormFieldType) => {
   const id = useId();
@@ -236,6 +244,17 @@ export const FormField = ({
             </RadioButtonGroupItem>
           ))}
         </RadioButtonGroup>
+      ) : type === "select" ? (
+        <Select
+          options={selectOptions ?? []}
+          name={name}
+          defaultValue={selectDefaultValue}
+          size={size}
+          rounded={rounded}
+          invalid={invalid}
+          onChange={onChange}
+          {...selectRest}
+        />
       ) : (
         <Input
           id={id}
