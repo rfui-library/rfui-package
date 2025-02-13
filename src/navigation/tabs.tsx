@@ -80,15 +80,15 @@ const Tab = ({
   fullWidth: boolean;
 }) => {
   const isActive = tabName === activeTab;
-  let containerClass = "rfui-tab px-5 py-4 text-center";
+  let containerClass = "rfui-tab cursor-default px-5 py-4 text-center";
 
   if (fullWidth) {
     containerClass += " w-full";
   }
 
   containerClass += isActive
-    ? " border-b text-neutral-900"
-    : " text-neutral-700";
+    ? " border-b border-neutral-500 text-neutral-900 font-bold"
+    : " text-neutral-700 hover:bg-neutral-50";
 
   return (
     <div className={containerClass} onClick={onClick}>
