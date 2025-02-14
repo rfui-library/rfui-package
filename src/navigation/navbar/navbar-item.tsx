@@ -32,11 +32,11 @@ export const NavbarItem = ({
   const { className: formPropsClass, ...formPropsWithoutClassName } =
     formProps ?? {};
   const desktopFormClass = formPropsClass
-    ? `hidden cursor-default h-full sm:inline-block ${formPropsClass}`
-    : "hidden cursor-default h-full sm:inline-block";
+    ? `hidden cursor-pointer h-full sm:inline-block ${formPropsClass}`
+    : "hidden cursor-pointer h-full sm:inline-block";
   const mobileFormClass = formPropsClass
-    ? `block cursor-default break-all h-full ${formPropsClass}`
-    : "block cursor-default break-all h-full";
+    ? `block cursor-pointer break-all h-full ${formPropsClass}`
+    : "block cursor-pointer break-all h-full";
 
   if (restClass) {
     containerClass += ` ${restClass}`;
@@ -57,14 +57,14 @@ export const NavbarItem = ({
         </Link>
       ) : onClick ? (
         <div
-          className="hidden cursor-default py-6 sm:inline-block"
+          className="hidden cursor-pointer py-6 sm:inline-block"
           onClick={onClick}
         >
           {children}
         </div>
       ) : formProps ? (
         <form className={desktopFormClass} {...formPropsWithoutClassName}>
-          <button type="submit" className="h-full">
+          <button type="submit" className="h-full cursor-pointer">
             {children}
           </button>
         </form>
@@ -84,12 +84,14 @@ export const NavbarItem = ({
             {children}
           </Link>
         ) : onClick ? (
-          <div className="block cursor-default break-all p-6" onClick={onClick}>
+          <div className="block cursor-pointer break-all p-6" onClick={onClick}>
             {children}
           </div>
         ) : formProps ? (
           <form className={mobileFormClass} {...formPropsWithoutClassName}>
-            <button className="w-full p-6 text-left">{children}</button>
+            <button className="w-full cursor-pointer p-6 text-left">
+              {children}
+            </button>
           </form>
         ) : (
           <div className="block break-all p-6">{children}</div>
