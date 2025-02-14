@@ -18,4 +18,4 @@ npm version minor
 npm version patch
 ```
 
-Then run `npm publish.
+Then run `npm publish`.
