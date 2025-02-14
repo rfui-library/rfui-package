@@ -413,6 +413,9 @@
   .z-10 {
     z-index: 10;
   }
+  .mx-0\! {
+    margin-inline: var(--spacing-0) !important;
+  }
   .mx-1 {
     margin-inline: var(--spacing-1);
   }
@@ -678,6 +681,9 @@
   .flex-1 {
     flex: 1;
   }
+  .grow {
+    flex-grow: 1;
+  }
   .-translate-x-1\/2 {
     --tw-translate-x: calc(calc(1/2 * 100%) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
@@ -719,6 +725,9 @@
   }
   .flex-col {
     flex-direction: column;
+  }
+  .flex-row {
+    flex-direction: row;
   }
   .items-center {
     align-items: center;
@@ -972,6 +981,9 @@
   }
   .p-5 {
     padding: var(--spacing-5);
+  }
+  .p-6 {
+    padding: var(--spacing-6);
   }
   .px-1 {
     padding-inline: var(--spacing-1);
