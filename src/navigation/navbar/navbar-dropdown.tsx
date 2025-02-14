@@ -61,9 +61,9 @@ export const NavbarDropdown = ({
         )}
 
         {/* Mobile */}
-        <Container size="xl" className="block sm:hidden">
+        <Container size="xl" className="mx-0! block sm:hidden">
           <Flex
-            className="block items-center justify-between py-6 sm:hidden"
+            className="block items-center justify-between p-6 sm:hidden"
             onClick={toggleMenu}
           >
             <span>{title}</span>
