@@ -21,7 +21,7 @@ export const Container = ({
   ...rest
 }: ContainerType) => {
   const { className: restClass, ...restWithoutClass } = rest;
-  let className = "mx-6 lg:mx-auto lg:px-10 lg:w-full";
+  let className = "mx-6 lg:mx-auto lg:w-full lg:px-10";
 
   className += (() => {
     switch (size) {
@@ -34,7 +34,7 @@ export const Container = ({
       case "xl":
         return " max-w-screen-xl";
       case "2xl":
-        return " m max-w-screen-2xl";
+        return " max-w-screen-2xl";
     }
   })();
 
