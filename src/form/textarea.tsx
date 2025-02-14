@@ -21,7 +21,7 @@ export const Textarea = ({
 }: TextareaType) => {
   const { className: restClass, ...resstWithoutClass } = rest;
   let className =
-    "focus:shadow-xs focus:outline-hidden block border border-neutral-500 px-2 py-1 focus:border-neutral-900";
+    "focus:shadow-xs focus:outline-hidden block w-full border border-neutral-500 px-2 py-1 focus:border-neutral-900";
 
   className += (() => {
     switch (rounded) {
