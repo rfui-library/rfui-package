@@ -18,8 +18,8 @@ export type SelectType = {
   size?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
-  defaultValue?: Option["value"];
-  onChange?: (newValue: Option["value"]) => void;
+  defaultValue?: Option;
+  onChange?: (newValue: Option) => void;
   buttonClassName?: string;
   optionsClassName?: string;
   optionClassName?: string;
@@ -52,9 +52,7 @@ export const Select = ({
     return null;
   }
 
-  const [selectedOption, setSelectedOption] = useState<Option["value"]>(
-    options[0].value,
-  );
+  const [selectedOption, setSelectedOption] = useState<Option>(options[0]);
   let buttonClassName =
     "min-w-52 flex w-full max-w-full items-center justify-between border hover:shadow-sm focus:shadow-md";
   let optionsClassName =
@@ -137,13 +135,13 @@ export const Select = ({
         defaultValue !== undefined
           ? defaultValue
           : !onChange
-            ? options[0].value
+            ? options[0]
             : undefined
       }
       value={onChange ? selectedOption : undefined}
       onChange={
         onChange
-          ? (newVal) => {
+          ? (newVal: Option) => {
               setSelectedOption(newVal);
               onChange(newVal);
             }
@@ -155,7 +153,7 @@ export const Select = ({
       <ListboxButton className={buttonClassName}>
         {({ value }) => (
           <>
-            <span>{value}</span>
+            <span>{value.label}</span>
             <ChevronDownIcon
               className={chevronIconClassName}
               aria-hidden="true"
@@ -167,7 +165,7 @@ export const Select = ({
         {options.map((option) => (
           <ListboxOption
             key={option.value}
-            value={option.value}
+            value={option}
             className={optionClassName}
             disabled={!!option.disabled}
           >
