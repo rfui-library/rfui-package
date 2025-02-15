@@ -58,9 +58,9 @@ export const Combobox = ({
         );
 
   let inputClassName =
-    "min-w-52 focus:shadow-xs focus:outline-hidden flex w-full max-w-full items-center justify-between border border-neutral-500 bg-[#fff] focus:border-neutral-900";
+    "min-w-52 flex w-full max-w-full items-center justify-between border hover:shadow-sm focus:shadow-md";
   let optionsClassName =
-    "min-w-52 focus:outline-hidden mt-1 w-[var(--input-width)] max-w-full border border-neutral-500 bg-[#fff] empty:invisible";
+    "min-w-52 mt-1 w-[var(--input-width)] max-w-full border border-neutral-500 bg-[#fff] empty:invisible";
   let optionClassName =
     "group mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50 data-[disabled]:opacity-50";
   let chevronIconClassName = "group pointer-events-none";
@@ -115,6 +115,8 @@ export const Combobox = ({
       " border-supporting-red-700 bg-supporting-red-50 text-supporting-red-900 focus:border-supporting-red-900";
     chevronIconClassName += " fill-supporting-red-700";
   } else {
+    inputClassName +=
+      " border-neutral-500 bg-[#fff] focus:border-primary-900 focus:border-neutral-900";
     chevronIconClassName += " fill-neutral-700";
   }
 

@@ -1245,6 +1245,13 @@
       }
     }
   }
+  .hover\:border-neutral-900 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: var(--color-neutral-900);
+      }
+    }
+  }
   .hover\:bg-current\/10 {
     &:hover {
       @media (hover: hover) {
@@ -1343,6 +1350,22 @@
       }
     }
   }
+  .hover\:shadow-sm {
+    &:hover {
+      @media (hover: hover) {
+        --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+        box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+      }
+    }
+  }
+  .hover\:shadow-xs {
+    &:hover {
+      @media (hover: hover) {
+        --tw-shadow: 0 1px 2px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.05));
+        box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+      }
+    }
+  }
   .hover\:outline {
     &:hover {
       @media (hover: hover) {
@@ -1364,6 +1387,11 @@
       border-color: var(--color-neutral-900);
     }
   }
+  .focus\:border-primary-900 {
+    &:focus {
+      border-color: var(--color-primary-900);
+    }
+  }
   .focus\:border-supporting-red-700 {
     &:focus {
       border-color: var(--color-supporting-red-700);
@@ -1374,9 +1402,9 @@
       border-color: var(--color-supporting-red-900);
     }
   }
-  .focus\:shadow-xs {
+  .focus\:shadow-md {
     &:focus {
-      --tw-shadow: 0 1px 2px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.05));
+      --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
       box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
     }
   }
@@ -1730,14 +1758,6 @@ table.rfui-table.striped tr:nth-child(even) {
 }
 .rfui-switch:checked::before {
   transform: translateX(1rem);
-}
-.rfui-switch:focus {
-  outline: none;
-  outline-color: transparent;
-}
-.rfui-switch:focus-visible {
-  outline: 2px solid var(--color-primary-300);
-  outline-offset: 2px;
 }
 .rfui-card-header {
   border-bottom-width: 1px;

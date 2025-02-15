@@ -96,11 +96,11 @@ export const CheckboxCardGroupItem = ({
     setIsChecked((v) => !v);
   };
   let containerClass =
-    "checkbox-card-group-item items-center rounded-sm border p-5";
+    "checkbox-card-group-item hover:shadow-xs items-center rounded-sm border border-2 p-5";
 
   containerClass += isChecked
-    ? " border-2 border-neutral-500"
-    : " border-2 border-neutral-100 hover:border-neutral-200";
+    ? " border-neutral-500"
+    : " border-neutral-100 hover:border-neutral-200";
 
   return (
     <Flex className={containerClass} onClick={handleClick}>

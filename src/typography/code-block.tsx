@@ -37,14 +37,18 @@ export const CodeBlock = ({ code, language, ...rest }: CodeBlockType) => {
 
   if (language) {
     return (
-      <SyntaxHighlighter className={className} language={language}>
+      <SyntaxHighlighter
+        className={className}
+        language={language}
+        tabIndex={-1}
+      >
         {code}
       </SyntaxHighlighter>
     );
   }
 
   return (
-    <pre className={className} {...restWithoutClass}>
+    <pre className={className} tabIndex={-1} {...restWithoutClass}>
       <code>{code}</code>
     </pre>
   );

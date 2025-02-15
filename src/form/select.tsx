@@ -9,9 +9,8 @@ import { useState, type ComponentProps } from "react";
 
 export type SelectType = {
   options: {
-    id: string;
-    display: string;
-    value: ComponentProps<"option">["value"];
+    label: string;
+    value: Exclude<ComponentProps<"option">["value"], readonly string[]>;
     disabled?: boolean;
   }[];
   name?: string;
@@ -19,8 +18,8 @@ export type SelectType = {
   size?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
-  defaultValue?: Option;
-  onChange?: (newValue: Option) => void;
+  defaultValue?: Option["value"];
+  onChange?: (newValue: Option["value"]) => void;
   buttonClassName?: string;
   optionsClassName?: string;
   optionClassName?: string;
@@ -53,11 +52,13 @@ export const Select = ({
     return null;
   }
 
-  const [selectedOption, setSelectedOption] = useState<Option>(options[0]);
+  const [selectedOption, setSelectedOption] = useState<Option["value"]>(
+    options[0].value,
+  );
   let buttonClassName =
-    "min-w-52 focus:shadow-xs focus:outline-hidden flex w-full max-w-full items-center justify-between border border-neutral-500 bg-[#fff] focus:border-neutral-900";
+    "min-w-52 flex w-full max-w-full items-center justify-between border hover:shadow-sm focus:shadow-md";
   let optionsClassName =
-    "min-w-52 focus:outline-hidden mt-1 w-[var(--button-width)] max-w-full border border-neutral-500 bg-[#fff]";
+    "min-w-52 mt-1 w-[var(--button-width)] max-w-full border border-neutral-500 bg-[#fff]";
   let optionClassName =
     "group mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50 data-[disabled]:opacity-50";
   let chevronIconClassName = "group pointer-events-none";
@@ -109,9 +110,11 @@ export const Select = ({
 
   if (invalid) {
     buttonClassName +=
-      " border-supporting-red-700 bg-supporting-red-50 text-supporting-red-900 focus:border-supporting-red-900";
+      " border-supporting-red-700 bg-supporting-red-50 text-supporting-red-900 focus:border-supporting-red-900 hover:shadow-sm focus:shadow-md";
     chevronIconClassName += " fill-supporting-red-700";
   } else {
+    buttonClassName +=
+      " border-neutral-500 bg-[#fff] hover:border-neutral-900 focus:border-primary-900";
     chevronIconClassName += " fill-neutral-700";
   }
 
@@ -133,19 +136,16 @@ export const Select = ({
       defaultValue={
         defaultValue !== undefined
           ? defaultValue
-          : onChange
-            ? undefined
-            : options[0]
+          : !onChange
+            ? options[0].value
+            : undefined
       }
       value={onChange ? selectedOption : undefined}
       onChange={
         onChange
           ? (newVal) => {
               setSelectedOption(newVal);
-
-              if (onChange) {
-                onChange(newVal);
-              }
+              onChange(newVal);
             }
           : undefined
       }
@@ -155,7 +155,7 @@ export const Select = ({
       <ListboxButton className={buttonClassName}>
         {({ value }) => (
           <>
-            <span>{value?.display}</span>
+            <span>{value}</span>
             <ChevronDownIcon
               className={chevronIconClassName}
               aria-hidden="true"
@@ -166,13 +166,13 @@ export const Select = ({
       <ListboxOptions anchor="bottom" className={optionsClassName}>
         {options.map((option) => (
           <ListboxOption
-            key={option.id}
-            value={option}
+            key={option.value}
+            value={option.value}
             className={optionClassName}
             disabled={!!option.disabled}
           >
             <CheckIcon className={checkIconClassName} />
-            <span>{option.display}</span>
+            <span>{option.label}</span>
           </ListboxOption>
         ))}
       </ListboxOptions>

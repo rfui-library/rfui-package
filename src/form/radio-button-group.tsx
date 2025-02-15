@@ -71,6 +71,7 @@ export const RadioButtonGroup = ({
           radioButtonRest: {
             checked,
             defaultChecked,
+            onChange: () => {},
           },
           onClick: !!onChange
             ? () => {
@@ -99,7 +100,7 @@ export const RadioButtonGroupItem = ({
 
   return (
     <label className={className} {...restWithoutClass}>
-      <RadioButton readOnly name={name} value={value} {...radioButtonRest} />
+      <RadioButton name={name} value={value} {...radioButtonRest} />
       <div>{children}</div>
     </label>
   );

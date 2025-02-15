@@ -233,16 +233,6 @@ table.rfui-table.striped tr:nth-child(even) {
   transform: translateX(1rem);
 }
 
-.rfui-switch:focus {
-  outline: none;
-  outline-color: transparent;
-}
-
-.rfui-switch:focus-visible {
-  outline: 2px solid var(--color-primary-300);
-  outline-offset: 2px;
-}
-
 /* Card */
 
 .rfui-card-header {

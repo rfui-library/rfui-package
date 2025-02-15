@@ -86,12 +86,16 @@ export const Alert = ({
           <div className={alertBodyClass}>{alertBody}</div>
         </div>
         {isDismissable && (
-          <CloseIcon
-            className={`${headerTextColorMap[variant]} self-start outline hover:bg-current/10`}
+          <button
+            className="self-start"
             onClick={() => {
               setIsShown(false);
             }}
-          />
+          >
+            <CloseIcon
+              className={`${headerTextColorMap[variant]} outline hover:bg-current/10`}
+            />
+          </button>
         )}
       </Flex>
     </div>
