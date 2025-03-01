@@ -30,6 +30,8 @@ export type {
 } from "./form/checkbox-card-group";
 export { Combobox } from "./form/combobox";
 export type { ComboboxType } from "./form/combobox";
+export { EditableText } from "./form/editable-text";
+export type { EditableTextType } from "./form/editable-text";
 export { FormField } from "./form/form-field";
 export type { FormFieldType } from "./form/form-field";
 export { Input } from "./form/input";
