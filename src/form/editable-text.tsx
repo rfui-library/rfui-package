@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Text, type TextType } from "../typography/text";
+import { Input } from "./input";
 
 export type EditableTextType = {
   text: string;
-  textProps?: TextType;
+  textProps?: Omit<TextType, "onClick">;
 };
 
 /** *
@@ -13,7 +15,12 @@ export type EditableTextType = {
  * @example
  * <EditableText text="Lorem ipsum dolor...">
  */
-export const EditableText = ({ text, textProps }: EditableTextType) => {
+export const EditableText = ({
+  text: initialText,
+  textProps,
+}: EditableTextType) => {
+  const [isEditable, setIsEditable] = useState(false);
+  const [newText, setNewText] = useState(initialText);
   const { className: textPropsClassName, ...textPropsWithoutClassName } =
     textProps ?? {};
   let textClassName =
@@ -23,9 +30,31 @@ export const EditableText = ({ text, textProps }: EditableTextType) => {
     textClassName += ` ${textPropsClassName}`;
   }
 
+  if (isEditable) {
+    return (
+      <Input
+        autoFocus
+        type="text"
+        value={newText}
+        onChange={(e) => {
+          setNewText(e.target.value);
+        }}
+        onBlur={() => {
+          setIsEditable(false);
+        }}
+      />
+    );
+  }
+
   return (
-    <Text className={textClassName} {...textPropsWithoutClassName}>
-      {text}
+    <Text
+      className={textClassName}
+      onClick={() => {
+        setIsEditable(true);
+      }}
+      {...textPropsWithoutClassName}
+    >
+      {initialText}
     </Text>
   );
 };
