@@ -1,25 +1,44 @@
 import { useState } from "react";
 import { Text, type TextType } from "../typography/text";
-import { Input } from "./input";
+import { Input, type InputType } from "./input";
+import { Textarea, type TextareaType } from "./textarea";
 
 export type EditableTextType = {
   text: string;
   onChange: (newText: string) => void;
+  type?: "input" | "textarea";
   textProps?: Omit<TextType, "onClick">;
+  inputProps?: Omit<
+    InputType,
+    "onClick" | "type" | "value" | "onChange" | "onBlur"
+  >;
+  textareaProps?: Omit<
+    TextareaType,
+    "onClick" | "value" | "onChange" | "onBlur"
+  >;
 };
 
 /** *
  * @function EditableText
  *
- * @see {@link https://rfui-docs.onrender.com/components/form/textarea}
+ * @see {@link https://rfui-docs.onrender.com/components/form/editable-text}
  *
  * @example
- * <EditableText text="Lorem ipsum dolor...">
+ * <EditableText
+ *   text={text}
+ *   onChange={(e) => {
+ *     setText(e.target.value);
+ *   }}
+ * >
  */
+
 export const EditableText = ({
   text: initialText,
+  type = "input",
   onChange,
   textProps,
+  inputProps,
+  textareaProps,
 }: EditableTextType) => {
   const [isEditable, setIsEditable] = useState(false);
   const [newText, setNewText] = useState(initialText);
@@ -33,20 +52,39 @@ export const EditableText = ({
   }
 
   if (isEditable) {
-    return (
-      <Input
-        autoFocus
-        type="text"
-        value={newText}
-        onChange={(e) => {
-          setNewText(e.target.value);
-        }}
-        onBlur={() => {
-          setIsEditable(false);
-          onChange(newText);
-        }}
-      />
-    );
+    if (type === "input") {
+      return (
+        <Input
+          autoFocus
+          type="text"
+          value={newText}
+          onChange={(e) => {
+            setNewText(e.target.value);
+          }}
+          onBlur={() => {
+            setIsEditable(false);
+            onChange(newText);
+          }}
+          {...inputProps}
+        />
+      );
+    } else if (type === "textarea") {
+      return (
+        <Textarea
+          autoFocus
+          value={newText}
+          onChange={(e) => {
+            setNewText(e.target.value);
+          }}
+          onBlur={() => {
+            setIsEditable(false);
+            onChange(newText);
+          }}
+          rows={initialText.split("\n").length + 2}
+          {...textareaProps}
+        ></Textarea>
+      );
+    }
   }
 
   return (
