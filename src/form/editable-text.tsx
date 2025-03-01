@@ -1,8 +1,9 @@
-import type { ComponentProps, ReactNode } from "react";
+import { Text, type TextType } from "../typography/text";
 
 export type EditableTextType = {
-  children?: ReactNode;
-} & ComponentProps<"textarea">;
+  text: string;
+  textProps?: TextType;
+};
 
 /** *
  * @function EditableText
@@ -10,16 +11,21 @@ export type EditableTextType = {
  * @see {@link https://rfui-docs.onrender.com/components/form/textarea}
  *
  * @example
- * <Textarea></Textarea>
+ * <EditableText text="Lorem ipsum dolor...">
  */
-export const EditableText = ({ ...rest }: EditableTextType) => {
-  const { className: restClass, ...resstWithoutClass } = rest;
-  let className =
-    "block w-full border px-2 py-1 hover:shadow-sm focus:shadow-md";
+export const EditableText = ({ text, textProps }: EditableTextType) => {
+  const { className: textPropsClassName, ...textPropsWithoutClassName } =
+    textProps ?? {};
+  let textClassName =
+    "border border-transparent hover:cursor-text hover:border-dashed hover:border-neutral-300";
 
-  if (restClass) {
-    className += ` ${restClass}`;
+  if (textPropsClassName) {
+    textClassName += ` ${textPropsClassName}`;
   }
 
-  return <textarea className={className} {...resstWithoutClass} />;
+  return (
+    <Text className={textClassName} {...textPropsWithoutClassName}>
+      {text}
+    </Text>
+  );
 };
