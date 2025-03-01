@@ -4,6 +4,7 @@ import { Input } from "./input";
 
 export type EditableTextType = {
   text: string;
+  onChange: (newText: string) => void;
   textProps?: Omit<TextType, "onClick">;
 };
 
@@ -17,6 +18,7 @@ export type EditableTextType = {
  */
 export const EditableText = ({
   text: initialText,
+  onChange,
   textProps,
 }: EditableTextType) => {
   const [isEditable, setIsEditable] = useState(false);
@@ -41,6 +43,7 @@ export const EditableText = ({
         }}
         onBlur={() => {
           setIsEditable(false);
+          onChange(newText);
         }}
       />
     );
