@@ -24,7 +24,7 @@ export const Text = ({ size = "md", children, ...rest }: TextType) => {
     lg: "text-2xl",
   };
   const { className: restClass, ...restWithoutClass } = rest;
-  let className = "max-w-prose gap-4 leading-relaxed";
+  let className = "max-w-prose gap-4 whitespace-pre-wrap leading-relaxed";
 
   className += ` ${sizeMap[size]}`;
 
