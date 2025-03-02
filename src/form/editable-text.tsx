@@ -53,17 +53,35 @@ export const EditableText = ({
   const [newText, setNewText] = useState(initialText);
   const { className: textPropsClassName, ...textPropsWithoutClassName } =
     textProps ?? {};
+  const { className: inputPropsClassName, ...inputPropsWithoutClassName } =
+    inputProps ?? {};
+  const {
+    className: textareaPropsClassName,
+    ...textareaPropsWithoutClassName
+  } = textareaProps ?? {};
   const { className: restClassName, ...restWithoutClassName } = rest;
 
   let textClassName =
     "border border-transparent hover:cursor-text hover:border-dashed hover:border-neutral-300";
+  let inputClassName = "text-lg";
+  let textareaClassName = "text-lg";
 
   if (textPropsClassName) {
     textClassName += ` ${textPropsClassName}`;
   }
 
+  if (inputPropsClassName) {
+    inputClassName += ` ${inputPropsClassName}`;
+  }
+
+  if (textPropsClassName) {
+    textareaClassName += ` ${textareaPropsClassName}`;
+  }
+
   if (restClassName) {
     textClassName += ` ${restClassName}`;
+    inputClassName += ` ${restClassName}`;
+    textareaClassName += ` ${restClassName}`;
   }
 
   if (isEditable) {
@@ -80,8 +98,9 @@ export const EditableText = ({
             setIsEditable(false);
             onChange(newText);
           }}
-          {...rest}
-          {...inputProps}
+          className={inputClassName}
+          {...restWithoutClassName}
+          {...inputPropsWithoutClassName}
         />
       );
     } else if (type === "textarea") {
@@ -97,8 +116,9 @@ export const EditableText = ({
             onChange(newText);
           }}
           rows={initialText.split("\n").length + 2}
-          {...rest}
-          {...textareaProps}
+          className={textareaClassName}
+          {...restWithoutClassName}
+          {...textareaPropsWithoutClassName}
         ></Textarea>
       );
     }
