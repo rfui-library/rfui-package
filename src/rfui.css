@@ -895,6 +895,9 @@
   .border-supporting-yellow-700 {
     border-color: var(--color-supporting-yellow-700);
   }
+  .border-transparent {
+    border-color: transparent;
+  }
   .border-t-neutral-100 {
     border-top-color: var(--color-neutral-100);
   }
@@ -1231,10 +1234,32 @@
       visibility: hidden;
     }
   }
+  .hover\:cursor-text {
+    &:hover {
+      @media (hover: hover) {
+        cursor: text;
+      }
+    }
+  }
+  .hover\:border-dashed {
+    &:hover {
+      @media (hover: hover) {
+        --tw-border-style: dashed;
+        border-style: dashed;
+      }
+    }
+  }
   .hover\:border-neutral-200 {
     &:hover {
       @media (hover: hover) {
         border-color: var(--color-neutral-200);
+      }
+    }
+  }
+  .hover\:border-neutral-300 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: var(--color-neutral-300);
       }
     }
   }
