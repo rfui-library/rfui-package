@@ -3,6 +3,14 @@ import { Text, type TextType } from "../typography/text";
 import { Input, type InputType } from "./input";
 import { Textarea, type TextareaType } from "./textarea";
 
+type CommonProps = Omit<
+  Pick<
+    TextType & InputType & TextareaType,
+    Extract<keyof TextType, keyof InputType & keyof TextareaType>
+  >,
+  "onClick" | "type" | "value" | "onChange" | "onBlur" | "children"
+>;
+
 export type EditableTextType = {
   text: string;
   onChange: (newText: string) => void;
@@ -16,7 +24,7 @@ export type EditableTextType = {
     TextareaType,
     "onClick" | "value" | "onChange" | "onBlur"
   >;
-};
+} & CommonProps;
 
 /** *
  * @function EditableText
@@ -39,6 +47,7 @@ export const EditableText = ({
   textProps,
   inputProps,
   textareaProps,
+  ...rest
 }: EditableTextType) => {
   const [isEditable, setIsEditable] = useState(false);
   const [newText, setNewText] = useState(initialText);
@@ -65,6 +74,7 @@ export const EditableText = ({
             setIsEditable(false);
             onChange(newText);
           }}
+          {...rest}
           {...inputProps}
         />
       );
@@ -81,6 +91,7 @@ export const EditableText = ({
             onChange(newText);
           }}
           rows={initialText.split("\n").length + 2}
+          {...rest}
           {...textareaProps}
         ></Textarea>
       );
@@ -93,6 +104,7 @@ export const EditableText = ({
       onClick={() => {
         setIsEditable(true);
       }}
+      {...rest}
       {...textPropsWithoutClassName}
     >
       {initialText}
