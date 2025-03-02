@@ -53,11 +53,17 @@ export const EditableText = ({
   const [newText, setNewText] = useState(initialText);
   const { className: textPropsClassName, ...textPropsWithoutClassName } =
     textProps ?? {};
+  const { className: restClassName, ...restWithoutClassName } = rest;
+
   let textClassName =
     "border border-transparent hover:cursor-text hover:border-dashed hover:border-neutral-300";
 
   if (textPropsClassName) {
     textClassName += ` ${textPropsClassName}`;
+  }
+
+  if (restClassName) {
+    textClassName += ` ${restClassName}`;
   }
 
   if (isEditable) {
@@ -104,7 +110,7 @@ export const EditableText = ({
       onClick={() => {
         setIsEditable(true);
       }}
-      {...rest}
+      {...restWithoutClassName}
       {...textPropsWithoutClassName}
     >
       {initialText}
