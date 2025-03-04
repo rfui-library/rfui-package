@@ -76,9 +76,10 @@ export const DropdownMenu = ({
 };
 
 const Items = ({ items }: { items: DropdownMenuItemType[] }) =>
-  items.map((item) =>
+  items.map((item, i) =>
     item.type === "link" ? (
       <MenuItem
+        key={i}
         disabled={!!item.disabled}
         className={menuItemClassName}
         style={{ width: "calc(100% - 8px)" }}
@@ -92,6 +93,7 @@ const Items = ({ items }: { items: DropdownMenuItemType[] }) =>
       </MenuItem>
     ) : item.type === "button" ? (
       <MenuItem
+        key={i}
         disabled={!!item.disabled}
         className={menuItemClassName}
         style={{ width: "calc(100% - 8px)" }}
@@ -104,9 +106,9 @@ const Items = ({ items }: { items: DropdownMenuItemType[] }) =>
         </button>
       </MenuItem>
     ) : item.type === "separator" ? (
-      <MenuSeparator className="my-1 h-px bg-neutral-100" />
+      <MenuSeparator key={i} className="my-1 h-px bg-neutral-100" />
     ) : item.type === "section" ? (
-      <MenuSection>
+      <MenuSection key={i}>
         <MenuHeading className={menuHeadingClassName}>
           {item.heading}
         </MenuHeading>
