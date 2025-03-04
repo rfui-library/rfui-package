@@ -62,11 +62,9 @@ export const DropdownMenu = ({
 }: DropdownMenuType) => {
   return (
     <Menu>
-      <MenuButton>
-        <Button {...buttonProps}>
-          {buttonText}{" "}
-          <ChevronDownIcon className="ml-1 inline-block" strokeWidth={2} />
-        </Button>
+      <MenuButton as={Button} {...buttonProps}>
+        {buttonText}{" "}
+        <ChevronDownIcon className="ml-1 inline-block" strokeWidth={2} />
       </MenuButton>
       <MenuItems anchor="bottom" className={menuItemsClassName}>
         <Items items={items} />
