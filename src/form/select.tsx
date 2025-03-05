@@ -5,27 +5,27 @@ import {
   ListboxOptions,
 } from "@headlessui/react";
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
-import { useState, type ComponentProps } from "react";
+
+type Option = {
+  label: string;
+  value: string | number | boolean | null | undefined;
+  disabled?: boolean;
+};
 
 export type SelectType = {
-  options: {
-    label: string;
-    value: Exclude<ComponentProps<"option">["value"], readonly string[]>;
-    disabled?: boolean;
-  }[];
+  options: Option[];
   name?: string;
   disabled?: boolean;
   size?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
   defaultValue?: Option;
+  value?: Option;
   onChange?: (newValue: Option) => void;
   buttonClassName?: string;
   optionsClassName?: string;
   optionClassName?: string;
 };
-
-type Option = SelectType["options"][number];
 
 /** *
  * @function Select
@@ -43,6 +43,7 @@ export const Select = ({
   rounded,
   invalid = false,
   defaultValue,
+  value,
   onChange,
   buttonClassName: _buttonClassName,
   optionsClassName: _optionsClassName,
@@ -52,7 +53,6 @@ export const Select = ({
     return null;
   }
 
-  const [selectedOption, setSelectedOption] = useState<Option>(options[0]);
   let buttonClassName =
     "min-w-52 flex w-full max-w-full items-center justify-between border hover:shadow-sm focus:shadow-md";
   let optionsClassName =
@@ -138,22 +138,15 @@ export const Select = ({
             ? options[0]
             : undefined
       }
-      value={onChange ? selectedOption : undefined}
-      onChange={
-        onChange
-          ? (newVal: Option) => {
-              setSelectedOption(newVal);
-              onChange(newVal);
-            }
-          : undefined
-      }
+      value={value}
+      onChange={onChange}
       disabled={disabled}
       invalid={invalid}
     >
       <ListboxButton className={buttonClassName}>
         {({ value }) => (
           <>
-            <span>{value.label}</span>
+            <span>{value?.label}</span>
             <ChevronDownIcon
               className={chevronIconClassName}
               aria-hidden="true"
@@ -164,7 +157,7 @@ export const Select = ({
       <ListboxOptions anchor="bottom" className={optionsClassName}>
         {options.map((option) => (
           <ListboxOption
-            key={option.value}
+            key={option.label}
             value={option}
             className={optionClassName}
             disabled={!!option.disabled}

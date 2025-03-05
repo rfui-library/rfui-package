@@ -8,25 +8,26 @@ import {
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
 
+type Option = {
+  label: string;
+  value: string | number | boolean | null | undefined;
+  disabled?: boolean;
+};
+
 export type ComboboxType = {
-  options: {
-    id: string;
-    value: string;
-    display: string;
-    disabled?: boolean;
-  }[];
+  options: Option[];
   name?: string;
   disabled?: boolean;
   size?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
+  defaultValue?: Option;
+  value?: Option;
   onChange?: (newValue: Option) => void;
   inputClassName?: string;
   optionsClassName?: string;
   optionClassName?: string;
 };
-
-type Option = ComboboxType["options"][number];
 
 /** *
  * @function Combobox
@@ -34,7 +35,22 @@ type Option = ComboboxType["options"][number];
  * @see {@link https://rfui-docs.onrender.com/components/form/combobox}
  *
  * @example
- * <Combobox />
+ * <Combobox
+    options={[
+      {
+        label: "foo",
+        value: "foo",
+      },
+      {
+        label: "bar",
+        value: "bar",
+      },
+      {
+        label: "baz",
+        value: "baz",
+      },
+    ]}
+  />
  */
 export const Combobox = ({
   options,
@@ -43,18 +59,19 @@ export const Combobox = ({
   size = "md",
   rounded,
   invalid = false,
+  defaultValue,
+  value,
   onChange,
   inputClassName: _inputClassName,
   optionsClassName: _optionsClassName,
   optionClassName: _optionClassName,
 }: ComboboxType) => {
-  const [selectedOption, setSelectedOption] = useState<Option>(options[0]);
   const [query, setQuery] = useState("");
   const filteredOptions =
     query === ""
       ? options
       : options.filter((option) =>
-          option.display.toLowerCase().includes(query.toLowerCase()),
+          option.label.toLowerCase().includes(query.toLowerCase()),
         );
 
   let inputClassName =
@@ -135,14 +152,15 @@ export const Combobox = ({
   return (
     <HeadlessUICombobox
       name={name}
-      value={selectedOption}
-      onChange={(option: Option) => {
-        setSelectedOption(option);
-
-        if (onChange) {
-          onChange(option);
-        }
-      }}
+      defaultValue={
+        defaultValue !== undefined
+          ? defaultValue
+          : !onChange
+            ? options[0]
+            : undefined
+      }
+      value={value}
+      onChange={onChange}
       onClose={() => {
         setQuery("");
       }}
@@ -150,7 +168,7 @@ export const Combobox = ({
     >
       <div className="relative">
         <ComboboxInput
-          displayValue={(option: Option) => (option ? option.display : "")}
+          displayValue={(option: Option) => (option ? option.label : "")}
           onChange={(event) => setQuery(event.target.value)}
           className={inputClassName}
         />
@@ -161,13 +179,13 @@ export const Combobox = ({
       <ComboboxOptions anchor="bottom" className={optionsClassName}>
         {filteredOptions.map((option) => (
           <ComboboxOption
-            key={option.id}
+            key={option.label}
             value={option}
             className={optionClassName}
             disabled={!!option.disabled}
           >
             <CheckIcon className={checkIconClassName} />
-            <span>{option.display}</span>
+            <span>{option.label}</span>
           </ComboboxOption>
         ))}
       </ComboboxOptions>
