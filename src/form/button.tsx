@@ -40,9 +40,9 @@ export const Button = ({
   ...rest
 }: ButtonType) => {
   const { className: restClass, ...restWithoutClass } = rest;
-  let className = "font-semibold";
-
+  let className = "";
   if (variant !== "link") {
+    className += " font-semibold";
     className += (() => {
       switch (size) {
         case "sm":
