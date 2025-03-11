@@ -7,11 +7,13 @@ export type ButtonType = {
     | "tertiary"
     | "danger-primary"
     | "danger-secondary"
-    | "danger-tertiary";
+    | "danger-tertiary"
+    | "link";
   size?: "sm" | "md" | "lg" | "block";
   rounded?: "square" | "sm" | "lg" | "full";
   isLoading?: boolean;
   loadingContent?: string;
+  href?: string;
   children: ReactNode;
 } & Omit<ComponentProps<"button">, "icon" | "size">;
 
@@ -33,6 +35,7 @@ export const Button = ({
   rounded,
   isLoading = false,
   loadingContent,
+  href,
   children,
   ...rest
 }: ButtonType) => {
@@ -82,12 +85,23 @@ export const Button = ({
           return " border border-supporting-red-900/50 text-supporting-red-900 hover:bg-supporting-red-50/50 active:bg-supporting-red-50";
         case "danger-tertiary":
           return " text-supporting-red-900 hover:bg-supporting-red-50/75 active:bg-supporting-red-50";
+        case "link":
+          return " underline underline-offset-2 text-primary-800 cursor-pointer";
       }
     }
   })();
 
   if (restClass) {
     className += ` ${restClass}`;
+  }
+
+  if (href) {
+    return (
+      // @ts-expect-error It's because I have `ComponentProps<"button">` instead of `ComponentProps<"a">`. Fixing the types is a bit tricky so I'm just leaving it like this for now.
+      <a href={href} className={className} {...restWithoutClass}>
+        {isLoading && loadingContent ? loadingContent : children}
+      </a>
+    );
   }
 
   return (
