@@ -42,32 +42,35 @@ export const Button = ({
   const { className: restClass, ...restWithoutClass } = rest;
   let className = "font-semibold";
 
-  className += (() => {
-    switch (size) {
-      case "sm":
-        return " px-2 py-1";
-      case "md":
-        return " px-3 py-2";
-      case "lg":
-        return " px-4 py-3";
-      case "block":
-        return " w-full px-4 py-2";
-    }
-  })();
-  className += (() => {
-    switch (rounded) {
-      case "square":
-        return " rounded-none";
-      case "sm":
-        return " rounded-sm";
-      case "lg":
-        return " rounded-lg";
-      case "full":
-        return " rounded-full";
-      default:
-        return " rfui-rounded-default";
-    }
-  })();
+  if (variant !== "link") {
+    className += (() => {
+      switch (size) {
+        case "sm":
+          return " px-2 py-1";
+        case "md":
+          return " px-3 py-2";
+        case "lg":
+          return " px-4 py-3";
+        case "block":
+          return " w-full px-4 py-2";
+      }
+    })();
+    className += (() => {
+      switch (rounded) {
+        case "square":
+          return " rounded-none";
+        case "sm":
+          return " rounded-sm";
+        case "lg":
+          return " rounded-lg";
+        case "full":
+          return " rounded-full";
+        default:
+          return " rfui-rounded-default";
+      }
+    })();
+  }
+
   className += (() => {
     if (rest.disabled || isLoading) {
       return " cursor-not-allowed bg-neutral-50 text-neutral-300 border-none";
