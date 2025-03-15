@@ -30,8 +30,6 @@ export type {
 } from "./form/checkbox-card-group";
 export { Combobox } from "./form/combobox";
 export type { ComboboxType } from "./form/combobox";
-export { EditableText } from "./form/editable-text";
-export type { EditableTextType } from "./form/editable-text";
 export { FormField } from "./form/form-field";
 export type { FormFieldType } from "./form/form-field";
 export { Input } from "./form/input";
@@ -138,6 +136,9 @@ export { Text } from "./typography/text";
 export type { TextType } from "./typography/text";
 export { UL } from "./typography/ul";
 export type { ULType } from "./typography/ul";
+
+export { EditableText } from "./editable-text/editable-text";
+export type { EditableTextType } from "./editable-text/editable-text";
 
 export { DropdownMenu } from "./other/dropdown-menu";
 export type { DropdownMenuType } from "./other/dropdown-menu";

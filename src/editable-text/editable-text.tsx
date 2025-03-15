@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { Input, type InputType } from "../form/input";
+import { Textarea, type TextareaType } from "../form/textarea";
 import { Text, type TextType } from "../typography/text";
-import { Input, type InputType } from "./input";
-import { Textarea, type TextareaType } from "./textarea";
 
 type CommonProps = Omit<
   Pick<
