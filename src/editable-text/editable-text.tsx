@@ -29,7 +29,7 @@ export type EditableTextType = {
 /** *
  * @function EditableText
  *
- * @see {@link https://rfui-docs.onrender.com/components/form/editable-text}
+ * @see {@link https://rfui-docs.onrender.com/components/editable-text/editable-text}
  *
  * @example
  * <EditableText
