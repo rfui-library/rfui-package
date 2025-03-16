@@ -139,6 +139,8 @@ export type { ULType } from "./typography/ul";
 
 export { EditableH1 } from "./editable-text/editable-h1";
 export type { EditableH1Type } from "./editable-text/editable-h1";
+export { EditableH2 } from "./editable-text/editable-h2";
+export type { EditableH2Type } from "./editable-text/editable-h2";
 export { EditableText } from "./editable-text/editable-text";
 export type { EditableTextType } from "./editable-text/editable-text";
 
