@@ -10,6 +10,7 @@ type CommonProps = Omit<
 export type EditableH2Type = {
   text: string;
   onChange: (newText: string) => void;
+  emptyStateText?: string;
   h2Props?: Omit<H2Type, "onClick">;
   inputProps?: Omit<
     InputType,
@@ -34,6 +35,7 @@ export type EditableH2Type = {
 export const EditableH2 = ({
   text: initialText,
   onChange,
+  emptyStateText,
   h2Props,
   inputProps,
   ...rest
@@ -92,7 +94,9 @@ export const EditableH2 = ({
       {...restWithoutClassName}
       {...h2PropsWithoutClassName}
     >
-      {initialText}
+      {emptyStateText && initialText.length === 0
+        ? emptyStateText
+        : initialText}
     </H2>
   );
 };

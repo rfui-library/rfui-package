@@ -10,6 +10,7 @@ type CommonProps = Omit<
 export type EditableH1Type = {
   text: string;
   onChange: (newText: string) => void;
+  emptyStateText?: string;
   h1Props?: Omit<H1Type, "onClick">;
   inputProps?: Omit<
     InputType,
@@ -34,6 +35,7 @@ export type EditableH1Type = {
 export const EditableH1 = ({
   text: initialText,
   onChange,
+  emptyStateText,
   h1Props,
   inputProps,
   ...rest
@@ -92,7 +94,9 @@ export const EditableH1 = ({
       {...restWithoutClassName}
       {...h1PropsWithoutClassName}
     >
-      {initialText}
+      {emptyStateText && initialText.length === 0
+        ? emptyStateText
+        : initialText}
     </H1>
   );
 };
