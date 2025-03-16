@@ -48,7 +48,7 @@ export const EditableH2 = ({
 
   let h2ClassName =
     "border border-transparent hover:cursor-text hover:border-dashed hover:border-neutral-300";
-  let inputClassName = "text-lg";
+  let inputClassName = "mb-5 mt-8 text-xl";
 
   if (h2PropsClassName) {
     h2ClassName += ` ${h2PropsClassName}`;
