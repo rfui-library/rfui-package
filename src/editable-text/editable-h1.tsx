@@ -48,7 +48,7 @@ export const EditableH1 = ({
 
   let h1ClassName =
     "border border-transparent hover:cursor-text hover:border-dashed hover:border-neutral-300";
-  let inputClassName = "text-lg";
+  let inputClassName = "mb-7 mt-9 py-2 text-3xl";
 
   if (h1PropsClassName) {
     h1ClassName += ` ${h1PropsClassName}`;
