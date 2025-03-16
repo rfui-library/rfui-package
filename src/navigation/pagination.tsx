@@ -1,17 +1,10 @@
-import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import type { ComponentProps } from "react";
-import { Fragment } from "react";
-import { Link } from "./link";
+import { ComponentProps } from "react";
 
 export type PaginationType = {
-  links: BreadcrumbLink[];
-  size?: "sm" | "md" | "lg" | "xl";
+  currPage: number;
+  itemsPerPage: number;
+  totalItems: number;
 } & Omit<ComponentProps<"nav">, "size">;
-
-type BreadcrumbLink = {
-  title: string;
-  href: string;
-};
 
 /** *
  * @function Pagination
@@ -19,61 +12,36 @@ type BreadcrumbLink = {
  * @see {@link https://rfui-docs.onrender.com/components/navigation/pagination}
  *
  * @example
- * <Paagination
-     
-   />
+ * <Pagination />
  */
-export const Pagination = ({ links, size = "sm", ...rest }: PaginationType) => {
+export const Pagination = ({
+  currPage,
+  itemsPerPage,
+  totalItems,
+  ...rest
+}: PaginationType) => {
   const { className: restClass, ...restWithoutClass } = rest;
-  const chevronClassName = (() => {
-    switch (size) {
-      case "xl":
-        return " !h-5 !w-5";
-      case "lg":
-        return " !h-[18px] !w-[18px]";
-      case "lg":
-        return " !h-4 !w-4";
-      default:
-        return " !h-3.5 !w-3.5";
-    }
-  })();
-  let className = "flex items-center gap-2 text-neutral-700";
-
-  className += (() => {
-    switch (size) {
-      case "xl":
-        return " text-xl";
-      case "lg":
-        return " text-lg";
-      case "sm":
-        return " text-sm";
-      default:
-        return "";
-    }
-  })();
+  let className = "flex items-center gap-2";
 
   if (restClass) {
     className += ` ${restClass}`;
   }
 
+  const lastPage = Math.ceil(totalItems / itemsPerPage);
+
   return (
     <nav className={className} {...restWithoutClass}>
-      {links.map((link, i) => {
-        const isLastLink = i === links.length - 1;
-
-        return (
-          <Fragment key={link.title}>
-            {!isLastLink ? (
-              <Link href={link.href} underline="hover">
-                {link.title}
-              </Link>
-            ) : (
-              <span>{link.title}</span>
-            )}
-            {!isLastLink && <ChevronRightIcon className={chevronClassName} />}
-          </Fragment>
-        );
-      })}
+      {currPage !== 1 && <div>1</div>}
+      {lastPage > 7 && currPage > 4 && <div>...</div>}
+      {currPage - 2 > 1 && <div>{currPage - 2}</div>}
+      {currPage - 1 > 1 && <div>{currPage - 1}</div>}
+      {<strong>{currPage}</strong>}
+      {currPage + 1 < lastPage && <div>{currPage + 1}</div>}
+      {currPage + 2 < lastPage && <div>{currPage + 2}</div>}
+      {lastPage > 7 && currPage < lastPage - 3 && <div>...</div>}
+      {currPage !== lastPage && <div>{lastPage}</div>}
     </nav>
   );
 };
+
+// 1 2 3 4 5 6 7 8
