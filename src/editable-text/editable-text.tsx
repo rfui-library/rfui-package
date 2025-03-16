@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { Input, type InputType } from "../form/input";
+import { Textarea, type TextareaType } from "../form/textarea";
 import { Text, type TextType } from "../typography/text";
-import { Input, type InputType } from "./input";
-import { Textarea, type TextareaType } from "./textarea";
 
 type CommonProps = Omit<
   Pick<
@@ -15,6 +15,7 @@ export type EditableTextType = {
   text: string;
   onChange: (newText: string) => void;
   type?: "input" | "textarea";
+  emptyStateText?: string;
   textProps?: Omit<TextType, "onClick">;
   inputProps?: Omit<
     InputType,
@@ -29,7 +30,7 @@ export type EditableTextType = {
 /** *
  * @function EditableText
  *
- * @see {@link https://rfui-docs.onrender.com/components/form/editable-text}
+ * @see {@link https://rfui-docs.onrender.com/components/editable-text/editable-text}
  *
  * @example
  * <EditableText
@@ -42,8 +43,9 @@ export type EditableTextType = {
 
 export const EditableText = ({
   text: initialText,
-  type = "input",
   onChange,
+  type = "input",
+  emptyStateText,
   textProps,
   inputProps,
   textareaProps,
@@ -133,7 +135,9 @@ export const EditableText = ({
       {...restWithoutClassName}
       {...textPropsWithoutClassName}
     >
-      {initialText}
+      {emptyStateText && initialText.length === 0
+        ? emptyStateText
+        : initialText}
     </Text>
   );
 };
