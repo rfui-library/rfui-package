@@ -1,3 +1,4 @@
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { ComponentProps } from "react";
 
 export type PaginationType = {
@@ -31,7 +32,11 @@ export const Pagination = ({
 
   return (
     <nav className={className} {...restWithoutClass}>
-      <div>Previous</div>
+      {currPage > 1 && (
+        <div>
+          <ChevronLeftIcon className="size-4" />
+        </div>
+      )}
       {currPage !== 1 && <div>1</div>}
       {lastPage > 7 && currPage > 4 && <div>...</div>}
       {currPage - 2 > 1 && <div>{currPage - 2}</div>}
@@ -41,7 +46,11 @@ export const Pagination = ({
       {currPage + 2 < lastPage && <div>{currPage + 2}</div>}
       {lastPage > 7 && currPage < lastPage - 3 && <div>...</div>}
       {currPage !== lastPage && <div>{lastPage}</div>}
-      <div>Next</div>
+      {currPage < lastPage && (
+        <div>
+          <ChevronRightIcon className="size-4" />
+        </div>
+      )}
     </nav>
   );
 };
