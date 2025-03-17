@@ -21,8 +21,8 @@ export type SelectType = {
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
   defaultValue?: Option;
-  value?: Option;
-  onChange?: (newValue: Option) => void;
+  value?: Option | Option[];
+  onChange?: (newValue: Option | Option[]) => void;
   multiple?: boolean;
   buttonClassName?: string;
   optionsClassName?: string;
@@ -149,6 +149,7 @@ export const Select = ({
       disabled={disabled}
       invalid={invalid}
       multiple={multiple}
+      by="value"
     >
       <ListboxButton className={buttonClassName}>
         {({ value }) => {
