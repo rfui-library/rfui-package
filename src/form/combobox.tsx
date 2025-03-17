@@ -172,6 +172,8 @@ export const Combobox = ({
       }}
       disabled={disabled}
       multiple={multiple}
+      // @ts-expect-error
+      by="value"
     >
       {({ value }) => (
         <>
