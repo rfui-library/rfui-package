@@ -20,7 +20,7 @@ export type SelectType = {
   size?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
-  defaultValue?: Option;
+  defaultValue?: Option | Option[];
   value?: Option | Option[];
   onChange?: (newValue: Option | Option[]) => void;
   multiple?: boolean;
@@ -135,9 +135,7 @@ export const Select = ({
       name={name}
       defaultValue={
         defaultValue !== undefined
-          ? multiple
-            ? [defaultValue]
-            : defaultValue
+          ? defaultValue
           : !onChange
             ? multiple
               ? [options[0]]
