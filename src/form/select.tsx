@@ -5,6 +5,7 @@ import {
   ListboxOptions,
 } from "@headlessui/react";
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
+import { Checkbox } from "./checkbox";
 
 type Option = {
   label: string;
@@ -22,6 +23,7 @@ export type SelectType = {
   defaultValue?: Option;
   value?: Option;
   onChange?: (newValue: Option) => void;
+  multiple?: boolean;
   buttonClassName?: string;
   optionsClassName?: string;
   optionClassName?: string;
@@ -45,6 +47,7 @@ export const Select = ({
   defaultValue,
   value,
   onChange,
+  multiple,
   buttonClassName: _buttonClassName,
   optionsClassName: _optionsClassName,
   optionClassName: _optionClassName,
@@ -58,10 +61,9 @@ export const Select = ({
   let optionsClassName =
     "min-w-52 mt-1 w-[var(--button-width)] max-w-full border border-neutral-500 bg-[#fff]";
   let optionClassName =
-    "group mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50 data-[disabled]:opacity-50";
-  let chevronIconClassName = "group pointer-events-none";
-  let checkIconClassName =
-    "invisible fill-neutral-700 group-data-[selected]:visible";
+    "mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50 data-[disabled]:opacity-50";
+  let chevronIconClassName = "pointer-events-none";
+  let checkIconClassName = "fill-neutral-700";
 
   if (size === "sm") {
     buttonClassName += " px-2 text-sm";
@@ -133,15 +135,20 @@ export const Select = ({
       name={name}
       defaultValue={
         defaultValue !== undefined
-          ? defaultValue
+          ? multiple
+            ? [defaultValue]
+            : defaultValue
           : !onChange
-            ? options[0]
+            ? multiple
+              ? [options[0]]
+              : options[0]
             : undefined
       }
       value={value}
       onChange={onChange}
       disabled={disabled}
       invalid={invalid}
+      multiple={multiple}
     >
       <ListboxButton className={buttonClassName}>
         {({ value }) => (
@@ -162,8 +169,18 @@ export const Select = ({
             className={optionClassName}
             disabled={!!option.disabled}
           >
-            <CheckIcon className={checkIconClassName} />
-            <span>{option.label}</span>
+            {({ selected }) => (
+              <>
+                {multiple ? (
+                  <Checkbox checked={selected} />
+                ) : (
+                  <CheckIcon
+                    className={`${checkIconClassName} ${selected ? "visible" : "invisible"}`}
+                  />
+                )}
+                <span>{option.label}</span>
+              </>
+            )}
           </ListboxOption>
         ))}
       </ListboxOptions>
