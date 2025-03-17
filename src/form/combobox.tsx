@@ -176,7 +176,8 @@ export const Combobox = ({
       by="value"
     >
       {({ value }) => (
-        <>
+        // A `<div>` is needed instead of `<>` to prevent console errors. See https://github.com/tailwindlabs/headlessui/issues/3351.
+        <div>
           {Array.isArray(value) && (
             <Flex className="mb-2 flex-wrap gap-2">
               {value.map((option) => (
@@ -223,7 +224,7 @@ export const Combobox = ({
               </ComboboxOption>
             ))}
           </ComboboxOptions>
-        </>
+        </div>
       )}
     </HeadlessUICombobox>
   );
