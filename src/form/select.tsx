@@ -172,7 +172,10 @@ export const Select = ({
             {({ selected }) => (
               <>
                 {multiple ? (
-                  <Checkbox checked={selected} size="sm" />
+                  <Checkbox
+                    checked={selected}
+                    size={size === "sm" ? "xs" : "sm"}
+                  />
                 ) : (
                   <CheckIcon
                     className={`${checkIconClassName} ${selected ? "visible" : "invisible"}`}
