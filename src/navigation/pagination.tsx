@@ -7,6 +7,7 @@ export type PaginationType = {
   totalItems: number;
   buildHref?: (page: number) => string;
   onChange?: (newPage: number) => void;
+  size?: "sm" | "md" | "lg";
 } & Omit<ComponentProps<"nav">, "size">;
 
 /** *
@@ -28,10 +29,27 @@ export const Pagination = ({
   totalItems,
   buildHref,
   onChange,
+  size = "md",
   ...rest
 }: PaginationType) => {
   const { className: restClass, ...restWithoutClass } = rest;
-  let className = "flex items-center gap-2";
+  let className = "flex items-center";
+  let chevronClassName;
+
+  switch (size) {
+    case "sm":
+      className += " text-sm gap-1";
+      chevronClassName = "size-3";
+      break;
+    case "md":
+      className += " gap-2";
+      chevronClassName = "size-4";
+      break;
+    case "lg":
+      className += " text-lg gap-3";
+      chevronClassName = "size-4.5";
+      break;
+  }
 
   if (restClass) {
     className += ` ${restClass}`;
@@ -51,7 +69,7 @@ export const Pagination = ({
           buildHref={buildHref}
           onChange={onChange}
         >
-          <ChevronLeftIcon className="size-4" />
+          <ChevronLeftIcon className={chevronClassName} />
         </PaginationItem>
       )}
       {currPage !== 1 && (
@@ -113,7 +131,7 @@ export const Pagination = ({
           buildHref={buildHref}
           onChange={onChange}
         >
-          <ChevronRightIcon className="size-4" />
+          <ChevronRightIcon className={chevronClassName} />
         </PaginationItem>
       )}
     </nav>
