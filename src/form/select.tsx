@@ -151,15 +151,23 @@ export const Select = ({
       multiple={multiple}
     >
       <ListboxButton className={buttonClassName}>
-        {({ value }) => (
-          <>
-            <span>{value?.label}</span>
-            <ChevronDownIcon
-              className={chevronIconClassName}
-              aria-hidden="true"
-            />
-          </>
-        )}
+        {({ value }) => {
+          const display = multiple
+            ? value.map((o: Option) => o?.label).join(", ").length > 50
+              ? `${value.length} item(s) selected`
+              : value.map((o: Option) => o?.label).join(", ")
+            : value?.label;
+
+          return (
+            <>
+              <span>{display}</span>
+              <ChevronDownIcon
+                className={chevronIconClassName}
+                aria-hidden="true"
+              />
+            </>
+          );
+        }}
       </ListboxButton>
       <ListboxOptions anchor="bottom" className={optionsClassName}>
         {options.map((option) => (
