@@ -7,7 +7,8 @@ import {
 } from "@headlessui/react";
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
-import { getUniqueArray } from "../utilities/get-unique-array";
+import { Badge } from "../data-display/badge";
+import { Flex } from "../layout/flex";
 import { Checkbox } from "./checkbox";
 
 type Option = {
@@ -175,24 +176,17 @@ export const Combobox = ({
       {({ value }) => (
         <>
           {Array.isArray(value) && (
-            <ul>
-              {getUniqueArray(value).map((option) => (
-                <li key={option.value?.toString()}>{option.label}</li>
+            <Flex className="mb-2 flex-wrap gap-2">
+              {value.map((option) => (
+                <Badge key={option.value?.toString()}>{option.label}</Badge>
               ))}
-            </ul>
+            </Flex>
           )}
           <div className="relative">
             <ComboboxInput
               displayValue={(option: Option | Option[]) =>
                 Array.isArray(option) ? "" : option?.label || ""
               }
-              // displayValue={(value: Option | Option[]) =>
-              //   Array.isArray(value)
-              //     ? value.map((o: Option) => o?.label).join(", ").length > 50
-              //       ? `${value.length} item(s) selected`
-              //       : value.map((o: Option) => o?.label).join(", ")
-              //     : value?.label
-              // }
               onChange={(event) => setQuery(event.target.value)}
               className={inputClassName}
             />
