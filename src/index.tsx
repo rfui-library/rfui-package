@@ -96,6 +96,8 @@ export type {
   LinkItemType,
   NavigationLinksType,
 } from "./navigation/navigation-links";
+export { Pagination } from "./navigation/pagination";
+export type { PaginationType } from "./navigation/pagination";
 export { Tabs, TabSection } from "./navigation/tabs";
 export type { TabsType } from "./navigation/tabs";
 export {
