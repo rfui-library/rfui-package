@@ -173,6 +173,7 @@ export const Select = ({
               <>
                 {multiple ? (
                   <Checkbox
+                    readOnly
                     checked={selected}
                     size={size === "sm" ? "xs" : "sm"}
                   />
