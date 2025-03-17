@@ -5,6 +5,7 @@ import {
   ListboxOptions,
 } from "@headlessui/react";
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
+import { Checkbox } from "./checkbox";
 
 type Option = {
   label: string;
@@ -19,9 +20,10 @@ export type SelectType = {
   size?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
-  defaultValue?: Option;
-  value?: Option;
-  onChange?: (newValue: Option) => void;
+  defaultValue?: Option | Option[];
+  value?: Option | Option[];
+  onChange?: (newValue: Option | Option[]) => void;
+  multiple?: boolean;
   buttonClassName?: string;
   optionsClassName?: string;
   optionClassName?: string;
@@ -45,6 +47,7 @@ export const Select = ({
   defaultValue,
   value,
   onChange,
+  multiple,
   buttonClassName: _buttonClassName,
   optionsClassName: _optionsClassName,
   optionClassName: _optionClassName,
@@ -58,10 +61,9 @@ export const Select = ({
   let optionsClassName =
     "min-w-52 mt-1 w-[var(--button-width)] max-w-full border border-neutral-500 bg-[#fff]";
   let optionClassName =
-    "group mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50 data-[disabled]:opacity-50";
-  let chevronIconClassName = "group pointer-events-none";
-  let checkIconClassName =
-    "invisible fill-neutral-700 group-data-[selected]:visible";
+    "mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50 data-[disabled]:opacity-50";
+  let chevronIconClassName = "pointer-events-none";
+  let checkIconClassName = "fill-neutral-700";
 
   if (size === "sm") {
     buttonClassName += " px-2 text-sm";
@@ -135,24 +137,36 @@ export const Select = ({
         defaultValue !== undefined
           ? defaultValue
           : !onChange
-            ? options[0]
+            ? multiple
+              ? [options[0]]
+              : options[0]
             : undefined
       }
       value={value}
       onChange={onChange}
       disabled={disabled}
       invalid={invalid}
+      multiple={multiple}
+      by="value"
     >
       <ListboxButton className={buttonClassName}>
-        {({ value }) => (
-          <>
-            <span>{value?.label}</span>
-            <ChevronDownIcon
-              className={chevronIconClassName}
-              aria-hidden="true"
-            />
-          </>
-        )}
+        {({ value }) => {
+          const display = multiple
+            ? value.map((o: Option) => o?.label).join(", ").length > 50
+              ? `${value.length} item(s) selected`
+              : value.map((o: Option) => o?.label).join(", ")
+            : value?.label;
+
+          return (
+            <>
+              <span>{display}</span>
+              <ChevronDownIcon
+                className={chevronIconClassName}
+                aria-hidden="true"
+              />
+            </>
+          );
+        }}
       </ListboxButton>
       <ListboxOptions anchor="bottom" className={optionsClassName}>
         {options.map((option) => (
@@ -162,8 +176,22 @@ export const Select = ({
             className={optionClassName}
             disabled={!!option.disabled}
           >
-            <CheckIcon className={checkIconClassName} />
-            <span>{option.label}</span>
+            {({ selected }) => (
+              <>
+                {multiple ? (
+                  <Checkbox
+                    readOnly
+                    checked={selected}
+                    size={size === "sm" ? "xs" : "sm"}
+                  />
+                ) : (
+                  <CheckIcon
+                    className={`${checkIconClassName} ${selected ? "visible" : "invisible"}`}
+                  />
+                )}
+                <span>{option.label}</span>
+              </>
+            )}
           </ListboxOption>
         ))}
       </ListboxOptions>

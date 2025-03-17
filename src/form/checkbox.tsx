@@ -1,7 +1,7 @@
 import type { ComponentProps } from "react";
 
 export type CheckboxType = {
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg";
   invalid?: boolean;
 } & Omit<ComponentProps<"input">, "size">;
 
@@ -29,6 +29,8 @@ export const Checkbox = ({
 
   className += (() => {
     switch (size) {
+      case "xs":
+        return " w-4 h-4";
       case "sm":
         return " w-5 h-5";
       case "md":
