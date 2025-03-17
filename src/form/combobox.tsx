@@ -7,6 +7,7 @@ import {
 } from "@headlessui/react";
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
+import { getUniqueArray } from "../utilities/get-unique-array";
 import { Checkbox } from "./checkbox";
 
 type Option = {
@@ -171,49 +172,63 @@ export const Combobox = ({
       disabled={disabled}
       multiple={multiple}
     >
-      <div className="relative">
-        <ComboboxInput
-          displayValue={(value: Option | Option[]) =>
-            Array.isArray(value)
-              ? value.map((o: Option) => o?.label).join(", ").length > 50
-                ? `${value.length} item(s) selected`
-                : value.map((o: Option) => o?.label).join(", ")
-              : value?.label
-          }
-          onChange={(event) => setQuery(event.target.value)}
-          className={inputClassName}
-        />
-        <ComboboxButton className="absolute inset-y-0 right-0 px-2.5">
-          <ChevronDownIcon className={chevronIconClassName} />
-        </ComboboxButton>
-      </div>
-      <ComboboxOptions anchor="bottom" className={optionsClassName}>
-        {filteredOptions.map((option) => (
-          <ComboboxOption
-            key={option.label}
-            value={option}
-            className={optionClassName}
-            disabled={!!option.disabled}
-          >
-            {({ selected }) => (
-              <>
-                {multiple ? (
-                  <Checkbox
-                    readOnly
-                    checked={selected}
-                    size={size === "sm" ? "xs" : "sm"}
-                  />
-                ) : (
-                  <CheckIcon
-                    className={`${checkIconClassName} ${selected ? "visible" : "invisible"}`}
-                  />
+      {({ value }) => (
+        <>
+          {Array.isArray(value) && (
+            <ul>
+              {getUniqueArray(value).map((option) => (
+                <li key={option.value?.toString()}>{option.label}</li>
+              ))}
+            </ul>
+          )}
+          <div className="relative">
+            <ComboboxInput
+              displayValue={(option: Option | Option[]) =>
+                Array.isArray(option) ? "" : option?.label || ""
+              }
+              // displayValue={(value: Option | Option[]) =>
+              //   Array.isArray(value)
+              //     ? value.map((o: Option) => o?.label).join(", ").length > 50
+              //       ? `${value.length} item(s) selected`
+              //       : value.map((o: Option) => o?.label).join(", ")
+              //     : value?.label
+              // }
+              onChange={(event) => setQuery(event.target.value)}
+              className={inputClassName}
+            />
+            <ComboboxButton className="absolute inset-y-0 right-0 px-2.5">
+              <ChevronDownIcon className={chevronIconClassName} />
+            </ComboboxButton>
+          </div>
+          <ComboboxOptions anchor="bottom" className={optionsClassName}>
+            {filteredOptions.map((option) => (
+              <ComboboxOption
+                key={option.label}
+                value={option}
+                className={optionClassName}
+                disabled={!!option.disabled}
+              >
+                {({ selected }) => (
+                  <>
+                    {multiple ? (
+                      <Checkbox
+                        readOnly
+                        checked={selected}
+                        size={size === "sm" ? "xs" : "sm"}
+                      />
+                    ) : (
+                      <CheckIcon
+                        className={`${checkIconClassName} ${selected ? "visible" : "invisible"}`}
+                      />
+                    )}
+                    <span>{option.label}</span>
+                  </>
                 )}
-                <span>{option.label}</span>
-              </>
-            )}
-          </ComboboxOption>
-        ))}
-      </ComboboxOptions>
+              </ComboboxOption>
+            ))}
+          </ComboboxOptions>
+        </>
+      )}
     </HeadlessUICombobox>
   );
 };
