@@ -1,5 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import { ComponentProps } from "react";
+import { ComponentProps, ReactNode } from "react";
 
 export type PaginationType = {
   currPage: number;
@@ -33,24 +33,44 @@ export const Pagination = ({
   return (
     <nav className={className} {...restWithoutClass}>
       {currPage > 1 && (
-        <div>
+        <PaginationItem>
           <ChevronLeftIcon className="size-4" />
-        </div>
+        </PaginationItem>
       )}
-      {currPage !== 1 && <div>1</div>}
-      {lastPage > 7 && currPage > 4 && <div>...</div>}
-      {currPage - 2 > 1 && <div>{currPage - 2}</div>}
-      {currPage - 1 > 1 && <div>{currPage - 1}</div>}
-      {<strong>{currPage}</strong>}
-      {currPage + 1 < lastPage && <div>{currPage + 1}</div>}
-      {currPage + 2 < lastPage && <div>{currPage + 2}</div>}
-      {lastPage > 7 && currPage < lastPage - 3 && <div>...</div>}
-      {currPage !== lastPage && <div>{lastPage}</div>}
+      {currPage !== 1 && <PaginationItem>1</PaginationItem>}
+      {lastPage > 7 && currPage > 4 && <Elipsis />}
+      {currPage - 2 > 1 && <PaginationItem>{currPage - 2}</PaginationItem>}
+      {currPage - 1 > 1 && <PaginationItem>{currPage - 1}</PaginationItem>}
+      {<ActivePaginationItem>{currPage}</ActivePaginationItem>}
+      {currPage + 1 < lastPage && (
+        <PaginationItem>{currPage + 1}</PaginationItem>
+      )}
+      {currPage + 2 < lastPage && (
+        <PaginationItem>{currPage + 2}</PaginationItem>
+      )}
+      {lastPage > 7 && currPage < lastPage - 3 && <Elipsis />}
+      {currPage !== lastPage && <PaginationItem>{lastPage}</PaginationItem>}
       {currPage < lastPage && (
-        <div>
+        <PaginationItem>
           <ChevronRightIcon className="size-4" />
-        </div>
+        </PaginationItem>
       )}
     </nav>
   );
+};
+
+const PaginationItem = ({ children }: { children: ReactNode }) => {
+  return (
+    <div className="rfui-rounded-default flex h-[2.5rem] cursor-pointer items-center px-3 py-2 hover:bg-neutral-50">
+      {children}
+    </div>
+  );
+};
+
+const ActivePaginationItem = ({ children }: { children: ReactNode }) => {
+  return <div className="px-3 py-2 font-bold">{children}</div>;
+};
+
+const Elipsis = () => {
+  return <div className="px-3 py-2">…</div>;
 };
