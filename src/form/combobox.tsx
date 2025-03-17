@@ -7,6 +7,7 @@ import {
 } from "@headlessui/react";
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
+import { Checkbox } from "./checkbox";
 
 type Option = {
   label: string;
@@ -21,9 +22,10 @@ export type ComboboxType = {
   size?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
-  defaultValue?: Option;
-  value?: Option;
-  onChange?: (newValue: Option) => void;
+  defaultValue?: Option | Option[];
+  value?: Option | Option[];
+  onChange?: (newValue: Option | Option[]) => void;
+  multiple?: boolean;
   inputClassName?: string;
   optionsClassName?: string;
   optionClassName?: string;
@@ -62,6 +64,7 @@ export const Combobox = ({
   defaultValue,
   value,
   onChange,
+  multiple,
   inputClassName: _inputClassName,
   optionsClassName: _optionsClassName,
   optionClassName: _optionClassName,
@@ -79,10 +82,9 @@ export const Combobox = ({
   let optionsClassName =
     "min-w-52 mt-1 w-[var(--input-width)] max-w-full border border-neutral-500 bg-[#fff] empty:invisible";
   let optionClassName =
-    "group mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50 data-[disabled]:opacity-50";
-  let chevronIconClassName = "group pointer-events-none";
-  let checkIconClassName =
-    "invisible fill-neutral-700 group-data-[selected]:visible";
+    "mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50 data-[disabled]:opacity-50";
+  let chevronIconClassName = "pointer-events-none";
+  let checkIconClassName = "invisible fill-neutral-700";
 
   if (size === "sm") {
     inputClassName += " px-2 text-sm";
@@ -156,7 +158,9 @@ export const Combobox = ({
         defaultValue !== undefined
           ? defaultValue
           : !onChange
-            ? options[0]
+            ? multiple
+              ? [options[0]]
+              : options[0]
             : undefined
       }
       value={value}
@@ -165,14 +169,21 @@ export const Combobox = ({
         setQuery("");
       }}
       disabled={disabled}
+      multiple={multiple}
     >
       <div className="relative">
         <ComboboxInput
-          displayValue={(option: Option) => (option ? option.label : "")}
+          displayValue={(value: Option | Option[]) =>
+            Array.isArray(value)
+              ? value.map((o: Option) => o?.label).join(", ").length > 50
+                ? `${value.length} item(s) selected`
+                : value.map((o: Option) => o?.label).join(", ")
+              : value?.label
+          }
           onChange={(event) => setQuery(event.target.value)}
           className={inputClassName}
         />
-        <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">
+        <ComboboxButton className="absolute inset-y-0 right-0 px-2.5">
           <ChevronDownIcon className={chevronIconClassName} />
         </ComboboxButton>
       </div>
@@ -184,8 +195,22 @@ export const Combobox = ({
             className={optionClassName}
             disabled={!!option.disabled}
           >
-            <CheckIcon className={checkIconClassName} />
-            <span>{option.label}</span>
+            {({ selected }) => (
+              <>
+                {multiple ? (
+                  <Checkbox
+                    readOnly
+                    checked={selected}
+                    size={size === "sm" ? "xs" : "sm"}
+                  />
+                ) : (
+                  <CheckIcon
+                    className={`${checkIconClassName} ${selected ? "visible" : "invisible"}`}
+                  />
+                )}
+                <span>{option.label}</span>
+              </>
+            )}
           </ComboboxOption>
         ))}
       </ComboboxOptions>
