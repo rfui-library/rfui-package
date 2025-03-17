@@ -30,6 +30,10 @@ export const Pagination = ({
 
   const lastPage = Math.ceil(totalItems / itemsPerPage);
 
+  if (!isValid(currPage, itemsPerPage, totalItems, lastPage)) {
+    return null;
+  }
+
   return (
     <nav className={className} {...restWithoutClass}>
       {currPage > 1 && (
@@ -74,3 +78,20 @@ const ActivePaginationItem = ({ children }: { children: ReactNode }) => {
 const Elipsis = () => {
   return <div className="px-3 py-2">…</div>;
 };
+
+const isValid = (
+  currPage: number,
+  itemsPerPage: number,
+  totalItems: number,
+  lastPage: number,
+) =>
+  Number.isInteger(currPage) &&
+  Number.isInteger(itemsPerPage) &&
+  Number.isInteger(totalItems) &&
+  Number.isInteger(lastPage) &&
+  currPage >= 1 &&
+  currPage <= lastPage &&
+  itemsPerPage >= 1 &&
+  totalItems >= 1 &&
+  lastPage >= 1 &&
+  currPage <= lastPage;
