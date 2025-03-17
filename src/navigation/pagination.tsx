@@ -15,7 +15,12 @@ export type PaginationType = {
  * @see {@link https://rfui-docs.onrender.com/components/navigation/pagination}
  *
  * @example
- * <Pagination />
+ * <Pagination
+    currPage={5}
+    itemsPerPage={10}
+    totalItems={100}
+    buildHref={(page) => `/items?page=${page}`}
+  />
  */
 export const Pagination = ({
   currPage,
