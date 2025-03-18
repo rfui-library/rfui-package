@@ -84,7 +84,6 @@ export type { LinkType } from "./navigation/link";
 export {
   Navbar,
   NavbarDropdown,
-  NavbarDropdownItem,
   NavbarItem,
   NavbarLeft,
   NavbarMegamenu,
