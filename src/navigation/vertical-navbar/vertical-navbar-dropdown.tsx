@@ -7,10 +7,10 @@ import { Link } from "../link";
 
 type DropdownItemType = {
   label: string;
-  icon?: ReactNode;
   href?: string;
   shouldOpenInNewTab?: boolean;
   onClick?: () => void;
+  icon?: ReactNode;
 };
 
 type VerticalNavbarDropdownType = {
@@ -51,25 +51,21 @@ export const VerticalNavbarDropdown = ({
                   href={item.href}
                   underline="none"
                   _newTab={item.shouldOpenInNewTab}
+                  className="flex items-start gap-2"
                 >
-                  <Flex className="items-start gap-2">
-                    {item.icon && (
-                      <span className="opacity-50">{item.icon}</span>
-                    )}
-                    <span>{item.label}</span>
-                  </Flex>
+                  {item.icon && <span className="opacity-50">{item.icon}</span>}
+                  <span>{item.label}</span>
                 </Link>
               </MenuItem>
             ) : item.onClick ? (
               <MenuItem className={menuItemClassName} key={item.label}>
-                <div onClick={item.onClick}>
-                  <Flex className="items-start gap-2">
-                    {item.icon && (
-                      <span className="opacity-50">{item.icon}</span>
-                    )}
-                    <span>{item.label}</span>
-                  </Flex>
-                </div>
+                <Flex
+                  className="cursor-default items-start gap-2"
+                  onClick={item.onClick}
+                >
+                  {item.icon && <span className="opacity-50">{item.icon}</span>}
+                  <span>{item.label}</span>
+                </Flex>
               </MenuItem>
             ) : null,
           )}
