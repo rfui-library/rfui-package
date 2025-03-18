@@ -23,7 +23,7 @@ export const VerticalNavbarItem = ({
   children,
 }: VerticalNavbarItemType) => {
   let containerClass =
-    "my-3 block flex items-center rounded-sm px-3 py-3 max-sm:text-lg sm:my-2 sm:py-2";
+    "my-3 flex items-center rounded-sm px-3 py-3 max-sm:text-lg sm:my-2 sm:py-2";
 
   containerClass += ` ${isActive ? "font-bold" : "hover:bg-neutral-100"}`;
 
@@ -31,7 +31,7 @@ export const VerticalNavbarItem = ({
   const { className: formPropsClassName, ...formPropsWithoutClassName } =
     formProps ?? {};
   const sharedFormClass =
-    "my-3 block flex items-center rounded-sm hover:bg-neutral-100 max-sm:text-lg sm:my-2";
+    "my-3 flex items-center rounded-sm hover:bg-neutral-100 max-sm:text-lg sm:my-2";
   const formClassName = formPropsClassName
     ? `${sharedFormClass} ${formPropsClassName}`
     : sharedFormClass;
