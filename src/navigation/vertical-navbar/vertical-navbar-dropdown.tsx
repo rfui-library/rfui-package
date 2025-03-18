@@ -52,22 +52,22 @@ export const VerticalNavbarDropdown = ({
                   underline="none"
                   _newTab={item.shouldOpenInNewTab}
                 >
-                  <Flex className="relative bottom-px items-center gap-2">
+                  <Flex className="items-start gap-2">
                     {item.icon && (
                       <span className="opacity-50">{item.icon}</span>
                     )}
-                    {item.label}
+                    <span>{item.label}</span>
                   </Flex>
                 </Link>
               </MenuItem>
             ) : item.onClick ? (
               <MenuItem className={menuItemClassName} key={item.label}>
                 <div onClick={item.onClick}>
-                  <Flex className="relative bottom-px items-center gap-2">
+                  <Flex className="items-start gap-2">
                     {item.icon && (
                       <span className="opacity-50">{item.icon}</span>
                     )}
-                    {item.label}
+                    <span>{item.label}</span>
                   </Flex>
                 </div>
               </MenuItem>
