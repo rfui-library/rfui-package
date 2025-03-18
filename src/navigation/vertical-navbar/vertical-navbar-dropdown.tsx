@@ -2,6 +2,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ComponentProps, ReactNode } from "react";
 import { ChevronDownIcon } from "../../icons/chevron-down";
 import { ChevronUpIcon } from "../../icons/chevron-up";
+import { Flex } from "../../layout/flex";
 import { Link } from "../link";
 
 type DropdownItemType = {
@@ -26,6 +27,7 @@ export const VerticalNavbarDropdown = ({
 }: VerticalNavbarDropdownType) => {
   const menuItemClassName =
     "mx-1 my-1 block rounded-sm px-3 hover:bg-neutral-50 max-sm:py-3 sm:py-2";
+
   return (
     <Menu>
       <MenuButton className="my-3 flex w-full items-center justify-between rounded-sm px-3 py-3 hover:bg-neutral-100 max-sm:text-lg sm:my-2 sm:py-2">
@@ -54,23 +56,35 @@ export const VerticalNavbarDropdown = ({
                   _newTab={item.shouldOpenInNewTab}
                   _includeNewTabIcon={item.shouldIncludeNewTabIcon}
                 >
-                  {item.icon && <span>{item.icon}</span>}
-                  {item.label}
+                  <Flex className="items-center gap-2">
+                    {item.icon && (
+                      <span className="opacity-50">{item.icon}</span>
+                    )}
+                    {item.label}
+                  </Flex>
                 </Link>
               </MenuItem>
             ) : item.onClick ? (
               <MenuItem className={menuItemClassName} key={item.label}>
                 <div onClick={item.onClick}>
-                  {item.icon && <span>{item.icon}</span>}
-                  {item.label}
+                  <Flex className="items-center gap-2">
+                    {item.icon && (
+                      <span className="opacity-50">{item.icon}</span>
+                    )}
+                    {item.label}
+                  </Flex>
                 </div>
               </MenuItem>
             ) : item.formProps ? (
               <MenuItem className={menuItemClassName} key={item.label}>
                 <form {...item.formProps}>
                   <button type="submit" className="w-full text-left">
-                    {item.icon && <span>{item.icon}</span>}
-                    {item.label}
+                    <Flex className="items-center gap-2">
+                      {item.icon && (
+                        <span className="opacity-50">{item.icon}</span>
+                      )}
+                      {item.label}
+                    </Flex>
                   </button>
                 </form>
               </MenuItem>
