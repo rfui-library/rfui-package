@@ -69,7 +69,7 @@ const HamburgerMenuToggle = ({
 }) => {
   return (
     <Flex
-      className="cursor-default items-center gap-2 px-2 py-3 text-neutral-700 hover:bg-neutral-100"
+      className="cursor-default items-center gap-2 rounded-sm px-2 py-3 text-neutral-700 hover:bg-neutral-100"
       onClick={toggleHamburgerMenu}
     >
       {isOpen ? (
