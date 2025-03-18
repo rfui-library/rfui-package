@@ -6,7 +6,6 @@ import { Flex } from "../../layout/flex";
 
 export { VerticalNavbarBottom } from "./vertical-navbar-bottom";
 export { VerticalNavbarDropdown } from "./vertical-navbar-dropdown";
-export { VerticalNavbarDropdownItem } from "./vertical-navbar-dropdown-item";
 export { VerticalNavbarItem } from "./vertical-navbar-item";
 export { VerticalNavbarSection } from "./vertical-navbar-section";
 export { VerticalNavbarTop } from "./vertical-navbar-top";

@@ -104,7 +104,6 @@ export {
   VerticalNavbar,
   VerticalNavbarBottom,
   VerticalNavbarDropdown,
-  VerticalNavbarDropdownItem,
   VerticalNavbarItem,
   VerticalNavbarSection,
   VerticalNavbarTop,
