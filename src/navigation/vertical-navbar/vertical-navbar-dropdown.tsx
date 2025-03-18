@@ -28,7 +28,7 @@ export const VerticalNavbarDropdown = ({
   };
   const { className: restClass, ...restWithoutClass } = rest;
   let containerClass =
-    "relative inline-block cursor-pointer border-b border-b-neutral-200 text-neutral-700 max-sm:hover:bg-neutral-100/50 sm:border-b-neutral-50";
+    "my-3 block flex cursor-default items-center rounded-sm px-3 py-3 hover:bg-neutral-100 max-sm:text-lg sm:my-2 sm:py-2";
 
   if (restClass) {
     containerClass += ` ${restClass}`;
@@ -46,14 +46,17 @@ export const VerticalNavbarDropdown = ({
     <>
       <li className={containerClass} ref={menuRef} {...restWithoutClass}>
         {/* Desktop */}
-        <div className="hidden py-6 sm:block" onClick={toggleMenu}>
-          <span className="mr-1">{title}</span>{" "}
+        <Flex
+          className="hidden w-full items-center justify-between sm:flex"
+          onClick={toggleMenu}
+        >
+          <span>{title}</span>
           {isMenuOpen ? (
-            <ChevronUpIcon className="relative bottom-[2px]" strokeWidth={2} />
+            <ChevronUpIcon strokeWidth={2} />
           ) : (
             <ChevronDownIcon strokeWidth={2} />
           )}
-        </div>
+        </Flex>
         {isMenuOpen && (
           <ul className="absolute left-0 top-[89px] z-10 hidden w-72 rounded-sm border border-neutral-100 bg-[#fff] py-2 sm:block">
             {children}
