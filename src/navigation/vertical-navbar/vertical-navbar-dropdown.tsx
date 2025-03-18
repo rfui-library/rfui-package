@@ -1,5 +1,5 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
-import { ComponentProps, ReactNode } from "react";
+import { ReactNode } from "react";
 import { ChevronDownIcon } from "../../icons/chevron-down";
 import { ChevronUpIcon } from "../../icons/chevron-up";
 import { Flex } from "../../layout/flex";
@@ -7,13 +7,10 @@ import { Link } from "../link";
 
 type DropdownItemType = {
   label: string;
-  href?: string;
-  onClick?: () => void;
-  formProps?: ComponentProps<"form">;
-  isActive?: boolean;
-  shouldOpenInNewTab?: boolean;
-  shouldIncludeNewTabIcon?: boolean;
   icon?: ReactNode;
+  href?: string;
+  shouldOpenInNewTab?: boolean;
+  onClick?: () => void;
 };
 
 type VerticalNavbarDropdownType = {
@@ -54,9 +51,8 @@ export const VerticalNavbarDropdown = ({
                   href={item.href}
                   underline="none"
                   _newTab={item.shouldOpenInNewTab}
-                  _includeNewTabIcon={item.shouldIncludeNewTabIcon}
                 >
-                  <Flex className="items-center gap-2">
+                  <Flex className="relative bottom-px items-center gap-2">
                     {item.icon && (
                       <span className="opacity-50">{item.icon}</span>
                     )}
@@ -67,26 +63,13 @@ export const VerticalNavbarDropdown = ({
             ) : item.onClick ? (
               <MenuItem className={menuItemClassName} key={item.label}>
                 <div onClick={item.onClick}>
-                  <Flex className="items-center gap-2">
+                  <Flex className="relative bottom-px items-center gap-2">
                     {item.icon && (
                       <span className="opacity-50">{item.icon}</span>
                     )}
                     {item.label}
                   </Flex>
                 </div>
-              </MenuItem>
-            ) : item.formProps ? (
-              <MenuItem className={menuItemClassName} key={item.label}>
-                <form {...item.formProps}>
-                  <button type="submit" className="w-full text-left">
-                    <Flex className="items-center gap-2">
-                      {item.icon && (
-                        <span className="opacity-50">{item.icon}</span>
-                      )}
-                      {item.label}
-                    </Flex>
-                  </button>
-                </form>
               </MenuItem>
             ) : null,
           )}
