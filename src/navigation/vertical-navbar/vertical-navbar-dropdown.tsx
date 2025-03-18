@@ -29,14 +29,20 @@ export const VerticalNavbarDropdown = ({
           </>
         )}
       </MenuButton>
-      <MenuItems>
-        {items.map((item) => (
-          <MenuItem>
-            <a className="block data-[focus]:bg-blue-100" href="/settings">
-              {item.label}
-            </a>
-          </MenuItem>
-        ))}
+      <MenuItems
+        anchor="bottom"
+        className="sm:max-w-[500px]! max-sm:w-full sm:w-fit sm:min-w-[300px]"
+      >
+        <div className="mx-3 rounded-sm border border-neutral-200 bg-[#fff] max-sm:mt-2 sm:mt-1">
+          {items.map((item) => (
+            <MenuItem
+              key={item.label}
+              className="mx-1 my-1 block rounded-sm px-3 hover:bg-neutral-50 max-sm:py-3 sm:py-2"
+            >
+              <a href="/settings">{item.label}</a>
+            </MenuItem>
+          ))}
+        </div>
       </MenuItems>
     </Menu>
   );
