@@ -103,6 +103,8 @@ export type { TabsType } from "./navigation/tabs";
 export {
   VerticalNavbar,
   VerticalNavbarBottom,
+  VerticalNavbarDropdown,
+  VerticalNavbarDropdownItem,
   VerticalNavbarItem,
   VerticalNavbarSection,
   VerticalNavbarTop,
