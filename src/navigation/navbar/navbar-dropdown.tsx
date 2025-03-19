@@ -1,85 +1,90 @@
-import type { ComponentProps, ReactNode } from "react";
-import { useEffect, useRef, useState } from "react";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import { ReactNode } from "react";
 import { ChevronDownIcon } from "../../icons/chevron-down";
 import { ChevronUpIcon } from "../../icons/chevron-up";
 import { Container } from "../../layout/container";
 import { Flex } from "../../layout/flex";
+import { Link } from "../link";
+
+type DropdownItemType = {
+  label: string;
+  href?: string;
+  shouldOpenInNewTab?: boolean;
+  onClick?: () => void;
+  icon?: ReactNode;
+};
+
+type VerticalNavbarDropdownType = {
+  title: string;
+  items: DropdownItemType[];
+};
 
 export const NavbarDropdown = ({
   title,
-  children,
-  ...rest
-}: { title: string; children: ReactNode } & ComponentProps<"li">) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLLIElement>(null);
-  const subMenuRef = useRef<HTMLLIElement>(null);
-  const toggleMenu = () => {
-    setIsMenuOpen((v) => !v);
-  };
-  const handleClickOutside = (event: MouseEvent) => {
-    const target = event.target as Node;
-    const clickedInside =
-      (menuRef.current && menuRef.current.contains(target)) ||
-      (subMenuRef.current && subMenuRef.current.contains(target));
-
-    if (!clickedInside) {
-      setIsMenuOpen(false);
-    }
-  };
-  const { className: restClass, ...restWithoutClass } = rest;
-  let containerClass =
-    "relative inline-block cursor-pointer border-b border-b-neutral-200 text-neutral-700 max-sm:hover:bg-neutral-100/50 sm:border-b-neutral-50";
-
-  if (restClass) {
-    containerClass += ` ${restClass}`;
-  }
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  items,
+}: VerticalNavbarDropdownType) => {
+  const menuItemClassName =
+    "mx-1 my-1 block rounded-sm px-3 hover:bg-neutral-50 max-sm:py-3 sm:py-2";
 
   return (
-    <>
-      <li className={containerClass} ref={menuRef} {...restWithoutClass}>
-        {/* Desktop */}
-        <div className="hidden py-6 sm:block" onClick={toggleMenu}>
-          <span className="mr-1">{title}</span>{" "}
-          {isMenuOpen ? (
-            <ChevronUpIcon className="relative bottom-[2px]" strokeWidth={2} />
-          ) : (
-            <ChevronDownIcon strokeWidth={2} />
+    <Menu as="li">
+      <MenuButton className="w-full">
+        {({ open }) => (
+          <>
+            {/* Desktop */}
+            <div className="cursor-pointer items-center gap-2 border-b border-b-neutral-50 py-6 text-neutral-700 max-sm:hidden sm:flex">
+              <span>{title}</span>
+              {open ? (
+                <ChevronUpIcon strokeWidth={2} />
+              ) : (
+                <ChevronDownIcon strokeWidth={2} />
+              )}
+            </div>
+
+            {/* Mobile */}
+            <Container className="mx-0! cursor-pointer border-b border-b-neutral-200 px-6 py-6 text-left text-neutral-700 hover:bg-neutral-100/50 max-sm:block sm:hidden">
+              <span className="mr-2">{title}</span>
+              {open ? (
+                <ChevronUpIcon strokeWidth={2} />
+              ) : (
+                <ChevronDownIcon strokeWidth={2} />
+              )}
+            </Container>
+          </>
+        )}
+      </MenuButton>
+      <MenuItems
+        anchor="bottom start"
+        className="sm:max-w-[500px]! max-sm:mx-2 max-sm:w-[95%] sm:w-fit sm:min-w-[300px]"
+      >
+        <div className="rounded-sm border border-neutral-200 bg-[#fff] max-sm:mt-2 sm:mt-1">
+          {items.map((item) =>
+            item.href ? (
+              <MenuItem className={menuItemClassName} key={item.label}>
+                <Link
+                  href={item.href}
+                  underline="none"
+                  _newTab={item.shouldOpenInNewTab}
+                  className="flex items-start gap-2"
+                >
+                  {item.icon && <span className="opacity-50">{item.icon}</span>}
+                  <span>{item.label}</span>
+                </Link>
+              </MenuItem>
+            ) : item.onClick ? (
+              <MenuItem className={menuItemClassName} key={item.label}>
+                <Flex
+                  className="cursor-default items-start gap-2"
+                  onClick={item.onClick}
+                >
+                  {item.icon && <span className="opacity-50">{item.icon}</span>}
+                  <span>{item.label}</span>
+                </Flex>
+              </MenuItem>
+            ) : null,
           )}
         </div>
-        {isMenuOpen && (
-          <ul className="absolute left-0 top-[89px] z-10 hidden w-72 rounded-sm border border-neutral-100 bg-[#fff] py-2 sm:block">
-            {children}
-          </ul>
-        )}
-
-        {/* Mobile */}
-        <Container size="xl" className="mx-0! block sm:hidden">
-          <Flex
-            className="block items-center justify-between p-6 sm:hidden"
-            onClick={toggleMenu}
-          >
-            <span>{title}</span>
-            {isMenuOpen ? (
-              <ChevronUpIcon className="mr-[2px] h-6 w-6" strokeWidth={1} />
-            ) : (
-              <ChevronDownIcon className="mr-[2px] h-6 w-6" strokeWidth={1} />
-            )}
-          </Flex>
-        </Container>
-      </li>
-      {isMenuOpen && (
-        <li ref={subMenuRef} className="block sm:hidden">
-          <ul className="ml-8">{children}</ul>
-        </li>
-      )}
-    </>
+      </MenuItems>
+    </Menu>
   );
 };
