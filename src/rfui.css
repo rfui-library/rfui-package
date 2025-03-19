@@ -401,9 +401,6 @@
   .-left-\[1em\] {
     left: calc(1em * -1);
   }
-  .left-0 {
-    left: var(--spacing-0);
-  }
   .left-1\/2 {
     left: calc(1/2 * 100%);
   }
@@ -421,6 +418,9 @@
   }
   .mx-1 {
     margin-inline: var(--spacing-1);
+  }
+  .mx-3 {
+    margin-inline: var(--spacing-3);
   }
   .mx-4 {
     margin-inline: var(--spacing-4);
@@ -505,9 +505,6 @@
   }
   .ml-4 {
     margin-left: var(--spacing-4);
-  }
-  .ml-8 {
-    margin-left: var(--spacing-8);
   }
   .box-content {
     box-sizing: content-box;
@@ -634,9 +631,6 @@
   .w-9 {
     width: var(--spacing-9);
   }
-  .w-72 {
-    width: calc(var(--spacing) * 72);
-  }
   .w-\[20px\] {
     width: 20px;
   }
@@ -744,6 +738,9 @@
   }
   .items-center {
     align-items: center;
+  }
+  .items-start {
+    align-items: flex-start;
   }
   .items-stretch {
     align-items: stretch;
@@ -919,6 +916,9 @@
   }
   .border-t-primary-500 {
     border-top-color: var(--color-primary-500);
+  }
+  .border-b-neutral-50 {
+    border-bottom-color: var(--color-neutral-50);
   }
   .border-b-neutral-100 {
     border-bottom-color: var(--color-neutral-100);
@@ -1316,13 +1316,6 @@
       }
     }
   }
-  .hover\:bg-neutral-100\/30 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: color-mix(in oklab, var(--color-neutral-100) 30%, transparent);
-      }
-    }
-  }
   .hover\:bg-neutral-100\/50 {
     &:hover {
       @media (hover: hover) {
@@ -1488,9 +1481,29 @@
       background-color: var(--color-neutral-50);
     }
   }
+  .max-sm\:mx-2 {
+    @media (width < 40rem) {
+      margin-inline: var(--spacing-2);
+    }
+  }
+  .max-sm\:mt-2 {
+    @media (width < 40rem) {
+      margin-top: var(--spacing-2);
+    }
+  }
+  .max-sm\:block {
+    @media (width < 40rem) {
+      display: block;
+    }
+  }
   .max-sm\:hidden {
     @media (width < 40rem) {
       display: none;
+    }
+  }
+  .max-sm\:w-\[95\%\] {
+    @media (width < 40rem) {
+      width: 95%;
     }
   }
   .max-sm\:w-full {
@@ -1506,6 +1519,11 @@
   .max-sm\:bg-neutral-100 {
     @media (width < 40rem) {
       background-color: var(--color-neutral-100);
+    }
+  }
+  .max-sm\:py-3 {
+    @media (width < 40rem) {
+      padding-block: var(--spacing-3);
     }
   }
   .max-sm\:text-lg {
@@ -1554,9 +1572,19 @@
       margin-block: var(--spacing-2);
     }
   }
+  .sm\:mt-1 {
+    @media (width >= 40rem) {
+      margin-top: var(--spacing-1);
+    }
+  }
   .sm\:block {
     @media (width >= 40rem) {
       display: block;
+    }
+  }
+  .sm\:flex {
+    @media (width >= 40rem) {
+      display: flex;
     }
   }
   .sm\:hidden {
@@ -1579,9 +1607,24 @@
       height: 100vh;
     }
   }
+  .sm\:w-fit {
+    @media (width >= 40rem) {
+      width: fit-content;
+    }
+  }
+  .sm\:max-w-\[500px\]\! {
+    @media (width >= 40rem) {
+      max-width: 500px !important;
+    }
+  }
   .sm\:min-w-\[250px\] {
     @media (width >= 40rem) {
       min-width: 250px;
+    }
+  }
+  .sm\:min-w-\[300px\] {
+    @media (width >= 40rem) {
+      min-width: 300px;
     }
   }
   .sm\:flex-row {
