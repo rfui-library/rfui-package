@@ -5,6 +5,7 @@ import { CloseIcon } from "../../icons/close-icon";
 import { Flex } from "../../layout/flex";
 
 export { VerticalNavbarBottom } from "./vertical-navbar-bottom";
+export { VerticalNavbarDropdown } from "./vertical-navbar-dropdown";
 export { VerticalNavbarItem } from "./vertical-navbar-item";
 export { VerticalNavbarSection } from "./vertical-navbar-section";
 export { VerticalNavbarTop } from "./vertical-navbar-top";
@@ -69,7 +70,7 @@ const HamburgerMenuToggle = ({
 }) => {
   return (
     <Flex
-      className="cursor-default items-center gap-2 px-2 py-3 text-neutral-700 hover:bg-neutral-100"
+      className="cursor-default items-center gap-2 rounded-sm px-2 py-3 text-neutral-700 hover:bg-neutral-100"
       onClick={toggleHamburgerMenu}
     >
       {isOpen ? (

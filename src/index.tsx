@@ -84,7 +84,6 @@ export type { LinkType } from "./navigation/link";
 export {
   Navbar,
   NavbarDropdown,
-  NavbarDropdownItem,
   NavbarItem,
   NavbarLeft,
   NavbarMegamenu,
@@ -103,6 +102,7 @@ export type { TabsType } from "./navigation/tabs";
 export {
   VerticalNavbar,
   VerticalNavbarBottom,
+  VerticalNavbarDropdown,
   VerticalNavbarItem,
   VerticalNavbarSection,
   VerticalNavbarTop,

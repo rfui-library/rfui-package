@@ -7,7 +7,6 @@ import { Flex } from "../../layout/flex";
 import { Stack } from "../../layout/stack";
 import { getComponents } from "../../navigation/navbar/get-components";
 
-export { NavbarDropdownItem } from "../../navigation/navbar/navbar-dropdown-item";
 export { NavbarItem } from "../../navigation/navbar/navbar-item";
 export { NavbarLeft } from "../../navigation/navbar/navbar-left";
 export { NavbarRight } from "../../navigation/navbar/navbar-right";
