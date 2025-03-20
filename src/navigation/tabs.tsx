@@ -4,7 +4,7 @@ import { Flex } from "../layout/flex";
 
 export type TabsType = {
   fullWidth?: boolean;
-  initialActiveTab?: string;
+  initialActiveTabName?: string;
   children: ReactNode;
 } & ComponentProps<"div">;
 
@@ -22,15 +22,15 @@ export type TabsType = {
  */
 export const Tabs = ({
   fullWidth = false,
-  initialActiveTab,
+  initialActiveTabName,
   children,
   ...rest
 }: TabsType) => {
   const tabNames = getTabNames(children);
-  const [activeTab, setActiveTab] = useState<string>(
-    initialActiveTab ?? tabNames[0],
+  const [activeTabName, setActiveTabName] = useState<string>(
+    initialActiveTabName ?? tabNames[0],
   );
-  const activeTabSection = getActiveTabSection(children, activeTab);
+  const activeTabSection = getActiveTabSection(children, activeTabName);
 
   return (
     <div {...rest}>
@@ -39,9 +39,9 @@ export const Tabs = ({
           <Tab
             key={tabName}
             tabName={tabName}
-            activeTab={activeTab}
+            activeTabName={activeTabName}
             onClick={() => {
-              setActiveTab(tabName);
+              setActiveTabName(tabName);
             }}
             fullWidth={fullWidth}
           />
@@ -70,16 +70,16 @@ const getActiveTabSection = (children: any, tabName: string) => {
 
 const Tab = ({
   tabName,
-  activeTab,
+  activeTabName,
   onClick,
   fullWidth,
 }: {
   tabName: string;
-  activeTab: string;
+  activeTabName: string;
   onClick: () => void;
   fullWidth: boolean;
 }) => {
-  const isActive = tabName === activeTab;
+  const isActive = tabName === activeTabName;
   let containerClass = "rfui-tab cursor-default px-5 py-4 text-center";
 
   if (fullWidth) {
