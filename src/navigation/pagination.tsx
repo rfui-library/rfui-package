@@ -45,8 +45,18 @@ export const Pagination = ({
     type === "button" && "onChange" in rest ? rest.onChange : undefined;
   const { className: restClass, ...restWithoutClass } = {
     ...rest,
+    buildHref: undefined,
     onChange: undefined,
   };
+
+  if ("buildHref" in restWithoutClass) {
+    delete restWithoutClass.buildHref;
+  }
+
+  if ("onChange" in restWithoutClass) {
+    delete restWithoutClass.onChange;
+  }
+
   let className = "flex items-center";
   let chevronClassName;
 
