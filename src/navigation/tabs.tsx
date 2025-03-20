@@ -30,7 +30,7 @@ export const Tabs = ({
   const [activeTabName, setActiveTabName] = useState<string>(
     initialActiveTabName ?? tabNames[0],
   );
-  const activeTabSection = getActiveTabSection(children, activeTabName);
+  const tabSections = getTabSections(children, activeTabName);
 
   return (
     <div {...rest}>
@@ -47,7 +47,7 @@ export const Tabs = ({
           />
         ))}
       </Flex>
-      <div className="mt-6 overflow-x-scroll">{activeTabSection}</div>
+      <div className="mt-6 overflow-x-scroll">{tabSections}</div>
     </div>
   );
 };
@@ -58,14 +58,16 @@ const getTabNames = (children: any) => {
   return childrenArray.map((child) => child.props.tabName);
 };
 
-const getActiveTabSection = (children: any, tabName: string) => {
+const getTabSections = (children: any, activeTabName: string) => {
   const childrenArray: any[] = Children.toArray(children);
 
-  if (childrenArray.length === 1) {
-    return children;
-  }
-
-  return childrenArray.find((child) => child.props.tabName === tabName);
+  return childrenArray.map((child) => ({
+    ...child,
+    props: {
+      ...child.props,
+      isActive: child.props.tabName === activeTabName,
+    },
+  }));
 };
 
 const Tab = ({
@@ -100,10 +102,12 @@ const Tab = ({
 export const TabSection = ({
   // @ts-expect-error This is needed elsewhere
   tabName,
+  isActive,
   children,
 }: {
   tabName: string;
+  isActive?: boolean;
   children: ReactNode;
 }) => {
-  return <>{children}</>;
+  return <div className={isActive ? "block" : "hidden"}>{children}</div>;
 };
