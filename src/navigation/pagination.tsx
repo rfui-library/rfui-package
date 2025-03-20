@@ -5,10 +5,18 @@ export type PaginationType = {
   currPage: number;
   itemsPerPage: number;
   totalItems: number;
-  buildHref?: (page: number) => string;
-  onChange?: (newPage: number) => void;
   size?: "sm" | "md" | "lg";
-} & Omit<ComponentProps<"nav">, "size">;
+} & Omit<ComponentProps<"nav">, "size" | "onChange"> &
+  (
+    | {
+        type?: "link";
+        buildHref: (page: number) => string;
+      }
+    | {
+        type: "button";
+        onChange: (newPage: number) => void;
+      }
+  );
 
 /** *
  * @function Pagination
@@ -27,12 +35,18 @@ export const Pagination = ({
   currPage,
   itemsPerPage,
   totalItems,
-  buildHref,
-  onChange,
+  type = "link",
   size = "md",
   ...rest
 }: PaginationType) => {
-  const { className: restClass, ...restWithoutClass } = rest;
+  const buildHref =
+    type === "link" && "buildHref" in rest ? rest.buildHref : undefined;
+  const onChange =
+    type === "button" && "onChange" in rest ? rest.onChange : undefined;
+  const { className: restClass, ...restWithoutClass } = {
+    ...rest,
+    onChange: undefined,
+  };
   let className = "flex items-center";
   let chevronClassName;
 
@@ -145,8 +159,8 @@ const PaginationItem = ({
   children,
 }: {
   page: number;
-  buildHref?: PaginationType["buildHref"];
-  onChange?: PaginationType["onChange"];
+  buildHref?: (page: number) => string;
+  onChange?: (newPage: number) => void;
   children: ReactNode;
 }) => {
   const sharedClassName =

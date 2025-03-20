@@ -24,14 +24,23 @@ export type ComboboxType = {
   size?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
-  defaultValue?: Option | Option[];
-  value?: Option | Option[];
-  onChange?: (newValue: Option | Option[]) => void;
-  multiple?: boolean;
   inputClassName?: string;
   optionsClassName?: string;
   optionClassName?: string;
-};
+} & (
+  | {
+      multiple: true;
+      value?: Option[];
+      defaultValue?: Option[];
+      onChange?: (newValue: Option[]) => void;
+    }
+  | {
+      multiple?: false;
+      value?: Option;
+      defaultValue?: Option;
+      onChange?: (newValue: Option) => void;
+    }
+);
 
 /** *
  * @function Combobox
@@ -66,7 +75,7 @@ export const Combobox = ({
   defaultValue,
   value,
   onChange,
-  multiple,
+  multiple = false,
   inputClassName: _inputClassName,
   optionsClassName: _optionsClassName,
   optionClassName: _optionClassName,

@@ -5,10 +5,17 @@ export type LinkType = {
   href: string;
   underline?: "always" | "hover" | "none";
   inPageLink?: boolean;
-  _newTab?: boolean;
-  _includeNewTabIcon?: boolean;
   children: ReactNode;
-} & ComponentProps<"a">;
+} & ComponentProps<"a"> &
+  (
+    | {
+        _newTab?: false;
+      }
+    | {
+        _newTab: true;
+        _includeNewTabIcon?: boolean;
+      }
+  );
 
 /** *
  * @function Link
@@ -23,11 +30,15 @@ export const Link = ({
   underline = "always",
   inPageLink = false,
   _newTab = false,
-  _includeNewTabIcon = false,
   children,
   ...rest
 }: LinkType) => {
   const { className: restClass, ...restWithoutClass } = rest;
+
+  if ("_includeNewTabIcon" in restWithoutClass) {
+    delete restWithoutClass._includeNewTabIcon;
+  }
+
   let className = "relative";
 
   className += (() => {
@@ -63,7 +74,7 @@ export const Link = ({
         </span>
       )}
       {children}
-      {_newTab && _includeNewTabIcon && (
+      {_newTab && "_includeNewTabIcon" in rest && rest._includeNewTabIcon && (
         <ArrowTopRightOnSquareIcon className="relative bottom-[1px] left-2 inline w-4" />
       )}
     </a>

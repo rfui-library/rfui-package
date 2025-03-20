@@ -17,15 +17,23 @@ export type EditableTextType = {
   type?: "input" | "textarea";
   emptyStateText?: string;
   textProps?: Omit<TextType, "onClick">;
-  inputProps?: Omit<
-    InputType,
-    "onClick" | "type" | "value" | "onChange" | "onBlur"
-  >;
-  textareaProps?: Omit<
-    TextareaType,
-    "onClick" | "value" | "onChange" | "onBlur"
-  >;
-} & CommonProps;
+} & CommonProps &
+  (
+    | {
+        type?: "input";
+        inputProps?: Omit<
+          InputType,
+          "onClick" | "type" | "value" | "onChange" | "onBlur"
+        >;
+      }
+    | {
+        type: "textarea";
+        textareaProps?: Omit<
+          TextareaType,
+          "onClick" | "value" | "onChange" | "onBlur"
+        >;
+      }
+  );
 
 /** *
  * @function EditableText
@@ -47,21 +55,27 @@ export const EditableText = ({
   type = "input",
   emptyStateText,
   textProps,
-  inputProps,
-  textareaProps,
   ...rest
 }: EditableTextType) => {
   const [isEditable, setIsEditable] = useState(false);
   const [newText, setNewText] = useState(initialText);
   const { className: textPropsClassName, ...textPropsWithoutClassName } =
     textProps ?? {};
-  const { className: inputPropsClassName, ...inputPropsWithoutClassName } =
-    inputProps ?? {};
-  const {
-    className: textareaPropsClassName,
-    ...textareaPropsWithoutClassName
-  } = textareaProps ?? {};
   const { className: restClassName, ...restWithoutClassName } = rest;
+  let inputPropsWithoutClassName = {};
+  let textareaPropsWithoutClassName = {};
+  let inputPropsClassName = "";
+  let textareaPropsClassName = "";
+
+  if (type === "input" && "inputProps" in rest) {
+    const { className, ...props } = rest.inputProps ?? {};
+    inputPropsClassName = className ?? "";
+    inputPropsWithoutClassName = props;
+  } else if (type === "textarea" && "textareaProps" in rest) {
+    const { className, ...props } = rest.textareaProps ?? {};
+    textareaPropsClassName = className ?? "";
+    textareaPropsWithoutClassName = props;
+  }
 
   let textClassName =
     "border border-transparent hover:cursor-text hover:border-dashed hover:border-neutral-300";
@@ -76,7 +90,7 @@ export const EditableText = ({
     inputClassName += ` ${inputPropsClassName}`;
   }
 
-  if (textPropsClassName) {
+  if (textareaPropsClassName) {
     textareaClassName += ` ${textareaPropsClassName}`;
   }
 

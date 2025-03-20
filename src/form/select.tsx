@@ -20,14 +20,23 @@ export type SelectType = {
   size?: "sm" | "md" | "lg";
   rounded?: "square" | "sm" | "lg" | "full";
   invalid?: boolean;
-  defaultValue?: Option | Option[];
-  value?: Option | Option[];
-  onChange?: (newValue: Option | Option[]) => void;
-  multiple?: boolean;
   buttonClassName?: string;
   optionsClassName?: string;
   optionClassName?: string;
-};
+} & (
+  | {
+      multiple: true;
+      value?: Option[];
+      defaultValue?: Option[];
+      onChange?: (newValue: Option[]) => void;
+    }
+  | {
+      multiple?: false;
+      value?: Option;
+      defaultValue?: Option;
+      onChange?: (newValue: Option) => void;
+    }
+);
 
 /** *
  * @function Select
@@ -47,7 +56,7 @@ export const Select = ({
   defaultValue,
   value,
   onChange,
-  multiple,
+  multiple = false,
   buttonClassName: _buttonClassName,
   optionsClassName: _optionsClassName,
   optionClassName: _optionClassName,

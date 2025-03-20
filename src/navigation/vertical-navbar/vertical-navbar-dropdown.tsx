@@ -7,11 +7,18 @@ import { Link } from "../link";
 
 type DropdownItemType = {
   label: string;
-  href?: string;
-  shouldOpenInNewTab?: boolean;
-  onClick?: () => void;
   icon?: ReactNode;
-};
+} & (
+  | {
+      type?: "link";
+      href: string;
+      shouldOpenInNewTab?: boolean;
+    }
+  | {
+      type: "button";
+      onClick: () => void;
+    }
+);
 
 type VerticalNavbarDropdownType = {
   title: string;
@@ -45,7 +52,7 @@ export const VerticalNavbarDropdown = ({
       >
         <div className="mx-3 rounded-sm border border-neutral-200 bg-[#fff] max-sm:mt-2 sm:mt-1">
           {items.map((item) =>
-            item.href ? (
+            item.type === "link" ? (
               <MenuItem className={menuItemClassName} key={item.label}>
                 <Link
                   href={item.href}
@@ -57,7 +64,7 @@ export const VerticalNavbarDropdown = ({
                   <span>{item.label}</span>
                 </Link>
               </MenuItem>
-            ) : item.onClick ? (
+            ) : item.type === "button" ? (
               <MenuItem className={menuItemClassName} key={item.label}>
                 <Flex
                   className="cursor-default items-start gap-2"

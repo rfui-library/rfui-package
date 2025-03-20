@@ -8,11 +8,18 @@ import { Link } from "../link";
 
 type DropdownItemType = {
   label: string;
-  href?: string;
-  shouldOpenInNewTab?: boolean;
-  onClick?: () => void;
   icon?: ReactNode;
-};
+} & (
+  | {
+      type?: "link";
+      href: string;
+      shouldOpenInNewTab?: boolean;
+    }
+  | {
+      type: "button";
+      onClick: () => void;
+    }
+);
 
 type VerticalNavbarDropdownType = {
   title: string;
@@ -58,8 +65,10 @@ export const NavbarDropdown = ({
         className="sm:max-w-[500px]! max-sm:mx-2 max-sm:w-[95%] sm:w-fit sm:min-w-[300px]"
       >
         <div className="rounded-sm border border-neutral-200 bg-[#fff] max-sm:mt-2 sm:mt-1">
-          {items.map((item) =>
-            item.href ? (
+          {items.map((item) => {
+            const type = item.type ?? "link";
+
+            return type === "link" && "href" in item ? (
               <MenuItem className={menuItemClassName} key={item.label}>
                 <Link
                   href={item.href}
@@ -71,7 +80,7 @@ export const NavbarDropdown = ({
                   <span>{item.label}</span>
                 </Link>
               </MenuItem>
-            ) : item.onClick ? (
+            ) : type === "button" && "onClick" in item ? (
               <MenuItem className={menuItemClassName} key={item.label}>
                 <Flex
                   className="cursor-default items-start gap-2"
@@ -81,8 +90,8 @@ export const NavbarDropdown = ({
                   <span>{item.label}</span>
                 </Flex>
               </MenuItem>
-            ) : null,
-          )}
+            ) : null;
+          })}
         </div>
       </MenuItems>
     </Menu>
