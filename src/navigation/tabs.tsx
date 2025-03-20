@@ -4,7 +4,7 @@ import { Flex } from "../layout/flex";
 
 export type TabsType = {
   fullWidth?: boolean;
-  initialActiveTab?: string;
+  initialActiveTabName?: string;
   children: ReactNode;
 } & ComponentProps<"div">;
 
@@ -22,15 +22,15 @@ export type TabsType = {
  */
 export const Tabs = ({
   fullWidth = false,
-  initialActiveTab,
+  initialActiveTabName,
   children,
   ...rest
 }: TabsType) => {
   const tabNames = getTabNames(children);
-  const [activeTab, setActiveTab] = useState<string>(
-    initialActiveTab ?? tabNames[0],
+  const [activeTabName, setActiveTabName] = useState<string>(
+    initialActiveTabName ?? tabNames[0],
   );
-  const activeTabSection = getActiveTabSection(children, activeTab);
+  const tabSections = getTabSections(children, activeTabName);
 
   return (
     <div {...rest}>
@@ -39,15 +39,15 @@ export const Tabs = ({
           <Tab
             key={tabName}
             tabName={tabName}
-            activeTab={activeTab}
+            activeTabName={activeTabName}
             onClick={() => {
-              setActiveTab(tabName);
+              setActiveTabName(tabName);
             }}
             fullWidth={fullWidth}
           />
         ))}
       </Flex>
-      <div className="mt-6 overflow-x-scroll">{activeTabSection}</div>
+      <div className="mt-6 overflow-x-scroll">{tabSections}</div>
     </div>
   );
 };
@@ -58,28 +58,30 @@ const getTabNames = (children: any) => {
   return childrenArray.map((child) => child.props.tabName);
 };
 
-const getActiveTabSection = (children: any, tabName: string) => {
+const getTabSections = (children: any, activeTabName: string) => {
   const childrenArray: any[] = Children.toArray(children);
 
-  if (childrenArray.length === 1) {
-    return children;
-  }
-
-  return childrenArray.find((child) => child.props.tabName === tabName);
+  return childrenArray.map((child) => ({
+    ...child,
+    props: {
+      ...child.props,
+      isActive: child.props.tabName === activeTabName,
+    },
+  }));
 };
 
 const Tab = ({
   tabName,
-  activeTab,
+  activeTabName,
   onClick,
   fullWidth,
 }: {
   tabName: string;
-  activeTab: string;
+  activeTabName: string;
   onClick: () => void;
   fullWidth: boolean;
 }) => {
-  const isActive = tabName === activeTab;
+  const isActive = tabName === activeTabName;
   let containerClass = "rfui-tab cursor-default px-5 py-4 text-center";
 
   if (fullWidth) {
@@ -100,10 +102,12 @@ const Tab = ({
 export const TabSection = ({
   // @ts-expect-error This is needed elsewhere
   tabName,
+  isActive,
   children,
 }: {
   tabName: string;
+  isActive?: boolean;
   children: ReactNode;
 }) => {
-  return <>{children}</>;
+  return <div className={isActive ? "block" : "hidden"}>{children}</div>;
 };

@@ -62,10 +62,22 @@ export const EditableText = ({
   const { className: textPropsClassName, ...textPropsWithoutClassName } =
     textProps ?? {};
   const { className: restClassName, ...restWithoutClassName } = rest;
+
+  if ("type" in restWithoutClassName) {
+    delete restWithoutClassName.type;
+  }
+
+  if ("inputProps" in restWithoutClassName) {
+    delete restWithoutClassName.inputProps;
+  }
+
+  if ("textareProps" in restWithoutClassName) {
+    delete restWithoutClassName.textareProps;
+  }
+
   let inputPropsWithoutClassName = {};
   let textareaPropsWithoutClassName = {};
-  let inputPropsClassName = "";
-  let textareaPropsClassName = "";
+  let inputPropsClassName = ""; let textareaPropsClassName ="";
 
   if (type === "input" && "inputProps" in rest) {
     const { className, ...props } = rest.inputProps ?? {};
