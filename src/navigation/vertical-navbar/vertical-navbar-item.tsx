@@ -25,7 +25,7 @@ type VerticalNavbarItemType = {
 );
 
 export const VerticalNavbarItem = ({
-  type,
+  type = "link",
   icon,
   children,
   ...rest

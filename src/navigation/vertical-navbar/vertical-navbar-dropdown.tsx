@@ -52,7 +52,17 @@ export const VerticalNavbarDropdown = ({
       >
         <div className="mx-3 rounded-sm border border-neutral-200 bg-[#fff] max-sm:mt-2 sm:mt-1">
           {items.map((item) =>
-            item.type === "link" ? (
+            item.type === "button" ? (
+              <MenuItem className={menuItemClassName} key={item.label}>
+                <Flex
+                  className="cursor-default items-start gap-2"
+                  onClick={item.onClick}
+                >
+                  {item.icon && <span className="opacity-50">{item.icon}</span>}
+                  <span>{item.label}</span>
+                </Flex>
+              </MenuItem>
+            ) : (
               <MenuItem className={menuItemClassName} key={item.label}>
                 <Link
                   href={item.href}
@@ -64,17 +74,7 @@ export const VerticalNavbarDropdown = ({
                   <span>{item.label}</span>
                 </Link>
               </MenuItem>
-            ) : item.type === "button" ? (
-              <MenuItem className={menuItemClassName} key={item.label}>
-                <Flex
-                  className="cursor-default items-start gap-2"
-                  onClick={item.onClick}
-                >
-                  {item.icon && <span className="opacity-50">{item.icon}</span>}
-                  <span>{item.label}</span>
-                </Flex>
-              </MenuItem>
-            ) : null,
+            ),
           )}
         </div>
       </MenuItems>
