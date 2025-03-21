@@ -63,17 +63,10 @@ export const EditableText = ({
     textProps ?? {};
   const { className: restClassName, ...restWithoutClassName } = rest;
 
-  if ("type" in restWithoutClassName) {
-    delete restWithoutClassName.type;
-  }
-
-  if ("inputProps" in restWithoutClassName) {
-    delete restWithoutClassName.inputProps;
-  }
-
-  if ("textareaProps" in restWithoutClassName) {
-    delete restWithoutClassName.textareaProps;
-  }
+  const cleanedRest = { ...restWithoutClassName };
+  delete (cleanedRest as any).type;
+  delete (cleanedRest as any).inputProps;
+  delete (cleanedRest as any).textareaProps;
 
   let inputPropsWithoutClassName = {};
   let textareaPropsWithoutClassName = {};
@@ -128,7 +121,7 @@ export const EditableText = ({
             onChange(newText);
           }}
           className={inputClassName}
-          {...restWithoutClassName}
+          {...cleanedRest}
           {...inputPropsWithoutClassName}
         />
       );
@@ -146,7 +139,7 @@ export const EditableText = ({
           }}
           rows={initialText.split("\n").length + 2}
           className={textareaClassName}
-          {...restWithoutClassName}
+          {...cleanedRest}
           {...textareaPropsWithoutClassName}
         ></Textarea>
       );
@@ -159,7 +152,7 @@ export const EditableText = ({
       onClick={() => {
         setIsEditable(true);
       }}
-      {...restWithoutClassName}
+      {...cleanedRest}
       {...textPropsWithoutClassName}
     >
       {emptyStateText && initialText.length === 0
