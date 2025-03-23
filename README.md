@@ -10,7 +10,7 @@ npx @tailwindcss/cli -i ./src/rfui-input.css -o ./src/rfui.css
 
 # Publishing a new version
 
-To publish new versions, use `npm version`.
+To publish new versions run `npm run build` and then use `npm version`.
 
 ```
 npm version major
