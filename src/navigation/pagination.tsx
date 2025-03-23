@@ -6,6 +6,7 @@ export type PaginationType = {
   itemsPerPage: number;
   totalItems: number;
   size?: "sm" | "md" | "lg";
+  disabled?: boolean;
 } & Omit<ComponentProps<"nav">, "size" | "onChange"> &
   (
     | {
@@ -37,6 +38,7 @@ export const Pagination = ({
   totalItems,
   type = "link",
   size = "md",
+  disabled = false,
   ...rest
 }: PaginationType) => {
   const buildHref =
@@ -92,12 +94,18 @@ export const Pagination = ({
           page={currPage - 1}
           buildHref={buildHref}
           onChange={onChange}
+          disabled={disabled}
         >
           <ChevronLeftIcon className={chevronClassName} />
         </PaginationItem>
       )}
       {currPage !== 1 && (
-        <PaginationItem page={1} buildHref={buildHref} onChange={onChange}>
+        <PaginationItem
+          page={1}
+          buildHref={buildHref}
+          onChange={onChange}
+          disabled={disabled}
+        >
           1
         </PaginationItem>
       )}
@@ -107,6 +115,7 @@ export const Pagination = ({
           page={currPage - 2}
           buildHref={buildHref}
           onChange={onChange}
+          disabled={disabled}
         >
           {currPage - 2}
         </PaginationItem>
@@ -116,6 +125,7 @@ export const Pagination = ({
           page={currPage - 1}
           buildHref={buildHref}
           onChange={onChange}
+          disabled={disabled}
         >
           {currPage - 1}
         </PaginationItem>
@@ -126,6 +136,7 @@ export const Pagination = ({
           page={currPage + 1}
           buildHref={buildHref}
           onChange={onChange}
+          disabled={disabled}
         >
           {currPage + 1}
         </PaginationItem>
@@ -135,6 +146,7 @@ export const Pagination = ({
           page={currPage + 2}
           buildHref={buildHref}
           onChange={onChange}
+          disabled={disabled}
         >
           {currPage + 2}
         </PaginationItem>
@@ -145,6 +157,7 @@ export const Pagination = ({
           page={lastPage}
           buildHref={buildHref}
           onChange={onChange}
+          disabled={disabled}
         >
           {lastPage}
         </PaginationItem>
@@ -154,6 +167,7 @@ export const Pagination = ({
           page={currPage + 1}
           buildHref={buildHref}
           onChange={onChange}
+          disabled={disabled}
         >
           <ChevronRightIcon className={chevronClassName} />
         </PaginationItem>
@@ -166,17 +180,19 @@ const PaginationItem = ({
   page,
   buildHref,
   onChange,
+  disabled,
   children,
 }: {
   page: number;
   buildHref?: (page: number) => string;
   onChange?: (newPage: number) => void;
+  disabled?: boolean;
   children: ReactNode;
 }) => {
   const sharedClassName =
     "rfui-rounded-default flex h-[2.5rem] items-center px-3 py-2 hover:bg-neutral-50";
-  const linkClassName = `${sharedClassName}`;
-  const buttonClassName = `${sharedClassName} cursor-pointer`;
+  const linkClassName = `${sharedClassName} ${disabled ? "pointer-events-none" : ""}`;
+  const buttonClassName = `${sharedClassName} ${disabled ? "pointer-events-none" : "cursor-pointer"}`;
 
   return buildHref ? (
     <a href={buildHref(page)} className={linkClassName}>
@@ -185,11 +201,12 @@ const PaginationItem = ({
   ) : (
     <button
       onClick={() => {
-        if (onChange) {
+        if (onChange && !disabled) {
           onChange(page);
         }
       }}
       className={buttonClassName}
+      disabled={disabled}
     >
       {children}
     </button>
