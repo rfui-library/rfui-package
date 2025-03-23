@@ -83,7 +83,10 @@ export const Pagination = ({
 
   const lastPage = Math.ceil(totalItems / itemsPerPage);
 
-  if (!isValid(currPage, itemsPerPage, totalItems, lastPage)) {
+  if (
+    !isValid(currPage, itemsPerPage, totalItems, lastPage) ||
+    lastPage === 1
+  ) {
     return null;
   }
 
