@@ -121,61 +121,36 @@ export const AdvancedTable = <T,>({
   const isSortable = sortType !== "none";
   const [sortKey, setSortKey] = useState<keyof T | null>(null);
   const [sortDirection, setSortDirection] = useState<SortDirection>(null);
-
   const handleHeaderClick = (column: SortableHeaderColumn<T>) => {
     if (sortType === "automatic") {
-      const autoProps = props as AutomaticSorting<T>;
-      if (autoProps.onSort) {
-        // External sorting control
-        if (sortKey === column.sortKey) {
-          // Cycle through: asc -> desc -> null
-          if (sortDirection === "asc") {
-            autoProps.onSort(column.sortKey, "desc");
-            setSortDirection("desc");
-          } else if (sortDirection === "desc") {
-            autoProps.onSort(null, null);
-            setSortKey(null);
-            setSortDirection(null);
-          } else {
-            autoProps.onSort(column.sortKey, "asc");
-            setSortKey(column.sortKey);
-            setSortDirection("asc");
-          }
-        } else {
-          // Start with ascending sort
-          autoProps.onSort(column.sortKey, "asc");
-          setSortKey(column.sortKey);
+      if (sortKey === column.sortKey) {
+        if (sortDirection === "desc") {
           setSortDirection("asc");
+        } else if (sortDirection === "asc") {
+          setSortKey(null);
+          setSortDirection(null);
+        } else {
+          setSortKey(column.sortKey);
+          setSortDirection("desc");
         }
       } else {
-        // Internal sorting control
-        if (sortKey === column.sortKey) {
-          // Cycle through: asc -> desc -> null
-          if (sortDirection === "asc") {
-            setSortDirection("desc");
-          } else if (sortDirection === "desc") {
-            setSortKey(null);
-            setSortDirection(null);
-          } else {
-            setSortKey(column.sortKey);
-            setSortDirection("asc");
-          }
-        } else {
-          // Start with ascending sort
-          setSortKey(column.sortKey);
-          setSortDirection("asc");
-        }
+        setSortKey(column.sortKey);
+        setSortDirection("desc");
       }
-      return;
-    } else if (sortType === "controlled") {
-      const controlledProps = props as ControlledSorting<T>;
-      if (!controlledProps.onSort) return;
-
-      // For controlled sorting, we don't track the current sort state
-      // Just toggle between ascending and descending
-      controlledProps.onSort(column.sortKey, "asc");
     }
   };
+  const potentiallySortedBodyRowsData =
+    sortType === "automatic" && sortKey
+      ? [...bodyRowsData].sort((a, b) =>
+          sortDirection === "asc"
+            ? a[sortKey] > b[sortKey]
+              ? 1
+              : -1
+            : a[sortKey] < b[sortKey]
+              ? 1
+              : -1,
+        )
+      : bodyRowsData;
 
   return (
     <Table {...props}>
@@ -228,7 +203,7 @@ export const AdvancedTable = <T,>({
         </tr>
       </thead>
       <tbody>
-        {bodyRowsData.map((rowData, index) => (
+        {potentiallySortedBodyRowsData.map((rowData, index) => (
           <tr key={getRowKey ? getRowKey(rowData) : `row-${index}`}>
             {buildBodyRow(rowData)}
           </tr>
