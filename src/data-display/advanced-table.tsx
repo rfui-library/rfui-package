@@ -60,6 +60,10 @@ export type AdvancedTableType<T> =
  * 2. Controlled sorting (via onSort callback)
  * 3. URL-based sorting (via buildHref)
  *
+ * For automatic sorting, the sort direction cycle depends on the type of data being sorted:
+ * - Numbers: desc -> asc -> null
+ * - Other types (strings, etc.): asc -> desc -> null
+ *
  * @example
  * // Automatic sorting with internal state
  * <AdvancedTable
@@ -121,21 +125,46 @@ export const AdvancedTable = <T,>({
   const isSortable = sortType !== "none";
   const [sortKey, setSortKey] = useState<keyof T | null>(null);
   const [sortDirection, setSortDirection] = useState<SortDirection>(null);
+
+  const isNumericValue = (value: unknown): boolean => {
+    return typeof value === "number" && !isNaN(value);
+  };
+
   const handleHeaderClick = (column: SortableHeaderColumn<T>) => {
     if (sortType === "automatic") {
       if (sortKey === column.sortKey) {
-        if (sortDirection === "desc") {
-          setSortDirection("asc");
-        } else if (sortDirection === "asc") {
-          setSortKey(null);
-          setSortDirection(null);
+        const sampleValue = bodyRowsData[0]?.[column.sortKey];
+        const isNumeric = isNumericValue(sampleValue);
+
+        if (isNumeric) {
+          // For numbers: desc -> asc -> null
+          if (sortDirection === "desc") {
+            setSortDirection("asc");
+          } else if (sortDirection === "asc") {
+            setSortKey(null);
+            setSortDirection(null);
+          } else {
+            setSortKey(column.sortKey);
+            setSortDirection("desc");
+          }
         } else {
-          setSortKey(column.sortKey);
-          setSortDirection("desc");
+          // For other types: asc -> desc -> null
+          if (sortDirection === "asc") {
+            setSortDirection("desc");
+          } else if (sortDirection === "desc") {
+            setSortKey(null);
+            setSortDirection(null);
+          } else {
+            setSortKey(column.sortKey);
+            setSortDirection("asc");
+          }
         }
       } else {
+        // When clicking a new column, start with the appropriate direction based on type
+        const sampleValue = bodyRowsData[0]?.[column.sortKey];
+        const isNumeric = isNumericValue(sampleValue);
         setSortKey(column.sortKey);
-        setSortDirection("desc");
+        setSortDirection(isNumeric ? "desc" : "asc");
       }
     }
   };
@@ -146,9 +175,9 @@ export const AdvancedTable = <T,>({
             ? a[sortKey] > b[sortKey]
               ? 1
               : -1
-            : a[sortKey] < b[sortKey]
-              ? 1
-              : -1,
+            : a[sortKey] > b[sortKey]
+              ? -1
+              : 1,
         )
       : bodyRowsData;
 
