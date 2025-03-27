@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Flex } from "../../layout/flex";
 import { isNumericValue } from "../../utilities/is-numeric-value";
 import { Table } from "../table";
 import { getPotentiallySortedRows } from "./get-potentially-sorted-rows";
-import { SortArrows } from "./sort-arrows";
+import { TableHeader } from "./table-header";
 import type {
   AdvancedTableType,
   AutomaticSorting,
@@ -26,7 +25,6 @@ export type { AdvancedTableType };
  */
 export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
   const { rows, buildRow, getRowKey } = props;
-  const isSortable = props.sortType && props.sortType !== "none";
   const [internalSortKey, setInternalSortKey] = useState<keyof T | null>(null);
   const [internalSortDirection, setInternalSortDirection] =
     useState<SortDirection>(null);
@@ -96,46 +94,12 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
 
   return (
     <Table {...props.tableProps}>
-      <thead>
-        <tr>
-          {props.columns.map((column, index) => (
-            <th
-              key={`header-${index}`}
-              className={isSortable ? "cursor-pointer select-none" : ""}
-              onClick={() => {
-                if (
-                  props.sortType === "automatic" ||
-                  props.sortType === "controlled"
-                ) {
-                  handleHeaderClick(column as SortableColumn<T>);
-                }
-              }}
-            >
-              <Flex className="items-center gap-1">
-                {props.sortType === "url" ? (
-                  <a
-                    href={props.buildHref(
-                      (column as SortableColumn<T>).sortKey,
-                      props.sortDirection === "desc" ? "asc" : "desc",
-                    )}
-                    className="no-underline"
-                  >
-                    {column.label}
-                  </a>
-                ) : (
-                  column.label
-                )}
-                <SortArrows
-                  advancedTableProps={props}
-                  internalSortKey={internalSortKey}
-                  columnSortKey={(column as SortableColumn<T>).sortKey}
-                  internalSortDirection={internalSortDirection}
-                />
-              </Flex>
-            </th>
-          ))}
-        </tr>
-      </thead>
+      <TableHeader
+        props={props}
+        internalSortKey={internalSortKey}
+        internalSortDirection={internalSortDirection}
+        handleHeaderClick={handleHeaderClick}
+      />
       <tbody>
         {potentiallySortedRows.map((row, index) => (
           <tr key={getRowKey ? getRowKey(row) : `row-${index}`}>

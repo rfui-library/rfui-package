@@ -1,0 +1,60 @@
+import { Flex } from "../../layout/flex";
+import { SortArrows } from "./sort-arrows";
+import { AdvancedTableType, SortableColumn, SortDirection } from "./types";
+
+export const TableHeader = <T,>({
+  props,
+  internalSortKey,
+  internalSortDirection,
+  handleHeaderClick,
+}: {
+  props: AdvancedTableType<T>;
+  internalSortKey: keyof T | null;
+  internalSortDirection: SortDirection;
+  handleHeaderClick: (column: SortableColumn<T>) => void;
+}) => {
+  const isSortable = props.sortType && props.sortType !== "none";
+
+  return (
+    <thead>
+      <tr>
+        {props.columns.map((column, index) => (
+          <th
+            key={`header-${index}`}
+            className={isSortable ? "cursor-pointer select-none" : ""}
+            onClick={() => {
+              if (
+                props.sortType === "automatic" ||
+                props.sortType === "controlled"
+              ) {
+                handleHeaderClick(column as SortableColumn<T>);
+              }
+            }}
+          >
+            <Flex className="items-center gap-1">
+              {props.sortType === "url" ? (
+                <a
+                  href={props.buildHref(
+                    (column as SortableColumn<T>).sortKey,
+                    props.sortDirection === "desc" ? "asc" : "desc",
+                  )}
+                  className="no-underline"
+                >
+                  {column.label}
+                </a>
+              ) : (
+                column.label
+              )}
+              <SortArrows
+                advancedTableProps={props}
+                internalSortKey={internalSortKey}
+                columnSortKey={(column as SortableColumn<T>).sortKey}
+                internalSortDirection={internalSortDirection}
+              />
+            </Flex>
+          </th>
+        ))}
+      </tr>
+    </thead>
+  );
+};
