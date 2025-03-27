@@ -125,11 +125,9 @@ export const AdvancedTable = <T,>({
   const isSortable = sortType !== "none";
   const [sortKey, setSortKey] = useState<keyof T | null>(null);
   const [sortDirection, setSortDirection] = useState<SortDirection>(null);
-
   const isNumericValue = (value: unknown): boolean => {
     return typeof value === "number" && !isNaN(value);
   };
-
   const handleHeaderClick = (column: SortableHeaderColumn<T>) => {
     if (sortType === "automatic") {
       if (sortKey === column.sortKey) {
