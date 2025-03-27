@@ -2,44 +2,43 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import { Table, type TableType } from "./table";
 
-export type SortDirection = "asc" | "desc" | null;
+type SortDirection = "asc" | "desc" | null;
 
-export type HeaderColumn = {
+type BaseColumn = {
   label: ReactNode;
 };
 
-export type SortableHeaderColumn<T> = {
+type SortableColumn<T> = BaseColumn & {
   sortKey: keyof T;
-  label: ReactNode;
 };
 
 type BaseAdvancedTableType<T> = {
-  bodyRowsData: T[];
-  buildBodyRow: (rowData: T) => ReactNode;
-  getRowKey?: (rowData: T) => string | number;
+  rows: T[];
+  buildRow: (row: T) => ReactNode;
+  getRowKey?: (row: T) => string | number;
   tableProps?: Omit<TableType, "children">;
 };
 
 type NoSorting<T> = BaseAdvancedTableType<T> & {
   sortType?: "none";
-  headerColumns: HeaderColumn[];
+  columns: BaseColumn[];
 };
 
 type AutomaticSorting<T> = BaseAdvancedTableType<T> & {
   sortType: "automatic";
-  headerColumns: SortableHeaderColumn<T>[];
+  columns: SortableColumn<T>[];
   onSort?: (key: keyof T | null, direction: SortDirection) => void;
 };
 
 type ControlledSorting<T> = BaseAdvancedTableType<T> & {
   sortType: "controlled";
-  headerColumns: SortableHeaderColumn<T>[];
+  columns: SortableColumn<T>[];
   onSort: (key: keyof T | null, direction: SortDirection) => void;
 };
 
 type UrlBasedSorting<T> = BaseAdvancedTableType<T> & {
   sortType: "url";
-  headerColumns: SortableHeaderColumn<T>[];
+  columns: SortableColumn<T>[];
   sortKey: keyof T | null;
   sortDirection: SortDirection;
   buildHref: (key: keyof T | null, direction: SortDirection) => string;
@@ -63,7 +62,7 @@ export type AdvancedTableType<T> =
  *
  */
 export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
-  const { bodyRowsData, buildBodyRow, getRowKey } = props;
+  const { rows, buildRow, getRowKey } = props;
   const isSortable = props.sortType && props.sortType !== "none";
   const [internalSortKey, setInternalSortKey] = useState<keyof T | null>(null);
   const [internalSortDirection, setInternalSortDirection] =
@@ -71,20 +70,20 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
   const isNumericValue = (value: unknown): boolean => {
     return typeof value === "number" && !isNaN(value);
   };
-  const handleHeaderClick = (column: SortableHeaderColumn<T>) => {
+  const handleHeaderClick = (column: SortableColumn<T>) => {
     if (props.sortType === "automatic") {
       handleAutomaticSort(column, props);
     }
   };
   const handleAutomaticSort = (
-    column: SortableHeaderColumn<T>,
+    column: SortableColumn<T>,
     automaticSortingProps: AutomaticSorting<T>,
   ) => {
     let newSortDirection: SortDirection;
     let newSortKey: keyof T | null | undefined = undefined;
 
     if (internalSortKey === column.sortKey) {
-      const sampleValue = bodyRowsData[0]?.[column.sortKey];
+      const sampleValue = rows[0]?.[column.sortKey];
       const isNumeric = isNumericValue(sampleValue);
 
       if (isNumeric) {
@@ -112,7 +111,7 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
       }
     } else {
       // When clicking a new column, start with the appropriate direction based on type
-      const sampleValue = bodyRowsData[0]?.[column.sortKey];
+      const sampleValue = rows[0]?.[column.sortKey];
       const isNumeric = isNumericValue(sampleValue);
       newSortDirection = isNumeric ? "desc" : "asc";
       newSortKey = column.sortKey;
@@ -130,7 +129,7 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
   };
   const potentiallySortedBodyRowsData =
     props.sortType === "automatic" && internalSortKey
-      ? [...bodyRowsData].sort((a, b) =>
+      ? [...rows].sort((a, b) =>
           internalSortDirection === "asc"
             ? a[internalSortKey] > b[internalSortKey]
               ? 1
@@ -139,13 +138,13 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
               ? -1
               : 1,
         )
-      : bodyRowsData;
+      : rows;
 
   return (
     <Table {...props.tableProps}>
       <thead>
         <tr>
-          {props.headerColumns.map((column, index) => (
+          {props.columns.map((column, index) => (
             <th
               key={`header-${index}`}
               className={isSortable ? "cursor-pointer select-none" : ""}
@@ -154,7 +153,7 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
                   props.sortType === "automatic" ||
                   props.sortType === "controlled"
                 ) {
-                  handleHeaderClick(column as SortableHeaderColumn<T>);
+                  handleHeaderClick(column as SortableColumn<T>);
                 }
               }}
             >
@@ -162,7 +161,7 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
                 {props.sortType === "url" ? (
                   <a
                     href={props.buildHref(
-                      (column as SortableHeaderColumn<T>).sortKey,
+                      (column as SortableColumn<T>).sortKey,
                       props.sortDirection === "desc" ? "asc" : "desc",
                     )}
                     className="no-underline"
@@ -175,8 +174,7 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
                 {props.sortType === "url" && (
                   <SortArrows
                     isVisible={
-                      props.sortKey ===
-                      (column as SortableHeaderColumn<T>).sortKey
+                      props.sortKey === (column as SortableColumn<T>).sortKey
                     }
                     sortDirection={props.sortDirection}
                   />
@@ -184,8 +182,7 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
                 {props.sortType === "automatic" && (
                   <SortArrows
                     isVisible={
-                      internalSortKey ===
-                      (column as SortableHeaderColumn<T>).sortKey
+                      internalSortKey === (column as SortableColumn<T>).sortKey
                     }
                     sortDirection={internalSortDirection}
                   />
@@ -196,9 +193,9 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
         </tr>
       </thead>
       <tbody>
-        {potentiallySortedBodyRowsData.map((rowData, index) => (
-          <tr key={getRowKey ? getRowKey(rowData) : `row-${index}`}>
-            {buildBodyRow(rowData)}
+        {potentiallySortedBodyRowsData.map((row, index) => (
+          <tr key={getRowKey ? getRowKey(row) : `row-${index}`}>
+            {buildRow(row)}
           </tr>
         ))}
       </tbody>
