@@ -17,7 +17,8 @@ type BaseAdvancedTableType<T> = {
   bodyRowsData: T[];
   buildBodyRow: (rowData: T) => ReactNode;
   getRowKey?: (rowData: T) => string | number;
-} & Omit<TableType, "children">;
+  tableProps?: Omit<TableType, "children">;
+};
 
 type NoSorting<T> = BaseAdvancedTableType<T> & {
   sortType?: "none";
@@ -140,7 +141,7 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
       : bodyRowsData;
 
   return (
-    <Table {...props}>
+    <Table {...props.tableProps}>
       <thead>
         <tr>
           {props.headerColumns.map((column, index) => (
