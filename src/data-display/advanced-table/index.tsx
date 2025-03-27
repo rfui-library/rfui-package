@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Table } from "../table";
 import { getPotentiallySortedRows } from "./get-potentially-sorted-rows";
+import { SortArrows } from "./sort-arrows";
 import type {
   AdvancedTableType,
   AutomaticSorting,
@@ -154,21 +155,5 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
         ))}
       </tbody>
     </Table>
-  );
-};
-
-const SortArrows = ({
-  isVisible,
-  sortDirection,
-}: {
-  isVisible: boolean;
-  sortDirection: SortDirection;
-}) => {
-  return (
-    <span
-      className={`ml-0.5 inline-block text-xs ${isVisible ? "" : "invisible"}`}
-    >
-      {sortDirection === "asc" ? "⏶" : "⏷"}
-    </span>
   );
 };
