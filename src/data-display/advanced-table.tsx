@@ -60,59 +60,6 @@ export type AdvancedTableType<T> =
  * 2. Controlled sorting (via onSort callback)
  * 3. URL-based sorting (via buildHref)
  *
- * For automatic sorting, the sort direction cycle depends on the type of data being sorted:
- * - Numbers: desc -> asc -> null
- * - Other types (strings, etc.): asc -> desc -> null
- *
- * @example
- * // Automatic sorting with internal state
- * <AdvancedTable
- *   sortType="automatic"
- *   headerColumns={[
- *     { sortKey: 'name', label: 'Name' },
- *     { sortKey: 'age', label: 'Age' }
- *   ]}
- *   bodyRowsData={data}
- * />
- *
- * // Automatic sorting with external control
- * <AdvancedTable
- *   sortType="automatic"
- *   headerColumns={[
- *     { sortKey: 'name', label: 'Name' },
- *     { sortKey: 'age', label: 'Age' }
- *   ]}
- *   bodyRowsData={data}
- *   onSort={(key, direction) => {
- *     // Handle sorting logic here
- *   }}
- * />
- *
- * // Controlled sorting
- * <AdvancedTable
- *   sortType="controlled"
- *   headerColumns={[
- *     { sortKey: 'name', label: 'Name' },
- *     { sortKey: 'age', label: 'Age' }
- *   ]}
- *   bodyRowsData={data}
- *   onSort={(key, direction) => {
- *     // Handle sorting logic here
- *   }}
- * />
- *
- * // URL-based sorting
- * <AdvancedTable
- *   sortType="url"
- *   headerColumns={[
- *     { sortKey: 'name', label: 'Name' },
- *     { sortKey: 'age', label: 'Age' }
- *   ]}
- *   bodyRowsData={data}
- *   buildHref={(key, direction) =>
- *     `/users?sort=${key}&direction=${direction}`
- *   }
- * />
  */
 export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
   const { bodyRowsData, buildBodyRow, getRowKey } = props;
