@@ -124,22 +124,12 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
                 ) : (
                   column.label
                 )}
-                {props.sortType === "url" && (
-                  <SortArrows
-                    isVisible={
-                      props.sortKey === (column as SortableColumn<T>).sortKey
-                    }
-                    sortDirection={props.sortDirection}
-                  />
-                )}
-                {props.sortType === "automatic" && (
-                  <SortArrows
-                    isVisible={
-                      internalSortKey === (column as SortableColumn<T>).sortKey
-                    }
-                    sortDirection={internalSortDirection}
-                  />
-                )}
+                <SortArrows
+                  advancedTableProps={props}
+                  internalSortKey={internalSortKey}
+                  columnSortKey={(column as SortableColumn<T>).sortKey}
+                  internalSortDirection={internalSortDirection}
+                />
               </div>
             </th>
           ))}
