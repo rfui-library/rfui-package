@@ -65,8 +65,9 @@ export type AdvancedTableType<T> =
 export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
   const { bodyRowsData, buildBodyRow, getRowKey } = props;
   const isSortable = props.sortType !== "none";
-  const [sortKey, setSortKey] = useState<keyof T | null>(null);
-  const [sortDirection, setSortDirection] = useState<SortDirection>(null);
+  const [internalSortKey, setInternalSortKey] = useState<keyof T | null>(null);
+  const [internalSortDirection, setInternalSortDirection] =
+    useState<SortDirection>(null);
   const isNumericValue = (value: unknown): boolean => {
     return typeof value === "number" && !isNaN(value);
   };
@@ -82,15 +83,15 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
     let newSortDirection: SortDirection;
     let newSortKey: keyof T | null | undefined = undefined;
 
-    if (sortKey === column.sortKey) {
+    if (internalSortKey === column.sortKey) {
       const sampleValue = bodyRowsData[0]?.[column.sortKey];
       const isNumeric = isNumericValue(sampleValue);
 
       if (isNumeric) {
         // For numbers: desc -> asc -> null
-        if (sortDirection === "desc") {
+        if (internalSortDirection === "desc") {
           newSortDirection = "asc";
-        } else if (sortDirection === "asc") {
+        } else if (internalSortDirection === "asc") {
           newSortDirection = null;
           newSortKey = null;
         } else {
@@ -99,9 +100,9 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
         }
       } else {
         // For other types: asc -> desc -> null
-        if (sortDirection === "asc") {
+        if (internalSortDirection === "asc") {
           newSortDirection = "desc";
-        } else if (sortDirection === "desc") {
+        } else if (internalSortDirection === "desc") {
           newSortDirection = null;
           newSortKey = null;
         } else {
@@ -121,20 +122,20 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
       automaticSortingProps.onSort(column.sortKey, newSortDirection);
     }
 
-    setSortDirection(newSortDirection);
+    setInternalSortDirection(newSortDirection);
 
     if (newSortKey !== undefined) {
-      setSortKey(newSortKey);
+      setInternalSortKey(newSortKey);
     }
   };
   const potentiallySortedBodyRowsData =
-    props.sortType === "automatic" && sortKey
+    props.sortType === "automatic" && internalSortKey
       ? [...bodyRowsData].sort((a, b) =>
-          sortDirection === "asc"
-            ? a[sortKey] > b[sortKey]
+          internalSortDirection === "asc"
+            ? a[internalSortKey] > b[internalSortKey]
               ? 1
               : -1
-            : a[sortKey] > b[sortKey]
+            : a[internalSortKey] > b[internalSortKey]
               ? -1
               : 1,
         )
@@ -183,9 +184,10 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
                 {props.sortType === "automatic" && (
                   <SortArrows
                     isVisible={
-                      sortKey === (column as SortableHeaderColumn<T>).sortKey
+                      internalSortKey ===
+                      (column as SortableHeaderColumn<T>).sortKey
                     }
-                    sortDirection={sortDirection}
+                    sortDirection={internalSortDirection}
                   />
                 )}
               </div>
