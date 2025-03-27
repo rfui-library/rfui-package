@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Flex } from "../../layout/flex";
 import { isNumericValue } from "../../utilities/is-numeric-value";
 import { Table } from "../table";
 import { getPotentiallySortedRows } from "./get-potentially-sorted-rows";
@@ -110,7 +111,7 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
                 }
               }}
             >
-              <div className="flex items-center gap-1">
+              <Flex className="items-center gap-1">
                 {props.sortType === "url" ? (
                   <a
                     href={props.buildHref(
@@ -130,7 +131,7 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
                   columnSortKey={(column as SortableColumn<T>).sortKey}
                   internalSortDirection={internalSortDirection}
                 />
-              </div>
+              </Flex>
             </th>
           ))}
         </tr>
