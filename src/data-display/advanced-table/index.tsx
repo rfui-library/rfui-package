@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { isNumericValue } from "../../utilities/is-numeric-value";
 import { Table } from "../table";
+import { getNewSortState } from "./get-new-sort-state";
 import { TableBody } from "./table-body";
 import { TableHeader } from "./table-header";
 import type {
@@ -37,53 +37,19 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
     column: SortableColumn<T>,
     automaticSortingProps: AutomaticSorting<T>,
   ) => {
-    let newSortDirection: SortDirection;
-    let newSortKey: keyof T | null | undefined = undefined;
-
-    if (internalSortKey === column.sortKey) {
-      const sampleValue = rows[0]?.[column.sortKey];
-      const isNumeric = isNumericValue(sampleValue);
-
-      if (isNumeric) {
-        // For numbers: desc -> asc -> null
-        if (internalSortDirection === "desc") {
-          newSortDirection = "asc";
-        } else if (internalSortDirection === "asc") {
-          newSortDirection = null;
-          newSortKey = null;
-        } else {
-          newSortDirection = "desc";
-          newSortKey = column.sortKey;
-        }
-      } else {
-        // For other types: asc -> desc -> null
-        if (internalSortDirection === "asc") {
-          newSortDirection = "desc";
-        } else if (internalSortDirection === "desc") {
-          newSortDirection = null;
-          newSortKey = null;
-        } else {
-          newSortDirection = "asc";
-          newSortKey = column.sortKey;
-        }
-      }
-    } else {
-      // When clicking a new column, start with the appropriate direction based on type
-      const sampleValue = rows[0]?.[column.sortKey];
-      const isNumeric = isNumericValue(sampleValue);
-      newSortDirection = isNumeric ? "desc" : "asc";
-      newSortKey = column.sortKey;
-    }
+    const { newSortDirection, newSortKey } = getNewSortState(
+      internalSortDirection,
+      internalSortKey,
+      column.sortKey,
+      rows,
+    );
 
     if (automaticSortingProps.onSort) {
-      automaticSortingProps.onSort(column.sortKey, newSortDirection);
+      automaticSortingProps.onSort(newSortKey, newSortDirection);
     }
 
     setInternalSortDirection(newSortDirection);
-
-    if (newSortKey !== undefined) {
-      setInternalSortKey(newSortKey);
-    }
+    setInternalSortKey(newSortKey);
   };
 
   return (
