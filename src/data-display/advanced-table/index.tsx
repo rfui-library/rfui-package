@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Table } from "../table";
+import { getPotentiallySortedRows } from "./get-potentially-sorted-rows";
 import type {
   AdvancedTableType,
   AutomaticSorting,
@@ -86,18 +87,12 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
       setInternalSortKey(newSortKey);
     }
   };
-  const potentiallySortedBodyRowsData =
-    props.sortType === "automatic" && internalSortKey
-      ? [...rows].sort((a, b) =>
-          internalSortDirection === "asc"
-            ? a[internalSortKey] > b[internalSortKey]
-              ? 1
-              : -1
-            : a[internalSortKey] > b[internalSortKey]
-              ? -1
-              : 1,
-        )
-      : rows;
+  const potentiallySortedRows = getPotentiallySortedRows<T>(
+    props.sortType,
+    rows,
+    internalSortKey,
+    internalSortDirection,
+  );
 
   return (
     <Table {...props.tableProps}>
@@ -152,7 +147,7 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
         </tr>
       </thead>
       <tbody>
-        {potentiallySortedBodyRowsData.map((row, index) => (
+        {potentiallySortedRows.map((row, index) => (
           <tr key={getRowKey ? getRowKey(row) : `row-${index}`}>
             {buildRow(row)}
           </tr>
