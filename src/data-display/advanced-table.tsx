@@ -64,7 +64,7 @@ export type AdvancedTableType<T> =
  */
 export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
   const { bodyRowsData, buildBodyRow, getRowKey } = props;
-  const isSortable = props.sortType !== "none";
+  const isSortable = props.sortType && props.sortType !== "none";
   const [internalSortKey, setInternalSortKey] = useState<keyof T | null>(null);
   const [internalSortDirection, setInternalSortDirection] =
     useState<SortDirection>(null);
