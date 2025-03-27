@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { isNumericValue } from "../../utilities/is-numeric-value";
 import { Table } from "../table";
 import { getPotentiallySortedRows } from "./get-potentially-sorted-rows";
 import { SortArrows } from "./sort-arrows";
@@ -28,9 +29,6 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
   const [internalSortKey, setInternalSortKey] = useState<keyof T | null>(null);
   const [internalSortDirection, setInternalSortDirection] =
     useState<SortDirection>(null);
-  const isNumericValue = (value: unknown): boolean => {
-    return typeof value === "number" && !isNaN(value);
-  };
   const handleHeaderClick = (column: SortableColumn<T>) => {
     if (props.sortType === "automatic") {
       handleAutomaticSort(column, props);
