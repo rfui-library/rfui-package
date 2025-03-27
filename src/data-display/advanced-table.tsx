@@ -114,60 +114,57 @@ export type AdvancedTableType<T> =
  *   }
  * />
  */
-export const AdvancedTable = <T,>({
-  sortType = "none",
-  headerColumns,
-  bodyRowsData,
-  buildBodyRow,
-  getRowKey,
-  ...props
-}: AdvancedTableType<T>) => {
-  const isSortable = sortType !== "none";
+export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
+  const { headerColumns, bodyRowsData, buildBodyRow, getRowKey } = props;
+  const isSortable = props.sortType !== "none";
   const [sortKey, setSortKey] = useState<keyof T | null>(null);
   const [sortDirection, setSortDirection] = useState<SortDirection>(null);
   const isNumericValue = (value: unknown): boolean => {
     return typeof value === "number" && !isNaN(value);
   };
   const handleHeaderClick = (column: SortableHeaderColumn<T>) => {
-    if (sortType === "automatic") {
-      if (sortKey === column.sortKey) {
-        const sampleValue = bodyRowsData[0]?.[column.sortKey];
-        const isNumeric = isNumericValue(sampleValue);
+    if (props.sortType === "automatic") {
+      handleAutomaticSort(column);
+    }
+  };
+  const handleAutomaticSort = (column: SortableHeaderColumn<T>) => {
+    if (sortKey === column.sortKey) {
+      const sampleValue = bodyRowsData[0]?.[column.sortKey];
+      const isNumeric = isNumericValue(sampleValue);
 
-        if (isNumeric) {
-          // For numbers: desc -> asc -> null
-          if (sortDirection === "desc") {
-            setSortDirection("asc");
-          } else if (sortDirection === "asc") {
-            setSortKey(null);
-            setSortDirection(null);
-          } else {
-            setSortKey(column.sortKey);
-            setSortDirection("desc");
-          }
+      if (isNumeric) {
+        // For numbers: desc -> asc -> null
+        if (sortDirection === "desc") {
+          setSortDirection("asc");
+        } else if (sortDirection === "asc") {
+          setSortKey(null);
+          setSortDirection(null);
         } else {
-          // For other types: asc -> desc -> null
-          if (sortDirection === "asc") {
-            setSortDirection("desc");
-          } else if (sortDirection === "desc") {
-            setSortKey(null);
-            setSortDirection(null);
-          } else {
-            setSortKey(column.sortKey);
-            setSortDirection("asc");
-          }
+          setSortKey(column.sortKey);
+          setSortDirection("desc");
         }
       } else {
-        // When clicking a new column, start with the appropriate direction based on type
-        const sampleValue = bodyRowsData[0]?.[column.sortKey];
-        const isNumeric = isNumericValue(sampleValue);
-        setSortKey(column.sortKey);
-        setSortDirection(isNumeric ? "desc" : "asc");
+        // For other types: asc -> desc -> null
+        if (sortDirection === "asc") {
+          setSortDirection("desc");
+        } else if (sortDirection === "desc") {
+          setSortKey(null);
+          setSortDirection(null);
+        } else {
+          setSortKey(column.sortKey);
+          setSortDirection("asc");
+        }
       }
+    } else {
+      // When clicking a new column, start with the appropriate direction based on type
+      const sampleValue = bodyRowsData[0]?.[column.sortKey];
+      const isNumeric = isNumericValue(sampleValue);
+      setSortKey(column.sortKey);
+      setSortDirection(isNumeric ? "desc" : "asc");
     }
   };
   const potentiallySortedBodyRowsData =
-    sortType === "automatic" && sortKey
+    props.sortType === "automatic" && sortKey
       ? [...bodyRowsData].sort((a, b) =>
           sortDirection === "asc"
             ? a[sortKey] > b[sortKey]
@@ -188,19 +185,20 @@ export const AdvancedTable = <T,>({
               key={`header-${index}`}
               className={isSortable ? "cursor-pointer select-none" : ""}
               onClick={() => {
-                if (sortType === "automatic" || sortType === "controlled") {
+                if (
+                  props.sortType === "automatic" ||
+                  props.sortType === "controlled"
+                ) {
                   handleHeaderClick(column as SortableHeaderColumn<T>);
                 }
               }}
             >
               <div className="flex items-center gap-1">
-                {sortType === "url" ? (
+                {props.sortType === "url" ? (
                   <a
-                    href={(props as UrlBasedSorting<T>).buildHref(
+                    href={props.buildHref(
                       (column as SortableHeaderColumn<T>).sortKey,
-                      (props as UrlBasedSorting<T>).sortDirection === "desc"
-                        ? "asc"
-                        : "desc",
+                      props.sortDirection === "desc" ? "asc" : "desc",
                     )}
                     className="no-underline"
                   >
@@ -209,16 +207,16 @@ export const AdvancedTable = <T,>({
                 ) : (
                   column.label
                 )}
-                {sortType === "url" && (
+                {props.sortType === "url" && (
                   <SortArrows
                     isVisible={
-                      (props as UrlBasedSorting<T>).sortKey ===
+                      props.sortKey ===
                       (column as SortableHeaderColumn<T>).sortKey
                     }
-                    sortDirection={(props as UrlBasedSorting<T>).sortDirection}
+                    sortDirection={props.sortDirection}
                   />
                 )}
-                {sortType === "automatic" && (
+                {props.sortType === "automatic" && (
                   <SortArrows
                     isVisible={
                       sortKey === (column as SortableHeaderColumn<T>).sortKey
