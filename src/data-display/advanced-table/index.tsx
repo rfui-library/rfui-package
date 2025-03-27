@@ -1,54 +1,13 @@
-import type { ReactNode } from "react";
 import { useState } from "react";
-import { Table, type TableType } from "./table";
+import { Table } from "../table";
+import type {
+  AdvancedTableType,
+  AutomaticSorting,
+  SortableColumn,
+  SortDirection,
+} from "./types";
 
-type SortDirection = "asc" | "desc" | null;
-
-type BaseColumn = {
-  label: ReactNode;
-};
-
-type SortableColumn<T> = BaseColumn & {
-  sortKey: keyof T;
-};
-
-type BaseAdvancedTableType<T> = {
-  rows: T[];
-  buildRow: (row: T) => ReactNode;
-  getRowKey?: (row: T) => string | number;
-  tableProps?: Omit<TableType, "children">;
-};
-
-type NoSorting<T> = BaseAdvancedTableType<T> & {
-  sortType?: "none";
-  columns: BaseColumn[];
-};
-
-type AutomaticSorting<T> = BaseAdvancedTableType<T> & {
-  sortType: "automatic";
-  columns: SortableColumn<T>[];
-  onSort?: (key: keyof T | null, direction: SortDirection) => void;
-};
-
-type ControlledSorting<T> = BaseAdvancedTableType<T> & {
-  sortType: "controlled";
-  columns: SortableColumn<T>[];
-  onSort: (key: keyof T | null, direction: SortDirection) => void;
-};
-
-type UrlBasedSorting<T> = BaseAdvancedTableType<T> & {
-  sortType: "url";
-  columns: SortableColumn<T>[];
-  sortKey: keyof T | null;
-  sortDirection: SortDirection;
-  buildHref: (key: keyof T | null, direction: SortDirection) => string;
-};
-
-export type AdvancedTableType<T> =
-  | NoSorting<T>
-  | AutomaticSorting<T>
-  | ControlledSorting<T>
-  | UrlBasedSorting<T>;
+export type { AdvancedTableType };
 
 /**
  * @function AdvancedTable
