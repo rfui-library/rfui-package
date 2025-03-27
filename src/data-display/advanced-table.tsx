@@ -211,21 +211,23 @@ export const AdvancedTable = <T,>({
                 ) : (
                   column.label
                 )}
-                {sortType === "url" &&
-                  (props as UrlBasedSorting<T>).sortKey ===
-                    (column as SortableHeaderColumn<T>).sortKey && (
-                    <span className="text-xs">
-                      {(props as UrlBasedSorting<T>).sortDirection === "asc"
-                        ? "↑"
-                        : "↓"}
-                    </span>
-                  )}
-                {sortType === "automatic" &&
-                  sortKey === (column as SortableHeaderColumn<T>).sortKey && (
-                    <span className="text-xs">
-                      {sortDirection === "asc" ? "↑" : "↓"}
-                    </span>
-                  )}
+                {sortType === "url" && (
+                  <SortArrows
+                    isVisible={
+                      (props as UrlBasedSorting<T>).sortKey ===
+                      (column as SortableHeaderColumn<T>).sortKey
+                    }
+                    sortDirection={(props as UrlBasedSorting<T>).sortDirection}
+                  />
+                )}
+                {sortType === "automatic" && (
+                  <SortArrows
+                    isVisible={
+                      sortKey === (column as SortableHeaderColumn<T>).sortKey
+                    }
+                    sortDirection={sortDirection}
+                  />
+                )}
               </div>
             </th>
           ))}
@@ -239,5 +241,21 @@ export const AdvancedTable = <T,>({
         ))}
       </tbody>
     </Table>
+  );
+};
+
+const SortArrows = ({
+  isVisible,
+  sortDirection,
+}: {
+  isVisible: boolean;
+  sortDirection: SortDirection;
+}) => {
+  return (
+    <span
+      className={`ml-0.5 inline-block text-xs ${isVisible ? "" : "invisible"}`}
+    >
+      {sortDirection === "asc" ? "⏶" : "⏷"}
+    </span>
   );
 };
