@@ -1,4 +1,5 @@
 import { Flex } from "../../layout/flex";
+import { getNewSortState } from "./get-new-sort-state";
 import { SortArrows } from "./sort-arrows";
 import { AdvancedTableType, SortableColumn, SortDirection } from "./types";
 
@@ -36,7 +37,12 @@ export const TableHeader = <T,>({
                 <a
                   href={props.buildHref(
                     (column as SortableColumn<T>).sortKey,
-                    props.sortDirection === "desc" ? "asc" : "desc",
+                    getNewSortState(
+                      props.sortDirection,
+                      (column as SortableColumn<T>).sortKey,
+                      (column as SortableColumn<T>).sortKey,
+                      props.rows,
+                    ).newSortDirection,
                   )}
                   className="no-underline"
                 >
