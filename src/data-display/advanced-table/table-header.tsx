@@ -6,12 +6,12 @@ export const TableHeader = <T,>({
   props,
   internalSortKey,
   internalSortDirection,
-  handleHeaderClick,
+  handleColumnClick,
 }: {
   props: AdvancedTableType<T>;
   internalSortKey: keyof T | null;
   internalSortDirection: SortDirection;
-  handleHeaderClick: (column: SortableColumn<T>) => void;
+  handleColumnClick: (column: SortableColumn<T>) => void;
 }) => {
   const isSortable = props.sortType && props.sortType !== "none";
 
@@ -27,7 +27,7 @@ export const TableHeader = <T,>({
                 props.sortType === "automatic" ||
                 props.sortType === "controlled"
               ) {
-                handleHeaderClick(column as SortableColumn<T>);
+                handleColumnClick(column as SortableColumn<T>);
               }
             }}
           >

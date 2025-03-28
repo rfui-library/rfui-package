@@ -20,7 +20,10 @@ export const SortArrows = <T,>({
         sortDirection={internalSortDirection}
       />
     );
-  } else if (advancedTableProps.sortType === "url") {
+  } else if (
+    advancedTableProps.sortType === "url" ||
+    advancedTableProps.sortType === "controlled"
+  ) {
     return (
       <SortArrowsHelper
         isVisible={advancedTableProps.sortKey === columnSortKey}

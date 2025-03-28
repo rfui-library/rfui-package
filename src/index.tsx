@@ -1,5 +1,8 @@
 export { AdvancedTable } from "./data-display/advanced-table";
-export type { AdvancedTableType } from "./data-display/advanced-table";
+export type {
+  AdvancedTableType,
+  SortDirection,
+} from "./data-display/advanced-table";
 export { Badge } from "./data-display/badge";
 export type { BadgeType } from "./data-display/badge";
 export {

@@ -32,6 +32,8 @@ export type AutomaticSorting<T> = BaseAdvancedTableType<T> & {
 export type ControlledSorting<T> = BaseAdvancedTableType<T> & {
   sortType: "controlled";
   columns: SortableColumn<T>[];
+  sortKey: keyof T | null;
+  sortDirection: SortDirection;
   onSort: (key: keyof T | null, direction: SortDirection) => void;
 };
 

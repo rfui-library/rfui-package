@@ -6,11 +6,12 @@ import { TableHeader } from "./table-header";
 import type {
   AdvancedTableType,
   AutomaticSorting,
+  ControlledSorting,
   SortableColumn,
   SortDirection,
 } from "./types";
 
-export type { AdvancedTableType };
+export type { AdvancedTableType, SortDirection };
 
 /**
  * @function AdvancedTable
@@ -28,9 +29,11 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
   const [internalSortKey, setInternalSortKey] = useState<keyof T | null>(null);
   const [internalSortDirection, setInternalSortDirection] =
     useState<SortDirection>(null);
-  const handleHeaderClick = (column: SortableColumn<T>) => {
+  const handleColumnClick = (column: SortableColumn<T>) => {
     if (props.sortType === "automatic") {
       handleAutomaticSort(column, props);
+    } else if (props.sortType === "controlled") {
+      handleControlledSort(column, props);
     }
   };
   const handleAutomaticSort = (
@@ -51,6 +54,19 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
     setInternalSortDirection(newSortDirection);
     setInternalSortKey(newSortKey);
   };
+  const handleControlledSort = (
+    column: SortableColumn<T>,
+    controlledSortingProps: ControlledSorting<T>,
+  ) => {
+    const { newSortDirection, newSortKey } = getNewSortState(
+      controlledSortingProps.sortDirection,
+      controlledSortingProps.sortKey,
+      column.sortKey,
+      rows,
+    );
+
+    controlledSortingProps.onSort(newSortKey, newSortDirection);
+  };
 
   return (
     <Table {...props.tableProps}>
@@ -58,7 +74,7 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
         props={props}
         internalSortKey={internalSortKey}
         internalSortDirection={internalSortDirection}
-        handleHeaderClick={handleHeaderClick}
+        handleColumnClick={handleColumnClick}
       />
       <TableBody
         sortType={props.sortType}
