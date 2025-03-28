@@ -4,7 +4,7 @@
   "description": "A React component library",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rollup -c",
+    "build": "rm -rf dist && rollup -c",
     "start": "rollup -c -w",
     "typecheck": "tsc --noEmit"
   },
