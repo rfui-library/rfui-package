@@ -66,7 +66,7 @@ export const DropdownMenu = ({
         {buttonText}{" "}
         <ChevronDownIcon className="ml-1 inline-block" strokeWidth={2} />
       </MenuButton>
-      <MenuItems anchor="bottom" className={menuItemsClassName}>
+      <MenuItems anchor="bottom start" className={menuItemsClassName}>
         <Items items={items} />
       </MenuItems>
     </Menu>

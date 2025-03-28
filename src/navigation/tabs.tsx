@@ -34,7 +34,7 @@ export const Tabs = ({
 
   return (
     <div {...rest}>
-      <Flex className="overflow-x-scroll border-b border-b-neutral-500">
+      <Flex className="overflow-x-auto border-b border-b-neutral-500">
         {tabNames.map((tabName) => (
           <Tab
             key={tabName}
@@ -47,7 +47,7 @@ export const Tabs = ({
           />
         ))}
       </Flex>
-      <div className="mt-6 overflow-x-scroll">{tabSections}</div>
+      <div className="mt-6 overflow-x-auto">{tabSections}</div>
     </div>
   );
 };
