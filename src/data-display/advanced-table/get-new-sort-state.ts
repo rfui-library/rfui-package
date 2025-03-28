@@ -3,13 +3,15 @@ import { SortDirection } from "./types";
 
 export const getNewSortState = <T>(
   oldSortDirection: SortDirection,
-  oldSortKey: keyof T | null,
-  columnSortKey: keyof T,
+  oldSortKey: string | null,
+  columnSortKey: string,
   rows: T[],
 ) => {
   let newSortDirection: SortDirection;
-  let newSortKey: keyof T | null = oldSortKey;
-  const sampleValue = rows[0]?.[columnSortKey];
+  let newSortKey: string | null = oldSortKey;
+  const sampleValue = rows[0]
+    ? (rows[0] as Record<string, unknown>)[columnSortKey]
+    : null;
   const isNumeric = isNumericValue(sampleValue);
   const shouldReorderSameColumn = oldSortKey === columnSortKey;
 

@@ -26,10 +26,10 @@ export type { AdvancedTableType, SortDirection };
  */
 export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
   const { rows, buildRow, getRowKey } = props;
-  const [internalSortKey, setInternalSortKey] = useState<keyof T | null>(null);
+  const [internalSortKey, setInternalSortKey] = useState<string | null>(null);
   const [internalSortDirection, setInternalSortDirection] =
     useState<SortDirection>(null);
-  const handleColumnClick = (column: SortableColumn<T>) => {
+  const handleColumnClick = (column: SortableColumn) => {
     if (props.sortType === "automatic") {
       handleAutomaticSort(column, props);
     } else if (props.sortType === "controlled") {
@@ -37,7 +37,7 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
     }
   };
   const handleAutomaticSort = (
-    column: SortableColumn<T>,
+    column: SortableColumn,
     automaticSortingProps: AutomaticSorting<T>,
   ) => {
     const { newSortDirection, newSortKey } = getNewSortState(
@@ -55,7 +55,7 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
     setInternalSortKey(newSortKey);
   };
   const handleControlledSort = (
-    column: SortableColumn<T>,
+    column: SortableColumn,
     controlledSortingProps: ControlledSorting<T>,
   ) => {
     const { newSortDirection, newSortKey } = getNewSortState(

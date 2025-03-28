@@ -7,8 +7,8 @@ export type BaseColumn = {
   label: ReactNode;
 };
 
-export type SortableColumn<T> = BaseColumn & {
-  sortKey: keyof T;
+export type SortableColumn = BaseColumn & {
+  sortKey: string;
 };
 
 export type BaseAdvancedTableType<T> = {
@@ -25,24 +25,24 @@ export type NoSorting<T> = BaseAdvancedTableType<T> & {
 
 export type AutomaticSorting<T> = BaseAdvancedTableType<T> & {
   sortType: "automatic";
-  columns: SortableColumn<T>[];
-  onSort?: (key: keyof T | null, direction: SortDirection) => void;
+  columns: SortableColumn[];
+  onSort?: (key: string | null, direction: SortDirection) => void;
 };
 
 export type ControlledSorting<T> = BaseAdvancedTableType<T> & {
   sortType: "controlled";
-  columns: SortableColumn<T>[];
-  sortKey: keyof T | null;
+  columns: SortableColumn[];
+  sortKey: string | null;
   sortDirection: SortDirection;
-  onSort: (key: keyof T | null, direction: SortDirection) => void;
+  onSort: (key: string | null, direction: SortDirection) => void;
 };
 
 export type UrlBasedSorting<T> = BaseAdvancedTableType<T> & {
   sortType: "url";
-  columns: SortableColumn<T>[];
-  sortKey: keyof T | null;
+  columns: SortableColumn[];
+  sortKey: string | null;
   sortDirection: SortDirection;
-  buildHref: (key: keyof T | null, direction: SortDirection) => string;
+  buildHref: (key: string | null, direction: SortDirection) => string;
 };
 
 export type AdvancedTableType<T> =

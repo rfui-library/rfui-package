@@ -2,7 +2,7 @@ import { AdvancedTableType, SortDirection } from "./types";
 
 type TableBodyType<T> = {
   sortType: AdvancedTableType<T>["sortType"];
-  internalSortKey: keyof T | null;
+  internalSortKey: string | null;
   internalSortDirection: SortDirection;
   rows: T[];
   getRowKey: AdvancedTableType<T>["getRowKey"];
@@ -43,11 +43,22 @@ export const TableBody = <T,>({
 
 const getSortedRows = <T,>(
   rows: T[],
-  internalSortKey: keyof T,
+  internalSortKey: string,
   internalSortDirection: SortDirection,
 ) =>
   [...rows].sort((a, b) => {
-    const comparison = a[internalSortKey] > b[internalSortKey] ? 1 : -1;
+    const aValue = (a as Record<string, unknown>)[internalSortKey];
+    const bValue = (b as Record<string, unknown>)[internalSortKey];
+
+    if (typeof aValue === "number" && typeof bValue === "number") {
+      return internalSortDirection === "asc"
+        ? aValue - bValue
+        : bValue - aValue;
+    }
+
+    const aString = String(aValue);
+    const bString = String(bValue);
+    const comparison = aString.localeCompare(bString);
 
     return internalSortDirection === "asc" ? comparison : -comparison;
   });

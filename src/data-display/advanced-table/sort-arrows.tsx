@@ -2,8 +2,8 @@ import type { AdvancedTableType, SortDirection } from "./types";
 
 type SortArrowsType<T> = {
   advancedTableProps: AdvancedTableType<T>;
-  internalSortKey: keyof T | null;
-  columnSortKey: keyof T;
+  internalSortKey: string | null;
+  columnSortKey: string;
   internalSortDirection: SortDirection;
 };
 

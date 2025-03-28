@@ -10,9 +10,9 @@ export const TableHeader = <T,>({
   handleColumnClick,
 }: {
   props: AdvancedTableType<T>;
-  internalSortKey: keyof T | null;
+  internalSortKey: string | null;
   internalSortDirection: SortDirection;
-  handleColumnClick: (column: SortableColumn<T>) => void;
+  handleColumnClick: (column: SortableColumn) => void;
 }) => {
   const isSortable = props.sortType && props.sortType !== "none";
 
@@ -28,7 +28,7 @@ export const TableHeader = <T,>({
                 props.sortType === "automatic" ||
                 props.sortType === "controlled"
               ) {
-                handleColumnClick(column as SortableColumn<T>);
+                handleColumnClick(column as SortableColumn);
               }
             }}
           >
@@ -36,11 +36,11 @@ export const TableHeader = <T,>({
               {props.sortType === "url" ? (
                 <a
                   href={props.buildHref(
-                    (column as SortableColumn<T>).sortKey,
+                    (column as SortableColumn).sortKey,
                     getNewSortState(
                       props.sortDirection,
-                      (column as SortableColumn<T>).sortKey,
-                      (column as SortableColumn<T>).sortKey,
+                      (column as SortableColumn).sortKey,
+                      (column as SortableColumn).sortKey,
                       props.rows,
                     ).newSortDirection,
                   )}
@@ -54,7 +54,7 @@ export const TableHeader = <T,>({
               <SortArrows
                 advancedTableProps={props}
                 internalSortKey={internalSortKey}
-                columnSortKey={(column as SortableColumn<T>).sortKey}
+                columnSortKey={(column as SortableColumn).sortKey}
                 internalSortDirection={internalSortDirection}
               />
             </Flex>
