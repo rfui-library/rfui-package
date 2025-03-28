@@ -1,3 +1,4 @@
+import { getNestedValue } from "./get-nested-value";
 import { AdvancedTableType, SortDirection } from "./types";
 
 type TableBodyType<T> = {
@@ -47,8 +48,14 @@ const getSortedRows = <T,>(
   internalSortDirection: SortDirection,
 ) =>
   [...rows].sort((a, b) => {
-    const aValue = (a as Record<string, unknown>)[internalSortKey];
-    const bValue = (b as Record<string, unknown>)[internalSortKey];
+    const aValue = getNestedValue(
+      a as Record<string, unknown>,
+      internalSortKey,
+    );
+    const bValue = getNestedValue(
+      b as Record<string, unknown>,
+      internalSortKey,
+    );
 
     if (typeof aValue === "number" && typeof bValue === "number") {
       return internalSortDirection === "asc"

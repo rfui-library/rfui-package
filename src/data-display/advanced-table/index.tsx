@@ -23,6 +23,53 @@ export type { AdvancedTableType, SortDirection };
  * 2. Controlled sorting (via onSort callback)
  * 3. URL-based sorting (via buildHref)
  *
+ * @example
+ * // Automatic sorting example
+ * <AdvancedTable
+ *   sortType="automatic"
+ *   columns={[
+ *     { label: "Name", sortKey: "name" },
+ *     { label: "Age", sortKey: "age" },
+ *   ]}
+ *   rows={[
+ *     { name: "Alice", age: 19 },
+ *     { name: "Bob", age: 25 },
+ *   ]}
+ *   buildRow={(row: RowData) => (
+ *     <>
+ *       <td>{row.name}</td>
+ *       <td>{row.age}</td>
+ *     </>
+ *   )}
+ *   onSort={(sortKey, sortType) => {
+ *     console.log(sortKey, sortType);
+ *   }}
+ * />
+ *
+ * @example
+ * // URL-based sorting example
+ * <AdvancedTable
+ *   sortType="url"
+ *   columns={[
+ *     { label: "Name", sortKey: "name" },
+ *     { label: "Age", sortKey: "age" },
+ *   ]}
+ *   rows={[
+ *     { name: "Alice", age: 19 },
+ *     { name: "Bob", age: 25 },
+ *   ]}
+ *   buildHref={(key, direction) =>
+ *     `/users?sort=${key}&direction=${direction}`
+ *   }
+ *   buildRow={(row: RowData) => (
+ *     <>
+ *       <td>{row.name}</td>
+ *       <td>{row.age}</td>
+ *     </>
+ *   )}
+ *   sortKey={null}
+ *   sortDirection={null}
+ * />
  */
 export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
   const { rows, buildRow, getRowKey } = props;
