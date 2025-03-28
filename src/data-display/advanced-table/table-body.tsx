@@ -25,7 +25,15 @@ export const TableBody = <T,>({
   return (
     <tbody>
       {rows.map((row, index) => (
-        <tr key={getRowKey ? getRowKey(row) : `row-${index}`}>
+        <tr
+          key={
+            getRowKey
+              ? getRowKey(row)
+              : typeof row === "object" && row && "id" in row
+                ? `row-${row.id}`
+                : `row-${index}`
+          }
+        >
           {buildRow(row)}
         </tr>
       ))}

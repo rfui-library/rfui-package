@@ -20,7 +20,7 @@ export const TableHeader = <T,>({
       <tr>
         {props.columns.map((column, index) => (
           <th
-            key={`header-${index}`}
+            key={`${column.label}-${index}`}
             className={isSortable ? "cursor-pointer select-none" : ""}
             onClick={() => {
               if (
