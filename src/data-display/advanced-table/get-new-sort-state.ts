@@ -7,6 +7,10 @@ export const getNewSortState = <T>(
   columnSortKey: string,
   rows: T[],
 ) => {
+  if (columnSortKey === "projectedTime") {
+    debugger;
+  }
+
   let newSortDirection: SortDirection;
   let newSortKey: string | null = oldSortKey;
   const sampleValue = rows[0]
@@ -25,7 +29,6 @@ export const getNewSortState = <T>(
         newSortKey = null;
       } else {
         newSortDirection = "desc";
-        newSortKey = columnSortKey;
       }
     } else {
       // For other types: asc -> desc -> null
@@ -36,7 +39,6 @@ export const getNewSortState = <T>(
         newSortKey = null;
       } else {
         newSortDirection = "asc";
-        newSortKey = columnSortKey;
       }
     }
   } else {
