@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Flex } from "../../layout/flex";
 import { getNewSortState } from "./get-new-sort-state";
 import { SortArrows } from "./sort-arrows";
@@ -14,7 +15,12 @@ export const TableHeader = <T,>({
   internalSortDirection: SortDirection;
   handleColumnClick: (column: SortableColumn) => void;
 }) => {
+  const [currHref, setCurrHref] = useState<string | null>(null);
   const isSortable = props.sortType && props.sortType !== "none";
+
+  useEffect(() => {
+    setCurrHref(window.location.href);
+  }, []);
 
   return (
     <thead>
@@ -35,16 +41,26 @@ export const TableHeader = <T,>({
             <Flex className="items-center gap-1">
               {props.sortType === "url" ? (
                 <a
-                  href={props.buildHref(
-                    (column as SortableColumn).sortKey,
-                    getNewSortState(
+                  className="no-underline"
+                  href={(() => {
+                    const newSortState = getNewSortState(
                       props.sortDirection,
-                      (column as SortableColumn).sortKey,
+                      props.sortKey,
                       (column as SortableColumn).sortKey,
                       props.rows,
-                    ).newSortDirection,
-                  )}
-                  className="no-underline"
+                    );
+
+                    return props.buildHref
+                      ? props.buildHref(
+                          newSortState.newSortKey,
+                          newSortState.newSortDirection,
+                        )
+                      : getDefaultHref(
+                          currHref,
+                          newSortState.newSortKey,
+                          newSortState.newSortDirection,
+                        );
+                  })()}
                 >
                   {column.label}
                 </a>
@@ -63,4 +79,29 @@ export const TableHeader = <T,>({
       </tr>
     </thead>
   );
+};
+const getDefaultHref = (
+  currHref: string | null,
+  key: string | null,
+  direction: SortDirection,
+) => {
+  if (!currHref) {
+    return "";
+  }
+
+  const url = new URL(currHref);
+
+  if (key) {
+    url.searchParams.set("sort", key);
+  } else {
+    url.searchParams.delete("sort");
+  }
+
+  if (direction) {
+    url.searchParams.set("direction", direction);
+  } else {
+    url.searchParams.delete("direction");
+  }
+
+  return url.toString();
 };

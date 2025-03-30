@@ -42,7 +42,7 @@ export type UrlBasedSorting<T> = BaseAdvancedTableType<T> & {
   columns: SortableColumn[];
   sortKey: string | null;
   sortDirection: SortDirection;
-  buildHref: (key: string | null, direction: SortDirection) => string;
+  buildHref?: (key: string | null, direction: SortDirection) => string;
 };
 
 export type AdvancedTableType<T> =
