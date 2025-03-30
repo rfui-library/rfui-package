@@ -7,15 +7,12 @@ export const getNewSortState = <T>(
   columnSortKey: string,
   rows: T[],
 ) => {
-  if (columnSortKey === "projectedTime") {
-    debugger;
-  }
-
   let newSortDirection: SortDirection;
   let newSortKey: string | null = oldSortKey;
   const sampleValue = rows[0]
     ? (rows[0] as Record<string, unknown>)[columnSortKey]
     : null;
+  console.log(oldSortDirection, oldSortKey, columnSortKey, sampleValue);
   const isNumeric = isNumericValue(sampleValue);
   const shouldReorderSameColumn = oldSortKey === columnSortKey;
 
