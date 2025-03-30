@@ -29,6 +29,11 @@ export const TableHeader = <T,>({
 
     return className;
   };
+  const getThPropsWithoutClassName = (column: SortableColumn) => {
+    const { className, ...rest } = column.thProps ?? {};
+
+    return rest;
+  };
 
   useEffect(() => {
     setCurrHref(window.location.href);
@@ -49,7 +54,7 @@ export const TableHeader = <T,>({
                 handleColumnClick(column as SortableColumn);
               }
             }}
-            {...column.thProps}
+            {...getThPropsWithoutClassName(column as SortableColumn)}
           >
             {props.sortType === "url" ? (
               <a
