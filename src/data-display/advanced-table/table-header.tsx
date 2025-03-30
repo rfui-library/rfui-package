@@ -103,5 +103,7 @@ const getDefaultHref = (
     url.searchParams.delete("direction");
   }
 
+  url.searchParams.delete("page");
+
   return url.toString();
 };
