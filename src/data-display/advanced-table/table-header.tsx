@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Flex } from "../../layout/flex";
 import { getNewSortState } from "./get-new-sort-state";
 import { SortArrows } from "./sort-arrows";
 import { AdvancedTableType, SortableColumn, SortDirection } from "./types";
@@ -17,6 +16,19 @@ export const TableHeader = <T,>({
 }) => {
   const [currHref, setCurrHref] = useState<string | null>(null);
   const isSortable = props.sortType && props.sortType !== "none";
+  const getThClassName = (column: SortableColumn) => {
+    let className = "flex items-center gap-1";
+
+    if (isSortable) {
+      className += " cursor-pointer select-none";
+    }
+
+    if (column.thProps?.className) {
+      className += ` ${column.thProps.className}`;
+    }
+
+    return className;
+  };
 
   useEffect(() => {
     setCurrHref(window.location.href);
@@ -28,7 +40,7 @@ export const TableHeader = <T,>({
         {props.columns.map((column, index) => (
           <th
             key={`${column.label}-${index}`}
-            className={`${isSortable ? "cursor-pointer select-none" : ""} ${column.thProps?.className ?? ""}`}
+            className={getThClassName(column as SortableColumn)}
             onClick={() => {
               if (
                 props.sortType === "automatic" ||
@@ -39,42 +51,40 @@ export const TableHeader = <T,>({
             }}
             {...column.thProps}
           >
-            <Flex className="items-center gap-1">
-              {props.sortType === "url" ? (
-                <a
-                  className="no-underline"
-                  href={(() => {
-                    const newSortState = getNewSortState(
-                      props.sortDirection,
-                      props.sortKey,
-                      (column as SortableColumn).sortKey,
-                      props.rows,
-                    );
+            {props.sortType === "url" ? (
+              <a
+                className="no-underline"
+                href={(() => {
+                  const newSortState = getNewSortState(
+                    props.sortDirection,
+                    props.sortKey,
+                    (column as SortableColumn).sortKey,
+                    props.rows,
+                  );
 
-                    return props.buildHref
-                      ? props.buildHref(
-                          newSortState.newSortKey,
-                          newSortState.newSortDirection,
-                        )
-                      : getDefaultHref(
-                          currHref,
-                          newSortState.newSortKey,
-                          newSortState.newSortDirection,
-                        );
-                  })()}
-                >
-                  {column.label}
-                </a>
-              ) : (
-                column.label
-              )}
-              <SortArrows
-                advancedTableProps={props}
-                internalSortKey={internalSortKey}
-                columnSortKey={(column as SortableColumn).sortKey}
-                internalSortDirection={internalSortDirection}
-              />
-            </Flex>
+                  return props.buildHref
+                    ? props.buildHref(
+                        newSortState.newSortKey,
+                        newSortState.newSortDirection,
+                      )
+                    : getDefaultHref(
+                        currHref,
+                        newSortState.newSortKey,
+                        newSortState.newSortDirection,
+                      );
+                })()}
+              >
+                {column.label}
+              </a>
+            ) : (
+              column.label
+            )}
+            <SortArrows
+              advancedTableProps={props}
+              internalSortKey={internalSortKey}
+              columnSortKey={(column as SortableColumn).sortKey}
+              internalSortDirection={internalSortDirection}
+            />
           </th>
         ))}
       </tr>
