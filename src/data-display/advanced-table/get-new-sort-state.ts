@@ -48,7 +48,7 @@ export const getNewSortState = <T>(
 const getSampleValue = <T>(rows: T[], columnSortKey: string): unknown => {
   const firstValidValue = rows
     .map((row) => (row as Record<string, unknown>)[columnSortKey])
-    .filter((value): value is NonNullable<unknown> => value != null)[0];
+    .filter((value) => value !== null && value !== undefined)[0];
 
   return firstValidValue ?? null;
 };
