@@ -28,7 +28,7 @@ export const TableHeader = <T,>({
         {props.columns.map((column, index) => (
           <th
             key={`${column.label}-${index}`}
-            className={isSortable ? "cursor-pointer select-none" : ""}
+            className={`${isSortable ? "cursor-pointer select-none" : ""} ${column.thProps?.className ?? ""}`}
             onClick={() => {
               if (
                 props.sortType === "automatic" ||
@@ -37,6 +37,7 @@ export const TableHeader = <T,>({
                 handleColumnClick(column as SortableColumn);
               }
             }}
+            {...column.thProps}
           >
             <Flex className="items-center gap-1">
               {props.sortType === "url" ? (

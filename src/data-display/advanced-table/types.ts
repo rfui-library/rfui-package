@@ -1,10 +1,11 @@
-import { ReactNode } from "react";
+import { ComponentProps, ReactNode } from "react";
 import { TableType } from "../table";
 
 export type SortDirection = "asc" | "desc" | null;
 
 export type BaseColumn = {
   label: ReactNode;
+  thProps?: Omit<ComponentProps<"th">, "onClick">;
 };
 
 export type SortableColumn = BaseColumn & {
