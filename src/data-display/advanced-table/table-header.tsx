@@ -19,7 +19,7 @@ export const TableHeader = <T,>({
   const getThClassName = (column: SortableColumn) => {
     let className = "relative";
 
-    if (isSortable) {
+    if (isSortable && column.sortKey) {
       className += " cursor-pointer select-none";
     }
 
@@ -56,14 +56,14 @@ export const TableHeader = <T,>({
             }}
             {...getThPropsWithoutClassName(column as SortableColumn)}
           >
-            {props.sortType === "url" ? (
+            {props.sortType === "url" && (column as SortableColumn)?.sortKey ? (
               <a
                 className="no-underline"
                 href={(() => {
                   const newSortState = getNewSortState(
                     props.sortDirection,
                     props.sortKey,
-                    (column as SortableColumn).sortKey,
+                    (column as SortableColumn).sortKey as string,
                     props.rows,
                   );
 

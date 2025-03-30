@@ -3,7 +3,7 @@ import type { AdvancedTableType, SortDirection } from "./types";
 type SortArrowsType<T> = {
   advancedTableProps: AdvancedTableType<T>;
   internalSortKey: string | null;
-  columnSortKey: string;
+  columnSortKey?: string;
   internalSortDirection: SortDirection;
 };
 
@@ -13,6 +13,10 @@ export const SortArrows = <T,>({
   columnSortKey,
   internalSortDirection,
 }: SortArrowsType<T>) => {
+  if (columnSortKey === undefined) {
+    return null;
+  }
+
   if (advancedTableProps.sortType === "automatic") {
     return (
       <SortArrowsHelper
@@ -20,7 +24,9 @@ export const SortArrows = <T,>({
         sortDirection={internalSortDirection}
       />
     );
-  } else if (
+  }
+
+  if (
     advancedTableProps.sortType === "url" ||
     advancedTableProps.sortType === "controlled"
   ) {
@@ -30,9 +36,9 @@ export const SortArrows = <T,>({
         sortDirection={advancedTableProps.sortDirection}
       />
     );
-  } else {
-    return null;
   }
+
+  return null;
 };
 
 const SortArrowsHelper = ({

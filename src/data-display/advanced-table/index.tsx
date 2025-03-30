@@ -90,7 +90,7 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
     const { newSortDirection, newSortKey } = getNewSortState(
       internalSortDirection,
       internalSortKey,
-      column.sortKey,
+      column.sortKey as string,
       rows,
     );
 
@@ -108,7 +108,7 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
     const { newSortDirection, newSortKey } = getNewSortState(
       controlledSortingProps.sortDirection,
       controlledSortingProps.sortKey,
-      column.sortKey,
+      column.sortKey as string,
       rows,
     );
 

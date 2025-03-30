@@ -9,7 +9,7 @@ export type BaseColumn = {
 };
 
 export type SortableColumn = BaseColumn & {
-  sortKey: string;
+  sortKey?: string;
 };
 
 export type BaseAdvancedTableType<T> = {
