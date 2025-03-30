@@ -1,5 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import { ComponentProps, ReactNode } from "react";
+import { ComponentProps, ReactNode, useEffect, useState } from "react";
 
 export type PaginationType = {
   currPage: number;
@@ -11,7 +11,7 @@ export type PaginationType = {
   (
     | {
         type?: "link";
-        buildHref: (page: number) => string;
+        buildHref?: (page: number) => string;
       }
     | {
         type: "button";
@@ -94,6 +94,7 @@ export const Pagination = ({
     <nav className={className} {...restWithoutClass}>
       {currPage > 1 && (
         <PaginationItem
+          type={type}
           page={currPage - 1}
           buildHref={buildHref}
           onChange={onChange}
@@ -104,6 +105,7 @@ export const Pagination = ({
       )}
       {currPage !== 1 && (
         <PaginationItem
+          type={type}
           page={1}
           buildHref={buildHref}
           onChange={onChange}
@@ -115,6 +117,7 @@ export const Pagination = ({
       {lastPage > 7 && currPage > 4 && <Elipsis />}
       {currPage - 2 > 1 && (
         <PaginationItem
+          type={type}
           page={currPage - 2}
           buildHref={buildHref}
           onChange={onChange}
@@ -125,6 +128,7 @@ export const Pagination = ({
       )}
       {currPage - 1 > 1 && (
         <PaginationItem
+          type={type}
           page={currPage - 1}
           buildHref={buildHref}
           onChange={onChange}
@@ -136,6 +140,7 @@ export const Pagination = ({
       {<ActivePaginationItem>{currPage}</ActivePaginationItem>}
       {currPage + 1 < lastPage && (
         <PaginationItem
+          type={type}
           page={currPage + 1}
           buildHref={buildHref}
           onChange={onChange}
@@ -146,6 +151,7 @@ export const Pagination = ({
       )}
       {currPage + 2 < lastPage && (
         <PaginationItem
+          type={type}
           page={currPage + 2}
           buildHref={buildHref}
           onChange={onChange}
@@ -157,6 +163,7 @@ export const Pagination = ({
       {lastPage > 7 && currPage < lastPage - 3 && <Elipsis />}
       {currPage !== lastPage && (
         <PaginationItem
+          type={type}
           page={lastPage}
           buildHref={buildHref}
           onChange={onChange}
@@ -167,6 +174,7 @@ export const Pagination = ({
       )}
       {currPage < lastPage && (
         <PaginationItem
+          type={type}
           page={currPage + 1}
           buildHref={buildHref}
           onChange={onChange}
@@ -180,25 +188,33 @@ export const Pagination = ({
 };
 
 const PaginationItem = ({
+  type,
   page,
   buildHref,
   onChange,
   disabled,
   children,
 }: {
+  type: "link" | "button";
   page: number;
   buildHref?: (page: number) => string;
   onChange?: (newPage: number) => void;
   disabled?: boolean;
   children: ReactNode;
 }) => {
+  const [currHref, setCurrHref] = useState<string | null>(null);
   const sharedClassName =
     "rfui-rounded-default flex h-[2.5rem] items-center px-3 py-2 hover:bg-neutral-50";
   const linkClassName = `${sharedClassName} ${disabled ? "pointer-events-none" : ""}`;
   const buttonClassName = `${sharedClassName} ${disabled ? "pointer-events-none" : "cursor-pointer"}`;
+  const href = buildHref ? buildHref(page) : getDefaultHref(currHref, page);
 
-  return buildHref ? (
-    <a href={buildHref(page)} className={linkClassName}>
+  useEffect(() => {
+    setCurrHref(window.location.href);
+  }, []);
+
+  return type === "link" ? (
+    <a href={href} className={linkClassName}>
       {children}
     </a>
   ) : (
@@ -240,3 +256,19 @@ const isValid = (
   totalItems >= 1 &&
   lastPage >= 1 &&
   currPage <= lastPage;
+
+const getDefaultHref = (currHref: string | null, page: number) => {
+  if (!currHref) {
+    return "";
+  }
+
+  const url = new URL(currHref);
+
+  if (page && page > 1) {
+    url.searchParams.set("page", page.toString());
+  } else {
+    url.searchParams.delete("page");
+  }
+
+  return url.toString();
+};
