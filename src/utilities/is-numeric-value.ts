@@ -1,3 +1,3 @@
-export const isNumericValue = (value: unknown): boolean => {
+export const isNumeric = (value: unknown): boolean => {
   return typeof value === "number" && !isNaN(value);
 };
