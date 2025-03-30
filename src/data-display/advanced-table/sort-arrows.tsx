@@ -42,10 +42,12 @@ const SortArrowsHelper = ({
   isVisible: boolean;
   sortDirection: SortDirection;
 }) => {
+  if (!isVisible) {
+    return null;
+  }
+
   return (
-    <span
-      className={`ml-0.5 inline-block text-xs ${isVisible ? "" : "invisible"}`}
-    >
+    <span className="absolute right-1 top-1/2 -translate-y-1/2 text-xs">
       {sortDirection === "asc" ? "⏶" : "⏷"}
     </span>
   );

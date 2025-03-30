@@ -17,7 +17,7 @@ export const TableHeader = <T,>({
   const [currHref, setCurrHref] = useState<string | null>(null);
   const isSortable = props.sortType && props.sortType !== "none";
   const getThClassName = (column: SortableColumn) => {
-    let className = "flex items-center gap-1";
+    let className = "relative";
 
     if (isSortable) {
       className += " cursor-pointer select-none";
