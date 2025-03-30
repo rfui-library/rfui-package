@@ -386,6 +386,9 @@
   .right-0 {
     right: var(--spacing-0);
   }
+  .right-1 {
+    right: var(--spacing-1);
+  }
   .right-full {
     right: 100%;
   }
@@ -496,9 +499,6 @@
   }
   .-ml-4 {
     margin-left: calc(var(--spacing-4) * -1);
-  }
-  .ml-0\.5 {
-    margin-left: calc(var(--spacing) * 0.5);
   }
   .ml-1 {
     margin-left: var(--spacing-1);
