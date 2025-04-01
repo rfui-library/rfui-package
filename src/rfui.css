@@ -995,6 +995,9 @@
   .fill-supporting-red-700 {
     fill: var(--color-supporting-red-700);
   }
+  .p-0\! {
+    padding: var(--spacing-0) !important;
+  }
   .p-0\.5 {
     padding: calc(var(--spacing) * 0.5);
   }
