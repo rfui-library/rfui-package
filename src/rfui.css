@@ -1786,10 +1786,6 @@ table.rfui-table.sticky-first-column tr th:first-child, table.rfui-table.sticky-
 table.rfui-table.condensed th {
   padding-bottom: var(--spacing-1);
 }
-table.rfui-table td, table.rfui-table th {
-  overflow-wrap: anywhere;
-  word-break: break-all;
-}
 table.rfui-table td {
   padding-top: var(--spacing-5);
   padding-bottom: var(--spacing-5);
