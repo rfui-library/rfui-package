@@ -78,6 +78,12 @@ export const EditableH1 = ({
           setIsEditable(false);
           onChange(newText);
         }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            setIsEditable(false);
+            onChange(newText);
+          }
+        }}
         className={inputClassName}
         {...restWithoutClassName}
         {...inputPropsWithoutClassName}
