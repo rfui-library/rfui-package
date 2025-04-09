@@ -39,9 +39,9 @@ export const VerticalNavbarDropdown = ({
           <>
             <span>{title}</span>
             {open ? (
-              <ChevronUpIcon strokeWidth={2} />
+              <ChevronUpIcon strokeWidth={2} className="text-neutral-600" />
             ) : (
-              <ChevronDownIcon strokeWidth={2} />
+              <ChevronDownIcon strokeWidth={2} className="text-neutral-600" />
             )}
           </>
         )}
