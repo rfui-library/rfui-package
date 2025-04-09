@@ -1056,6 +1056,9 @@
   .py-8 {
     padding-block: var(--spacing-8);
   }
+  .pr-5\! {
+    padding-right: var(--spacing-5) !important;
+  }
   .pl-5 {
     padding-left: var(--spacing-5);
   }
@@ -1145,6 +1148,9 @@
   }
   .text-neutral-300 {
     color: var(--color-neutral-300);
+  }
+  .text-neutral-400 {
+    color: var(--color-neutral-400);
   }
   .text-neutral-500 {
     color: var(--color-neutral-500);
