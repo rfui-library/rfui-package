@@ -410,6 +410,9 @@
   .left-2 {
     left: var(--spacing-2);
   }
+  .left-\[5px\] {
+    left: 5px;
+  }
   .left-full {
     left: 100%;
   }
@@ -847,6 +850,10 @@
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
   }
+  .border-b-2 {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 2px;
+  }
   .border-l {
     border-left-style: var(--tw-border-style);
     border-left-width: 1px;
@@ -874,6 +881,9 @@
   }
   .border-neutral-500 {
     border-color: var(--color-neutral-500);
+  }
+  .border-neutral-700 {
+    border-color: var(--color-neutral-700);
   }
   .border-primary-200 {
     border-color: var(--color-primary-200);
@@ -928,9 +938,6 @@
   }
   .border-b-neutral-200 {
     border-bottom-color: var(--color-neutral-200);
-  }
-  .border-b-neutral-500 {
-    border-bottom-color: var(--color-neutral-500);
   }
   .border-l-primary-500 {
     border-left-color: var(--color-primary-500);
