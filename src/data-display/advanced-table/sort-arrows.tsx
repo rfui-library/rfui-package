@@ -1,3 +1,4 @@
+import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import type { AdvancedTableType, SortDirection } from "./types";
 
 type SortArrowsType<T> = {
@@ -48,13 +49,15 @@ const SortArrowsHelper = ({
   isVisible: boolean;
   sortDirection: SortDirection;
 }) => {
-  if (!isVisible) {
-    return null;
-  }
-
   return (
     <span className="absolute right-1 top-1/2 -translate-y-1/2 text-xs">
-      {sortDirection === "asc" ? "⏶" : "⏷"}
+      {!isVisible ? (
+        <ChevronUpDownIcon className="relative left-[5px] h-4 w-4" />
+      ) : sortDirection === "asc" ? (
+        "⏶"
+      ) : (
+        "⏷"
+      )}
     </span>
   );
 };
