@@ -34,7 +34,7 @@ export const Tabs = ({
 
   return (
     <div {...rest}>
-      <Flex className="overflow-x-auto border-b border-b-neutral-500">
+      <Flex className="overflow-x-auto">
         {tabNames.map((tabName) => (
           <Tab
             key={tabName}
@@ -82,15 +82,16 @@ const Tab = ({
   fullWidth: boolean;
 }) => {
   const isActive = tabName === activeTabName;
-  let containerClass = "rfui-tab cursor-default px-5 py-4 text-center";
+  let containerClass =
+    "rfui-tab cursor-default border-b-2 px-5 py-4 text-center";
 
   if (fullWidth) {
     containerClass += " w-full";
   }
 
   containerClass += isActive
-    ? " border-b border-neutral-500 text-neutral-900 font-bold"
-    : " text-neutral-700 hover:bg-neutral-50";
+    ? " border-neutral-700 text-neutral-900 font-bold"
+    : " border-neutral-100 text-neutral-700 hover:bg-neutral-50";
 
   return (
     <div className={containerClass} onClick={onClick}>
