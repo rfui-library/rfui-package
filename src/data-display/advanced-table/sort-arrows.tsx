@@ -52,7 +52,7 @@ const SortArrowsHelper = ({
   return (
     <span className="absolute right-1 top-1/2 -translate-y-1/2 text-xs">
       {!isVisible ? (
-        <ChevronUpDownIcon className="relative left-[5px] h-4 w-4" />
+        <ChevronUpDownIcon className="relative left-[5px] h-4 w-4 text-neutral-400" />
       ) : sortDirection === "asc" ? (
         "⏶"
       ) : (

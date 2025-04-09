@@ -20,7 +20,7 @@ export const TableHeader = <T,>({
     let className = "relative";
 
     if (isSortable && column.sortKey) {
-      className += " cursor-pointer select-none";
+      className += " cursor-pointer select-none pr-5!";
     }
 
     if (props.sortType === "url") {
