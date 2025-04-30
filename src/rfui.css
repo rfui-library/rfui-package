@@ -1008,6 +1008,9 @@
   .p-0\.5 {
     padding: calc(var(--spacing) * 0.5);
   }
+  .p-1 {
+    padding: var(--spacing-1);
+  }
   .p-4 {
     padding: var(--spacing-4);
   }
