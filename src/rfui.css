@@ -1819,6 +1819,9 @@ table.rfui-table.bordered td {
 table.rfui-table.hover tr:hover td {
   background: rgb(240 244 248 / 0.45);
 }
+table.rfui-table.hover.sticky-first-column tr:hover td:first-child {
+  background: var(--color-neutral-50);
+}
 table.rfui-table.hover.striped tr:hover td {
   background: var(--color-neutral-100);
 }
