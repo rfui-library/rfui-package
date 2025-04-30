@@ -110,5 +110,7 @@ export const TabSection = ({
   isActive?: boolean;
   children: ReactNode;
 }) => {
-  return <div className={isActive ? "block" : "hidden"}>{children}</div>;
+  return (
+    <div className={isActive ? "block p-1" : "hidden p-1"}>{children}</div>
+  );
 };
