@@ -11,14 +11,14 @@ import { Badge } from "../data-display/badge";
 import { Flex } from "../layout/flex";
 import { Checkbox } from "./checkbox";
 
-type Option = {
+type Option<T> = {
   label: string;
-  value: string | number | boolean | null | undefined;
+  value: T;
   disabled?: boolean;
 };
 
-type ComboboxBaseType = {
-  options: Option[];
+type ComboboxBaseType<T> = {
+  options: Option<T>[];
   name?: string;
   disabled?: boolean;
   size?: "sm" | "md" | "lg";
@@ -29,21 +29,21 @@ type ComboboxBaseType = {
   optionClassName?: string;
 };
 
-type ComboboxSingleType = ComboboxBaseType & {
+type ComboboxSingleType<T> = ComboboxBaseType<T> & {
   multiple?: false;
-  value?: Option;
-  defaultValue?: Option;
-  onChange?: (newValue: Option) => void;
+  value?: Option<T>;
+  defaultValue?: Option<T>;
+  onChange?: (newValue: Option<T>) => void;
 };
 
-type ComboboxMultiType = ComboboxBaseType & {
+type ComboboxMultiType<T> = ComboboxBaseType<T> & {
   multiple: true;
-  value?: Option[];
-  defaultValue?: Option[];
-  onChange?: (newValue: Option[]) => void;
+  value?: Option<T>[];
+  defaultValue?: Option<T>[];
+  onChange?: (newValue: Option<T>[]) => void;
 };
 
-export type ComboboxType = ComboboxSingleType | ComboboxMultiType;
+export type ComboboxType<T> = ComboboxSingleType<T> | ComboboxMultiType<T>;
 
 /** *
  * @function Combobox
@@ -68,9 +68,7 @@ export type ComboboxType = ComboboxSingleType | ComboboxMultiType;
     ]}
   />
  */
-export function Combobox(props: ComboboxMultiType): React.ReactElement;
-export function Combobox(props: ComboboxSingleType): React.ReactElement;
-export function Combobox({
+export const Combobox = <T,>({
   options,
   name,
   disabled = false,
@@ -84,7 +82,7 @@ export function Combobox({
   inputClassName: _inputClassName,
   optionsClassName: _optionsClassName,
   optionClassName: _optionClassName,
-}: ComboboxType): React.ReactElement {
+}: ComboboxType<T>): React.ReactElement => {
   const [query, setQuery] = useState("");
   const filteredOptions =
     query === ""
@@ -201,7 +199,7 @@ export function Combobox({
           )}
           <div className="relative">
             <ComboboxInput
-              displayValue={(option: Option | Option[]) =>
+              displayValue={(option: Option<T> | Option<T>[]) =>
                 Array.isArray(option) ? "" : option?.label || ""
               }
               onChange={(event) => setQuery(event.target.value)}
@@ -242,4 +240,4 @@ export function Combobox({
       )}
     </HeadlessUICombobox>
   );
-}
+};

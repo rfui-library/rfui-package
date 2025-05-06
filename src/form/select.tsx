@@ -7,14 +7,14 @@ import {
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Checkbox } from "./checkbox";
 
-type Option = {
+type Option<T> = {
   label: string;
-  value: string | number | boolean | null | undefined;
+  value: T;
   disabled?: boolean;
 };
 
-type SelectBaseType = {
-  options: Option[];
+type SelectBaseType<T> = {
+  options: Option<T>[];
   name?: string;
   disabled?: boolean;
   size?: "sm" | "md" | "lg";
@@ -25,21 +25,21 @@ type SelectBaseType = {
   optionClassName?: string;
 };
 
-type SelectSingleType = SelectBaseType & {
+type SelectSingleType<T> = SelectBaseType<T> & {
   multiple?: false;
-  value?: Option;
-  defaultValue?: Option;
-  onChange?: (newValue: Option) => void;
+  value?: Option<T>;
+  defaultValue?: Option<T>;
+  onChange?: (newValue: Option<T>) => void;
 };
 
-type SelectMultiType = SelectBaseType & {
+type SelectMultiType<T> = SelectBaseType<T> & {
   multiple: true;
-  value?: Option[];
-  defaultValue?: Option[];
-  onChange?: (newValue: Option[]) => void;
+  value?: Option<T>[];
+  defaultValue?: Option<T>[];
+  onChange?: (newValue: Option<T>[]) => void;
 };
 
-export type SelectType = SelectSingleType | SelectMultiType;
+export type SelectType<T> = SelectSingleType<T> | SelectMultiType<T>;
 
 /** *
  * @function Select
@@ -49,9 +49,7 @@ export type SelectType = SelectSingleType | SelectMultiType;
  * @example
  * <Select options={options} />
  */
-export function Select(props: SelectMultiType): React.ReactNode;
-export function Select(props: SelectSingleType): React.ReactNode;
-export function Select({
+export const Select = <T,>({
   options,
   name,
   disabled = false,
@@ -65,7 +63,7 @@ export function Select({
   buttonClassName: _buttonClassName,
   optionsClassName: _optionsClassName,
   optionClassName: _optionClassName,
-}: SelectType): React.ReactNode {
+}: SelectType<T>): React.ReactNode => {
   if (options.length === 0) {
     return null;
   }
@@ -166,9 +164,9 @@ export function Select({
       <ListboxButton className={buttonClassName}>
         {({ value }) => {
           const display = multiple
-            ? value.map((o: Option) => o?.label).join(", ").length > 50
+            ? value.map((o: Option<T>) => o?.label).join(", ").length > 50
               ? `${value.length} item(s) selected`
-              : value.map((o: Option) => o?.label).join(", ")
+              : value.map((o: Option<T>) => o?.label).join(", ")
             : value?.label;
 
           return (
@@ -211,4 +209,4 @@ export function Select({
       </ListboxOptions>
     </Listbox>
   );
-}
+};
