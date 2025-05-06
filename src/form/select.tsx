@@ -13,7 +13,7 @@ type Option = {
   disabled?: boolean;
 };
 
-export type SelectType = {
+type SelectBaseType = {
   options: Option[];
   name?: string;
   disabled?: boolean;
@@ -23,20 +23,23 @@ export type SelectType = {
   buttonClassName?: string;
   optionsClassName?: string;
   optionClassName?: string;
-} & (
-  | {
-      multiple: true;
-      value?: Option[];
-      defaultValue?: Option[];
-      onChange?: (newValue: Option[]) => void;
-    }
-  | {
-      multiple?: false;
-      value?: Option;
-      defaultValue?: Option;
-      onChange?: (newValue: Option) => void;
-    }
-);
+};
+
+type SelectSingleType = SelectBaseType & {
+  multiple?: false;
+  value?: Option;
+  defaultValue?: Option;
+  onChange?: (newValue: Option) => void;
+};
+
+type SelectMultiType = SelectBaseType & {
+  multiple: true;
+  value?: Option[];
+  defaultValue?: Option[];
+  onChange?: (newValue: Option[]) => void;
+};
+
+export type SelectType = SelectSingleType | SelectMultiType;
 
 /** *
  * @function Select
@@ -46,7 +49,9 @@ export type SelectType = {
  * @example
  * <Select options={options} />
  */
-export const Select = ({
+export function Select(props: SelectMultiType): React.ReactNode;
+export function Select(props: SelectSingleType): React.ReactNode;
+export function Select({
   options,
   name,
   disabled = false,
@@ -60,7 +65,7 @@ export const Select = ({
   buttonClassName: _buttonClassName,
   optionsClassName: _optionsClassName,
   optionClassName: _optionClassName,
-}: SelectType) => {
+}: SelectType): React.ReactNode {
   if (options.length === 0) {
     return null;
   }
@@ -206,4 +211,4 @@ export const Select = ({
       </ListboxOptions>
     </Listbox>
   );
-};
+}

@@ -17,7 +17,7 @@ type Option = {
   disabled?: boolean;
 };
 
-export type ComboboxType = {
+type ComboboxBaseType = {
   options: Option[];
   name?: string;
   disabled?: boolean;
@@ -27,20 +27,23 @@ export type ComboboxType = {
   inputClassName?: string;
   optionsClassName?: string;
   optionClassName?: string;
-} & (
-  | {
-      multiple: true;
-      value?: Option[];
-      defaultValue?: Option[];
-      onChange?: (newValue: Option[]) => void;
-    }
-  | {
-      multiple?: false;
-      value?: Option;
-      defaultValue?: Option;
-      onChange?: (newValue: Option) => void;
-    }
-);
+};
+
+type ComboboxSingleType = ComboboxBaseType & {
+  multiple?: false;
+  value?: Option;
+  defaultValue?: Option;
+  onChange?: (newValue: Option) => void;
+};
+
+type ComboboxMultiType = ComboboxBaseType & {
+  multiple: true;
+  value?: Option[];
+  defaultValue?: Option[];
+  onChange?: (newValue: Option[]) => void;
+};
+
+export type ComboboxType = ComboboxSingleType | ComboboxMultiType;
 
 /** *
  * @function Combobox
@@ -65,7 +68,9 @@ export type ComboboxType = {
     ]}
   />
  */
-export const Combobox = ({
+export function Combobox(props: ComboboxMultiType): React.ReactElement;
+export function Combobox(props: ComboboxSingleType): React.ReactElement;
+export function Combobox({
   options,
   name,
   disabled = false,
@@ -79,7 +84,7 @@ export const Combobox = ({
   inputClassName: _inputClassName,
   optionsClassName: _optionsClassName,
   optionClassName: _optionClassName,
-}: ComboboxType) => {
+}: ComboboxType): React.ReactElement {
   const [query, setQuery] = useState("");
   const filteredOptions =
     query === ""
@@ -237,4 +242,4 @@ export const Combobox = ({
       )}
     </HeadlessUICombobox>
   );
-};
+}
