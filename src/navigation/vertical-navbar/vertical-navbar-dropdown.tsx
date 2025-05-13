@@ -34,7 +34,7 @@ export const VerticalNavbarDropdown = ({
 
   return (
     <Menu>
-      <MenuButton className="my-3 flex w-full items-center justify-between rounded-sm px-3 py-3 hover:bg-neutral-100 max-sm:text-lg sm:my-2 sm:py-2">
+      <MenuButton className="my-3 flex w-full items-center justify-between rounded-sm px-3 py-3 outline-none hover:bg-neutral-100 max-sm:text-lg sm:my-2 sm:py-2">
         {({ open }) => (
           <>
             <span>{title}</span>
@@ -48,7 +48,7 @@ export const VerticalNavbarDropdown = ({
       </MenuButton>
       <MenuItems
         anchor="bottom"
-        className="sm:max-w-[500px]! max-sm:w-full sm:w-fit sm:min-w-[300px]"
+        className="sm:max-w-[500px]! outline-none max-sm:w-full sm:w-fit sm:min-w-[300px]"
       >
         <div className="mx-3 rounded-sm border border-neutral-200 bg-[#fff] max-sm:mt-2 sm:mt-1">
           {items.map((item) =>
