@@ -92,7 +92,7 @@ export const Combobox = <T,>({
         );
 
   let inputClassName =
-    "flex w-full max-w-full items-center justify-between border hover:shadow-sm focus:shadow-md";
+    "flex w-full max-w-full items-center justify-between truncate border hover:shadow-sm focus:shadow-md";
   let optionsClassName =
     "mt-1 w-[var(--input-width)] max-w-full border border-neutral-500 bg-[#fff] empty:invisible";
   let optionClassName =
