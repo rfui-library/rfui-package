@@ -101,17 +101,17 @@ export const Combobox = <T,>({
   let checkIconClassName = "invisible fill-neutral-700";
 
   if (size === "sm") {
-    inputClassName += " px-2 text-sm";
+    inputClassName += " pl-2 pr-[36px] text-sm";
     optionClassName += " px-2 text-sm";
     chevronIconClassName += " size-4";
     checkIconClassName += " size-3";
   } else if (size === "md") {
-    inputClassName += " px-3 py-2";
+    inputClassName += " pl-3 pr-[44px] py-2";
     optionClassName += " px-3 py-2";
     chevronIconClassName += " size-5";
     checkIconClassName += " size-4";
   } else if (size === "lg") {
-    inputClassName += " px-3 py-3 text-lg";
+    inputClassName += " pl-3 pr-[44px] py-3 text-lg";
     optionClassName += " px-3 py-3 text-lg";
     chevronIconClassName += " size-5";
     checkIconClassName += " size-4";
