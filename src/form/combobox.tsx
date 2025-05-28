@@ -92,9 +92,9 @@ export const Combobox = <T,>({
         );
 
   let inputClassName =
-    "min-w-52 flex w-full max-w-full items-center justify-between border hover:shadow-sm focus:shadow-md";
+    "flex w-full max-w-full items-center justify-between border hover:shadow-sm focus:shadow-md";
   let optionsClassName =
-    "min-w-52 mt-1 w-[var(--input-width)] max-w-full border border-neutral-500 bg-[#fff] empty:invisible";
+    "mt-1 w-[var(--input-width)] max-w-full border border-neutral-500 bg-[#fff] empty:invisible";
   let optionClassName =
     "mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50 data-[disabled]:opacity-50";
   let chevronIconClassName = "pointer-events-none";
