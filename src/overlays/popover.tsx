@@ -31,7 +31,7 @@ export const Popover = ({
       </PopoverButton>
       <PopoverPanel
         anchor={{ to: direction, gap: 6 }}
-        className="rounded-sm border border-neutral-100 p-4 shadow-lg"
+        className="rounded-sm border border-neutral-100 bg-[#fff] p-4 shadow-lg"
       >
         <div className="max-w-prose">{content}</div>
       </PopoverPanel>
