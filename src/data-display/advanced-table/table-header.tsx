@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { HelpTooltip } from "../../overlays/help-tooltip";
 import { getNewSortState } from "./get-new-sort-state";
 import { SortArrows } from "./sort-arrows";
 import { AdvancedTableType, SortableColumn, SortDirection } from "./types";
@@ -25,6 +26,10 @@ export const TableHeader = <T,>({
 
     if (props.sortType === "url") {
       className += " p-0!";
+    }
+
+    if (column.helpTooltipContent) {
+      className += " flex items-center gap-1";
     }
 
     if (column.thProps?.className) {
@@ -60,6 +65,14 @@ export const TableHeader = <T,>({
             }}
             {...getThPropsWithoutClassName(column as SortableColumn)}
           >
+            {column.helpTooltipContent && (
+              <HelpTooltip
+                content={column.helpTooltipContent}
+                style={{ textTransform: "none" }}
+                direction="bottom"
+                size="sm"
+              />
+            )}
             {props.sortType === "url" && (column as SortableColumn)?.sortKey ? (
               <a
                 className="inline-block w-full px-4 py-2 no-underline"

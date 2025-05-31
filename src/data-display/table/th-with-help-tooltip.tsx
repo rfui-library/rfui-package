@@ -14,12 +14,13 @@ export const ThWithHelpTooltip = ({
   return (
     <th>
       <Flex className="items-center gap-1">
-        {cellContent}{" "}
         <HelpTooltip
           content={tooltipContent}
           style={{ textTransform: "none" }}
           direction="bottom"
-        />
+          size="sm"
+        />{" "}
+        {cellContent}
       </Flex>
     </th>
   );
