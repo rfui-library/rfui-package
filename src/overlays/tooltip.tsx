@@ -39,7 +39,7 @@ export const Tooltip = ({
   const { className: restClass, ...restWithoutClass } = rest;
   let containerClass = "relative inline-block";
   let tooltipClass =
-    "absolute z-10 max-w-xs transform whitespace-nowrap rounded-sm bg-neutral-900 px-2 py-1 text-neutral-50";
+    "absolute z-10 max-w-prose transform overflow-hidden text-ellipsis whitespace-nowrap rounded-sm bg-neutral-900 px-2 py-1 text-neutral-50";
 
   tooltipClass += (() => {
     switch (direction) {
