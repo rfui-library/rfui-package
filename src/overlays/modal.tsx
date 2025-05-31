@@ -1,13 +1,19 @@
-import type { ComponentProps, ReactNode } from "react";
-import { useEffect, useRef } from "react";
+import {
+  Dialog,
+  DialogBackdrop,
+  DialogPanel,
+  DialogTitle,
+} from "@headlessui/react";
+import type { ReactNode } from "react";
 import { CloseIcon } from "../icons/close-icon";
 
 export type ModalType = {
   isOpen: boolean;
   close: () => void;
   heading?: string;
+  className?: string;
   children: ReactNode;
-} & ComponentProps<"dialog">;
+};
 
 /** *
  * @function Modal
@@ -15,7 +21,7 @@ export type ModalType = {
  * @see {@link https://rfui-docs.onrender.com/components/overlays/modal}
  *
  * @example
- * <Modal isOpen={isOpen}>
+ * <Modal isOpen={isOpen} close={close}>
  *   Example
  * </Modal>
  */
@@ -23,59 +29,28 @@ export const Modal = ({
   isOpen,
   close,
   heading,
+  className,
   children,
-  ...rest
 }: ModalType) => {
-  const dialogRef = useRef<HTMLDialogElement | null>(null);
-  const { className: restClass, ...restWithoutClass } = rest;
-  const containerClass = `w-[600px] p-4 rounded-sm backdrop:backdrop-blur-sm mx-auto absolute top-[30%] translate-y-[-30%] ${restClass}`;
-
-  // @ts-expect-error
-  useEffect(() => {
-    if (dialogRef.current) {
-      if (isOpen === true) {
-        dialogRef.current.showModal();
-        document.body.style.overflow = "hidden";
-      } else {
-        dialogRef.current.close();
-        document.body.style.overflow = "auto";
-      }
-
-      return () => {
-        if (dialogRef.current) {
-          dialogRef.current.close();
-        }
-
-        document.body.style.overflow = "auto";
-      };
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [isOpen]);
-
   return (
-    <dialog ref={dialogRef} className={containerClass} {...restWithoutClass}>
-      <div className="mb-2 text-right">
-        <button onClick={close}>
-          <CloseIcon className="hover:bg-current/10 outline" />
-        </button>
+    <Dialog open={isOpen} onClose={close} className="relative z-50">
+      <DialogBackdrop className="fixed inset-0 bg-neutral-500/10 backdrop-blur-sm" />
+      <div className="fixed inset-0 w-screen overflow-y-auto p-8">
+        <div className="flex min-h-full items-start justify-center">
+          <DialogPanel
+            className={`w-2xl max-w-full space-y-4 rounded-sm border bg-[#fff] p-6 ${className}`}
+          >
+            <DialogTitle className="flex justify-between font-bold text-neutral-900">
+              <span>{heading}</span>
+              <CloseIcon
+                className="hover:bg-current/10 outline"
+                onClick={close}
+              />
+            </DialogTitle>
+            {children}
+          </DialogPanel>
+        </div>
       </div>
-      <div className="mx-4 mb-4">
-        {heading && (
-          <h3 className="mb-4 text-xl text-neutral-700">{heading}</h3>
-        )}
-        {children}
-      </div>
-    </dialog>
+    </Dialog>
   );
 };
