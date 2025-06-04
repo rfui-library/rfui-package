@@ -5,6 +5,7 @@ export type SortDirection = "asc" | "desc" | null;
 
 export type BaseColumn = {
   label: ReactNode;
+  helpTooltipContent?: string;
   thProps?: Omit<ComponentProps<"th">, "onClick">;
 };
 

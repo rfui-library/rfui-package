@@ -15,6 +15,8 @@ export {
 export type { CardType } from "./data-display/card";
 export { Table } from "./data-display/table";
 export type { TableType } from "./data-display/table";
+export { ThWithHelpTooltip } from "./data-display/table/th-with-help-tooltip";
+export type { ThWithHelpTooltipType } from "./data-display/table/th-with-help-tooltip";
 
 export { Alert, AlertBody, AlertHeader } from "./feedback/alert";
 export type { AlertType } from "./feedback/alert";

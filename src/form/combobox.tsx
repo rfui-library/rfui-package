@@ -92,26 +92,26 @@ export const Combobox = <T,>({
         );
 
   let inputClassName =
-    "min-w-52 flex w-full max-w-full items-center justify-between border hover:shadow-sm focus:shadow-md";
+    "flex w-full max-w-full items-center justify-between truncate border hover:shadow-sm focus:shadow-md";
   let optionsClassName =
-    "min-w-52 mt-1 w-[var(--input-width)] max-w-full border border-neutral-500 bg-[#fff] empty:invisible";
+    "mt-1 w-[var(--input-width)] max-w-full border border-neutral-500 bg-[#fff] empty:invisible";
   let optionClassName =
     "mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50 data-[disabled]:opacity-50";
   let chevronIconClassName = "pointer-events-none";
   let checkIconClassName = "invisible fill-neutral-700";
 
   if (size === "sm") {
-    inputClassName += " px-2 text-sm";
+    inputClassName += " pl-2 pr-[36px] text-sm";
     optionClassName += " px-2 text-sm";
     chevronIconClassName += " size-4";
     checkIconClassName += " size-3";
   } else if (size === "md") {
-    inputClassName += " px-3 py-2";
+    inputClassName += " pl-3 pr-[44px] py-2";
     optionClassName += " px-3 py-2";
     chevronIconClassName += " size-5";
     checkIconClassName += " size-4";
   } else if (size === "lg") {
-    inputClassName += " px-3 py-3 text-lg";
+    inputClassName += " pl-3 pr-[44px] py-3 text-lg";
     optionClassName += " px-3 py-3 text-lg";
     chevronIconClassName += " size-5";
     checkIconClassName += " size-4";

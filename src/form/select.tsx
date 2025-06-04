@@ -69,28 +69,29 @@ export const Select = <T,>({
   }
 
   let buttonClassName =
-    "min-w-52 flex w-full max-w-full items-center justify-between border hover:shadow-sm focus:shadow-md";
+    "min-w-52 relative w-full max-w-full border text-left hover:shadow-sm focus:shadow-md";
   let optionsClassName =
     "min-w-52 mt-1 w-[var(--button-width)] max-w-full border border-neutral-500 bg-[#fff]";
   let optionClassName =
     "mx-1 my-1 flex cursor-default items-center gap-3 data-[focus]:bg-neutral-50 data-[disabled]:opacity-50";
-  let chevronIconClassName = "pointer-events-none";
+  let chevronIconClassName =
+    "pointer-events-none absolute inset-y-0 right-0 h-full px-2.5";
   let checkIconClassName = "fill-neutral-700";
 
   if (size === "sm") {
-    buttonClassName += " px-2 text-sm";
+    buttonClassName += " pl-2 pr-[36px] text-sm";
     optionClassName += " px-2 text-sm";
-    chevronIconClassName += " size-4";
+    chevronIconClassName += " w-[36px]";
     checkIconClassName += " size-3";
   } else if (size === "md") {
-    buttonClassName += " px-3 py-2";
+    buttonClassName += " pl-3 pr-[44px] py-2";
     optionClassName += " px-3 py-2";
-    chevronIconClassName += " size-5";
+    chevronIconClassName += " w-[44px]";
     checkIconClassName += " size-4";
   } else if (size === "lg") {
-    buttonClassName += " px-3 py-3 text-lg";
+    buttonClassName += " pl-3 pr-[44px] py-3 text-lg";
     optionClassName += " px-3 py-3 text-lg";
-    chevronIconClassName += " size-5";
+    chevronIconClassName += " w-[44px]";
     checkIconClassName += " size-4";
   }
 
@@ -171,7 +172,7 @@ export const Select = <T,>({
 
           return (
             <>
-              <span>{display}</span>
+              <span className="block truncate">{display}</span>
               <ChevronDownIcon
                 className={chevronIconClassName}
                 aria-hidden="true"
