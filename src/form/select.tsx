@@ -172,7 +172,8 @@ export const Select = <T,>({
 
           return (
             <>
-              <span className="block truncate">{display}</span>
+              {/* Using a non-breaking space to prevent the button from collapsing when there is no value */}
+              <span className="block truncate">{display || "\u00A0"}</span>
               <ChevronDownIcon
                 className={chevronIconClassName}
                 aria-hidden="true"
