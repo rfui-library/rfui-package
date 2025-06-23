@@ -114,7 +114,7 @@ export const Pagination = ({
           1
         </PaginationItem>
       )}
-      {lastPage > 7 && currPage > 4 && <Elipsis />}
+      {currPage > 4 && <Elipsis />}
       {currPage - 2 > 1 && (
         <PaginationItem
           type={type}
@@ -160,7 +160,7 @@ export const Pagination = ({
           {currPage + 2}
         </PaginationItem>
       )}
-      {lastPage > 7 && currPage < lastPage - 3 && <Elipsis />}
+      {currPage < lastPage - 3 && <Elipsis />}
       {currPage !== lastPage && (
         <PaginationItem
           type={type}
