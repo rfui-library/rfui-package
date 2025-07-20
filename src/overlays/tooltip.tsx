@@ -26,7 +26,7 @@ export const Tooltip = ({
   const id = `tooltip-${useId()}`;
   const handleMouseEnter = () => {
     timeoutRef.current = setTimeout(() => {
-      setIsVisible(true);
+      setIsVisible(content.length > 0); // Show tooltip if content is not empty
     }, 400);
   };
   const handleMouseLeave = () => {
