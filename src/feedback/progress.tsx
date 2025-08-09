@@ -20,6 +20,7 @@ export const Progress = ({
   variant = "neutral",
   ...rest
 }: ProgressType) => {
+  const adjustedValue = value > 100 ? 100 : value;
   const { className: restClass, ...restWithoutClass } = rest;
   let outerClassName = `rounded-xs box-content border`;
   let innerClassName = `h-full`;
@@ -69,7 +70,10 @@ export const Progress = ({
 
   return (
     <div className={outerClassName} {...restWithoutClass}>
-      <div className={innerClassName} style={{ width: `${value}%` }}></div>
+      <div
+        className={innerClassName}
+        style={{ width: `${adjustedValue}%` }}
+      ></div>
     </div>
   );
 };
