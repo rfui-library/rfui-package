@@ -34,7 +34,7 @@ export const Tabs = ({
 
   return (
     <div {...rest}>
-      <Flex className="overflow-x-auto">
+      <Flex className="flex-nowrap overflow-x-auto">
         {tabNames.map((tabName) => (
           <Tab
             key={tabName}
@@ -83,7 +83,7 @@ const Tab = ({
 }) => {
   const isActive = tabName === activeTabName;
   let containerClass =
-    "rfui-tab cursor-default border-b-2 px-5 py-4 text-center";
+    "rfui-tab cursor-default whitespace-nowrap border-b-2 px-5 py-4 text-center";
 
   if (fullWidth) {
     containerClass += " w-full";

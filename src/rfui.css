@@ -643,14 +643,14 @@
   .w-\[20px\] {
     width: 20px;
   }
+  .w-\[44px\] {
+    width: 44px;
+  }
   .w-\[300px\] {
     width: 300px;
   }
   .w-\[36px\] {
     width: 36px;
-  }
-  .w-\[44px\] {
-    width: 44px;
   }
   .w-\[600px\] {
     width: 600px;
@@ -743,6 +743,9 @@
   }
   .flex-row {
     flex-direction: row;
+  }
+  .flex-nowrap {
+    flex-wrap: nowrap;
   }
   .flex-wrap {
     flex-wrap: wrap;
