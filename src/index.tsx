@@ -62,7 +62,7 @@ export type {
   RadioButtonGroupType,
 } from "./form/radio-button-group";
 export { Select } from "./form/select";
-export type { SelectType } from "./form/select";
+export type { Option, SelectType } from "./form/select";
 export { Stepper } from "./form/stepper";
 export type { StepperType } from "./form/stepper";
 export { Switch } from "./form/switch";
