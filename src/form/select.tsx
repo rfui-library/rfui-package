@@ -7,7 +7,7 @@ import {
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Checkbox } from "./checkbox";
 
-type Option<T> = {
+export type Option<T> = {
   label: string;
   value: T;
   disabled?: boolean;
