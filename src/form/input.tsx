@@ -26,7 +26,7 @@ export const Input = ({
   ...rest
 }: InputType) => {
   const { className: restClass, ...restWithoutClass } = rest;
-  let className = "w-full border px-2 py-1 hover:shadow-sm focus:shadow-md";
+  let className = "z-1 w-full border px-2 py-1 hover:shadow-sm focus:shadow-md";
   let contentBeforeClassName =
     "rounded-r-none border border-r-0 border-neutral-500 bg-neutral-50";
   let contentAfterClassName =
@@ -78,7 +78,7 @@ export const Input = ({
 
   if (invalid) {
     className +=
-      " border-supporting-red-300 bg-supporting-red-50 text-supporting-red-900 focus:border-supporting-red-700";
+      " border-supporting-red-300 bg-supporting-red-50 text-supporting-red-900 focus:border-supporting-red-700 focus-visible:ring-supporting-red-700";
   } else {
     className +=
       " border-neutral-500 hover:border-neutral-900 focus:border-primary-900";
