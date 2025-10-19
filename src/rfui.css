@@ -1,4 +1,5 @@
-/*! tailwindcss v4.0.2 | MIT License | https://tailwindcss.com */
+/*! tailwindcss v4.1.14 | MIT License | https://tailwindcss.com */
+@layer properties;
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
@@ -8,19 +9,7 @@
     --breakpoint-lg: 64rem;
     --breakpoint-xl: 80rem;
     --breakpoint-2xl: 96rem;
-    --container-3xs: 16rem;
-    --container-2xs: 18rem;
-    --container-xs: 20rem;
-    --container-sm: 24rem;
-    --container-md: 28rem;
-    --container-lg: 32rem;
-    --container-xl: 36rem;
     --container-2xl: 42rem;
-    --container-3xl: 48rem;
-    --container-4xl: 56rem;
-    --container-5xl: 64rem;
-    --container-6xl: 72rem;
-    --container-7xl: 80rem;
     --text-xs: 0.75rem;
     --text-xs--line-height: calc(1 / 0.75);
     --text-sm: 0.875rem;
@@ -37,97 +26,16 @@
     --text-3xl--line-height: calc(2.25 / 1.875);
     --text-4xl: 2.25rem;
     --text-4xl--line-height: calc(2.5 / 2.25);
-    --text-5xl: 3rem;
-    --text-5xl--line-height: 1;
-    --text-6xl: 3.75rem;
-    --text-6xl--line-height: 1;
-    --text-7xl: 4.5rem;
-    --text-7xl--line-height: 1;
-    --text-8xl: 6rem;
-    --text-8xl--line-height: 1;
-    --text-9xl: 8rem;
-    --text-9xl--line-height: 1;
-    --font-weight-thin: 100;
-    --font-weight-extralight: 200;
-    --font-weight-light: 300;
     --font-weight-normal: 400;
-    --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
-    --font-weight-extrabold: 800;
-    --font-weight-black: 900;
-    --tracking-tighter: -0.05em;
-    --tracking-tight: -0.025em;
-    --tracking-normal: 0em;
     --tracking-wide: 0.025em;
-    --tracking-wider: 0.05em;
-    --tracking-widest: 0.1em;
-    --leading-tight: 1.25;
-    --leading-snug: 1.375;
-    --leading-normal: 1.5;
     --leading-relaxed: 1.625;
-    --leading-loose: 2;
     --radius-xs: 0.125rem;
     --radius-sm: 0.25rem;
-    --radius-md: 0.375rem;
     --radius-lg: 0.5rem;
-    --radius-xl: 0.75rem;
-    --radius-2xl: 1rem;
-    --radius-3xl: 1.5rem;
-    --radius-4xl: 2rem;
-    --shadow-2xs: 0 1px rgb(0 0 0 / 0.05);
-    --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1),
-      0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
-      0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-      0 8px 10px -6px rgb(0 0 0 / 0.1);
-    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-    --inset-shadow-2xs: inset 0 1px rgb(0 0 0 / 0.05);
-    --inset-shadow-xs: inset 0 1px 1px rgb(0 0 0 / 0.05);
-    --inset-shadow-sm: inset 0 2px 4px rgb(0 0 0 / 0.05);
-    --drop-shadow-xs: 0 1px 1px rgb(0 0 0 / 0.05);
-    --drop-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.15);
-    --drop-shadow-md: 0 3px 3px rgb(0 0 0 / 0.12);
-    --drop-shadow-lg: 0 4px 4px rgb(0 0 0 / 0.15);
-    --drop-shadow-xl: 0 9px 7px rgb(0 0 0 / 0.1);
-    --drop-shadow-2xl: 0 25px 25px rgb(0 0 0 / 0.15);
-    --ease-in: cubic-bezier(0.4, 0, 1, 1);
-    --ease-out: cubic-bezier(0, 0, 0.2, 1);
-    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-    --animate-spin: spin 1s linear infinite;
-    --animate-ping: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
-    --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    --animate-bounce: bounce 1s infinite;
-    --blur-xs: 4px;
     --blur-sm: 8px;
-    --blur-md: 12px;
-    --blur-lg: 16px;
-    --blur-xl: 24px;
-    --blur-2xl: 40px;
-    --blur-3xl: 64px;
-    --perspective-dramatic: 100px;
-    --perspective-near: 300px;
-    --perspective-normal: 500px;
-    --perspective-midrange: 800px;
-    --perspective-distant: 1200px;
-    --aspect-video: 16 / 9;
-    --default-transition-duration: 150ms;
-    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
-    --default-font-feature-settings: var(--font-sans--font-feature-settings);
-    --default-font-variation-settings: var(
-      --font-sans--font-variation-settings
-    );
-    --default-mono-font-family: var(--font-mono);
-    --default-mono-font-feature-settings: var(
-      --font-mono--font-feature-settings
-    );
-    --default-mono-font-variation-settings: var(
-      --font-mono--font-variation-settings
-    );
     --font-sans: "Open Sans", sans-serif;
     --spacing-px: 1px;
     --spacing-0: 0;
@@ -141,25 +49,14 @@
     --spacing-8: 4rem;
     --spacing-9: 6rem;
     --spacing-10: 8rem;
-    --spacing-11: 12rem;
     --spacing-12: 16rem;
-    --spacing-13: 24rem;
-    --spacing-14: 32rem;
-    --spacing-15: 40rem;
-    --spacing-16: 48rem;
-    --rounded-square: var(--spacing-0);
     --rounded-sm: var(--spacing-1);
-    --rounded-lg: var(--spacing-2);
-    --rounded-full: 9999px;
     --default-roundedness: var(--rounded-sm);
     --color-gray-200: rgb(229 231 235);
     --color-primary-50: rgb(220 238 251);
     --color-primary-100: rgb(182 224 254);
     --color-primary-200: rgb(132 197 244);
-    --color-primary-300: rgb(98 176 232);
-    --color-primary-400: rgb(64 152 215);
     --color-primary-500: rgb(38 128 194);
-    --color-primary-600: rgb(24 111 175);
     --color-primary-700: rgb(15 96 155);
     --color-primary-800: rgb(10 85 140);
     --color-primary-900: rgb(0 62 107);
@@ -171,35 +68,21 @@
     --color-neutral-500: rgb(98 125 152);
     --color-neutral-600: rgb(72 101 129);
     --color-neutral-700: rgb(51 78 104);
-    --color-neutral-800: rgb(36 59 83);
     --color-neutral-900: rgb(16 42 67);
     --color-supporting-green-50: rgb(227 249 229);
-    --color-supporting-green-100: rgb(193 234 197);
     --color-supporting-green-200: rgb(163 217 165);
-    --color-supporting-green-300: rgb(123 196 127);
-    --color-supporting-green-400: rgb(87 174 91);
     --color-supporting-green-500: rgb(63 145 66);
-    --color-supporting-green-600: rgb(47 129 50);
     --color-supporting-green-700: rgb(32 114 39);
-    --color-supporting-green-800: rgb(14 88 20);
     --color-supporting-green-900: rgb(5 68 10);
     --color-supporting-yellow-50: rgb(255 251 234);
-    --color-supporting-yellow-100: rgb(255 243 196);
     --color-supporting-yellow-200: rgb(252 229 136);
-    --color-supporting-yellow-300: rgb(250 219 95);
-    --color-supporting-yellow-400: rgb(247 201 72);
-    --color-supporting-yellow-500: rgb(240 180 41);
-    --color-supporting-yellow-600: rgb(222 145 29);
     --color-supporting-yellow-700: rgb(203 110 23);
     --color-supporting-yellow-800: rgb(180 77 18);
     --color-supporting-yellow-900: rgb(141 43 11);
     --color-supporting-red-50: rgb(255 238 238);
-    --color-supporting-red-100: rgb(250 205 205);
     --color-supporting-red-200: rgb(242 155 155);
     --color-supporting-red-300: rgb(230 106 106);
-    --color-supporting-red-400: rgb(214 69 69);
     --color-supporting-red-500: rgb(186 37 37);
-    --color-supporting-red-600: rgb(166 27 27);
     --color-supporting-red-700: rgb(145 17 17);
     --color-supporting-red-800: rgb(120 10 10);
     --color-supporting-red-900: rgb(97 4 4);
@@ -216,13 +99,10 @@
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
     tab-size: 4;
-    font-family: var( --default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" );
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
     font-feature-settings: var(--default-font-feature-settings, normal);
-    font-variation-settings: var( --default-font-variation-settings, normal );
+    font-variation-settings: var(--default-font-variation-settings, normal);
     -webkit-tap-highlight-color: transparent;
-  }
-  body {
-    line-height: inherit;
   }
   hr {
     height: 0;
@@ -246,9 +126,9 @@
     font-weight: bolder;
   }
   code, kbd, samp, pre {
-    font-family: var( --default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace );
-    font-feature-settings: var( --default-mono-font-feature-settings, normal );
-    font-variation-settings: var( --default-mono-font-variation-settings, normal );
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
     font-size: 1em;
   }
   small {
@@ -312,7 +192,14 @@
   }
   ::placeholder {
     opacity: 1;
-    color: color-mix(in oklab, currentColor 50%, transparent);
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
   }
   textarea {
     resize: vertical;
@@ -332,6 +219,9 @@
   }
   ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
     padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
   }
   :-moz-ui-invalid {
     box-shadow: none;
@@ -418,6 +308,9 @@
   }
   .left-full {
     left: 100%;
+  }
+  .z-1 {
+    z-index: 1;
   }
   .z-10 {
     z-index: 10;
@@ -643,14 +536,14 @@
   .w-\[20px\] {
     width: 20px;
   }
+  .w-\[36px\] {
+    width: 36px;
+  }
   .w-\[44px\] {
     width: 44px;
   }
   .w-\[300px\] {
     width: 300px;
-  }
-  .w-\[36px\] {
-    width: 36px;
   }
   .w-\[600px\] {
     width: 600px;
@@ -712,7 +605,7 @@
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .transform {
-    transform: var(--tw-rotate-x) var(--tw-rotate-y) var(--tw-rotate-z) var(--tw-skew-x) var(--tw-skew-y);
+    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
   }
   .cursor-default {
     cursor: default;
@@ -840,6 +733,14 @@
     border-top-left-radius: var(--radius-lg);
     border-bottom-left-radius: var(--radius-lg);
   }
+  .rounded-l-none {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+  .rounded-l-none\! {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
   .rounded-r {
     border-top-right-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem;
@@ -851,6 +752,14 @@
   .rounded-r-lg {
     border-top-right-radius: var(--radius-lg);
     border-bottom-right-radius: var(--radius-lg);
+  }
+  .rounded-r-none {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+  .rounded-r-none\! {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
   }
   .border {
     border-style: var(--tw-border-style);
@@ -872,6 +781,10 @@
     border-top-style: var(--tw-border-style);
     border-top-width: 2px;
   }
+  .border-r-0 {
+    border-right-style: var(--tw-border-style);
+    border-right-width: 0px;
+  }
   .border-b {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
@@ -883,6 +796,10 @@
   .border-l {
     border-left-style: var(--tw-border-style);
     border-left-width: 1px;
+  }
+  .border-l-0 {
+    border-left-style: var(--tw-border-style);
+    border-left-width: 0px;
   }
   .border-l-2 {
     border-left-style: var(--tw-border-style);
@@ -918,7 +835,10 @@
     border-color: var(--color-primary-500);
   }
   .border-primary-900\/50 {
-    border-color: color-mix(in oklab, var(--color-primary-900) 50%, transparent);
+    border-color: color-mix(in srgb, rgb(0 62 107) 50%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-primary-900) 50%, transparent);
+    }
   }
   .border-supporting-green-200 {
     border-color: var(--color-supporting-green-200);
@@ -939,7 +859,10 @@
     border-color: var(--color-supporting-red-700);
   }
   .border-supporting-red-900\/50 {
-    border-color: color-mix(in oklab, var(--color-supporting-red-900) 50%, transparent);
+    border-color: color-mix(in srgb, rgb(97 4 4) 50%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-supporting-red-900) 50%, transparent);
+    }
   }
   .border-supporting-yellow-200 {
     border-color: var(--color-supporting-yellow-200);
@@ -975,7 +898,10 @@
     background-color: var(--color-neutral-50);
   }
   .bg-neutral-50\/75 {
-    background-color: color-mix(in oklab, var(--color-neutral-50) 75%, transparent);
+    background-color: color-mix(in srgb, rgb(240 244 248) 75%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-neutral-50) 75%, transparent);
+    }
   }
   .bg-neutral-100 {
     background-color: var(--color-neutral-100);
@@ -984,7 +910,10 @@
     background-color: var(--color-neutral-200);
   }
   .bg-neutral-500\/10 {
-    background-color: color-mix(in oklab, var(--color-neutral-500) 10%, transparent);
+    background-color: color-mix(in srgb, rgb(98 125 152) 10%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-neutral-500) 10%, transparent);
+    }
   }
   .bg-neutral-700 {
     background-color: var(--color-neutral-700);
@@ -1253,9 +1182,6 @@
   .\!normal-case {
     text-transform: none !important;
   }
-  .uppercase {
-    text-transform: uppercase;
-  }
   .no-underline {
     text-decoration-line: none;
   }
@@ -1296,9 +1222,6 @@
   }
   .outline-supporting-red-500 {
     outline-color: var(--color-supporting-red-500);
-  }
-  .filter {
-    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
   .backdrop-blur-sm {
     --tw-backdrop-blur: blur(var(--blur-sm));
@@ -1369,7 +1292,10 @@
   .hover\:bg-current\/10 {
     &:hover {
       @media (hover: hover) {
-        background-color: color-mix(in oklab, currentColor 10%, transparent);
+        background-color: currentcolor;
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, currentcolor 10%, transparent);
+        }
       }
     }
   }
@@ -1383,7 +1309,10 @@
   .hover\:bg-neutral-50\/75 {
     &:hover {
       @media (hover: hover) {
-        background-color: color-mix(in oklab, var(--color-neutral-50) 75%, transparent);
+        background-color: color-mix(in srgb, rgb(240 244 248) 75%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-neutral-50) 75%, transparent);
+        }
       }
     }
   }
@@ -1397,14 +1326,20 @@
   .hover\:bg-neutral-100\/50 {
     &:hover {
       @media (hover: hover) {
-        background-color: color-mix(in oklab, var(--color-neutral-100) 50%, transparent);
+        background-color: color-mix(in srgb, rgb(217 226 236) 50%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-neutral-100) 50%, transparent);
+        }
       }
     }
   }
   .hover\:bg-primary-50\/50 {
     &:hover {
       @media (hover: hover) {
-        background-color: color-mix(in oklab, var(--color-primary-50) 50%, transparent);
+        background-color: color-mix(in srgb, rgb(220 238 251) 50%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-primary-50) 50%, transparent);
+        }
       }
     }
   }
@@ -1418,14 +1353,20 @@
   .hover\:bg-supporting-red-50\/50 {
     &:hover {
       @media (hover: hover) {
-        background-color: color-mix(in oklab, var(--color-supporting-red-50) 50%, transparent);
+        background-color: color-mix(in srgb, rgb(255 238 238) 50%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-supporting-red-50) 50%, transparent);
+        }
       }
     }
   }
   .hover\:bg-supporting-red-50\/75 {
     &:hover {
       @media (hover: hover) {
-        background-color: color-mix(in oklab, var(--color-supporting-red-50) 75%, transparent);
+        background-color: color-mix(in srgb, rgb(255 238 238) 75%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-supporting-red-50) 75%, transparent);
+        }
       }
     }
   }
@@ -1517,11 +1458,23 @@
   }
   .focus\:outline-hidden {
     &:focus {
+      --tw-outline-style: none;
       outline-style: none;
       @media (forced-colors: active) {
         outline: 2px solid transparent;
         outline-offset: 2px;
       }
+    }
+  }
+  .focus\:outline-1 {
+    &:focus {
+      outline-style: var(--tw-outline-style);
+      outline-width: 1px;
+    }
+  }
+  .focus-visible\:outline-supporting-red-700 {
+    &:focus-visible {
+      outline-color: var(--color-supporting-red-700);
     }
   }
   .active\:bg-neutral-50 {
@@ -1620,7 +1573,10 @@
     @media (width < 40rem) {
       &:hover {
         @media (hover: hover) {
-          background-color: color-mix(in oklab, var(--color-neutral-100) 50%, transparent);
+          background-color: color-mix(in srgb, rgb(217 226 236) 50%, transparent);
+          @supports (color: color-mix(in lab, red, red)) {
+            background-color: color-mix(in oklab, var(--color-neutral-100) 50%, transparent);
+          }
         }
       }
     }
@@ -1765,7 +1721,10 @@
     @media (width >= 40rem) {
       &:hover {
         @media (hover: hover) {
-          background-color: color-mix(in oklab, var(--color-neutral-100) 50%, transparent);
+          background-color: color-mix(in srgb, rgb(217 226 236) 50%, transparent);
+          @supports (color: color-mix(in lab, red, red)) {
+            background-color: color-mix(in oklab, var(--color-neutral-100) 50%, transparent);
+          }
         }
       }
     }
@@ -1938,32 +1897,6 @@ table.rfui-table.striped tr:nth-child(even) {
 .rfui-in-page-link:hover .rfui-in-page-link-icon {
   display: inline;
 }
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-@keyframes ping {
-  75%, 100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-@keyframes pulse {
-  50% {
-    opacity: 0.5;
-  }
-}
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(-25%);
-    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-  }
-  50% {
-    transform: none;
-    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  }
-}
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;
@@ -1982,27 +1915,22 @@ table.rfui-table.striped tr:nth-child(even) {
 @property --tw-rotate-x {
   syntax: "*";
   inherits: false;
-  initial-value: rotateX(0);
 }
 @property --tw-rotate-y {
   syntax: "*";
   inherits: false;
-  initial-value: rotateY(0);
 }
 @property --tw-rotate-z {
   syntax: "*";
   inherits: false;
-  initial-value: rotateZ(0);
 }
 @property --tw-skew-x {
   syntax: "*";
   inherits: false;
-  initial-value: skewX(0);
 }
 @property --tw-skew-y {
   syntax: "*";
   inherits: false;
-  initial-value: skewY(0);
 }
 @property --tw-space-y-reverse {
   syntax: "*";
@@ -2035,6 +1963,11 @@ table.rfui-table.striped tr:nth-child(even) {
   syntax: "*";
   inherits: false;
 }
+@property --tw-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
 @property --tw-inset-shadow {
   syntax: "*";
   inherits: false;
@@ -2043,6 +1976,11 @@ table.rfui-table.striped tr:nth-child(even) {
 @property --tw-inset-shadow-color {
   syntax: "*";
   inherits: false;
+}
+@property --tw-inset-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
 }
 @property --tw-ring-color {
   syntax: "*";
@@ -2086,42 +2024,6 @@ table.rfui-table.striped tr:nth-child(even) {
   inherits: false;
   initial-value: solid;
 }
-@property --tw-blur {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-brightness {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-contrast {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-grayscale {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-hue-rotate {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-invert {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-opacity {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-saturate {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-sepia {
-  syntax: "*";
-  inherits: false;
-}
 @property --tw-backdrop-blur {
   syntax: "*";
   inherits: false;
@@ -2157,4 +2059,47 @@ table.rfui-table.striped tr:nth-child(even) {
 @property --tw-backdrop-sepia {
   syntax: "*";
   inherits: false;
+}
+@layer properties {
+  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
+    *, ::before, ::after, ::backdrop {
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-translate-z: 0;
+      --tw-rotate-x: initial;
+      --tw-rotate-y: initial;
+      --tw-rotate-z: initial;
+      --tw-skew-x: initial;
+      --tw-skew-y: initial;
+      --tw-space-y-reverse: 0;
+      --tw-border-style: solid;
+      --tw-leading: initial;
+      --tw-font-weight: initial;
+      --tw-tracking: initial;
+      --tw-shadow: 0 0 #0000;
+      --tw-shadow-color: initial;
+      --tw-shadow-alpha: 100%;
+      --tw-inset-shadow: 0 0 #0000;
+      --tw-inset-shadow-color: initial;
+      --tw-inset-shadow-alpha: 100%;
+      --tw-ring-color: initial;
+      --tw-ring-shadow: 0 0 #0000;
+      --tw-inset-ring-color: initial;
+      --tw-inset-ring-shadow: 0 0 #0000;
+      --tw-ring-inset: initial;
+      --tw-ring-offset-width: 0px;
+      --tw-ring-offset-color: #fff;
+      --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-outline-style: solid;
+      --tw-backdrop-blur: initial;
+      --tw-backdrop-brightness: initial;
+      --tw-backdrop-contrast: initial;
+      --tw-backdrop-grayscale: initial;
+      --tw-backdrop-hue-rotate: initial;
+      --tw-backdrop-invert: initial;
+      --tw-backdrop-opacity: initial;
+      --tw-backdrop-saturate: initial;
+      --tw-backdrop-sepia: initial;
+    }
+  }
 }
