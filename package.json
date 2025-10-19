@@ -1,6 +1,6 @@
 {
   "name": "rfui-package",
-  "version": "0.11.36",
+  "version": "0.11.37",
   "description": "A React component library",
   "main": "dist/index.js",
   "scripts": {
