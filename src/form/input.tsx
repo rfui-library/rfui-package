@@ -78,7 +78,7 @@ export const Input = ({
 
   if (invalid) {
     className +=
-      " border-supporting-red-300 bg-supporting-red-50 text-supporting-red-900 focus:border-supporting-red-700 focus-visible:ring-supporting-red-700";
+      " border-supporting-red-300 bg-supporting-red-50 text-supporting-red-900 focus:border-supporting-red-700 focus:outline-1 focus-visible:outline-supporting-red-700";
   } else {
     className +=
       " border-neutral-500 hover:border-neutral-900 focus:border-primary-900";
