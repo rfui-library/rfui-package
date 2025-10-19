@@ -28,9 +28,9 @@ export const Input = ({
   const { className: restClass, ...restWithoutClass } = rest;
   let className = "z-1 w-full border px-2 py-1 hover:shadow-sm focus:shadow-md";
   let contentBeforeClassName =
-    "flex-shrink-0 rounded-r-none border border-r-0 border-neutral-500 bg-neutral-50";
+    "rounded-r-none! flex-shrink-0 border border-r-0 border-neutral-500 bg-neutral-50";
   let contentAfterClassName =
-    "flex-shrink-0 rounded-l-none border border-l-0 border-neutral-500 bg-neutral-50";
+    "rounded-l-none! flex-shrink-0 border border-l-0 border-neutral-500 bg-neutral-50";
 
   if (size === "sm") {
     className += " px-2 text-sm";
