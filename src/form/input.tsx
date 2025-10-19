@@ -28,9 +28,9 @@ export const Input = ({
   const { className: restClass, ...restWithoutClass } = rest;
   let className = "z-1 w-full border px-2 py-1 hover:shadow-sm focus:shadow-md";
   let contentBeforeClassName =
-    "rounded-r-none border border-r-0 border-neutral-500 bg-neutral-50";
+    "flex-shrink-0 rounded-r-none border border-r-0 border-neutral-500 bg-neutral-50";
   let contentAfterClassName =
-    "rounded-l-none border border-l-0 border-neutral-500 bg-neutral-50";
+    "flex-shrink-0 rounded-l-none border border-l-0 border-neutral-500 bg-neutral-50";
 
   if (size === "sm") {
     className += " px-2 text-sm";
@@ -102,7 +102,7 @@ export const Input = ({
         {contentBefore && (
           <div className={contentBeforeClassName}>{contentBefore}</div>
         )}
-        <input className={className} {...restWithoutClass} />
+        <input className={`${className} flex-1`} {...restWithoutClass} />
         {contentAfter && (
           <div className={contentAfterClassName}>{contentAfter}</div>
         )}
