@@ -15,7 +15,7 @@ export type SortableColumn = BaseColumn & {
 
 export type BaseAdvancedTableType<T> = {
   rows: T[];
-  buildRow: (row: T) => ReactNode;
+  buildRow: (row: T, index: number) => ReactNode;
   getRowKey?: (row: T) => string | number;
   tableProps?: Omit<TableType, "children">;
 };
@@ -29,6 +29,7 @@ export type AutomaticSorting<T> = BaseAdvancedTableType<T> & {
   sortType: "automatic";
   columns: SortableColumn[];
   onSort?: (key: string | null, direction: SortDirection) => void;
+  shouldSortLastRow?: boolean;
 };
 
 export type ControlledSorting<T> = BaseAdvancedTableType<T> & {
