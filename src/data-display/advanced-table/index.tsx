@@ -130,6 +130,11 @@ export const AdvancedTable = <T,>(props: AdvancedTableType<T>) => {
         rows={rows}
         getRowKey={getRowKey}
         buildRow={buildRow}
+        shouldSortLastRow={
+          "shouldSortLastRow" in props
+            ? (props.shouldSortLastRow ?? true)
+            : true
+        }
       />
     </Table>
   );

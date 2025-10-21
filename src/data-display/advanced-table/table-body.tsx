@@ -8,6 +8,7 @@ type TableBodyType<T> = {
   rows: T[];
   getRowKey: AdvancedTableType<T>["getRowKey"];
   buildRow: AdvancedTableType<T>["buildRow"];
+  shouldSortLastRow: boolean;
 };
 
 export const TableBody = <T,>({
@@ -17,10 +18,16 @@ export const TableBody = <T,>({
   rows: _rows,
   getRowKey,
   buildRow,
+  shouldSortLastRow,
 }: TableBodyType<T>) => {
   const rows =
     sortType === "automatic" && internalSortKey
-      ? getSortedRows(_rows, internalSortKey, internalSortDirection)
+      ? getSortedRows(
+          _rows,
+          internalSortKey,
+          internalSortDirection,
+          shouldSortLastRow,
+        )
       : _rows;
 
   return (
@@ -46,8 +53,12 @@ const getSortedRows = <T,>(
   rows: T[],
   internalSortKey: string,
   internalSortDirection: SortDirection,
-) =>
-  [...rows].sort((a, b) => {
+  shouldSortLastRow: boolean,
+) => {
+  const lastRow = rows[rows.length - 1];
+  const otherRows = rows.slice(0, -1);
+  const rowsToSort = shouldSortLastRow ? rows : otherRows;
+  const sortedRows = [...rowsToSort].sort((a, b) => {
     const aValue = getNestedValue(
       a as Record<string, unknown>,
       internalSortKey,
@@ -99,3 +110,6 @@ const getSortedRows = <T,>(
 
     return internalSortDirection === "asc" ? comparison : -comparison;
   });
+
+  return shouldSortLastRow ? sortedRows : [...sortedRows, lastRow];
+};
