@@ -15,7 +15,7 @@ export type SortableColumn = BaseColumn & {
 
 export type BaseAdvancedTableType<T> = {
   rows: T[];
-  buildRow: (row: T, index: number) => ReactNode;
+  buildRow: (row: T, index: number, isLastRow: boolean) => ReactNode;
   getRowKey?: (row: T) => string | number;
   tableProps?: Omit<TableType, "children">;
 };

@@ -42,7 +42,7 @@ export const TableBody = <T,>({
                 : `row-${index}`
           }
         >
-          {buildRow(row, index)}
+          {buildRow(row, index, index === rows.length - 1)}
         </tr>
       ))}
     </tbody>
