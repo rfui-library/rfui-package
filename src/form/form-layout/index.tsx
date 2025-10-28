@@ -1,7 +1,10 @@
-import type { ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
+import { Children, cloneElement, isValidElement } from "react";
 import { Stack, StackType } from "../../layout/stack";
+import { FormSection, FormSectionType } from "./form-section";
 
 export type FormLayoutType = {
+  layout?: "horizontal" | "vertical";
   children: ReactNode;
 } & StackType;
 
@@ -24,10 +27,31 @@ export type FormLayoutType = {
  *   </FormSection>
  * </FormLayout>
  */
-export const FormLayout = ({ children, ...rest }: FormLayoutType) => {
+export const FormLayout = ({
+  layout = "horizontal",
+  children,
+  ...rest
+}: FormLayoutType) => {
+  const validatedChildren = Children.map(children, (child) => {
+    if (!isValidElement(child)) {
+      throw new Error("FormLayout children must be valid React elements");
+    }
+
+    if (child.type !== FormSection) {
+      throw new Error(
+        "FormLayout only accepts FormSection components as direct children",
+      );
+    }
+
+    const typedChild = child as ReactElement<FormSectionType>;
+    return cloneElement(typedChild, {
+      layout: typedChild.props.layout ?? layout,
+    });
+  });
+
   return (
     <Stack className="gap-8" {...rest}>
-      {children}
+      {validatedChildren}
     </Stack>
   );
 };
