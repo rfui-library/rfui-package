@@ -1,5 +1,19 @@
 import type { ComponentProps, ReactNode } from "react";
-import { Children } from "react";
+import { Children, createContext, useContext, useState } from "react";
+import { ChevronDownIcon } from "../icons/chevron-down";
+import { ChevronUpIcon } from "../icons/chevron-up";
+
+type CardContextType = {
+  collapsible: boolean;
+  isCollapsed: boolean;
+  toggleCollapsed: () => void;
+};
+
+const CardContext = createContext<CardContextType>({
+  collapsible: false,
+  isCollapsed: false,
+  toggleCollapsed: () => {},
+});
 
 export type CardType = {
   rounded?: "square" | "sm" | "lg";
@@ -8,6 +22,7 @@ export type CardType = {
   padding?: "sm" | "md" | "lg";
   topAccent?: boolean;
   leftAccent?: boolean;
+  collapsible?: boolean;
   children: ReactNode;
 } & Omit<ComponentProps<"div">, "size">;
 
@@ -26,9 +41,13 @@ export const Card = ({
   topAccent = false,
   leftAccent = false,
   padding = "md",
+  collapsible = false,
   children,
   ...rest
 }: CardType) => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const toggleCollapsed = () => setIsCollapsed((prev) => !prev);
+
   const { cardHeader, cardBody, cardFooter, isArray } = getComponents(children);
   const { className: restClass, ...restWithoutClass } = rest;
   let containerClass = "rfui-card max-w-full border border-neutral-100";
@@ -84,14 +103,16 @@ export const Card = ({
   }
 
   return (
-    <div className={containerClass} {...restWithoutClass}>
-      {cardHeader ? cardHeader : null}
-      {cardBody && isArray ? cardBody : null}
-      {cardBody && !isArray ? (
-        <div className="rfui-card-body">{cardBody}</div>
-      ) : null}
-      {cardFooter ? cardFooter : null}
-    </div>
+    <CardContext.Provider value={{ collapsible, isCollapsed, toggleCollapsed }}>
+      <div className={containerClass} {...restWithoutClass}>
+        {cardHeader ? cardHeader : null}
+        {cardBody && isArray ? cardBody : null}
+        {cardBody && !isArray ? (
+          <div className="rfui-card-body">{cardBody}</div>
+        ) : null}
+        {cardFooter ? cardFooter : null}
+      </div>
+    </CardContext.Provider>
   );
 };
 
@@ -127,16 +148,44 @@ export const CardHeader = ({
   children,
   ...rest
 }: { children: ReactNode } & ComponentProps<"div">) => {
+  const { collapsible, isCollapsed, toggleCollapsed } = useContext(CardContext);
   const { className: restClass, ...restWithoutClass } = rest;
   let className = "rfui-card-header";
+
+  if (collapsible) {
+    className += " cursor-pointer select-none";
+  }
 
   if (restClass) {
     className += ` ${restClass}`;
   }
 
+  const content = collapsible ? (
+    <div className="flex items-center justify-between">
+      <div className="flex-1">{children}</div>
+      {isCollapsed ? (
+        <ChevronDownIcon
+          className="h-4 w-4 flex-none text-neutral-700"
+          strokeWidth={3}
+        />
+      ) : (
+        <ChevronUpIcon
+          className="h-4 w-4 flex-none text-neutral-700"
+          strokeWidth={3}
+        />
+      )}
+    </div>
+  ) : (
+    children
+  );
+
   return (
-    <div className={className} {...restWithoutClass}>
-      {children}
+    <div
+      className={className}
+      onClick={collapsible ? toggleCollapsed : undefined}
+      {...restWithoutClass}
+    >
+      {content}
     </div>
   );
 };
@@ -145,11 +194,16 @@ export const CardBody = ({
   children,
   ...rest
 }: { children: ReactNode } & ComponentProps<"div">) => {
+  const { collapsible, isCollapsed } = useContext(CardContext);
   const { className: restClass, ...restWithoutClass } = rest;
   let className = "rfui-card-body";
 
   if (restClass) {
     className += ` ${restClass}`;
+  }
+
+  if (collapsible && isCollapsed) {
+    return null;
   }
 
   return (
@@ -163,11 +217,16 @@ export const CardFooter = ({
   children,
   ...rest
 }: { children: ReactNode } & ComponentProps<"div">) => {
+  const { collapsible, isCollapsed } = useContext(CardContext);
   const { className: restClass, ...restWithoutClass } = rest;
   let className = "rfui-card-footer";
 
   if (restClass) {
     className += ` ${restClass}`;
+  }
+
+  if (collapsible && isCollapsed) {
+    return null;
   }
 
   return (
