@@ -1,5 +1,4 @@
-import type { ReactNode } from "react";
-import { Flex, FlexType } from "../../layout/flex";
+import type { ComponentProps, ReactNode } from "react";
 import { Stack } from "../../layout/stack";
 
 export type FormSectionType = {
@@ -7,7 +6,7 @@ export type FormSectionType = {
   description?: string;
   layout?: "horizontal" | "vertical";
   children: ReactNode;
-} & FlexType;
+} & ComponentProps<"div">;
 
 export const FormSection = ({
   title,
@@ -31,14 +30,14 @@ export const FormSection = ({
   }
 
   return (
-    <Flex className="gap-20" {...rest}>
-      <div className="w-48 flex-none">
+    <div className="flex flex-col gap-4 md:flex-row md:gap-20" {...rest}>
+      <div className="md:w-48 md:flex-none">
         <h3 className="text-xl">{title}</h3>
         {description && (
-          <div className="mt-4 text-neutral-700">{description}</div>
+          <div className="mt-2 text-neutral-700 md:mt-4">{description}</div>
         )}
       </div>
       <Stack className="flex-1 gap-4">{children}</Stack>
-    </Flex>
+    </div>
   );
 };
