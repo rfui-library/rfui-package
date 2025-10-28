@@ -1,5 +1,7 @@
 import type { ComponentProps, ReactNode } from "react";
 import { Children, createContext, useContext, useState } from "react";
+import { ChevronDownIcon } from "../icons/chevron-down";
+import { ChevronUpIcon } from "../icons/chevron-up";
 
 type CardContextType = {
   collapsible: boolean;
@@ -146,7 +148,7 @@ export const CardHeader = ({
   children,
   ...rest
 }: { children: ReactNode } & ComponentProps<"div">) => {
-  const { collapsible, toggleCollapsed } = useContext(CardContext);
+  const { collapsible, isCollapsed, toggleCollapsed } = useContext(CardContext);
   const { className: restClass, ...restWithoutClass } = rest;
   let className = "rfui-card-header";
 
@@ -158,13 +160,32 @@ export const CardHeader = ({
     className += ` ${restClass}`;
   }
 
+  const content = collapsible ? (
+    <div className="flex items-center justify-between">
+      <div className="flex-1">{children}</div>
+      {isCollapsed ? (
+        <ChevronDownIcon
+          className="h-4 w-4 flex-none text-neutral-700"
+          strokeWidth={3}
+        />
+      ) : (
+        <ChevronUpIcon
+          className="h-4 w-4 flex-none text-neutral-700"
+          strokeWidth={3}
+        />
+      )}
+    </div>
+  ) : (
+    children
+  );
+
   return (
     <div
       className={className}
       onClick={collapsible ? toggleCollapsed : undefined}
       {...restWithoutClass}
     >
-      {children}
+      {content}
     </div>
   );
 };
