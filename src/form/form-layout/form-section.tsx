@@ -30,14 +30,16 @@ export const FormSection = ({
   }
 
   return (
-    <div className="flex flex-col gap-4 md:flex-row md:gap-20" {...rest}>
-      <div className="md:w-48 md:flex-none">
-        <h3 className="text-xl">{title}</h3>
-        {description && (
-          <div className="mt-2 text-neutral-700 md:mt-4">{description}</div>
-        )}
+    <div className="@container" {...rest}>
+      <div className="@lg:flex-row @lg:gap-20 flex flex-col gap-4">
+        <div className="@lg:w-48 @lg:flex-none">
+          <h3 className="text-xl">{title}</h3>
+          {description && (
+            <div className="@lg:mt-4 mt-2 text-neutral-700">{description}</div>
+          )}
+        </div>
+        <Stack className="flex-1 gap-4">{children}</Stack>
       </div>
-      <Stack className="flex-1 gap-4">{children}</Stack>
     </div>
   );
 };
