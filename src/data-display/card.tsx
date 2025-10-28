@@ -23,6 +23,7 @@ export type CardType = {
   topAccent?: boolean;
   leftAccent?: boolean;
   collapsible?: boolean;
+  isCollapsedByDefault?: boolean;
   children: ReactNode;
 } & Omit<ComponentProps<"div">, "size">;
 
@@ -42,10 +43,11 @@ export const Card = ({
   leftAccent = false,
   padding = "md",
   collapsible = false,
+  isCollapsedByDefault = false,
   children,
   ...rest
 }: CardType) => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(isCollapsedByDefault);
   const toggleCollapsed = () => setIsCollapsed((prev) => !prev);
 
   const { cardHeader, cardBody, cardFooter, isArray } = getComponents(children);
