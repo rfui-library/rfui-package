@@ -198,7 +198,7 @@ export const CardBody = ({
 }: { children: ReactNode } & ComponentProps<"div">) => {
   const { collapsible, isCollapsed } = useContext(CardContext);
   const { className: restClass, ...restWithoutClass } = rest;
-  let className = "rfui-card-body";
+  let className = "rfui-card-body overflow-x-auto";
 
   if (restClass) {
     className += ` ${restClass}`;
