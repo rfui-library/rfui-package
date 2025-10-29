@@ -13,6 +13,8 @@ export {
   CardHeading,
 } from "./data-display/card";
 export type { CardType } from "./data-display/card";
+export { DescriptionList } from "./data-display/description-list";
+export type { DescriptionListType } from "./data-display/description-list";
 export { Table } from "./data-display/table";
 export type { TableType } from "./data-display/table";
 export { ThWithHelpTooltip } from "./data-display/table/th-with-help-tooltip";
