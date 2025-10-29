@@ -23,7 +23,7 @@ export const Badge = ({
   ...rest
 }: BadgeType) => {
   const { className: restClass, ...restWithoutClass } = rest;
-  let className = "inline";
+  let className = "inline whitespace-nowrap";
 
   className += (() => {
     switch (type) {
