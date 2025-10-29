@@ -19,7 +19,7 @@ export const DescriptionList = ({
   ...rest
 }: DescriptionListType) => {
   const { className: restClass, ...restWithoutClass } = rest;
-  let className = "";
+  let className = "flex flex-col gap-4";
 
   className += (() => {
     switch (size) {
