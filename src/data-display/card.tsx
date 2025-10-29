@@ -109,9 +109,7 @@ export const Card = ({
       <div className={containerClass} {...restWithoutClass}>
         {cardHeader ? cardHeader : null}
         {cardBody && isArray ? cardBody : null}
-        {cardBody && !isArray ? (
-          <div className="rfui-card-body">{cardBody}</div>
-        ) : null}
+        {cardBody && !isArray ? <CardBody>{cardBody}</CardBody> : null}
         {cardFooter ? cardFooter : null}
       </div>
     </CardContext.Provider>
