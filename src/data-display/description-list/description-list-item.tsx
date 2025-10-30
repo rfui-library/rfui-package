@@ -10,9 +10,9 @@ export const DescriptionListItem = ({
   children,
 }: DescriptionListItemType) => {
   return (
-    <>
+    <div>
       <dt className="mb-1 text-sm text-neutral-700">{label}</dt>
       <dd>{children}</dd>
-    </>
+    </div>
   );
 };
