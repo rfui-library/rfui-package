@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-type DescriptionListItemType = {
+export type DescriptionListItemType = {
   label: string;
   children: ReactNode;
 };
