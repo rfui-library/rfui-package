@@ -29,7 +29,7 @@ export const Tabs = ({
   const { areLinks, hrefs } = areTabsLinks(children);
   const tabNames = getTabNames(children);
   const [activeTabName, setActiveTabName] = useState<string>(
-    initialActiveTabName ?? tabNames[0],
+    areLinks ? "" : (initialActiveTabName ?? tabNames[0]),
   );
   const tabSections = getTabSections(children, activeTabName);
 
@@ -103,7 +103,11 @@ const Tab = ({
 }) => {
   const isActive = tabName === activeTabName;
   let containerClass =
-    "rfui-tab cursor-default whitespace-nowrap border-b-2 px-5 py-4 text-center";
+    "rfui-tab whitespace-nowrap border-b-2 px-5 py-4 text-center";
+
+  if (!href) {
+    containerClass += " cursor-default";
+  }
 
   if (fullWidth) {
     containerClass += " w-full";
