@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from "react";
-import { Children, useState } from "react";
+import { Children, useEffect, useState } from "react";
 import { Flex } from "../layout/flex";
 
 export type TabsType = {
@@ -26,24 +26,35 @@ export const Tabs = ({
   children,
   ...rest
 }: TabsType) => {
+  const { areLinks, hrefs } = areTabsLinks(children);
   const tabNames = getTabNames(children);
   const [activeTabName, setActiveTabName] = useState<string>(
     initialActiveTabName ?? tabNames[0],
   );
   const tabSections = getTabSections(children, activeTabName);
 
+  useEffect(() => {
+    if (areLinks) {
+      const i = hrefs.indexOf(window.location.pathname);
+      setActiveTabName(tabNames[i]);
+    }
+  }, [areLinks]);
+
   return (
     <div {...rest}>
       <Flex className="flex-nowrap overflow-x-auto">
-        {tabNames.map((tabName) => (
+        {tabNames.map((tabName, index) => (
           <Tab
             key={tabName}
             tabName={tabName}
             activeTabName={activeTabName}
             onClick={() => {
-              setActiveTabName(tabName);
+              if (!areLinks) {
+                setActiveTabName(tabName);
+              }
             }}
             fullWidth={fullWidth}
+            href={areLinks ? hrefs[index] : undefined}
           />
         ))}
       </Flex>
@@ -52,6 +63,13 @@ export const Tabs = ({
   );
 };
 
+const areTabsLinks = (children: any) => {
+  const childrenArray: any[] = Children.toArray(children);
+  const areLinks = childrenArray.some((child) => child.props.href);
+  const hrefs = childrenArray.map((child) => child.props.href);
+
+  return { areLinks, hrefs };
+};
 const getTabNames = (children: any) => {
   const childrenArray: any[] = Children.toArray(children);
 
@@ -75,11 +93,13 @@ const Tab = ({
   activeTabName,
   onClick,
   fullWidth,
+  href,
 }: {
   tabName: string;
   activeTabName: string;
   onClick: () => void;
   fullWidth: boolean;
+  href: string;
 }) => {
   const isActive = tabName === activeTabName;
   let containerClass =
@@ -93,6 +113,14 @@ const Tab = ({
     ? " border-neutral-700 text-neutral-900 font-bold"
     : " border-neutral-100 text-neutral-700 hover:bg-neutral-50";
 
+  if (href) {
+    return (
+      <a href={href} className={containerClass} onClick={onClick}>
+        {tabName}
+      </a>
+    );
+  }
+
   return (
     <div className={containerClass} onClick={onClick}>
       {tabName}
@@ -103,10 +131,13 @@ const Tab = ({
 export const TabSection = ({
   // @ts-expect-error This is needed elsewhere
   tabName,
+  // @ts-expect-error This is needed elsewhere
+  href,
   isActive,
   children,
 }: {
   tabName: string;
+  href?: string;
   isActive?: boolean;
   children: ReactNode;
 }) => {
