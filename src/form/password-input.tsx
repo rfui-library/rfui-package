@@ -46,7 +46,7 @@ export const PasswordInput = ({
       } else if (inputProps.size === "md") {
         s += " text-sm w-8";
       } else if (inputProps.size === "sm") {
-        s += " text-xs w-7";
+        s += " text-xs w-8";
       }
     } else {
       s += " text-sm w-8";
