@@ -7,7 +7,7 @@ export type H2Type = {
 } & ComponentProps<"h2">;
 
 /** *
- * @function H1
+ * @function H2
  *
  * @see {@link https://rfui-docs.onrender.com/components/typography/h2}
  *
