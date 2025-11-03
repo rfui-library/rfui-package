@@ -42,12 +42,14 @@ export const PasswordInput = ({
 
     if ("size" in inputProps) {
       if (inputProps.size === "lg") {
-        s += " text-md";
+        s += " text-md w-9";
       } else if (inputProps.size === "md") {
-        s += " text-sm";
+        s += " text-sm w-8";
       } else if (inputProps.size === "sm") {
-        s += " text-xs";
+        s += " text-xs w-7";
       }
+    } else {
+      s += " text-sm w-8";
     }
 
     if ("rounded" in inputProps) {
