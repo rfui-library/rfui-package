@@ -1,22 +1,22 @@
 import type { ComponentProps, ReactNode } from "react";
 import { Link } from "../navigation/link";
 
-export type H2Type = {
+export type H3Type = {
   inPageLink?: string;
   children: ReactNode;
-} & ComponentProps<"h2">;
+} & ComponentProps<"h3">;
 
 /** *
- * @function H2
+ * @function H3
  *
- * @see {@link https://rfui-docs.onrender.com/components/typography/h2}
+ * @see {@link https://rfui-docs.onrender.com/components/typography/h3}
  *
  * @example
- * <H2>Subheading</H2>
+ * <H3>Subheading</H3>
  */
-export const H2 = ({ inPageLink, children, ...rest }: H2Type) => {
+export const H3 = ({ inPageLink, children, ...rest }: H3Type) => {
   const { className: restClass, ...restWithoutClass } = rest;
-  let className = "mb-5 mt-8 max-w-prose text-2xl text-neutral-700";
+  let className = "mb-2 mt-6 max-w-prose text-lg text-neutral-700";
 
   if (restClass) {
     className += ` ${restClass}`;
@@ -24,17 +24,17 @@ export const H2 = ({ inPageLink, children, ...rest }: H2Type) => {
 
   if (inPageLink) {
     return (
-      <h2 id={inPageLink} className={className} {...restWithoutClass}>
+      <h3 id={inPageLink} className={className} {...restWithoutClass}>
         <Link inPageLink href={`#${inPageLink}`} underline="hover">
           {children}
         </Link>
-      </h2>
+      </h3>
     );
   }
 
   return (
-    <h2 className={className} {...restWithoutClass}>
+    <h3 className={className} {...restWithoutClass}>
       {children}
-    </h2>
+    </h3>
   );
 };
