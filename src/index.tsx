@@ -143,6 +143,8 @@ export { H1 } from "./typography/h1";
 export type { H1Type } from "./typography/h1";
 export { H2 } from "./typography/h2";
 export type { H2Type } from "./typography/h2";
+export { H3 } from "./typography/h3";
+export type { H3Type } from "./typography/h3";
 export { Highlight } from "./typography/highlight";
 export type { HighlightType } from "./typography/highlight";
 export { InlineCode } from "./typography/inline-code";
