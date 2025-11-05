@@ -177,7 +177,6 @@ export const Select = <T,>({
       disabled={disabled}
       invalid={invalid}
       multiple={multiple}
-      by="value"
     >
       <ListboxButton className={buttonClassName}>
         {({ value }) => (
@@ -214,9 +213,7 @@ export const Select = <T,>({
                     className={`${checkIconClassName} ${selected ? "visible" : "invisible"}`}
                   />
                 )}
-                <span>
-                  {option.label} ({selected.toString()})
-                </span>
+                <span>{option.label}</span>
               </>
             )}
           </ListboxOption>

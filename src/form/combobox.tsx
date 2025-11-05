@@ -184,8 +184,6 @@ export const Combobox = <T,>({
       }}
       disabled={disabled}
       multiple={multiple}
-      // @ts-expect-error
-      by="value"
     >
       {({ value }) => (
         // A `<div>` is needed instead of `<>` to prevent console errors. See https://github.com/tailwindlabs/headlessui/issues/3351.
