@@ -214,7 +214,9 @@ export const Select = <T,>({
                     className={`${checkIconClassName} ${selected ? "visible" : "invisible"}`}
                   />
                 )}
-                <span>{option.label}</span>
+                <span>
+                  {option.label} ({selected.toString()})
+                </span>
               </>
             )}
           </ListboxOption>
