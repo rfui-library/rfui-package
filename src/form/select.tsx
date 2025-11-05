@@ -68,30 +68,22 @@ export const Select = <T,>({
     return null;
   }
 
-  // Convert value(s) to Option(s) for Headless UI
-  const valueAsOption = multiple
-    ? (value as T[] | undefined)
-        ?.map((v) => options.find((o) => o.value === v))
-        .filter((o): o is Option<T> => o !== undefined)
-    : options.find((o) => o.value === value);
+  const getDisplay = (value: T | T[]) => {
+    if (!multiple) {
+      const selectedOption = options.find((o) => o.value === value);
 
-  const defaultValueAsOption = multiple
-    ? (defaultValue as T[] | undefined)
-        ?.map((v) => options.find((o) => o.value === v))
-        .filter((o): o is Option<T> => o !== undefined)
-    : options.find((o) => o.value === defaultValue);
+      return selectedOption?.label;
+    }
 
-  // Convert onChange to work with values instead of Options
-  const handleChange = onChange
-    ? (newOption: Option<T> | Option<T>[]) => {
-        if (multiple) {
-          const values = (newOption as Option<T>[]).map((o) => o.value);
-          (onChange as (v: T[]) => void)(values);
-        } else {
-          (onChange as (v: T) => void)((newOption as Option<T>).value);
-        }
-      }
-    : undefined;
+    const selectedOptions = options.filter((o) =>
+      (value as T[]).includes(o.value),
+    );
+    const labelsString = selectedOptions.map((o) => o.label).join(", ");
+
+    return labelsString.length > 50
+      ? `${selectedOptions.length} item(s) selected`
+      : labelsString;
+  };
 
   let buttonClassName =
     "min-w-52 relative w-full max-w-full border text-left hover:shadow-sm focus:shadow-md";
@@ -172,46 +164,40 @@ export const Select = <T,>({
     <Listbox
       name={name}
       defaultValue={
-        defaultValueAsOption !== undefined
-          ? defaultValueAsOption
+        defaultValue !== undefined
+          ? defaultValue
           : !onChange
             ? multiple
-              ? [options[0]]
-              : options[0]
+              ? [options[0].value].filter(Boolean)
+              : options[0].value
             : undefined
       }
-      value={valueAsOption}
-      onChange={handleChange}
+      value={value}
+      onChange={onChange}
       disabled={disabled}
       invalid={invalid}
       multiple={multiple}
       by="value"
     >
       <ListboxButton className={buttonClassName}>
-        {({ value }) => {
-          const display = multiple
-            ? value.map((o: Option<T>) => o?.label).join(", ").length > 50
-              ? `${value.length} item(s) selected`
-              : value.map((o: Option<T>) => o?.label).join(", ")
-            : value?.label;
-
-          return (
-            <>
-              {/* Using a non-breaking space to prevent the button from collapsing when there is no value */}
-              <span className="block truncate">{display || "\u00A0"}</span>
-              <ChevronDownIcon
-                className={chevronIconClassName}
-                aria-hidden="true"
-              />
-            </>
-          );
-        }}
+        {({ value }) => (
+          <>
+            {/* Using a non-breaking space to prevent the button from collapsing when there is no value */}
+            <span className="block truncate">
+              {getDisplay(value) || "\u00A0"}
+            </span>
+            <ChevronDownIcon
+              className={chevronIconClassName}
+              aria-hidden="true"
+            />
+          </>
+        )}
       </ListboxButton>
       <ListboxOptions anchor="bottom" className={optionsClassName}>
         {options.map((option) => (
           <ListboxOption
             key={option.label}
-            value={option}
+            value={option.value}
             className={optionClassName}
             disabled={!!option.disabled}
           >

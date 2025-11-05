@@ -83,31 +83,6 @@ export const Combobox = <T,>({
   optionsClassName: _optionsClassName,
   optionClassName: _optionClassName,
 }: ComboboxType<T>): React.ReactElement => {
-  // Convert value(s) to Option(s) for Headless UI
-  const valueAsOption = multiple
-    ? (value as T[] | undefined)
-        ?.map((v) => options.find((o) => o.value === v))
-        .filter((o): o is Option<T> => o !== undefined)
-    : options.find((o) => o.value === value);
-
-  const defaultValueAsOption = multiple
-    ? (defaultValue as T[] | undefined)
-        ?.map((v) => options.find((o) => o.value === v))
-        .filter((o): o is Option<T> => o !== undefined)
-    : options.find((o) => o.value === defaultValue);
-
-  // Convert onChange to work with values instead of Options
-  const handleChange = onChange
-    ? (newOption: Option<T> | Option<T>[]) => {
-        if (multiple) {
-          const values = (newOption as Option<T>[]).map((o) => o.value);
-          (onChange as (v: T[]) => void)(values);
-        } else {
-          (onChange as (v: T) => void)((newOption as Option<T>).value);
-        }
-      }
-    : undefined;
-
   const [query, setQuery] = useState("");
   const filteredOptions =
     query === ""
@@ -194,16 +169,16 @@ export const Combobox = <T,>({
     <HeadlessUICombobox
       name={name}
       defaultValue={
-        defaultValueAsOption !== undefined
-          ? defaultValueAsOption
+        defaultValue !== undefined
+          ? defaultValue
           : !onChange
             ? multiple
-              ? [options[0]]
-              : options[0]
+              ? [options[0].value].filter(Boolean)
+              : options[0].value
             : undefined
       }
-      value={valueAsOption}
-      onChange={handleChange}
+      value={value}
+      onChange={onChange}
       onClose={() => {
         setQuery("");
       }}
@@ -217,9 +192,13 @@ export const Combobox = <T,>({
         <div>
           {Array.isArray(value) && (
             <Flex className="mb-2 flex-wrap gap-2">
-              {value.map((option) => (
-                <Badge key={option.value?.toString()}>{option.label}</Badge>
-              ))}
+              {value.map((optionValue) => {
+                const option = options.find((o) => o.value === optionValue);
+
+                return (
+                  <Badge key={optionValue?.toString()}>{option?.label}</Badge>
+                );
+              })}
             </Flex>
           )}
           <div className="relative">
@@ -238,7 +217,7 @@ export const Combobox = <T,>({
             {filteredOptions.map((option) => (
               <ComboboxOption
                 key={option.label}
-                value={option}
+                value={option.value}
                 className={optionClassName}
                 disabled={!!option.disabled}
               >
