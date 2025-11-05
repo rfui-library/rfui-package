@@ -210,7 +210,7 @@ export const Select = <T,>({
                   />
                 ) : (
                   <CheckIcon
-                    className={`${checkIconClassName} ${selected ? "visible" : "invisible"}`}
+                    className={`${checkIconClassName}${selected ? " visible" : " invisible"}`}
                   />
                 )}
                 <span>{option.label}</span>
