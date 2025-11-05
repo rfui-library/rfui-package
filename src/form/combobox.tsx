@@ -201,9 +201,15 @@ export const Combobox = <T,>({
           )}
           <div className="relative">
             <ComboboxInput
-              displayValue={(option: Option<T> | Option<T>[]) =>
-                Array.isArray(option) ? "" : option?.label || ""
-              }
+              displayValue={(value: T | T[]) => {
+                if (Array.isArray(value)) {
+                  return "";
+                }
+
+                const option = options.find((o) => o.value === value);
+
+                return option?.label || "";
+              }}
               onChange={(event) => setQuery(event.target.value)}
               className={inputClassName}
             />
