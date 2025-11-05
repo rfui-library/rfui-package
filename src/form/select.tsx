@@ -27,16 +27,16 @@ type SelectBaseType<T> = {
 
 type SelectSingleType<T> = SelectBaseType<T> & {
   multiple?: false;
-  value?: Option<T>;
-  defaultValue?: Option<T>;
-  onChange?: (newValue: Option<T>) => void;
+  value?: T;
+  defaultValue?: T;
+  onChange?: (newValue: T) => void;
 };
 
 type SelectMultiType<T> = SelectBaseType<T> & {
   multiple: true;
-  value?: Option<T>[];
-  defaultValue?: Option<T>[];
-  onChange?: (newValue: Option<T>[]) => void;
+  value?: T[];
+  defaultValue?: T[];
+  onChange?: (newValue: T[]) => void;
 };
 
 export type SelectType<T> = SelectSingleType<T> | SelectMultiType<T>;
@@ -67,6 +67,31 @@ export const Select = <T,>({
   if (options.length === 0) {
     return null;
   }
+
+  // Convert value(s) to Option(s) for Headless UI
+  const valueAsOption = multiple
+    ? (value as T[] | undefined)
+        ?.map((v) => options.find((o) => o.value === v))
+        .filter((o): o is Option<T> => o !== undefined)
+    : options.find((o) => o.value === value);
+
+  const defaultValueAsOption = multiple
+    ? (defaultValue as T[] | undefined)
+        ?.map((v) => options.find((o) => o.value === v))
+        .filter((o): o is Option<T> => o !== undefined)
+    : options.find((o) => o.value === defaultValue);
+
+  // Convert onChange to work with values instead of Options
+  const handleChange = onChange
+    ? (newOption: Option<T> | Option<T>[]) => {
+        if (multiple) {
+          const values = (newOption as Option<T>[]).map((o) => o.value);
+          (onChange as (v: T[]) => void)(values);
+        } else {
+          (onChange as (v: T) => void)((newOption as Option<T>).value);
+        }
+      }
+    : undefined;
 
   let buttonClassName =
     "min-w-52 relative w-full max-w-full border text-left hover:shadow-sm focus:shadow-md";
@@ -147,16 +172,16 @@ export const Select = <T,>({
     <Listbox
       name={name}
       defaultValue={
-        defaultValue !== undefined
-          ? defaultValue
+        defaultValueAsOption !== undefined
+          ? defaultValueAsOption
           : !onChange
             ? multiple
               ? [options[0]]
               : options[0]
             : undefined
       }
-      value={value}
-      onChange={onChange}
+      value={valueAsOption}
+      onChange={handleChange}
       disabled={disabled}
       invalid={invalid}
       multiple={multiple}

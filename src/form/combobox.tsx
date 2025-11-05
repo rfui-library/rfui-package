@@ -31,16 +31,16 @@ type ComboboxBaseType<T> = {
 
 type ComboboxSingleType<T> = ComboboxBaseType<T> & {
   multiple?: false;
-  value?: Option<T>;
-  defaultValue?: Option<T>;
-  onChange?: (newValue: Option<T>) => void;
+  value?: T;
+  defaultValue?: T;
+  onChange?: (newValue: T) => void;
 };
 
 type ComboboxMultiType<T> = ComboboxBaseType<T> & {
   multiple: true;
-  value?: Option<T>[];
-  defaultValue?: Option<T>[];
-  onChange?: (newValue: Option<T>[]) => void;
+  value?: T[];
+  defaultValue?: T[];
+  onChange?: (newValue: T[]) => void;
 };
 
 export type ComboboxType<T> = ComboboxSingleType<T> | ComboboxMultiType<T>;
@@ -83,6 +83,31 @@ export const Combobox = <T,>({
   optionsClassName: _optionsClassName,
   optionClassName: _optionClassName,
 }: ComboboxType<T>): React.ReactElement => {
+  // Convert value(s) to Option(s) for Headless UI
+  const valueAsOption = multiple
+    ? (value as T[] | undefined)
+        ?.map((v) => options.find((o) => o.value === v))
+        .filter((o): o is Option<T> => o !== undefined)
+    : options.find((o) => o.value === value);
+
+  const defaultValueAsOption = multiple
+    ? (defaultValue as T[] | undefined)
+        ?.map((v) => options.find((o) => o.value === v))
+        .filter((o): o is Option<T> => o !== undefined)
+    : options.find((o) => o.value === defaultValue);
+
+  // Convert onChange to work with values instead of Options
+  const handleChange = onChange
+    ? (newOption: Option<T> | Option<T>[]) => {
+        if (multiple) {
+          const values = (newOption as Option<T>[]).map((o) => o.value);
+          (onChange as (v: T[]) => void)(values);
+        } else {
+          (onChange as (v: T) => void)((newOption as Option<T>).value);
+        }
+      }
+    : undefined;
+
   const [query, setQuery] = useState("");
   const filteredOptions =
     query === ""
@@ -169,16 +194,16 @@ export const Combobox = <T,>({
     <HeadlessUICombobox
       name={name}
       defaultValue={
-        defaultValue !== undefined
-          ? defaultValue
+        defaultValueAsOption !== undefined
+          ? defaultValueAsOption
           : !onChange
             ? multiple
               ? [options[0]]
               : options[0]
             : undefined
       }
-      value={value}
-      onChange={onChange}
+      value={valueAsOption}
+      onChange={handleChange}
       onClose={() => {
         setQuery("");
       }}
