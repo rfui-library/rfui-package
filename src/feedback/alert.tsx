@@ -6,6 +6,7 @@ import { Flex } from "../layout/flex";
 export type AlertType = {
   variant?: "success" | "info" | "warning" | "danger" | "neutral";
   isDismissable?: boolean;
+  onClose?: () => void;
   children: any;
 } & Omit<ComponentProps<"div">, "size">;
 
@@ -25,6 +26,7 @@ export type AlertType = {
 export const Alert = ({
   variant = "neutral",
   isDismissable = true,
+  onClose,
   children,
   ...rest
 }: AlertType) => {
@@ -90,6 +92,7 @@ export const Alert = ({
             className="self-start"
             onClick={() => {
               setIsShown(false);
+              onClose?.();
             }}
           >
             <CloseIcon
