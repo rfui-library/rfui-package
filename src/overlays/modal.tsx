@@ -4,7 +4,7 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import type { ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { CloseIcon } from "../icons/close-icon";
 
 export type ModalType = {
@@ -13,7 +13,10 @@ export type ModalType = {
   heading?: string;
   className?: string;
   children: ReactNode;
-};
+} & Omit<
+  ComponentPropsWithoutRef<typeof Dialog>,
+  "open" | "onClose" | "className" | "children"
+>;
 
 /** *
  * @function Modal
@@ -31,9 +34,15 @@ export const Modal = ({
   heading,
   className,
   children,
+  ...dialogProps
 }: ModalType) => {
   return (
-    <Dialog open={isOpen} onClose={close} className="relative z-50">
+    <Dialog
+      open={isOpen}
+      onClose={close}
+      className="relative z-50"
+      {...dialogProps}
+    >
       <DialogBackdrop className="fixed inset-0 bg-neutral-500/10 backdrop-blur-sm" />
       <div className="fixed inset-0 w-screen overflow-y-auto p-8">
         <div className="flex min-h-full items-start justify-center">
