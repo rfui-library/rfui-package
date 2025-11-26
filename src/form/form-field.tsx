@@ -59,7 +59,7 @@ export const FormField = ({
   return (
     <div {...rest}>
       <div>
-        <label htmlFor={id} className={`mb-1 block ${normalFontClass}`}>
+        <label htmlFor={id} className={`mb-1 ${normalFontClass}`}>
           {label}{" "}
           {required && requiredIndicator === "text" && (
             <span className={`text-neutral-700 ${smallFontClass}`}>
