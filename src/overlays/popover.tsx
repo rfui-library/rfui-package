@@ -17,7 +17,9 @@ export type PopoverType = {
  * @see {@link https://rfui-docs.onrender.com/components/overlays/popover}
  *
  * @example
- * <Popover content="Example content">Click me</Popover>
+ * <Popover content="Example content">
+ *   <Button>Click me</Button>
+ * </Popover>
  */
 export const Popover = ({
   content,
