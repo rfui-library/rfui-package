@@ -27,10 +27,8 @@ export const Popover = ({
   children,
 }: PopoverType) => {
   return (
-    <HeadlessUIPopover>
-      <PopoverButton as="span" className="inline-block">
-        {children}
-      </PopoverButton>
+    <HeadlessUIPopover as="span" className="inline-block">
+      <PopoverButton>{children}</PopoverButton>
       <PopoverPanel
         anchor={{ to: direction, gap: 6 }}
         className="rounded-sm border border-neutral-100 bg-[#fff] p-4 shadow-lg"
