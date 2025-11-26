@@ -1,7 +1,12 @@
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+import {
+  ExclamationTriangleIcon,
+  InformationCircleIcon,
+} from "@heroicons/react/24/outline";
 import type { ComponentProps, ReactNode } from "react";
 import { useId } from "react";
 import { Flex } from "../layout/flex";
+import { Popover } from "../overlays/popover";
+import { Button } from "./button";
 
 export type FormFieldType = {
   label: string;
@@ -9,6 +14,7 @@ export type FormFieldType = {
   requiredIndicator?: "text" | "asterisk" | "none";
   optionalIndicator?: "text" | "asterisk" | "none";
   helperText?: string;
+  infoPopoverContent?: string;
   size?: "sm" | "md" | "lg";
   errorText?: string;
   children: ReactNode;
@@ -32,6 +38,7 @@ export const FormField = ({
   requiredIndicator = "none",
   optionalIndicator = "none",
   helperText,
+  infoPopoverContent,
   size = "md",
   errorText,
   children,
@@ -51,21 +58,30 @@ export const FormField = ({
 
   return (
     <div {...rest}>
-      <label htmlFor={id} className={`mb-1 block ${normalFontClass}`}>
-        {label}{" "}
-        {required && requiredIndicator === "text" && (
-          <span className={`text-neutral-700 ${smallFontClass}`}>
-            (required)
-          </span>
+      <div>
+        <label htmlFor={id} className={`mb-1 block ${normalFontClass}`}>
+          {label}{" "}
+          {required && requiredIndicator === "text" && (
+            <span className={`text-neutral-700 ${smallFontClass}`}>
+              (required)
+            </span>
+          )}
+          {required && requiredIndicator === "asterisk" && <sup>*</sup>}
+          {!required && optionalIndicator === "text" && (
+            <span className={`text-neutral-700 ${smallFontClass}`}>
+              (optional)
+            </span>
+          )}
+          {!required && optionalIndicator === "asterisk" && <sup>*</sup>}
+        </label>
+        {infoPopoverContent && (
+          <Popover content={infoPopoverContent}>
+            <Button variant="tertiary" size="sm" className="ml-1">
+              <InformationCircleIcon className="h-4 w-4" />
+            </Button>
+          </Popover>
         )}
-        {required && requiredIndicator === "asterisk" && <sup>*</sup>}
-        {!required && optionalIndicator === "text" && (
-          <span className={`text-neutral-700 ${smallFontClass}`}>
-            (optional)
-          </span>
-        )}
-        {!required && optionalIndicator === "asterisk" && <sup>*</sup>}
-      </label>
+      </div>
       <div className={`${smallFontClass} text-neutral-700 mb-1`}>
         {helperText}
       </div>
