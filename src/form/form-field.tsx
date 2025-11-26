@@ -76,11 +76,7 @@ export const FormField = ({
         </label>
         {infoPopoverContent && (
           <Popover content={infoPopoverContent}>
-            <Button
-              variant="tertiary"
-              size="sm"
-              className="relative top-0.5 ml-1"
-            >
+            <Button variant="tertiary" size="sm" className="relative top-0.5">
               <InformationCircleIcon className="h-4 w-4" />
             </Button>
           </Popover>
