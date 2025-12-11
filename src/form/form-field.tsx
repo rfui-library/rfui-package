@@ -13,10 +13,10 @@ export type FormFieldType = {
   required?: boolean;
   requiredIndicator?: "text" | "asterisk" | "none";
   optionalIndicator?: "text" | "asterisk" | "none";
-  helperText?: string;
+  helperText?: string | ReactNode;
   infoPopoverContent?: string;
   size?: "sm" | "md" | "lg";
-  errorText?: string;
+  errorText?: string | ReactNode;
   children: ReactNode;
 } & Omit<ComponentProps<"div">, "size">;
 
