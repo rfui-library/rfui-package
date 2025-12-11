@@ -13,7 +13,7 @@ export type FormFieldType = {
   required?: boolean;
   requiredIndicator?: "text" | "asterisk" | "none";
   optionalIndicator?: "text" | "asterisk" | "none";
-  helperText?: string | ReactNode;
+  helperText?: ReactNode | string;
   infoPopoverContent?: string;
   size?: "sm" | "md" | "lg";
   errorText?: string | ReactNode;
